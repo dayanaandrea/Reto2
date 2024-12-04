@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('tlf1');
             $table->string('tlf2')->nullable();
             $table->string('foto')->nullable();
+
             $table->unsignedBigInteger('id_rol');
-            $table->foreign('id_rol')->references('id')->on('roles');
+            $table->foreign('id_rol')->references('id')->on('roles')->onUpdate('cascade')->onDelete('no action');
         });
     }
 
@@ -35,6 +36,8 @@ return new class extends Migration
             $table->dropColumn('tlf1');
             $table->dropColumn('tlf2');
             $table->dropColumn('foto');
+
+            $table->dropForeign('users_id_rol_foreign');
             $table->dropColumn('id_rol');
         });
     }
