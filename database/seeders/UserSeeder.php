@@ -13,8 +13,8 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         // Crear profesores
-        User::factory()->withRole1()->count(20)->create();
+        User::factory()->conRolProfesor()->count(20)->create();
         // Crear estudiantes
-        User::factory()->withRole2()->count(50)->create();
+        User::factory()->conRolEstudiante()->count(50)->create();
     }
 }

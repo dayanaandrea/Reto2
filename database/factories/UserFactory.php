@@ -52,7 +52,7 @@ class UserFactory extends Factory
         /**
      * Crear un usuario con rol 1 - PROFESOR
      */
-    public function withRole1(): static
+    public function conRolProfesor(): static
     {
         return $this->state(fn (array $attributes) => [
             'id_rol' => 1,
@@ -62,7 +62,7 @@ class UserFactory extends Factory
     /**
      * Crear un usuario con rol 2 - ESTUDIANTE
      */
-    public function withRole2(): static
+    public function conRolEstudiante(): static
     {
         return $this->state(fn (array $attributes) => [
             'id_rol' => 2,
