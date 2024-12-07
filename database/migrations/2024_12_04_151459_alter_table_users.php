@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('direccion');
             $table->string('tlf1');
             $table->string('tlf2')->nullable();
+            // La imagen se guarda como string, porque se guardará la ruta
             $table->string('foto')->nullable();
 
             $table->unsignedBigInteger('id_rol');

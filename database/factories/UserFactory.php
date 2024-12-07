@@ -33,6 +33,8 @@ class UserFactory extends Factory
             'direccion' => fake()->address(),
             'tlf1' => fake() -> phoneNumber(),
             'dni' => fake() -> numberBetween(11111111, 99999999) . chr(rand(65, 90)),
+            'created_at' => now(),
+            'updated_at'=> now(),
             'id_rol' => 1 // valor por defecto, se asigna después
         ];
     }
