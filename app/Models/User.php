@@ -13,6 +13,7 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    // Un usuario puede tener un único rol
     public function rol(): BelongsTo{
         return $this->belongsTo(Rol::class);
     }
