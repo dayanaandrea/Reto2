@@ -15,7 +15,9 @@ class OfertaSeeder extends Seeder
         DB::table('ofertas')->insert([
             ['id_ciclo' => 1, 'id_modulo' => 1],
             ['id_ciclo' => 1, 'id_modulo' => 2],
-            ['id_ciclo' => 2, 'id_modulo' => 3],
+            ['id_ciclo' => 1, 'id_modulo' => 3],
+            ['id_ciclo' => 1, 'id_modulo' => 4],
+            ['id_ciclo' => 1, 'id_modulo' => 5],
         ]);
     }
 }
