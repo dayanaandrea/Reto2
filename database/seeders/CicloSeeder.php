@@ -15,7 +15,7 @@ class CicloSeeder extends Seeder
     DB::table('ciclos')->insert([
         ['codigo' => 'DAM', 'nombre' => 'Técnico superior en desarrollo de aplicaciones multiplataforma'],
         ['codigo' => 'DAW', 'nombre' => 'Técnico superior en desarrollo de aplicaciones web'],
-        ['codigo' => 'ASIR', 'nombre' => 'Técnico superior en administración de sistemas informáticos en red'],
+        ['codigo' => 'ASIR', 'nombre' => 'Técnico superior en administración de sistemas informáticos en red']
     ]);
 }
 }

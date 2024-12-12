@@ -17,7 +17,7 @@ class OfertaSeeder extends Seeder
             ['id_ciclo' => 1, 'id_modulo' => 2],
             ['id_ciclo' => 1, 'id_modulo' => 3],
             ['id_ciclo' => 1, 'id_modulo' => 4],
-            ['id_ciclo' => 1, 'id_modulo' => 5],
+            ['id_ciclo' => 1, 'id_modulo' => 5]
         ]);
     }
 }
