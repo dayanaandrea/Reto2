@@ -31,7 +31,8 @@ class AdminController extends Controller
         if ($role->role == 'god' || $role->role == 'administrador') {
             return view('admin');
         } else {
-            redirect('/home');
+            // Lanzar page not found
+            abort(404);
         }
     }
 }
