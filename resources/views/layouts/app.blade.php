@@ -23,11 +23,11 @@
                 <!-- Poner un enlace según el rol del usuario -->
                 @if (Auth::user() && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador'))
                     <a class="navbar-brand" href="{{ url('/admin') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'ElorAdmin') }}
                     </a>
                 @else
                     <a class="navbar-brand" href="{{ url('/home') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'ElorAdmin') }}
                     </a>
                 @endif
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -46,13 +46,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('nav.login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('nav.register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -65,7 +65,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('nav.logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
