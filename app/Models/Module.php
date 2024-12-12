@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Modulo extends Model
+class Module extends Model
 {
-    protected $fillable = ['codigo', 'nombre', 'horas', 'curso', 'id_ciclo'];
+    protected $fillable = ['code', 'name', 'hours', 'course', 'cycle_id'];
 
     public function ciclo()
     {
-        return $this->belongsTo(Ciclo::class, 'id_ciclo');
+        return $this->belongsTo(Ciclo::class, 'cycle_id');
     }
+
+    //REVISAR 
 
     public function ofertas()
     {

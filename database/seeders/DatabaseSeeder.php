@@ -20,5 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CicloSeeder::class);
         $this->call(ModuloSeeder::class);
         $this->call(OfertaSeeder::class);
+        $this->call(ReunionSeeder::class);
+        $this->call(MatriculaSeeder::class);
+
     }
 }
