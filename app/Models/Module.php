@@ -10,11 +10,10 @@ class Module extends Model
 
     public function cycle()
     {
-        return $this->belongsTo(Ciclo::class, 'cycle_id');
+        return $this->belongsTo(Cycle::class, 'cycle_id');
     }
 
     //REVISAR 
-
     public function offers()
     {
         return $this->hasMany(Oferta::class, 'offers_id');

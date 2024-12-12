@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Insertar los roles
-        $this->call(RolSeeder::class);
+        $this->call(RoleSeeder::class);
         // Insertar los usuarios
         $this->call(UserSeeder::class);
         $this->call(CycleSeeder::class);

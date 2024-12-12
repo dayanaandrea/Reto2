@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 class LoginController extends Controller
 {
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/home'; // se cambia luego
 
     /**
      * Create a new controller instance.
@@ -36,5 +38,22 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
+    }
+
+    /**
+     * Controla la redirección tras el login.
+     * @param mixed $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function authenticated()
+    {
+        $user = Auth::user();
+        $role = $user->role;
+
+        if ($role && ($role->role == 'god' || $role->role == 'administrador')) {
+            return redirect('/admin');
+        } else {
+            return redirect('/home');
+        }
     }
 }

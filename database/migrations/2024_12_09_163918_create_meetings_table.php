@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
             //Establecer los valores por defecto que va a tener el enum
-            $table->enum('status', ['acept', 'rejected', 'pending'])->default('pending');
+            $table->enum('status', ['accepted', 'rejected', 'pending'])->default('pending');
 
 
             $table->unsignedBigInteger ('teacher_id');

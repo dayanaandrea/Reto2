@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Matricula;
+use App\Models\Offer;
 use Illuminate\Http\Request;
 
-class MatriculaController extends Controller
+class OfferController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class MatriculaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Matricula $matricula)
+    public function show(Offer $offer)
     {
         //
     }
@@ -42,7 +42,7 @@ class MatriculaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Matricula $matricula)
+    public function edit(Offer $offer)
     {
         //
     }
@@ -50,7 +50,7 @@ class MatriculaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Matricula $matricula)
+    public function update(Request $request, Offer $offer)
     {
         //
     }
@@ -58,7 +58,7 @@ class MatriculaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Matricula $matricula)
+    public function destroy(Offer $offer)
     {
         //
     }

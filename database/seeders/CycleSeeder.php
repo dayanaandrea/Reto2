@@ -14,9 +14,9 @@ class CycleSeeder extends Seeder
     public function run()
 {
     DB::table('cycles')->insert([
-        ['code' => 'DAM', 'name' => 'Técnico superior en desarrollo de aplicaciones multiplataforma'],
-        ['code' => 'DAW', 'name' => 'Técnico superior en desarrollo de aplicaciones web'],
-        ['code' => 'ASIR', 'name' => 'Técnico superior en administración de sistemas informáticos en red']
+        ['code' => 'DAM', 'name' => 'Técnico superior en desarrollo de aplicaciones multiplataforma', 'created_at'=>now(),'updated_at'=>now()],
+        ['code' => 'DAW', 'name' => 'Técnico superior en desarrollo de aplicaciones web', 'created_at'=>now(),'updated_at'=>now()],
+        ['code' => 'ASIR', 'name' => 'Técnico superior en administración de sistemas informáticos en red', 'created_at'=>now(),'updated_at'=>now()]
     ]);
 }
 }

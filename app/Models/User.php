@@ -15,8 +15,8 @@ class User extends Authenticatable
     use HasFactory, Notifiable, SoftDeletes;
 
     // Un usuario puede tener un único rol
-    public function rol(): BelongsTo{
-        return $this->belongsTo(Rol::class);
+    public function role(): BelongsTo{
+        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nombre',
+        'name',
         'email',
         'password',
     ];

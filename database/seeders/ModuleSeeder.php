@@ -14,6 +14,7 @@ class ModuleSeeder extends Seeder
     public function run()
 {
     DB::table('modules')->insert([
+
         //se insertan 5 módulos en el ciclo 1 (DAM) de primero
         ['code' => 'SI', 'name' => 'Sistemas informaticos', 'hours' => 165, 'course' => 1, 'cycle_id' => 1],
         ['code' => 'BBDD', 'name' => 'Bases de datos', 'hours' => 198, 'course' => 1, 'cycle_id' => 1],

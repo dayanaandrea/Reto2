@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ciclo;
+use App\Models\Cycle;
 use Illuminate\Http\Request;
 
-class CicloController extends Controller
+class CycleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class CicloController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ciclo $ciclo)
+    public function show(Cycle $cycle)
     {
         //
     }
@@ -42,7 +42,7 @@ class CicloController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ciclo $ciclo)
+    public function edit(Cycle $cycle)
     {
         //
     }
@@ -50,7 +50,7 @@ class CicloController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Ciclo $ciclo)
+    public function update(Request $request, Cycle $cycle)
     {
         //
     }
@@ -58,7 +58,7 @@ class CicloController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ciclo $ciclo)
+    public function destroy(Cycle $cycle)
     {
         //
     }
