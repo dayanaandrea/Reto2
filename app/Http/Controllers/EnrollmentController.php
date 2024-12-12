@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Oferta;
+use App\Models\Enrollment;
 use Illuminate\Http\Request;
 
-class OfertaController extends Controller
+class EnrollmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class OfertaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Oferta $oferta)
+    public function show(Enrollment $enrollment)
     {
         //
     }
@@ -42,7 +42,7 @@ class OfertaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Oferta $oferta)
+    public function edit(Enrollment $enrollment)
     {
         //
     }
@@ -50,7 +50,7 @@ class OfertaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Oferta $oferta)
+    public function update(Request $request, Enrollment $enrollment)
     {
         //
     }
@@ -58,7 +58,7 @@ class OfertaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Oferta $oferta)
+    public function destroy(Enrollment $enrollment)
     {
         //
     }
