@@ -13,12 +13,12 @@ class OfertaSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('ofertas')->insert([
-            ['id_ciclo' => 1, 'id_modulo' => 1],
-            ['id_ciclo' => 1, 'id_modulo' => 2],
-            ['id_ciclo' => 1, 'id_modulo' => 3],
-            ['id_ciclo' => 1, 'id_modulo' => 4],
-            ['id_ciclo' => 1, 'id_modulo' => 5]
+        DB::table('offers')->insert([
+            ['cycle_id' => 1, 'module_id' => 1],
+            ['cycle_id' => 1, 'module_id' => 2],
+            ['cycle_id' => 1, 'module_id' => 3],
+            ['cycle_id' => 1, 'module_id' => 4],
+            ['cycle_id' => 1, 'module_id' => 5]
         ]);
     }
 }

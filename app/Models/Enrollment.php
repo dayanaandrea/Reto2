@@ -8,11 +8,11 @@ class Matricula extends Model
 {
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_estudiante');
+        return $this->belongsTo(User::class, 'student_id');
     }
 
     public function modulo()
     {
-        return $this->hasMany(Oferta::class, 'id_modulo');
+        return $this->hasMany(Offer::class, 'module_id');
     }
 }
