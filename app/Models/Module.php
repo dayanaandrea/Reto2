@@ -8,15 +8,15 @@ class Module extends Model
 {
     protected $fillable = ['code', 'name', 'hours', 'course', 'cycle_id'];
 
-    public function ciclo()
+    public function cycle()
     {
-        return $this->belongsTo(Ciclo::class, 'cycle_id');
+        return $this->belongsTo(Cycle::class, 'cycle_id');
     }
 
     //REVISAR 
 
-    public function ofertas()
+    public function offer()
     {
-        return $this->hasMany(Oferta::class, 'id_modulo');
+        return $this->hasMany(Offer::class, 'id_modulo');
     }
 }
