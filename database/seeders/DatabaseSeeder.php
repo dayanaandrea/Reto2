@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RolSeeder::class);
         // Insertar los usuarios
         $this->call(UserSeeder::class);
+        $this->call(CicloSeeder::class);
+        $this->call(ModuloSeeder::class);
+        $this->call(OfertaSeeder::class);
     }
 }
