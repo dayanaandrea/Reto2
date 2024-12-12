@@ -20,8 +20,9 @@ return new class extends Migration
             // La imagen se guarda como string, porque se guardará la ruta
             $table->string('foto')->nullable();
 
-            $table->unsignedBigInteger('id_rol');
-            $table->foreign('id_rol')->references('id')->on('roles')->onUpdate('cascade')->onDelete('no action');
+            // Nulable para que cuando se borre un rol se ponga el campo a nulo
+            $table->unsignedBigInteger('id_rol')->nullable();
+            $table->foreign('id_rol')->references('id')->on('roles')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

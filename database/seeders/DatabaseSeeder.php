@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OfertaSeeder::class);
         $this->call(ReunionSeeder::class);
         $this->call(MatriculaSeeder::class);
+
     }
 }

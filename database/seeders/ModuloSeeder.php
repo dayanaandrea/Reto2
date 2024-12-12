@@ -14,9 +14,11 @@ class ModuloSeeder extends Seeder
     public function run()
 {
     DB::table('modulos')->insert([
-        ['codigo' => 'modulo1', 'nombre' => 'Módulo 1', 'horas' => 30, 'curso' => 1, 'id_ciclo' => 1],
-        ['codigo' => 'modulo2', 'nombre' => 'Módulo 2', 'horas' => 40, 'curso' => 2, 'id_ciclo' => 1],
-        ['codigo' => 'modulo3', 'nombre' => 'Módulo 3', 'horas' => 35, 'curso' => 1, 'id_ciclo' => 2],
+        ['codigo' => 'ACD', 'nombre' => 'Acceso a datos', 'horas' => 120, 'curso' => 2, 'id_ciclo' => 1],
+        ['codigo' => 'DI', 'nombre' => 'Desarrollo de interfaces', 'horas' => 140, 'curso' => 2, 'id_ciclo' => 1],
+        ['codigo' => 'PMDM', 'nombre' => 'Programación multimedia y dispositivos móviles', 'horas' => 100, 'curso' => 2, 'id_ciclo' => 1],
+        ['codigo' => 'PSP', 'nombre' => 'Programación de servicios y procesos', 'horas' => 80, 'curso' => 2, 'id_ciclo' => 1],
+        ['codigo' => 'SGE', 'nombre' => 'Sistemas de gestión empresarial', 'horas' => 100, 'curso' => 2, 'id_ciclo' => 1]
     ]);
 }
 }

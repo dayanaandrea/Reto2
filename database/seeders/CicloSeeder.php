@@ -14,9 +14,9 @@ class CicloSeeder extends Seeder
     public function run()
 {
     DB::table('ciclos')->insert([
-        ['codigo' => 'ciclo1', 'nombre' => 'Ciclo 1'],
-        ['codigo' => 'ciclo2', 'nombre' => 'Ciclo 2'],
-        ['codigo' => 'ciclo3', 'nombre' => 'Ciclo 3'],
+        ['codigo' => 'DAM', 'nombre' => 'Técnico superior en desarrollo de aplicaciones multiplataforma'],
+        ['codigo' => 'DAW', 'nombre' => 'Técnico superior en desarrollo de aplicaciones web'],
+        ['codigo' => 'ASIR', 'nombre' => 'Técnico superior en administración de sistemas informáticos en red']
     ]);
 }
 }
