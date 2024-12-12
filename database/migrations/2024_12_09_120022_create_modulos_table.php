@@ -13,7 +13,7 @@ return new class extends Migration
 {
     Schema::create('modulos', function (Blueprint $table) {
         $table->id();
-        $table->string('codigo', 10);
+        $table->string('codigo', 10)->unique();
         $table->string('nombre', 100);
         $table->tinyInteger('horas');
         $table->tinyInteger('curso');
