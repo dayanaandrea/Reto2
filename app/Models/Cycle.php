@@ -15,6 +15,6 @@ class Cycle extends Model
 
     public function offers()
     {
-        return $this->hasMany(Offer::class, 'cycle_id');
+        return $this->hasMany(Offer::class, 'offers_id');
     }
 }
