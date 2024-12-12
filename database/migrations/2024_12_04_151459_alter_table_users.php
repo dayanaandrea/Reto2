@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('apellidos');
-            $table->string('dni')->unique();
-            $table->string('direccion');
-            $table->string('tlf1');
-            $table->string('tlf2')->nullable();
+            $table->string('lastname');
+            $table->string('pin')->unique();
+            $table->string('address');
+            $table->string('phone1');
+            $table->string('phone2')->nullable();
             // La imagen se guarda como string, porque se guardará la ruta
-            $table->string('foto')->nullable();
+            $table->string('photo')->nullable();
 
             // Nulable para que cuando se borre un rol se ponga el campo a nulo
-            $table->unsignedBigInteger('id_rol')->nullable();
-            $table->foreign('id_rol')->references('id')->on('roles')->onUpdate('cascade')->onDelete('set null');
+            $table->unsignedBigInteger('role_id')->nullable();
+            $table->foreign('role_id')->references('id')->on('roles')->onUpdate('cascade')->onDelete('set null');
         });
     }
 
@@ -32,15 +32,15 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('apellidos');
-            $table->dropColumn('dni');
-            $table->dropColumn('direccion');
-            $table->dropColumn('tlf1');
-            $table->dropColumn('tlf2');
-            $table->dropColumn('foto');
+            $table->dropColumn('lastname');
+            $table->dropColumn('pin');
+            $table->dropColumn('address');
+            $table->dropColumn('phone1');
+            $table->dropColumn('phone2');
+            $table->dropColumn('photo');
 
-            $table->dropForeign('users_id_rol_foreign');
-            $table->dropColumn('id_rol');
+            $table->dropForeign('users_role_id_foreign');
+            $table->dropColumn('role_id');
         });
     }
 };

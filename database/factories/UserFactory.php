@@ -24,18 +24,18 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'nombre' => fake()->firstName(),
-            'apellidos' => fake()->lastName() . ' ' . fake()->lastName(),
+            'name' => fake()->firstName(),
+            'lastname' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'direccion' => fake()->address(),
-            'tlf1' => fake() -> phoneNumber(),
-            'dni' => fake() -> numberBetween(11111111, 99999999) . chr(rand(65, 90)),
+            'address' => fake()->address(),
+            'phone1' => fake() -> phoneNumber(),
+            'pin' => fake() -> numberBetween(11111111, 99999999) . chr(rand(65, 90)),
             'created_at' => now(),
             'updated_at'=> now(),
-            'id_rol' => 1 // valor por defecto, se asigna después
+            'role_id' => 1 // valor por defecto, se asigna después
         ];
     }
 
@@ -55,7 +55,7 @@ class UserFactory extends Factory
     public function conRolProfesor(): static
     {
         return $this->state(fn (array $attributes) => [
-            'id_rol' => 1,
+            'role_id' => 1,
         ]);
     }
 
@@ -65,7 +65,7 @@ class UserFactory extends Factory
     public function conRolEstudiante(): static
     {
         return $this->state(fn (array $attributes) => [
-            'id_rol' => 2,
+            'role_id' => 2,
         ]);
     }
 }
