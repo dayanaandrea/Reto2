@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ciclo extends Model
+class Cycle extends Model
 {
     protected $fillable = ['code', 'name'];
 

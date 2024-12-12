@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Matricula extends Model
+class Enrollment extends Model
 {
     public function user()
     {

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Oferta extends Model
+class Offer extends Model
 {
     protected $fillable = ['cycle_id', 'module_id'];
 
