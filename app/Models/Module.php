@@ -14,9 +14,8 @@ class Module extends Model
     }
 
     //REVISAR 
-
-    public function offer()
+    public function offers()
     {
-        return $this->hasMany(Offer::class, 'id_modulo');
+        return $this->hasMany(Oferta::class, 'offers_id');
     }
 }
