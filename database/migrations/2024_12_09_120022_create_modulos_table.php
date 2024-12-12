@@ -15,7 +15,7 @@ return new class extends Migration
         $table->id();
         $table->string('codigo', 10)->unique();
         $table->string('nombre', 100);
-        $table->tinyInteger('horas');
+        $table->integer('horas');
         $table->tinyInteger('curso');
         $table->unsignedBigInteger('id_ciclo');
         $table->timestamps();
