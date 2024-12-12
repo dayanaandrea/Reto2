@@ -29,10 +29,9 @@ class AdminController extends Controller
         $user = Auth::user();
         $role = $user->role;
         if ($role->role == 'god' || $role->role == 'administrador') {
-            return view('admin', ['user' => $user]);
+            return view('admin');
         } else {
-            // Lanzar page not found
-            abort(404);
+            redirect('/home');
         }
     }
 }
