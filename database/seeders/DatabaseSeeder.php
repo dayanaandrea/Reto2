@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
         $this->call(RolSeeder::class);
         // Insertar los usuarios
         $this->call(UserSeeder::class);
-        $this->call(CicloSeeder::class);
-        $this->call(ModuloSeeder::class);
-        $this->call(OfertaSeeder::class);
-        $this->call(ReunionSeeder::class);
-        $this->call(MatriculaSeeder::class);
+        $this->call(CycleSeeder::class);
+        $this->call(ModuleSeeder::class);
+        $this->call(OfferSeeder::class);
+        $this->call(MeetingSeeder::class);
+        $this->call(EnrollmentSeeder::class);
 
     }
 }
