@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Modulo;
+use App\Models\Meeting;
 use Illuminate\Http\Request;
 
-class ModuloController extends Controller
+class MeetingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class ModuloController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Modulo $modulo)
+    public function show(Meeting $meeting)
     {
         //
     }
@@ -42,7 +42,7 @@ class ModuloController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Modulo $modulo)
+    public function edit(Meeting $meeting)
     {
         //
     }
@@ -50,7 +50,7 @@ class ModuloController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Modulo $modulo)
+    public function update(Request $request, Meeting $meeting)
     {
         //
     }
@@ -58,7 +58,7 @@ class ModuloController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Modulo $modulo)
+    public function destroy(Meeting $meeting)
     {
         //
     }
