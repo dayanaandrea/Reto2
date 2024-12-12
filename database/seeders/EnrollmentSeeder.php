@@ -14,9 +14,20 @@ class EnrollmentSeeder extends Seeder
     public function run(): void
     {
         DB::table('enrollments')->insert([
-            ['date' => now()->toDateString(), 'course'=> 1, 'student_id'=> 60,'module_id'=> 1,'cycle_id'=> 1, 'created_at'=>now(),'updated_at'=>now()],
-            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 50,'module_id'=> 2,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
-            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 70,'module_id'=> 3,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+
+            //Usuario que se matricula en segundo 
+            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 60,'module_id'=> 1,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 60,'module_id'=> 2,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 60,'module_id'=> 3,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 60,'module_id'=> 4,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 60,'module_id'=> 5,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+            //Usuario que se matricula en segundo 
+            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 40,'module_id'=> 1,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 40,'module_id'=> 2,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 40,'module_id'=> 3,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 40,'module_id'=> 4,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+            ['date' => now()->toDateString(), 'course'=> 2, 'student_id'=> 40,'module_id'=> 5,'cycle_id'=> 2, 'created_at'=>now(),'updated_at'=>now()],
+            
         ]);
 
     }
