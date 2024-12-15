@@ -11,10 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        /*
+        Schema::create('horarios', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_profesor');
+            $table->unsignedBigInteger('id_modulo');
+            $table->tinyInteger('dia');
+            $table->time('hora');
             $table->timestamps();
+
+            $table->foreign('id_profesor')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_modulo')->references('id')->on('modulos')->onUpdate('cascade')->onDelete('cascade');
         });
+        */        
     }
 
     /**

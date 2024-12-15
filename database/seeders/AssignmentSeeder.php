@@ -12,6 +12,12 @@ class AssignmentSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('assignment')->insert([
+            /*
+            ['id_profesor' => 10,'id_modulo' => 2],
+            ['id_profesor' => 5,'id_modulo' => 1],
+            ['id_profesor' => 13,'id_modulo' => 3 ]
+            */
+         ]);
     }
 }
