@@ -62,6 +62,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $email = $user->email;
+        $user->delete();
+        return view('admin.users.success', ['email'=>$email]);
     }
 }
