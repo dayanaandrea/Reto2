@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone1');
             $table->string('phone2')->nullable();
-            // La imagen se guarda como string, porque se guardará la ruta
-            $table->string('photo')->nullable();
+            $table->binary('photo')->nullable();
 
             // Nulable para que cuando se borre un rol se ponga el campo a nulo
             $table->unsignedBigInteger('role_id')->nullable();

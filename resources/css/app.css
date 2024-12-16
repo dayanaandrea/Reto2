@@ -3,3 +3,17 @@
 @tailwind components;
 @tailwind utilities;
 */
+
+table.usuarios tr.admin {
+    background-color: red;
+    cursor: pointer;
+}
+
+table.usuarios tr.admin {
+    background-color: blue;
+    cursor: pointer;
+}
+
+h2 {
+    color: red;
+}
