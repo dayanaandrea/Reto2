@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CycleController;
+
 use Illuminate\Support\Facades\Auth;
 
 Route::permanentRedirect('/', '/home');
@@ -23,6 +26,12 @@ Route::middleware('auth')->group(function () {
 
       // Rutas de users
       Route::resource('users', UserController::class);
+
+      // Rutas de modulos 
+      Route::resource('modules', ModuleController::class);
+      
+      // Rutas de ciclos
+      Route::resource('cycles', CycleController::class);
   });
 
 });

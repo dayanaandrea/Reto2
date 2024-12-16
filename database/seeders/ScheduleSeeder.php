@@ -6,14 +6,14 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class SchedulesSeeder extends Seeder
+class ScheduleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('schedules')->insert([
+        DB::table('schedule')->insert([
            //Id's de los modulos 2DAM: 6ACD,7DI,8PMDM,9PSP,10SGE
             
             // Koldo -> 10 

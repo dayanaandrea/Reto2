@@ -12,7 +12,8 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        //
+        $modules = Module::orderBy('course', 'desc')->paginate(10);
+        return view('admin.module.index',['modules' => $modules]);
     }
 
     /**
