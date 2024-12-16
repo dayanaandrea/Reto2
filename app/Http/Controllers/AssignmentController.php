@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
 
+//index,show y destroy
+
 class AssignmentController extends Controller
 {
     /**

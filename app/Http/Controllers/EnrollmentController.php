@@ -12,7 +12,8 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        //
+        $enrollments = Enrollment::all();
+        return view('enrollment.index', compact('enrollments'));
     }
 
     /**
