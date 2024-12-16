@@ -11,10 +11,11 @@
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>
-                <th scope="col">Nombre profesor</th>
-                <th scope="col">Id profesor</th>
-                <th scope="col">Nombre modulo</th>
-                <th scope="col">Id modulo</th>
+                <th scope="col">Estudiante</th>
+                <th scope="col">Modulo</th>
+                <th scope="col">Ciclo</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Curso</th>
             </tr>
         </thead>
         <tbody>

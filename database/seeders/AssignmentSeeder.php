@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class AssignmentSeeder extends Seeder
+class AssignmentsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,16 +15,17 @@ class AssignmentSeeder extends Seeder
     {
         DB::table('assignments')->insert([
 
-            //Id's de los modulos 2DAM: 6ACD,7DI,8PMDM,9PSP,10SGE
+              //Profesor id 10
+              ['user_id' => 10,'module_id' => 6, 'created_at'=>now(),'updated_at'=>now()],
+              ['user_id' => 10,'module_id' => 9, 'created_at'=>now(),'updated_at'=>now()],
+              //Profesor id 11
+              ['user_id' => 11,'module_id' => 7,'created_at'=>now(),'updated_at'=>now()],
+              ['user_id' => 11,'module_id' => 10,'created_at'=>now(),'updated_at'=>now()],
+              //Profesor id 12
+              ['user_id' => 12,'module_id' => 8, 'created_at'=>now(),'updated_at'=>now() ],
+
             
-            //Profesor id 10
-            ['id_teacher' => 10,'id_modulo' => 6],
-            ['id_teacher' => 10,'id_modulo' => 9],
-            //Profesor id 11
-            ['id_teacher' => 11,'id_modulo' => 7],
-            ['id_teacher' => 11,'id_modulo' => 10],
-            //Profesor id 12
-            ['id_teacher' => 12,'id_modulo' => 8 ],
-         ]);
+        ]);
+
     }
 }
