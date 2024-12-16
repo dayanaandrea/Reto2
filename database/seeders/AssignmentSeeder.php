@@ -13,11 +13,17 @@ class AssignmentSeeder extends Seeder
     public function run(): void
     {
         DB::table('assignment')->insert([
-            /*
-            ['id_profesor' => 10,'id_modulo' => 2],
-            ['id_profesor' => 5,'id_modulo' => 1],
-            ['id_profesor' => 13,'id_modulo' => 3 ]
-            */
+
+            //Id's de los modulos 2DAM: 6ACD,7DI,8PMDM,9PSP,10SGE
+            
+            //Profesor id 10
+            ['id_teacher' => 10,'id_modulo' => 6],
+            ['id_teacher' => 10,'id_modulo' => 9],
+            //Profesor id 11
+            ['id_teacher' => 11,'id_modulo' => 7],
+            ['id_teacher' => 11,'id_modulo' => 10],
+            //Profesor id 12
+            ['id_teacher' => 12,'id_modulo' => 8 ],
          ]);
     }
 }

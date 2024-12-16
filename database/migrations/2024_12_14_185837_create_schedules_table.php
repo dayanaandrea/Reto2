@@ -11,19 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        /*
-        Schema::create('horarios', function (Blueprint $table) {
+        Schema::create('shedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_profesor');
-            $table->unsignedBigInteger('id_modulo');
-            $table->tinyInteger('dia');
-            $table->time('hora');
+            $table->unsignedBigInteger('id_teacher');
+            $table->unsignedBigInteger('id_module');
+            $table->tinyInteger('day');
+            $table->time('hour');
             $table->timestamps();
 
-            $table->foreign('id_profesor')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_modulo')->references('id')->on('modulos')->onUpdate('cascade')->onDelete('cascade');
-        });
-        */        
+            $table->foreign('id_teacher')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_module')->references('id')->on('modules')->onUpdate('cascade')->onDelete('cascade');
+        });      
     }
 
     /**
