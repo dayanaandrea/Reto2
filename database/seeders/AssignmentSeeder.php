@@ -12,7 +12,7 @@ class AssignmentSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('assignment')->insert([
+        DB::table('assignments')->insert([
 
             //Id's de los modulos 2DAM: 6ACD,7DI,8PMDM,9PSP,10SGE
             
