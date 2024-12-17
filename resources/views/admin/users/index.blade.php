@@ -100,7 +100,7 @@ $user = Auth::user();
         </table>
         <!-- Paginación -->
         <div>
-            {!! $users->links('vendor.pagination.bootstrap-5') !!}
+            {!! $users->appends(['active' => request()->active, 'inactive' => request()->inactive])->links('vendor.pagination.bootstrap-5') !!}
         </div>
     </div>
 
@@ -149,7 +149,7 @@ $user = Auth::user();
         </table>
         <!-- Paginación -->
         <div>
-            {!! $del_users->links('vendor.pagination.bootstrap-5') !!}
+            {!! $del_users->appends(['active' => request()->active, 'inactive' => request()->inactive])->links('vendor.pagination.bootstrap-5') !!}
         </div>
     </div>
     @endif
