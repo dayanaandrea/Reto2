@@ -10,18 +10,18 @@
     <table class="table table-hover">
         <thead>
             <tr class="text-uppercase table-dark">
-                <th scope="col"></th>
+        
                 <th scope="col">Codigo</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Horas</th>
                 <th scope="col">Curso </th>
-                <th scope="col">Ciclo</th>
+                <th scope="col">Acciones </th>
+       
             </tr>
         </thead>
         <tbody>
-            @foreach ($modules as $modules)
-                <tr class="{{$clase}}">
-                    <th scope="col">{{ $loop->iteration }}</th>
+            @foreach ($modules as $module)
+                <tr >
                     <td>{{$module->code}}</td>
                     <td>{{$module->name}}</td>
                     <td>{{$module->hours}}</td>
@@ -34,8 +34,7 @@
                             Editar
                         </a>
                         <!-- Para generar un modal diferente siempre, se debe incluir el id --> 
-                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalUsuario{{ $user->id }}"
-                            data-user-id="{{ $user->id }}">
+                        <a href="#" class="btn btn-danger btn-sm" >
                             Eliminar
                         </a>
                     </td>
@@ -45,7 +44,7 @@
     </table>
     <!-- Paginación -->
     <div>
-        {!! $users->links('vendor.pagination.bootstrap-5') !!}
+        {!! $modules->links('vendor.pagination.bootstrap-5') !!}
     </div>
 </div>
 @endsection
