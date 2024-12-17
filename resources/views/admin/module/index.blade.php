@@ -33,11 +33,7 @@
                         <a href="#" class="btn btn-warning btn-sm">
                             Editar
                         </a>
-                        <!-- Para generar un modal diferente siempre, se debe incluir el id --> 
-                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalUsuario{{ $user->id }}"
-                            data-user-id="{{ $user->id }}">
-                            Eliminar
-                        </a>
+                       
                     </td>
                 </tr>
             @endforeach
