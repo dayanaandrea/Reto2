@@ -21,6 +21,7 @@ $user = Auth::user();
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Rol</th>
+                    <th scope="col">Fecha de creación</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -48,6 +49,7 @@ $user = Auth::user();
                     <td>{{$user->name}}</td>
                     <td>{{$user->lastname}}</td>
                     <td class="text-capitalize">{{$user->role->role}}</td>
+                    <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
                     <td><a href="{{ route('admin.users.show', $user) }}" class="btn btn-secondary btn-sm">
                             Ver
                         </a>
@@ -101,5 +103,55 @@ $user = Auth::user();
             {!! $users->links('vendor.pagination.bootstrap-5') !!}
         </div>
     </div>
+
+    @if ($del_users && !empty($del_users))
+    <h2>Usuarios Eliminados</h2>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr class="text-uppercase table-dark">
+                    <th scope="col"></th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Fecha de eliminación</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($del_users as $user)
+                @php
+                // Definir la clase dependiendo del rol del usuario
+                $clase = '';
+
+                if ($user->role->role == 'god') {
+                $clase = 'table-danger';
+                } elseif ($user->role->role == 'administrador') {
+                $clase = 'table-warning';
+                } elseif ($user->role->role == 'profesor') {
+                $clase = 'table-primary';
+                } elseif($user->role->role == 'estudiante') {
+                $clase = 'table-success';
+                } else {
+                $clase = 'table-secondary';
+                }
+                @endphp
+                <tr class="{{$clase}}">
+                    <th scope="col">{{ $loop->iteration }}</th>
+                    <td>{{$user->email}}</td>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->lastname}}</td>
+                    <td class="text-capitalize">{{$user->role->role}}</td>
+                    <td>{{ date('d-m-Y', strtotime($user->deleted_at)) }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        <!-- Paginación -->
+        <div>
+            {!! $del_users->links('vendor.pagination.bootstrap-5') !!}
+        </div>
+    </div>
+    @endif
 </div>
 @endsection
