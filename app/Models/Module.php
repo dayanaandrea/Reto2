@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    protected $fillable = ['code', 'name', 'hours', 'course', 'cycle_id'];
-
+    protected $fillable = ['code', 'name','hours', 'course' , 'cycle_id']; 
     public function cycle()
     {
         return $this->belongsTo(Cycle::class, 'cycle_id');
@@ -16,6 +15,6 @@ class Module extends Model
     //REVISAR 
     public function offers()
     {
-        return $this->hasMany(Oferta::class, 'offers_id');
+        return $this->hasMany(Offer::class, 'offers_id');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Enrollment extends Model
 {
+    protected $fillable = ['date', 'course','student_id', 'module_id' , 'cycle_id']; 
     //Este clase modelo en un futuro podría borrarse(OPCIONAL) 
     public function user()
     {
