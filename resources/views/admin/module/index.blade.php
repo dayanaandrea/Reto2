@@ -19,15 +19,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($modules as $modules)
-                <tr class="{{$clase}}">
+            @foreach ($modules as $module)
+                <tr >
                     <th scope="col">{{ $loop->iteration }}</th>
                     <td>{{$module->code}}</td>
                     <td>{{$module->name}}</td>
                     <td>{{$module->hours}}</td>
                     <td>{{$module->course}}</td>
                     
-                    <td><a href="#" class="btn btn-secondary btn-sm">
+                    <td><a href="{{route('admin.modules.show', $module)}}" class="btn btn-secondary btn-sm">
                             Ver
                         </a>
                         <a href="#" class="btn btn-warning btn-sm">
@@ -45,7 +45,7 @@
     </table>
     <!-- Paginación -->
     <div>
-        {!! $users->links('vendor.pagination.bootstrap-5') !!}
+        {!! $modules->links('vendor.pagination.bootstrap-5') !!}
     </div>
 </div>
 @endsection
