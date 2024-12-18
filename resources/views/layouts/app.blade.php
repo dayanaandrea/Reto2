@@ -42,8 +42,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         @if (Auth::user() && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador'))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}">Usuarios</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.users.index') }}">Usuarios</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.cycles.index') }}">Ciclos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.modules.index') }}">Modulos</a>
+                            </li>
+                            
                         @endif
                     </ul>
 
