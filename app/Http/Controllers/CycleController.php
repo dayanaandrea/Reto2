@@ -38,7 +38,7 @@ class CycleController extends Controller
      */
     public function show(Cycle $cycle)
     {
-        //
+        return view('admin.cycle.show',['cycle'=>$cycle]);
     }
 
     /**
