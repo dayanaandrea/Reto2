@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -22,13 +23,6 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -50,8 +44,12 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'pin' => ['required', 'string', 'size:9'],
+            'address' => ['required', 'string', 'max:255'],
+            'phone1' => ['required', 'string', 'max:20'],
+            'role_id' => ['required'],
         ]);
     }
 
@@ -65,8 +63,27 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            // Pass por defecto 1234
+            'password' => Hash::make('1234'),
+            'pin' => $data['pin'],
+            'address' => $data['address'],
+            'phone1' => $data['phone1'],
+            'phone2' => $data['phone2'],
+            'created_at' => now(),
+            'updated_at' => now(),
+            'photo' => $data['photo'],
+            'role_id' => $data['role_id'],
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        // Datos que queremos pasar a la vista
+        $roles = Role::orderBy('id')->get();
+        
+        // Pasar los datos a la vista usando with()
+        return view('auth.register', ['roles' => $roles]);
     }
 }

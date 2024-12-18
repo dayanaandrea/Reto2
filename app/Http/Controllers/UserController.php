@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -13,8 +15,9 @@ class UserController extends Controller
     public function index()
     {
         // Paginar, para no mostrar todos de golpe
-        $users = User::orderBy('lastname', 'asc')->paginate(10);
-        return view('admin.users.index',['users' => $users]);
+        $users = User::orderBy('created_at', 'desc')->paginate(10, ['*'], 'active');
+        $del_users = User::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(10, ['*'], 'inactive');
+        return view('admin.users.index',['users' => $users, 'del_users' => $del_users]);
     }
 
     /**
@@ -22,7 +25,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        // Datos que queremos pasar a la vista
+        $roles = Role::orderBy('id')->get();
+        
+        // Pasar los datos a la vista usando with()
+        return view('admin.users.create', ['roles' => $roles]);
     }
 
     /**
@@ -30,8 +37,24 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Crear el usuario
+        $user = new User();
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->pin = $request->pin;
+        $user->address = $request->address;
+        $user->phone1 = $request->phone1;
+        $user->phone2 = $request->has('phone2');
+        $user->photo = $request->has('photo');
+        $user->role_id = $request->role_id;
+        $user->password = Hash::make('1234');
+
+        // Guardar el nuevo usuario
+        $user->save();
+    
+        return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' creado correctamente.');
+    }    
 
     /**
      * Display the specified resource.

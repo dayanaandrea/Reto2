@@ -17,5 +17,6 @@ return [
     'register' => 'Register',
     'submit' => 'Submit',
     'name' => 'Name',
-    'lastname' => 'Last Name'
+    'lastname' => 'Last Name',
+    'role' => 'Role',
 ];
