@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\schedules;
 use Illuminate\Http\Request;
 
-class SchedulesController extends Controller
+class ScheduleController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -6,14 +6,14 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class AssignmentsSeeder extends Seeder
+class AssignmentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('assignments')->insert([
+        DB::table('assignment')->insert([
 
               //Profesor id 10
               ['user_id' => 10,'module_id' => 6, 'created_at'=>now(),'updated_at'=>now()],
