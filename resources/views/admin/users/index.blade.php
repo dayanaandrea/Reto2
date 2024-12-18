@@ -11,6 +11,7 @@ $user = Auth::user();
         <p>Accede a la creación de usuarios:</p>
         <p><a href="{{ route('admin.users.create') }}" class="btn btn-primary">Crear usuario</a></p>
     </div>
+    @if ($users->count() > 0)
     <h2>Usuarios</h2>
     <div>
         <table class="table table-hover">
@@ -100,11 +101,12 @@ $user = Auth::user();
         </table>
         <!-- Paginación -->
         <div>
-            {!! $users->links('vendor.pagination.bootstrap-5') !!}
+            {!! $users->appends(['active' => request()->active, 'inactive' => request()->inactive])->links('vendor.pagination.bootstrap-5') !!}
         </div>
     </div>
+    @endif
 
-    @if ($del_users && !empty($del_users))
+    @if ($del_users->count() > 0)
     <h2>Usuarios Eliminados</h2>
     <div>
         <table class="table table-hover">
@@ -149,7 +151,7 @@ $user = Auth::user();
         </table>
         <!-- Paginación -->
         <div>
-            {!! $del_users->links('vendor.pagination.bootstrap-5') !!}
+            {!! $del_users->appends(['active' => request()->active, 'inactive' => request()->inactive])->links('vendor.pagination.bootstrap-5') !!}
         </div>
     </div>
     @endif
