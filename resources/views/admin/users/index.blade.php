@@ -135,7 +135,7 @@ $user = Auth::user();
                 }
                 @endphp
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td><img src="{{obtenerFoto($user)}}" alt="profile_img" width="20px"></td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->lastname}}</td>
