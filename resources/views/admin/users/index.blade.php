@@ -14,7 +14,7 @@ $user = Auth::user();
     @if ($users->count() > 0)
     <h2>Usuarios</h2>
     <div>
-        <table class="table table-hover">
+        <table class="table table-hover table-striped">
             <thead>
                 <tr class="text-uppercase table-dark">
                     <th scope="col"></th>
@@ -33,23 +33,21 @@ $user = Auth::user();
                 $clase = '';
 
                 if ($user->role->role == 'god') {
-                $clase = 'table-danger';
+                $clase = 'bg-danger';
                 } elseif ($user->role->role == 'administrador') {
-                $clase = 'table-warning';
+                $clase = 'bg-warning';
                 } elseif ($user->role->role == 'profesor') {
-                $clase = 'table-primary';
-                } elseif($user->role->role == 'estudiante') {
-                $clase = 'table-success';
+                $clase = 'bg-primary';
                 } else {
-                $clase = 'table-secondary';
+                $clase = 'bg-success';
                 }
                 @endphp
-                <tr class="{{$clase}}">
-                    <th scope="col">{{ $loop->iteration }}</th>
+                <tr>
+                    <td><img src="{{obtenerFoto($user)}}" alt="profile_img" width="20px"></td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->lastname}}</td>
-                    <td class="text-capitalize">{{$user->role->role}}</td>
+                    <td class="text-capitalize"><span class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></td>
                     <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
                     <td><a href="{{ route('admin.users.show', $user) }}" class="btn btn-secondary btn-sm">
                             Ver
@@ -109,7 +107,7 @@ $user = Auth::user();
     @if ($del_users->count() > 0)
     <h2>Usuarios Eliminados</h2>
     <div>
-        <table class="table table-hover">
+        <table class="table table-hover table-striped">
             <thead>
                 <tr class="text-uppercase table-dark">
                     <th scope="col"></th>
@@ -127,23 +125,21 @@ $user = Auth::user();
                 $clase = '';
 
                 if ($user->role->role == 'god') {
-                $clase = 'table-danger';
+                $clase = 'bg-danger';
                 } elseif ($user->role->role == 'administrador') {
-                $clase = 'table-warning';
+                $clase = 'bg-warning';
                 } elseif ($user->role->role == 'profesor') {
-                $clase = 'table-primary';
-                } elseif($user->role->role == 'estudiante') {
-                $clase = 'table-success';
+                $clase = 'bg-primary';
                 } else {
-                $clase = 'table-secondary';
+                $clase = 'bg-success';
                 }
                 @endphp
-                <tr class="{{$clase}}">
-                    <th scope="col">{{ $loop->iteration }}</th>
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->lastname}}</td>
-                    <td class="text-capitalize">{{$user->role->role}}</td>
+                    <td class="text-capitalize"><span class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></td>
                     <td>{{ date('d-m-Y', strtotime($user->deleted_at)) }}</td>
                 </tr>
                 @endforeach
