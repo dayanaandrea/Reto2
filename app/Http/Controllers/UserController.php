@@ -17,7 +17,7 @@ class UserController extends Controller
         // Paginar, para no mostrar todos de golpe
         $users = User::orderBy('created_at', 'desc')->paginate(10, ['*'], 'active');
         $del_users = User::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(10, ['*'], 'inactive');
-        return view('admin.users.index',['users' => $users, 'del_users' => $del_users]);
+        return view('admin.users.index', ['users' => $users, 'del_users' => $del_users]);
     }
 
     /**
@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         // Datos que queremos pasar a la vista
         $roles = Role::orderBy('id')->get();
-        
+
         // Pasar los datos a la vista usando with()
         return view('admin.users.create', ['roles' => $roles]);
     }
@@ -46,22 +46,33 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->phone1 = $request->phone1;
         $user->phone2 = $request->has('phone2');
-        $user->photo = $request->has('photo');
         $user->role_id = $request->role_id;
         $user->password = Hash::make('1234');
 
+        // Comprobar si la imagen es válida
+        $request->validate([
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        // La imagen se guarda como binary en la base de datos
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+            $imageData = file_get_contents($image->getRealPath());
+            $user->photo = $imageData;
+        }
+
         // Guardar el nuevo usuario
         $user->save();
-    
+
         return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' creado correctamente.');
-    }    
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(User $user)
     {
-        return view('admin.users.show',['user'=>$user]);
+        return view('admin.users.show', ['user' => $user]);
     }
 
     /**
@@ -87,6 +98,6 @@ class UserController extends Controller
     {
         $email = $user->email;
         $user->delete();
-        return view('admin.users.success', ['email'=>$email]);
+        return view('admin.users.success', ['email' => $email]);
     }
 }
