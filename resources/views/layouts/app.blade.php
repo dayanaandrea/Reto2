@@ -67,7 +67,7 @@
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <img src="{{ obtenerFoto(Auth::user()) }}" alt="usuario" width="30px">
+                                <img src="{{ obtenerFoto(Auth::user()) }}" alt="usuario" class="img-fluid rounded-circle mx-2" style="max-width: 30px; max-height: 30px;">
                                 {{ Auth::user()->name }}
                             </a>
 

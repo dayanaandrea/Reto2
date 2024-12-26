@@ -50,7 +50,7 @@
                                     }
                                 @endphp
                                 <tr>
-                                    <td><img src="{{obtenerFoto($user)}}" alt="profile_img" width="20px"></td>
+                                    <td><img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle" style="max-width: 30px; max-height: 30px;"></td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->lastname}}</td>
@@ -146,7 +146,7 @@
                                     }
                                 @endphp
                                 <tr>
-                                    <td><img src="{{obtenerFoto($user)}}" alt="profile_img" width="20px"></td>
+                                    <td><img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle" style="max-width: 30px; max-height: 30px;"></td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->lastname}}</td>
