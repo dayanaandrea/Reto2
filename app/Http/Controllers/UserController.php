@@ -80,7 +80,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        // Datos que queremos pasar a la vista
+        $roles = Role::orderBy('id')->get();
+
+        // Pasar los datos a la vista usando with()
+        return view('admin.users.edit', ['roles' => $roles, 'user' => $user]);
     }
 
     /**
@@ -88,7 +92,31 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->pin = $request->pin;
+        $user->address = $request->address;
+        $user->phone1 = $request->phone1;
+        $user->phone2 = $request->has('phone2');
+        $user->role_id = $request->role_id;
+
+        // Comprobar si la imagen es válida
+        $request->validate([
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        // La imagen se guarda como binary en la base de datos
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+            $imageData = file_get_contents($image->getRealPath());
+            $user->photo = $imageData;
+        }
+
+        // Guardar el nuevo usuario
+        $user->save();
+
+        return redirect()->route('admin.users.show', $user)->with('success', 'Usuario ' . $user->email . ' actualizado correctamente.');
     }
 
     /**

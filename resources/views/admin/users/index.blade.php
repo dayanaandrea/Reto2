@@ -60,7 +60,7 @@
                                     <td><a href="{{ route('admin.users.show', $user) }}" class="btn btn-secondary btn-sm">
                                             Ver
                                         </a>
-                                        <a href="#" class="btn btn-warning btn-sm">
+                                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning btn-sm">
                                             Editar
                                         </a>
                                         <!-- Para generar un modal diferente siempre, se debe incluir el id -->

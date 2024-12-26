@@ -2,8 +2,13 @@
 
 @section('content')
 <div class="container">
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <h2 class="mb-4">Detalles del Usuario</h2>
-
     <!-- Tarjeta para mostrar detalles del usuario -->
     <div class="card">
         <div class="card-header">
@@ -26,18 +31,18 @@
                         <p class="col-sm-9">{{ $user->name }} {{ $user->lastname }}</p>
 
                         @php
-                        // Definir la clase dependiendo del rol del usuario
-                        $clase = '';
+                            // Definir la clase dependiendo del rol del usuario
+                            $clase = '';
 
-                        if ($user->role->role == 'god') {
-                            $clase = 'bg-danger';
-                        } elseif ($user->role->role == 'administrador') {
-                            $clase = 'bg-warning';
-                        } elseif ($user->role->role == 'profesor') {
-                            $clase = 'bg-primary';
-                        } else {
-                            $clase = 'bg-success';
-                        }
+                            if ($user->role->role == 'god') {
+                                $clase = 'bg-danger';
+                            } elseif ($user->role->role == 'administrador') {
+                                $clase = 'bg-warning';
+                            } elseif ($user->role->role == 'profesor') {
+                                $clase = 'bg-primary';
+                            } else {
+                                $clase = 'bg-success';
+                            }
                         @endphp
 
                         <p class="col-sm-3 fw-bold">DNI:</p>
@@ -50,12 +55,13 @@
                         <p class="col-sm-9">{{ $user->phone1 }}</p>
 
                         @if ($user->phone2 != null)
-                        <p class="col-sm-3 fw-bold">Teléfono 2:</p>
-                        <p class="col-sm-9">{{ $user->phone2 }}</p>
+                            <p class="col-sm-3 fw-bold">Teléfono 2:</p>
+                            <p class="col-sm-9">{{ $user->phone2 }}</p>
                         @endif
 
                         <p class="col-sm-3 fw-bold">Rol:</p>
-                        <p class="col-sm-9"><span class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></p>
+                        <p class="col-sm-9"><span
+                                class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></p>
 
                         <p class="col-sm-3 fw-bold">Fecha de creación:</p>
                         <p class="col-sm-9">{{ $user->created_at->format('d/m/Y') }}</p>
