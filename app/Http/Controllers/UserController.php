@@ -96,8 +96,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $email = $user->email;
         $user->delete();
-        return view('admin.users.success', ['email' => $email]);
+        return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' eliminado correctamente.');
     }
 }
