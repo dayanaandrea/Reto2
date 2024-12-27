@@ -24,13 +24,20 @@ function obtenerFoto($user)
 
 function obtenerEstiloRol($role)
 {
-    if ($role == 'god') {
-        return 'bg-danger';
-    } elseif ($role == 'administrador') {
-        return 'bg-warning';
-    } elseif ($role == 'profesor') {
-        return 'bg-primary';
+    if ($role) {
+        if ($role == 'god') {
+            return 'bg-danger';
+        } elseif ($role == 'administrador') {
+            return 'bg-warning';
+        } elseif ($role == 'profesor') {
+            return 'bg-primary';
+        } elseif ($role == 'estudiante') {
+            return 'bg-success';
+        } else {
+            return 'bg-dark';
+        }
     } else {
-        return 'bg-success';
+        return 'bg-light';
     }
+
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CycleController;
+use App\Http\Controllers\RoleController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,9 @@ Route::middleware('auth')->group(function () {
 
       // Rutas de users
       Route::resource('users', UserController::class);
+      
+      // Rutas de roles
+      Route::resource('roles', RoleController::class);
 
       // Rutas de modulos 
       Route::resource('modules', ModuleController::class);

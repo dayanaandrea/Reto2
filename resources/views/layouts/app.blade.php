@@ -46,6 +46,9 @@
                                 <a class="nav-link" href="{{ route('admin.users.index') }}">Usuarios</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.roles.index') }}">Roles</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.cycles.index') }}">Ciclos</a>
                             </li>
                             <li class="nav-item">

@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@php
-    $user = Auth::user();
-@endphp
-
 @section('content')
 <div class="container">
     <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
@@ -36,8 +32,12 @@
                 <tbody>
                     @foreach ($users as $user)
                                 @php
-                                    // Definir la clase dependiendo del rol del usuario
-                                    $clase = obtenerEstiloRol($user->role->role);
+                                    if ($user->role) {
+                                        // Definir la clase dependiendo del rol del usuario
+                                        $clase = obtenerEstiloRol($user->role->role);
+                                    } else {
+                                        $clase = obtenerEstiloRol(null);
+                                    }
                                 @endphp
                                 <tr>
                                     <td><img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle"
@@ -45,8 +45,16 @@
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->lastname}}</td>
-                                    <td class="text-capitalize"><span
-                                            class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></td>
+                                    @if ($user->role)
+                                        <td class="text-capitalize">
+                                            <span class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span>
+                                        </td>
+                                    @else
+                                        <td class="text-capitalize">
+                                            <span class="badge {{$clase}} text-capitalize text-dark">Sin rol</span>
+                                        </td>
+                                    @endif
+
                                     <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
                                     <td>
                                         @php
