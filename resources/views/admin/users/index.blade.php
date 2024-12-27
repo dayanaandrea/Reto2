@@ -37,17 +37,7 @@
                     @foreach ($users as $user)
                                 @php
                                     // Definir la clase dependiendo del rol del usuario
-                                    $clase = '';
-
-                                    if ($user->role->role == 'god') {
-                                        $clase = 'bg-danger';
-                                    } elseif ($user->role->role == 'administrador') {
-                                        $clase = 'bg-warning';
-                                    } elseif ($user->role->role == 'profesor') {
-                                        $clase = 'bg-primary';
-                                    } else {
-                                        $clase = 'bg-success';
-                                    }
+                                    $clase = obtenerEstiloRol($user->role->role);
                                 @endphp
                                 <tr>
                                     <td><img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle"
@@ -107,17 +97,7 @@
                     @foreach ($del_users as $user)
                                 @php
                                     // Definir la clase dependiendo del rol del usuario
-                                    $clase = '';
-
-                                    if ($user->role->role == 'god') {
-                                        $clase = 'bg-danger';
-                                    } elseif ($user->role->role == 'administrador') {
-                                        $clase = 'bg-warning';
-                                    } elseif ($user->role->role == 'profesor') {
-                                        $clase = 'bg-primary';
-                                    } else {
-                                        $clase = 'bg-success';
-                                    }
+                                    $clase = obtenerEstiloRol($user->role->role);
                                 @endphp
                                 <tr>
                                     <td><img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle"
