@@ -21,3 +21,16 @@ function obtenerFoto($user)
         return Storage::url('public/images/user.png');
     }
 }
+
+function obtenerEstiloRol($role)
+{
+    if ($role == 'god') {
+        return 'bg-danger';
+    } elseif ($role == 'administrador') {
+        return 'bg-warning';
+    } elseif ($role == 'profesor') {
+        return 'bg-primary';
+    } else {
+        return 'bg-success';
+    }
+}

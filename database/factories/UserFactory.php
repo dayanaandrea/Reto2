@@ -30,7 +30,7 @@ class UserFactory extends Factory
         return [
             'name' => $name,
             'lastname' => $lastname,
-            'email' => $this->generateUniqueEmail($name, $lastname),
+            'email' => $this->generateUniqueEmail(trim($name), $lastname),
             'email_verified_at' => now(),
             'password' => '1234',
             'remember_token' => Str::random(10),
