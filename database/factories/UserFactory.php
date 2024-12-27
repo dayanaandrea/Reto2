@@ -48,6 +48,10 @@ class UserFactory extends Factory
      */
     private function generateUniqueEmail($name, $lastname)
     {
+        // Quitar posibles tildes
+        $name = iconv('UTF-8', 'ASCII//TRANSLIT', $name);
+        $lastname = iconv('UTF-8', 'ASCII//TRANSLIT', $lastname);
+
         // Generar el correo en formato nombre.apellido@elorrieta-errekamari.com
         $email = strtolower($name . '.' . $lastname) . '@elorrieta-errekamari.com';
 
