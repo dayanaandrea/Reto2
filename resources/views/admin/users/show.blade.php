@@ -34,9 +34,14 @@
                         @endif
 
                         @php
-                            // Definir la clase dependiendo del rol del usuario
-                            $clase = obtenerEstiloRol($user->role->role);
-                            $badge = '<span class="badge ' . $clase . ' text-capitalize">' . $user->role->role . '</span>';
+                            if ($user->role) {
+                                // Definir la clase dependiendo del rol del usuario
+                                $clase = obtenerEstiloRol($user->role->role);
+                                $badge = '<span class="badge ' . $clase . ' text-capitalize">' . $user->role->role . '</span>';
+                            } else {
+                                $clase = obtenerEstiloRol(null);
+                                $badge = '<span class="badge text-dark ' . $clase . ' text-capitalize">Sin Rol</span>';
+                            }
                         @endphp
                         <x-detail :label="'Rol:'" :value="$badge" />
                         <x-detail :label="'Fecha de Creación:'" :value="$user->created_at->format('d/m/Y')" />
