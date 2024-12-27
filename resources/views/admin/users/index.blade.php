@@ -48,23 +48,30 @@
                                     <td class="text-capitalize"><span
                                             class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></td>
                                     <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
-                                    <td><a href="{{ route('admin.users.show', $user) }}" class="btn btn-secondary btn-sm">
-                                            Ver
-                                        </a>
-                                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning btn-sm">
-                                            Editar
-                                        </a>
+                                    <td>
+                                        @php
+                                            $route = route('admin.users.show', $user);
+                                            $type = "show";
+                                            $text = "Ver";
+                                        @endphp
+                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                        @php
+                                            $route = route('admin.users.edit', $user);
+                                            $type = "edit";
+                                            $text = "Editar";
+                                        @endphp
+                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" />
                                         <!-- Para generar un modal diferente siempre, se debe incluir el id -->
-                                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#modal_delete{{ $user->id }}" data-user-id="{{ $user->id }}">
-                                            Eliminar
-                                        </a>
+                                        @php
+                                            $id_modal = '#modal_delete' . $user->id;
+                                        @endphp
+                                        <x-buttons.delete :id="$id_modal" />
                                     </td>
                                 </tr>
 
                                 <!-- Modal para eliminar un usuario -->
                                 @php
-                                    $id = $user->id;
+                                    $id = 'modal_delete' . $user->id;
                                     $mensaje = "¿Estás seguro de que deseas eliminar el usuario <strong>$user->email</strong>? Esta acción no se puede deshacer.";
                                     $ruta = route('admin.users.destroy', $user);
                                  @endphp

@@ -1,5 +1,5 @@
 <!-- El id del modal debe coincidir con el aributo data-bs-target del botón, porque es para enlazarlos -->
-<div class="modal fade" id="modal_delete{{ $id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{ $id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Encabezado del Modal -->

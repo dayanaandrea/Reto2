@@ -24,48 +24,35 @@
                 <!-- Contenedor de texto -->
                 <div class="col-6">
                     <div class="row">
-                        <p class="col-sm-3 fw-bold">Correo electrónico:</p>
-                        <p class="col-sm-9">{{ $user->email }}</p>
-
-                        <p class="col-sm-3 fw-bold">Nombre completo:</p>
-                        <p class="col-sm-9">{{ $user->name }} {{ $user->lastname }}</p>
+                        <x-detail :label="'Correo electrónico:'" :value="$user->email" />
+                        <x-detail :label="'Nombre completo:'" :value="$user->name . ' ' . $user->lastname" />
+                        <x-detail :label="'DNI:'" :value="$user->pin" />
+                        <x-detail :label="'Dirección:'" :value="$user->address" />
+                        <x-detail :label="'Teléfono:'" :value="$user->phone1" />
+                        @if ($user->phone2 != null)
+                            <x-detail :label="'Teléfono secundario:'" :value="$user->phone2" />
+                        @endif
 
                         @php
                             // Definir la clase dependiendo del rol del usuario
                             $clase = obtenerEstiloRol($user->role->role);
+                            $badge = '<span class="badge ' . $clase . ' text-capitalize">' . $user->role->role . '</span>';
                         @endphp
+                        <x-detail :label="'Rol:'" :value="$badge" />
+                        <x-detail :label="'Fecha de Creación:'" :value="$user->created_at->format('d/m/Y')" />
+                        <x-detail :label="'Última actualización:'" :value="$user->updated_at->format('d/m/Y')" />
 
-                        <p class="col-sm-3 fw-bold">DNI:</p>
-                        <p class="col-sm-9">{{ $user->pin }}</p>
-
-                        <p class="col-sm-3 fw-bold">Dirección:</p>
-                        <p class="col-sm-9">{{ $user->address }}</p>
-
-                        <p class="col-sm-3 fw-bold">Teléfono:</p>
-                        <p class="col-sm-9">{{ $user->phone1 }}</p>
-
-                        @if ($user->phone2 != null)
-                            <p class="col-sm-3 fw-bold">Teléfono 2:</p>
-                            <p class="col-sm-9">{{ $user->phone2 }}</p>
-                        @endif
-
-                        <p class="col-sm-3 fw-bold">Rol:</p>
-                        <p class="col-sm-9"><span
-                                class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></p>
-
-                        <p class="col-sm-3 fw-bold">Fecha de creación:</p>
-                        <p class="col-sm-9">{{ $user->created_at->format('d/m/Y') }}</p>
-
-                        <p class="col-sm-3 fw-bold">Última actualización:</p>
-                        <p class="col-sm-9">{{ $user->updated_at->format('d/m/Y') }}</p>
                         <div>
-                            <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-warning btn-sm">
-                                Editar
-                            </a>
-                            <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#modal_delete{{ $user->id }}" data-user-id="{{ $user->id }}">
-                                Eliminar
-                            </a>
+                            @php
+                                $route = route('admin.users.edit', $user);
+                                $type = "edit";
+                                $text = "Editar";
+                            @endphp
+                            <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                            @php
+                                $id_modal = '#modal_delete' . $user->id;
+                            @endphp
+                            <x-buttons.delete :id="$id_modal" />
                         </div>
                     </div>
                 </div>
@@ -75,9 +62,9 @@
 </div>
 <!-- Modal para eliminar un usuario -->
 @php
-    $id = $user->id;
+    $id = 'modal_delete' . $user->id;
     $mensaje = "¿Estás seguro de que deseas eliminar el usuario <strong>$user->email</strong>? Esta acción no se puede deshacer.";
     $ruta = route('admin.users.destroy', $user);
- @endphp
+@endphp
 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
 @endsection
