@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -12,7 +13,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::withCount('users')->orderBy('role', 'asc')->paginate(5);
+        // Contar usuarios sin rol
+        $sin_roles = User::whereNull('role_id')->count();
+        return view('admin.roles.index', ['roles' => $roles, 'sin_roles' => $sin_roles]);
     }
 
     /**
@@ -20,7 +24,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create');
     }
 
     /**
@@ -28,7 +32,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Crear el rol
+        $role = new Role();
+        $role->role = $request->role;
+        $role->description = $request->description;
+
+        // Guardar el nuevo rol
+        $role->save();
+
+        return redirect()->route('admin.roles.index')->with('success', 'Rol ' . $role->role . ' creado correctamente.');
     }
 
     /**
@@ -36,7 +48,13 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        // Contar los usuarios con el rol
+        $userCount = $role->users()->count();
+
+        return view('admin.roles.show', [
+            'role' => $role,
+            'userCount' => $userCount
+        ]);
     }
 
     /**
@@ -60,6 +78,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return redirect()->route('admin.roles.index')->with('success', 'Rol ' . $role->role . ' eliminado correctamente.');
     }
 }
