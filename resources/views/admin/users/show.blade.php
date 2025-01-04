@@ -54,6 +54,7 @@
                                 $text = "Editar";
                             @endphp
                             <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                            <x-buttons.reset :user="$user" />
                             @php
                                 $id_modal = '#modal_delete' . $user->id;
                             @endphp

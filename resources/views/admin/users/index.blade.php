@@ -69,6 +69,7 @@
                                             $text = "Editar";
                                         @endphp
                                         <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                        <x-buttons.reset :user="$user" />
                                         <!-- Para generar un modal diferente siempre, se debe incluir el id -->
                                         @php
                                             $id_modal = '#modal_delete' . $user->id;

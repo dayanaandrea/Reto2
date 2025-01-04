@@ -120,6 +120,19 @@ class UserController extends Controller
     }
 
     /**
+     * Reset the password to 1234.
+     */
+    public function reset(User $user)
+    {
+        $user->password = Hash::make('1234');
+
+        // Guardar el nuevo usuario
+        $user->save();
+
+        return redirect()->route('admin.users.index', $user)->with('success', 'Contraseña del usuario ' . $user->email . ' restablecida correctamente.');
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(User $user)

@@ -5,14 +5,15 @@ namespace App\View\Components\Buttons;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\User;
 
-class Delete extends Component
+class Reset extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $id,
+        public User $user,
     )
     {
         //
@@ -23,6 +24,6 @@ class Delete extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.buttons.delete');
+        return view('components.buttons.reset');
     }
 }
