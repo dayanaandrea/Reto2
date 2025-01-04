@@ -20,8 +20,9 @@ Route::middleware('auth')->group(function () {
 
   // Ruta para el home, solo accesible para usuarios autenticados
   Route::get('home', [HomeController::class, 'index'])->name('home');
-  // Rutas de users
-  Route::resource('users', UserController::class);
+
+  // Ruta para cambiar la contraseña de un usuario
+  Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
   // Ruta para cambiar la contraseña de un usuario
   Route::put('users/{user}/changePass', [UserController::class, 'changePass'])->name('users.changePass');
 

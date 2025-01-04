@@ -73,7 +73,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show', ['user' => $user]);
+        if (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god' || Auth::user()->id === $user->id){
+            return view('admin.users.show', ['user' => $user]);
+        } else {
+            return redirect("/home")->with('permission', 'No tienes permiso para acceder a la información de este usuario.');
+        }
     }
 
     /**
