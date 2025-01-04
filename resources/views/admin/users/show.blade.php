@@ -8,6 +8,14 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+
+    @if (session('permission'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ session('permission') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <h2 class="mb-4">Detalles del Usuario</h2>
     <!-- Tarjeta para mostrar detalles del usuario -->
     <div class="card">
@@ -59,7 +67,8 @@
                                 $id_modal = '#modal_change' . $user->id;
                                 $btn_open = 'btn_open' . $user->id;
                             @endphp
-                            <x-buttons.open-modal :id="$id_modal" :text="'Cambiar Contraseña'" :type="'secondary'" :btnOpen="$btn_open" />
+                            <x-buttons.open-modal :id="$id_modal" :text="'Cambiar Contraseña'" :type="'secondary'"
+                                :btnOpen="$btn_open" />
                             @php
                                 $id_modal = '#modal_delete' . $user->id;
                             @endphp

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -137,6 +138,11 @@ class UserController extends Controller
      */
     public function changePass(Request $request, User $user)
     {
+        // Verificar si el usuario logueado es el mismo que el usuario cuya contraseña se quiere cambiar
+        if (Auth::user()->id !== $user->id) {
+            return redirect()->route('admin.users.show', $user)->with('permission', 'No tienes permiso para cambiar la contraseña de este usuario.');
+        }
+
         $validated = $request->validate([
             'current_password' => 'required',
             // Confirmed busca automáticamente un campo con el nombre new_password_confirmation
