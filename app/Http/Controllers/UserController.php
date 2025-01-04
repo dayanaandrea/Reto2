@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -117,6 +118,65 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->route('admin.users.show', $user)->with('success', 'Usuario ' . $user->email . ' actualizado correctamente.');
+    }
+
+    /**
+     * Reset the password to 1234.
+     */
+    public function reset(User $user)
+    {
+        $user->password = Hash::make('1234');
+
+        // Guardar el nuevo usuario
+        $user->save();
+
+        return redirect()->route('admin.users.index', $user)->with('success', 'Contraseña del usuario ' . $user->email . ' restablecida correctamente.');
+    }
+
+    /**
+     * Change the current password.
+     */
+    public function changePass(Request $request, User $user)
+    {
+        // Verificar si el usuario logueado es el mismo que el usuario cuya contraseña se quiere cambiar
+        if (Auth::user()->id !== $user->id) {
+            return redirect()->route('admin.users.show', $user)->with('permission', 'No tienes permiso para cambiar la contraseña de este usuario.');
+        }
+
+        $validated = $request->validate([
+            'current_password' => 'required',
+            // Confirmed busca automáticamente un campo con el nombre new_password_confirmation
+            'new_password' => [
+                'required',
+                'min:8',
+                'max:255',
+                'confirmed',
+                'regex:/[A-Za-z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*?&]/',
+            ],
+            'new_password_confirmation' => 'required',
+        ], [
+            // Mensajes de error personalizados según lo que falle
+            'new_password.regex' => 'La nueva contraseña debe contener al menos una letra, un número y un carácter especial.',
+            'new_password.confirmed' => 'La confirmación de la nueva contraseña no coincide con la nueva contraseña.',
+            'new_password.min' => 'La nueva contraseña debe tener al menos 8 caracteres.',
+            'new_password.max' => 'La nueva contraseña no puede tener más de 255 caracteres.',
+            'new_password_confirmation.min' => 'La confirmación de la nueva contraseña debe tener al menos 8 caracteres.',
+            'new_password_confirmation.max' => 'La confirmación de la nueva contraseña no puede tener más de 255 caracteres.',
+        ]);
+
+        // Verificar si la contraseña actual es correcta
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'La contraseña actual es incorrecta.'])->withInput();
+        }
+
+        $user->password = Hash::make($request->password);
+
+        // Guardar el nuevo usuario
+        $user->save();
+
+        return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
     }
 
     /**

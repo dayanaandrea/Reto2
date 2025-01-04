@@ -27,9 +27,11 @@ class AdminController extends Controller
     {
         // Obtener el usuario logueado
         $user = Auth::user();
-        $role = $user->role;
-        if ($role->role == 'god' || $role->role == 'administrador') {
-            return view('admin.home');
+        if ($user->role) {
+            $role = $user->role;
+            if ($role->role == 'god' || $role->role == 'administrador') {
+                return view('admin.home');
+            }
         } else {
             // Lanzar page not found
             abort(404);

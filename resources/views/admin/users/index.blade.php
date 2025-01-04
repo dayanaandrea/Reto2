@@ -69,11 +69,12 @@
                                             $text = "Editar";
                                         @endphp
                                         <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                        <x-buttons.reset :user="$user" />
                                         <!-- Para generar un modal diferente siempre, se debe incluir el id -->
                                         @php
                                             $id_modal = '#modal_delete' . $user->id;
                                         @endphp
-                                        <x-buttons.delete :id="$id_modal" />
+                                        <x-buttons.open-modal :id="$id_modal" :text="'Eliminar'" :type="'danger'" />
                                     </td>
                                 </tr>
 
@@ -82,7 +83,7 @@
                                     $id = 'modal_delete' . $user->id;
                                     $mensaje = "¿Estás seguro de que deseas eliminar el usuario <strong>$user->email</strong>? Esta acción no se puede deshacer.";
                                     $ruta = route('admin.users.destroy', $user);
-                                 @endphp
+                                @endphp
                                 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
                     @endforeach
                 </tbody>

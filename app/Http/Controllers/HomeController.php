@@ -27,13 +27,15 @@ class HomeController extends Controller
     {
         // Obtener el usuario logueado
         $user = Auth::user();
-        $role = $user->role;
-        if ($role->role == 'profesor') {
-            // Recoger todos los profesores y quitar a el propio profesor logueado
-            $teachers = User::orderBy('lastname')->where('role_id', '=', 1)->where('id', '<>', $user->id)->get();
-            return view('home', ['teachers' => $teachers]);
-        } elseif ($role->role == 'estudiante') {
-            return view('home');
+        if ($user->role) {
+            $role = $user->role;
+
+            if ($role->role == 'profesor') {
+                $teachers = User::orderBy('lastname')->where('role_id', '=', 1)->get();
+                return view('home', ['teachers' => $teachers]);
+            } elseif ($role->role == 'estudiante') {
+                return view('home');
+            }
         } else {
             // Lanzar page not found
             abort(404);

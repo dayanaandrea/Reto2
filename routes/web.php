@@ -27,6 +27,10 @@ Route::middleware('auth')->group(function () {
 
       // Rutas de users
       Route::resource('users', UserController::class);
+      // Ruta para resetear la contraseña de un usuario
+      Route::put('users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
+      // Ruta para cambiar la contraseña de un usuario
+      Route::put('users/{user}/changePass', [UserController::class, 'changePass'])->name('users.changePass');
       
       // Rutas de roles
       Route::resource('roles', RoleController::class);

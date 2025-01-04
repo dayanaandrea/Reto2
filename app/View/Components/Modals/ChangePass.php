@@ -1,20 +1,21 @@
 <?php
 
-namespace App\View\Components\Buttons;
+namespace App\View\Components\Modals;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Delete extends Component
+class ChangePass extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
         public string $id,
-    )
-    {
+        public string $ruta,
+        public string $btnOpen,
+    ) {
         //
     }
 
@@ -23,6 +24,6 @@ class Delete extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.buttons.delete');
+        return view('components.modals.change-pass');
     }
 }

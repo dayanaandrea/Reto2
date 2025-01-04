@@ -1,19 +1,19 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Buttons;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\User;
 
-class Detail extends Component
+class Reset extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $label,
-        public string $value,
+        public User $user,
     )
     {
         //
@@ -24,6 +24,6 @@ class Detail extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.detail');
+        return view('components.buttons.reset');
     }
 }
