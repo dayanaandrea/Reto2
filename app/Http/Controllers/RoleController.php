@@ -78,7 +78,11 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $role->delete();
-        return redirect()->route('admin.roles.index')->with('success', 'Rol ' . $role->role . ' eliminado correctamente.');
+        if ($role->role == 'god' || $role->role == 'administrador' || $role->role == 'estudiante' || $role->role == 'profesor') {
+            return redirect()->route('admin.roles.index')->with('permission', 'El rol ' . $role->role . ' no puede ser eliminado.');
+        } else {
+            $role->delete();
+            return redirect()->route('admin.roles.index')->with('success', 'Rol ' . $role->role . ' eliminado correctamente.');
+        }
     }
 }
