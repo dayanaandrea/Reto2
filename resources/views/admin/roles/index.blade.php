@@ -56,7 +56,7 @@
                                         @php
                                             $id_modal = '#modal_delete' . $role->id;
                                         @endphp
-                                        <x-buttons.delete :id="$id_modal" />
+                                        <x-buttons.open-modal :id="$id_modal" :text="'Eliminar'" :type="'danger'" />
                                     </td>
                                 </tr>
 
