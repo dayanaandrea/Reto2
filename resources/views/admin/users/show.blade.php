@@ -56,23 +56,25 @@
                         <x-detail :label="'Última actualización:'" :value="$user->updated_at->format('d/m/Y')" />
 
                         <div>
-                            @php
-                                $route = route('admin.users.edit', $user);
-                                $type = "edit";
-                                $text = "Editar";
-                            @endphp
-                            <x-buttons.generic :route="$route" :type="$type" :text="$text" />
-                            <x-buttons.reset :user="$user" />
+                            @if(Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god'))
+                                                        @php
+                                                            $route = route('admin.users.edit', $user);
+                                                            $type = "edit";
+                                                            $text = "Editar";
+                                                        @endphp
+                                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                                        <x-buttons.reset :user="$user" />
+                                                        @php
+                                                            $id_modal = '#modal_delete' . $user->id;
+                                                        @endphp
+                                                        <x-buttons.open-modal :id="$id_modal" :text="'Eliminar'" :type="'danger'" />
+                            @endif
                             @php
                                 $id_modal = '#modal_change' . $user->id;
                                 $btn_open = 'btn_open' . $user->id;
                             @endphp
                             <x-buttons.open-modal :id="$id_modal" :text="'Cambiar Contraseña'" :type="'secondary'"
                                 :btnOpen="$btn_open" />
-                            @php
-                                $id_modal = '#modal_delete' . $user->id;
-                            @endphp
-                            <x-buttons.open-modal :id="$id_modal" :text="'Eliminar'" :type="'danger'" />
                         </div>
                     </div>
                 </div>
@@ -91,7 +93,11 @@
 <!-- Modal para actualizar la contraseña de un usuario -->
 @php
     $id = 'modal_change' . $user->id;
-    $ruta = route('admin.users.changePass', $user);
+    if (Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')){
+        $ruta = route('admin.users.changePass', $user);
+    } else {
+        $ruta = route('users.changePass', $user);
+    }
     $btn_open = 'btn_open' . $user->id;
 @endphp
 <x-modals.change-pass :id="$id" :mensaje="$mensaje" :ruta="$ruta" :btnOpen="$btn_open" />

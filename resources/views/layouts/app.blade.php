@@ -76,7 +76,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('admin.users.show', Auth::user()) }}">
+                                    @php
+                                        if (Auth::user() && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador')){
+                                            $perfil_ruta = route('admin.users.show', Auth::user());
+                                        } else {
+                                            $perfil_ruta = route('users.show', Auth::user());
+                                        }
+                                    @endphp
+                                    <a class="dropdown-item" href="{{$perfil_ruta}}">
                                         Perfil
                                     </a>
 

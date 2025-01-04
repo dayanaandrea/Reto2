@@ -6,6 +6,12 @@
 
 @section('content')
 <div class="container">
+    @if(session('permission'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ session('permission') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     @if($user->role)
         @if ($user->role->role == 'profesor')
             <h2 class="mb-3">Profesores</h2>
