@@ -22,27 +22,29 @@ Route::middleware('auth')->group(function () {
   Route::get('home', [HomeController::class, 'index'])->name('home');
   // Rutas de users
   Route::resource('users', UserController::class);
+  // Ruta para cambiar la contraseña de un usuario
+  Route::put('users/{user}/changePass', [UserController::class, 'changePass'])->name('users.changePass');
 
   // Rutas del administrador
   Route::prefix('admin')->name('admin.')->middleware(CheckAdminRole::class)->group(function () {
-      // Ruta principal del panel de administración
-      Route::get('/', [AdminController::class, 'index'])->name('index');
+    // Ruta principal del panel de administración
+    Route::get('/', [AdminController::class, 'index'])->name('index');
 
-      // Rutas de users
-      Route::resource('users', UserController::class);
-      // Ruta para resetear la contraseña de un usuario
-      Route::put('users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
-      // Ruta para cambiar la contraseña de un usuario
-      Route::put('users/{user}/changePass', [UserController::class, 'changePass'])->name('users.changePass');
-      
-      // Rutas de roles
-      Route::resource('roles', RoleController::class);
+    // Rutas de users
+    Route::resource('users', UserController::class);
+    // Ruta para resetear la contraseña de un usuario
+    Route::put('users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
+    // Ruta para cambiar la contraseña de un usuario
+    Route::put('users/{user}/changePass', [UserController::class, 'changePass'])->name('users.changePass');
 
-      // Rutas de modulos 
-      Route::resource('modules', ModuleController::class);
-      
-      // Rutas de ciclos
-      Route::resource('cycles', CycleController::class);
+    // Rutas de roles
+    Route::resource('roles', RoleController::class);
+
+    // Rutas de modulos 
+    Route::resource('modules', ModuleController::class);
+
+    // Rutas de ciclos
+    Route::resource('cycles', CycleController::class);
   });
 
 });

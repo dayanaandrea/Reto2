@@ -176,7 +176,11 @@ class UserController extends Controller
         // Guardar el nuevo usuario
         $user->save();
 
-        return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
+        if (Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')){
+            return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
+        } else {
+            return redirect()->route('users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
+        }
     }
 
     /**
