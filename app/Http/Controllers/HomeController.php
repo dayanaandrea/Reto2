@@ -35,6 +35,8 @@ class HomeController extends Controller
                 return view('home', ['teachers' => $teachers]);
             } elseif ($role->role == 'estudiante') {
                 return view('home');
+            } elseif ($role->role == 'god' || $role->role == 'administrador') {
+                return redirect('/admin');
             }
         } else {
             // Lanzar page not found
