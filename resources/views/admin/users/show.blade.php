@@ -56,9 +56,14 @@
                             <x-buttons.generic :route="$route" :type="$type" :text="$text" />
                             <x-buttons.reset :user="$user" />
                             @php
+                                $id_modal = '#modal_change' . $user->id;
+                                $btn_open = 'btn_open' . $user->id;
+                            @endphp
+                            <x-buttons.open-modal :id="$id_modal" :text="'Cambiar Contraseña'" :type="'secondary'" :btnOpen="$btn_open" />
+                            @php
                                 $id_modal = '#modal_delete' . $user->id;
                             @endphp
-                            <x-buttons.delete :id="$id_modal" />
+                            <x-buttons.open-modal :id="$id_modal" :text="'Eliminar'" :type="'danger'" />
                         </div>
                     </div>
                 </div>
@@ -73,4 +78,12 @@
     $ruta = route('admin.users.destroy', $user);
 @endphp
 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
+
+<!-- Modal para actualizar la contraseña de un usuario -->
+@php
+    $id = 'modal_change' . $user->id;
+    $ruta = route('admin.users.changePass', $user);
+    $btn_open = 'btn_open' . $user->id;
+@endphp
+<x-modals.change-pass :id="$id" :mensaje="$mensaje" :ruta="$ruta" :btnOpen="$btn_open" />
 @endsection
