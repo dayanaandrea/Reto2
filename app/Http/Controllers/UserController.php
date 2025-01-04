@@ -184,7 +184,13 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' eliminado correctamente.');
+        if ($user->role){
+            if ($user->role->role == 'god'){
+                return redirect()->route('admin.users.index')->with('permission', 'No tiene permisos para eliminar el usuario ' . $user->email . '.');
+            }
+        } else {
+            $user->delete();
+            return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' eliminado correctamente.');
+        }
     }
 }
