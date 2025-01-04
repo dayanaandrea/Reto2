@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckAdminRole;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
@@ -19,9 +20,11 @@ Route::middleware('auth')->group(function () {
 
   // Ruta para el home, solo accesible para usuarios autenticados
   Route::get('home', [HomeController::class, 'index'])->name('home');
+  // Rutas de users
+  Route::resource('users', UserController::class);
 
   // Rutas del administrador
-  Route::prefix('admin')->name('admin.')->group(function () {
+  Route::prefix('admin')->name('admin.')->middleware(CheckAdminRole::class)->group(function () {
       // Ruta principal del panel de administración
       Route::get('/', [AdminController::class, 'index'])->name('index');
 
