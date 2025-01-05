@@ -22,7 +22,7 @@
 
 <body id="elorrieta_body">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" id="barra">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     <img src="{{Storage::url('public/images/logo-elorrieta.svg')}}" alt="logo" class="img-fluid"
