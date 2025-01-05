@@ -37,9 +37,10 @@
                                 @php
                                     $route = route('users.show', $teacher);
                                     $type = "show";
-                                    $text = "Ver";
+                                    $text = '<i class="fa-solid fa-eye"></i>';
+                                    $tooltip = 'Ver datos del usuario';
                                 @endphp
-                                <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                             </td>
                         </tr>
                     @endforeach
