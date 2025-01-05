@@ -68,7 +68,7 @@
                                     </td>
                                 </tr>
 
-                                <!-- Modal para eliminar un usuario -->
+                                <!-- Modal para eliminar un rol -->
                                 @php
                                     $id = 'modal_delete' . $role->id;
                                     $mensaje = "¿Estás seguro de que deseas eliminar el rol <strong class='text-capitalize'>$role->role</strong>? Esta acción no se puede deshacer.";
