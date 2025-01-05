@@ -9,11 +9,12 @@
     --green-dark: #246d2f;
 }
 
-@import 'node_modules/futura-font/styles.css';
-
-/* Fuente Futura */
 body#elorrieta_body {
-    font-family: 'FuturaBT-Medium', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Ubuntu Condensed', sans-serif;
 }
 
 body#elorrieta_body div#app nav#barra {
@@ -71,6 +72,7 @@ button.btn-warning:hover, a.btn-warning:hover {
 
 /* BADGES */
 #elorrieta_body span.badge {
+    font-family: 'Ubuntu Condensed', sans-serif;
     font-weight: 400;
     color: white;
 }
