@@ -55,7 +55,7 @@
                             @if ($user->phone2 != null)
                                 <x-detail :label="'Teléfono secundario:'" :value="$user->phone2" />
                             @endif
-                            
+
                             <x-detail :label="'Fecha de Creación:'" :value="$user->created_at->format('d/m/Y')" />
                             <x-detail :label="'Última actualización:'" :value="$user->updated_at->format('d/m/Y')" />
                         @endif
@@ -65,22 +65,27 @@
                                                         @php
                                                             $route = route('admin.users.edit', $user);
                                                             $type = "edit";
-                                                            $text = "Editar";
+                                                            $text = '<i class="fa-solid fa-pen"></i>';
+                                                            $tooltip = 'Editar datos del usuario';
                                                         @endphp
-                                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                                                         <x-buttons.reset :user="$user" />
                                                         @php
                                                             $id_modal = '#modal_delete' . $user->id;
+                                                            $text = '<i class="fa-solid fa-trash-can"></i>';
+                                                            $tooltip = 'Eliminar usuario';
                                                         @endphp
-                                                        <x-buttons.open-modal :id="$id_modal" :text="'Eliminar'" :type="'danger'" />
+                                                        <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                             @endif
                             <!-- El botón de cambiar contraseña solo aparece si es el usuario logueado -->
                             @if(Auth::user()->id === $user->id)
                                                         @php
                                                             $id_modal = '#modal_change' . $user->id;
                                                             $btn_open = 'btn_open' . $user->id;
+                                                            $text = '<i class="fa-solid fa-lock"></i>';
+                                                            $tooltip = 'Cambiar contraseña';
                                                         @endphp
-                                                        <x-buttons.open-modal :id="$id_modal" :text="'Cambiar Contraseña'" :type="'secondary'"
+                                                        <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'secondary'" :tooltip="$tooltip"
                                                             :btnOpen="$btn_open" />
                             @endif
                         </div>
