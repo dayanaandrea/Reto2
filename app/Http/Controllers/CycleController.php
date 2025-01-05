@@ -12,7 +12,9 @@ class CycleController extends Controller
      */
     public function index()
     {
-        //
+        $cycles = Cycle::orderBy('name', 'desc')->paginate(10);
+        return view('admin.cycle.index',['cycles' => $cycles]);
+       
     }
 
     /**
@@ -36,7 +38,7 @@ class CycleController extends Controller
      */
     public function show(Cycle $cycle)
     {
-        //
+        return view('admin.cycle.show',['cycle'=>$cycle]);
     }
 
     /**

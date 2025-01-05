@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Role extends Model
 {
-    protected $fillable = ['role']; 
+    protected $fillable = ['role', 'description']; 
     // Un rol lo pueden tener asignador varios usuarios
     public function users(): HasMany {
         return $this->hasMany(User::class);

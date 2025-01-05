@@ -1,96 +1,144 @@
 @extends('layouts.app')
 
-@php
-    $user = Auth::user();
-@endphp
-
 @section('content')
 <div class="container">
-    <h2>Usuarios</h2>
-    <table class="table table-hover">
-        <thead>
-            <tr class="text-uppercase table-dark">
-                <th scope="col"></th>
-                <th scope="col">Correo</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellido</th>
-                <th scope="col">Rol</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
-                        @php
-                            // Definir la clase dependiendo del rol del usuario
-                            $clase = '';
-
-                            if ($user->role->role == 'god') {
-                                $clase = 'table-danger';
-                            } elseif ($user->role->role == 'administrador') {
-                                $clase = 'table-warning';
-                            } elseif ($user->role->role == 'profesor') {
-                                $clase = 'table-primary';
-                            } else {
-                                $clase = 'table-success';
-                            }
-                        @endphp
-                        <tr class="{{$clase}}">
-                            <th scope="col">{{ $loop->iteration }}</th>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->lastname}}</td>
-                            <td class="text-capitalize">{{$user->role->role}}</td>
-                            <td><a href="{{ route('admin.users.show', $user) }}" class="btn btn-secondary btn-sm">
-                                    Ver
-                                </a>
-                                <a href="#" class="btn btn-warning btn-sm">
-                                    Editar
-                                </a>
-                                <!-- Para generar un modal diferente siempre, se debe incluir el id --> 
-                                <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalUsuario{{ $user->id }}"
-                                    data-user-id="{{ $user->id }}">
-                                    Eliminar
-                                </a>
-                            </td>
-                        </tr>
-
-                        <!-- Modal para eliminar un usuario -->
-                        <div class="modal fade" id="modalUsuario{{ $user->id }}" tabindex="-1" aria-labelledby="deleteModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-
-                                    <!-- Encabezado del Modal -->
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Confirmar eliminación</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-
-                                    <!-- Cuerpo del Modal -->
-                                    <div class="modal-body">
-                                        ¿Estás seguro de que deseas eliminar al usuario <b>{{$user->email}}</b>? Esta acción no se puede deshacer.
-                                    </div>
-
-                                    <!-- Pie del Modal -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <!-- Formulario de eliminación -->
-                                        <form action="{{route('admin.users.destroy', $user)}}" method="POST"
-                                            enctype="multipart/form-data">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger" type="submit">Eliminar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            @endforeach
-        </tbody>
-    </table>
-    <!-- Paginación -->
+    <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if(session('permission'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ session('permission') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    <h2>Crear un nuevo usuario</h2>
     <div>
-        {!! $users->links('vendor.pagination.bootstrap-5') !!}
+        <p>Accede a la creación de usuarios:</p>
+        <p><a href="{{ route('admin.users.create') }}" class="btn btn-primary">Crear usuario</a></p>
     </div>
+    @if ($users->count() > 0)
+        <h2>Usuarios</h2>
+        <div>
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="text-uppercase table-dark">
+                        <th scope="col"></th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Fecha de creación</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $user)
+                                @php
+                                    if ($user->role) {
+                                        // Definir la clase dependiendo del rol del usuario
+                                        $clase = obtenerEstiloRol($user->role->role);
+                                    } else {
+                                        $clase = obtenerEstiloRol(null);
+                                    }
+                                @endphp
+                                <tr>
+                                    <td><img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle"
+                                            style="max-width: 30px; max-height: 30px;"></td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->lastname}}</td>
+                                    @if ($user->role)
+                                        <td class="text-capitalize">
+                                            <span class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span>
+                                        </td>
+                                    @else
+                                        <td class="text-capitalize">
+                                            <span class="badge {{$clase}} text-capitalize text-dark">Sin rol</span>
+                                        </td>
+                                    @endif
+
+                                    <td>{{ date('d-m-Y', strtotime($user->created_at)) }}</td>
+                                    <td>
+                                        @php
+                                            $route = route('admin.users.show', $user);
+                                            $type = "show";
+                                            $text = "Ver";
+                                        @endphp
+                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                        @php
+                                            $route = route('admin.users.edit', $user);
+                                            $type = "edit";
+                                            $text = "Editar";
+                                        @endphp
+                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                        <x-buttons.reset :user="$user" />
+                                        <!-- Para generar un modal diferente siempre, se debe incluir el id -->
+                                        @php
+                                            $id_modal = '#modal_delete' . $user->id;
+                                        @endphp
+                                        <x-buttons.open-modal :id="$id_modal" :text="'Eliminar'" :type="'danger'" />
+                                    </td>
+                                </tr>
+
+                                <!-- Modal para eliminar un usuario -->
+                                @php
+                                    $id = 'modal_delete' . $user->id;
+                                    $mensaje = "¿Estás seguro de que deseas eliminar el usuario <strong>$user->email</strong>? Esta acción no se puede deshacer.";
+                                    $ruta = route('admin.users.destroy', $user);
+                                @endphp
+                                <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
+                    @endforeach
+                </tbody>
+            </table>
+            <!-- Paginación -->
+            <div>
+                {!! $users->appends(['active' => request()->active, 'inactive' => request()->inactive])->links('vendor.pagination.bootstrap-5') !!}
+            </div>
+        </div>
+    @endif
+
+    @if ($del_users->count() > 0)
+        <h2>Usuarios Eliminados</h2>
+        <div>
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr class="text-uppercase table-dark">
+                        <th scope="col"></th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Fecha de eliminación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($del_users as $user)
+                                @php
+                                    // Definir la clase dependiendo del rol del usuario
+                                    $clase = obtenerEstiloRol($user->role->role);
+                                @endphp
+                                <tr>
+                                    <td><img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle"
+                                            style="max-width: 30px; max-height: 30px;"></td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->lastname}}</td>
+                                    <td class="text-capitalize"><span
+                                            class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></td>
+                                    <td>{{ date('d-m-Y', strtotime($user->deleted_at)) }}</td>
+                                </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <!-- Paginación -->
+            <div>
+                {!! $del_users->appends(['active' => request()->active, 'inactive' => request()->inactive])->links('vendor.pagination.bootstrap-5') !!}
+            </div>
+        </div>
+    @endif
 </div>
 @endsection

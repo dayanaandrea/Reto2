@@ -42,7 +42,17 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         @if (Auth::user() && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador'))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('admin.users.index') }}">Usuarios</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.users.index') }}">Usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.roles.index') }}">Roles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.cycles.index') }}">Ciclos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.modules.index') }}">Modulos</a>
                             </li>
                         @endif
                     </ul>
@@ -56,22 +66,29 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('nav.login') }}</a>
                                 </li>
                             @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('nav.register') }}</a>
-                                </li>
-                            @endif
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <img src="{{ obtenerFoto(Auth::user()) }}" alt="usuario"
+                                        class="img-fluid rounded-circle mx-2" style="max-width: 30px; max-height: 30px;">
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @php
+                                        if (Auth::user() && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador')){
+                                            $perfil_ruta = route('admin.users.show', Auth::user());
+                                        } else {
+                                            $perfil_ruta = route('users.show', Auth::user());
+                                        }
+                                    @endphp
+                                    <a class="dropdown-item" href="{{$perfil_ruta}}">
+                                        Perfil
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
+                                                             document.getElementById('logout-form').submit();">
                                         {{ __('nav.logout') }}
                                     </a>
 
