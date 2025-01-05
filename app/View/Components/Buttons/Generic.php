@@ -15,6 +15,7 @@ class Generic extends Component
         public string $route,
         public string $type,
         public string $text,
+        public ?string $tooltip = null
     )
     {
         //
