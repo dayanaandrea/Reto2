@@ -11,19 +11,22 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Fonts -->
+    <!--
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    -->
+    
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body>
+<body id="elorrieta_body">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                    <img src="{{Storage::url('public/images/logo-elorrieta.svg')}}" alt="logo" class="img-fluid" style="max-width: 150px;">
+                    <img src="{{Storage::url('public/images/logo-elorrieta.svg')}}" alt="logo" class="img-fluid"
+                        style="max-width: 150px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -80,8 +83,9 @@
                                                             Perfil
                                                         </a>
 
-                                                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                                                     document.getElementById('logout-form').submit();">
+                                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                                            onclick="event.preventDefault();
+                                                                                                                                     document.getElementById('logout-form').submit();">
                                                             {{ __('nav.logout') }}
                                                         </a>
 
