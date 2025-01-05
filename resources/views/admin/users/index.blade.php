@@ -53,7 +53,7 @@
                                     <td>{{$user->lastname}}</td>
                                     @if ($user->role)
                                         <td class="text-capitalize">
-                                            <span class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span>
+                                            <a href="{{route('admin.roles.show', $user->role)}}"><span class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></a>
                                         </td>
                                     @else
                                         <td class="text-capitalize">

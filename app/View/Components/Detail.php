@@ -14,6 +14,7 @@ class Detail extends Component
     public function __construct(
         public string $label,
         public string $value,
+        public ?string $route = null
     )
     {
         //
