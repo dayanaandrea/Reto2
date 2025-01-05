@@ -2,12 +2,11 @@
     --pantone-dark: #211261;
     --pantone-medium: #3cb4e5;
     --pantone-light: #7ac5f4;
-}
-
-:root {
-    --pantone-dark: #211261;
-    --pantone-medium: #3cb4e5;
-    --pantone-light: #7ac5f4;
+    --pantone-lightest: #ebf7ff;
+    --pink: #ed217c;
+    --pink-light: #ff5ba5;
+    --green: #36b449;
+    --green-dark: #246d2f;
 }
 
 @import 'node_modules/futura-font/styles.css';
@@ -17,26 +16,92 @@ body#elorrieta_body {
     font-family: 'FuturaBT-Medium', sans-serif;
 }
 
-button.btn-primary {
+body#elorrieta_body div#app nav#barra {
+    background-color: var(--pantone-lightest) !important;
+}
+
+/* BOTONES */
+button.btn-primary, a.btn-primary {
     background-color: var(--pantone-medium);
     border-color: var(--pantone-medium);
-    color: black;
+    color: white;
 }
 
-button.btn-primary:hover {
+button.btn-primary:hover, a.btn-primary:hover {
     background-color: var(--pantone-light);
     border-color: var(--pantone-light);
-    color: black;
+    color: white;
 }
 
-a.btn-primary {
+button.btn-danger, a.btn-danger {
+    background-color: var(--pink);
+    border-color: var(--pink);
+    color: white;
+}
+
+button.btn-danger:hover, a.btn-danger:hover {
+    background-color: var(--pink-light);
+    border-color: var(--pink-light);
+    color: white;
+}
+
+button.btn-secondary, a.btn-secondary {
+    background-color: var(--pantone-dark);
+    border-color: var(--pantone-dark);
+    color: white;
+}
+
+button.btn-secondary:hover, a.btn-secondary:hover {
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+
+button.btn-warning, a.btn-warning {
+    background-color: var(--green);
+    border-color: var(--green);
+    color: white;
+}
+
+button.btn-warning:hover, a.btn-warning:hover {
+    background-color: var(--green-dark);
+    border-color: var(--green-dark);
+    color: white;
+}
+
+/* BADGES */
+#elorrieta_body span.badge {
+    font-weight: 400;
+    color: white;
+}
+#elorrieta_body span.badge.bg-warning {
+    background-color: var(--pantone-dark) !important;
+}
+#elorrieta_body span.badge.bg-danger {
+    background-color: var(--pink) !important;
+}
+#elorrieta_body span.badge.bg-primary {
+    background-color: var(--pantone-medium) !important;
+}
+#elorrieta_body span.badge.bg-success {
+    background-color: var(--green) !important;
+}
+
+/* PAGINACIÓN */
+.pagination .page-link {
+    color: var(--pantone-medium); 
+    background-color: #f1f1f1; 
+    border-color: #ddd; 
+}
+
+.pagination .page-link:hover {
+    color: white;
     background-color: var(--pantone-medium);
-    border-color: var(--pantone-medium);
-    color: black;
+    border-color: var(--pantone-medium); 
 }
 
-a.btn-primary:hover {
-    background-color: var(--pantone-light);
-    border-color: var(--pantone-light);
-    color: black;
+.pagination .page-item.active .page-link {
+    color: white; 
+    background-color: var(--pantone-dark); 
+    border-color: var(--pantone-dark); 
 }
