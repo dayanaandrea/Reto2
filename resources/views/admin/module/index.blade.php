@@ -36,7 +36,6 @@
                         <a href="#" class="btn btn-warning btn-sm">
                             Editar
                         </a>
-                        <!-- Para generar un modal diferente siempre, se debe incluir el id -->
                     <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalModule{{$module->id}}"
                     data-module-id="{{ $module->id }}">
                         Eliminar
@@ -49,7 +48,6 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
 
-                        <!-- Encabezado del Modal -->
                         <div class="modal-header">
                             <h5 class="modal-title">Confirmar eliminación</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -60,7 +58,6 @@
                             ¿Estás seguro de que deseas eliminar el módulo <b>{{ $module->name }}</b>? Esta acción no se puede deshacer.
                         </div>
 
-                        <!-- Pie del Modal -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <!-- Formulario de eliminación -->
