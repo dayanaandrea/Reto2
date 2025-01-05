@@ -1,19 +1,42 @@
-/*
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-*/
-
-table.usuarios tr.admin {
-    background-color: red;
-    cursor: pointer;
+:root {
+    --pantone-dark: #211261;
+    --pantone-medium: #3cb4e5;
+    --pantone-light: #7ac5f4;
 }
 
-table.usuarios tr.admin {
-    background-color: blue;
-    cursor: pointer;
+:root {
+    --pantone-dark: #211261;
+    --pantone-medium: #3cb4e5;
+    --pantone-light: #7ac5f4;
 }
 
-h2 {
-    color: red;
+@import 'node_modules/futura-font/styles.css';
+
+/* Fuente Futura */
+body#elorrieta_body {
+    font-family: 'FuturaBT-Medium', sans-serif;
+}
+
+button.btn-primary {
+    background-color: var(--pantone-medium);
+    border-color: var(--pantone-medium);
+    color: black;
+}
+
+button.btn-primary:hover {
+    background-color: var(--pantone-light);
+    border-color: var(--pantone-light);
+    color: black;
+}
+
+a.btn-primary {
+    background-color: var(--pantone-medium);
+    border-color: var(--pantone-medium);
+    color: black;
+}
+
+a.btn-primary:hover {
+    background-color: var(--pantone-light);
+    border-color: var(--pantone-light);
+    color: black;
 }

@@ -31,7 +31,7 @@ class HomeController extends Controller
             $role = $user->role;
 
             if ($role->role == 'profesor') {
-                $teachers = User::orderBy('lastname')->where('role_id', '=', 1)->get();
+                $teachers = User::orderBy('lastname')->where('role_id', '=', 1)->paginate(5);
                 return view('home', ['teachers' => $teachers]);
             } elseif ($role->role == 'estudiante') {
                 return view('home');
