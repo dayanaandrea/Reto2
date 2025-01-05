@@ -107,3 +107,14 @@ button.btn-warning:hover, a.btn-warning:hover {
     background-color: var(--pantone-dark); 
     border-color: var(--pantone-dark); 
 }
+
+#carousel .carousel-item img {
+    object-fit: cover;
+    object-position: center;
+    height: 60vh;
+    overflow: hidden;
+}
+
+#carousel .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.65);
+}
