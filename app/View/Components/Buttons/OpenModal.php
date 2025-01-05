@@ -1,20 +1,21 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Buttons;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Detail extends Component
+class OpenModal extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $label,
-        public string $value,
-        public ?string $route = null
+        public string $id,
+        public string $text,
+        public string $type,
+        public ?string $btnOpen = null
     )
     {
         //
@@ -25,6 +26,6 @@ class Detail extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.detail');
+        return view('components.buttons.open-modal');
     }
 }

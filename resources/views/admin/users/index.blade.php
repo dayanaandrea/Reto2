@@ -9,6 +9,12 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
+    @if(session('permission'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ session('permission') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <h2>Crear un nuevo usuario</h2>
     <div>
         <p>Accede a la creación de usuarios:</p>
@@ -17,7 +23,7 @@
     @if ($users->count() > 0)
         <h2>Usuarios</h2>
         <div>
-            <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped lista">
                 <thead>
                     <tr class="text-uppercase table-dark">
                         <th scope="col"></th>
@@ -47,7 +53,7 @@
                                     <td>{{$user->lastname}}</td>
                                     @if ($user->role)
                                         <td class="text-capitalize">
-                                            <span class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span>
+                                            <a href="{{route('admin.roles.show', $user->role)}}"><span class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></a>
                                         </td>
                                     @else
                                         <td class="text-capitalize">
@@ -69,11 +75,12 @@
                                             $text = "Editar";
                                         @endphp
                                         <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                        <x-buttons.reset :user="$user" />
                                         <!-- Para generar un modal diferente siempre, se debe incluir el id -->
                                         @php
                                             $id_modal = '#modal_delete' . $user->id;
                                         @endphp
-                                        <x-buttons.delete :id="$id_modal" />
+                                        <x-buttons.open-modal :id="$id_modal" :text="'Eliminar'" :type="'danger'" />
                                     </td>
                                 </tr>
 
@@ -82,7 +89,7 @@
                                     $id = 'modal_delete' . $user->id;
                                     $mensaje = "¿Estás seguro de que deseas eliminar el usuario <strong>$user->email</strong>? Esta acción no se puede deshacer.";
                                     $ruta = route('admin.users.destroy', $user);
-                                 @endphp
+                                @endphp
                                 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
                     @endforeach
                 </tbody>

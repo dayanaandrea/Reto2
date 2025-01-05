@@ -8,7 +8,7 @@
                 <div class="card-header">Actualización del Usuario</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.users.update', $user->id) }}"
+                    <form method="POST" action="{{ route('admin.users.update', $user) }}"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
