@@ -39,12 +39,13 @@
                                 // Definir la clase dependiendo del rol del usuario
                                 $clase = obtenerEstiloRol($user->role->role);
                                 $badge = '<span class="badge ' . $clase . ' text-capitalize">' . $user->role->role . '</span>';
+                                $route = route('admin.roles.show', $user->role);
                             } else {
                                 $clase = obtenerEstiloRol(null);
                                 $badge = '<span class="badge text-dark ' . $clase . ' text-capitalize">Sin Rol</span>';
                             }
                         @endphp
-                        <x-detail :label="'Rol:'" :value="$badge" />
+                        <x-detail :label="'Rol:'" :value="$badge" :route="$route" />
 
                         <!-- La información personal solo aparece para los god o admin, o el propio usuario logueado (su perfil) -->
                         @if((Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')) || Auth::user()->id === $user->id)
