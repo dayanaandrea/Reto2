@@ -171,7 +171,7 @@ class UserController extends Controller
             return back()->withErrors(['current_password' => 'La contraseña actual es incorrecta.'])->withInput();
         }
 
-        $user->password = Hash::make($request->password);
+        $user->password = Hash::make($request->new_password);
 
         // Guardar el nuevo usuario
         $user->save();
