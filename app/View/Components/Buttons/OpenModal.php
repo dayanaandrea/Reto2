@@ -15,7 +15,8 @@ class OpenModal extends Component
         public string $id,
         public string $text,
         public string $type,
-        public ?string $btnOpen = null
+        public ?string $btnOpen = null,
+        public ?string $tooltip = null
     )
     {
         //

@@ -16,10 +16,8 @@
         </div>
     @endif
     <h2>Crear un nuevo rol</h2>
-    <div>
-        <p>Accede a la creación de roles:</p>
-        <p><a href="{{ route('admin.roles.create') }}" class="btn btn-primary">Crear rol</a></p>
-    </div>
+    <p><a href="{{ route('admin.roles.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
+            data-bs-placement="top" title="Crear un nuevo rol"><i class="fa-solid fa-plus"></i></a></p>
     @if ($roles->count() > 0)
         <h2>Roles</h2>
         <div>
@@ -49,20 +47,24 @@
                                         @php
                                             $route = route('admin.roles.show', $role);
                                             $type = "show";
-                                            $text = "Ver";
+                                            $text = '<i class="fa-solid fa-eye"></i>';
+                                            $tooltip = 'Ver datos del rol';
                                         @endphp
-                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                                         @php
                                             $route = route('admin.roles.edit', $role);
                                             $type = "edit";
-                                            $text = "Editar";
+                                            $text = '<i class="fa-solid fa-pen"></i>';
+                                            $tooltip = 'Editar datos del rol';
                                         @endphp
-                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                                         <!-- Para generar un modal diferente siempre, se debe incluir el id -->
                                         @php
                                             $id_modal = '#modal_delete' . $role->id;
+                                            $text = '<i class="fa-solid fa-trash-can"></i>';
+                                            $tooltip = 'Eliminar rol';
                                         @endphp
-                                        <x-buttons.open-modal :id="$id_modal" :text="'Eliminar'" :type="'danger'" />
+                                        <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                                     </td>
                                 </tr>
 
@@ -85,4 +87,4 @@
             </div>
         </div>
     @endif
-@endsection
+    @endsection

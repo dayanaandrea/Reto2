@@ -16,10 +16,8 @@
         </div>
     @endif
     <h2>Crear un nuevo usuario</h2>
-    <div>
-        <p>Accede a la creación de usuarios:</p>
-        <p><a href="{{ route('admin.users.create') }}" class="btn btn-primary">Crear usuario</a></p>
-    </div>
+    <p><a href="{{ route('admin.users.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
+            data-bs-placement="top" title="Crear un nuevo usuario"><i class="fa-solid fa-plus"></i></a></p>
     @if ($users->count() > 0)
         <h2>Usuarios</h2>
         <div>
@@ -53,7 +51,8 @@
                                     <td>{{$user->lastname}}</td>
                                     @if ($user->role)
                                         <td class="text-capitalize">
-                                            <a href="{{route('admin.roles.show', $user->role)}}"><span class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></a>
+                                            <a href="{{route('admin.roles.show', $user->role)}}"><span
+                                                    class="badge {{$clase}} text-capitalize">{{ $user->role->role }}</span></a>
                                         </td>
                                     @else
                                         <td class="text-capitalize">
@@ -66,21 +65,25 @@
                                         @php
                                             $route = route('admin.users.show', $user);
                                             $type = "show";
-                                            $text = "Ver";
+                                            $text = '<i class="fa-solid fa-eye"></i>';
+                                            $tooltip = 'Ver datos del usuario';
                                         @endphp
-                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                                         @php
                                             $route = route('admin.users.edit', $user);
                                             $type = "edit";
-                                            $text = "Editar";
+                                            $text = '<i class="fa-solid fa-pen"></i>';
+                                            $tooltip = 'Editar datos del usuario';
                                         @endphp
-                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                                         <x-buttons.reset :user="$user" />
                                         <!-- Para generar un modal diferente siempre, se debe incluir el id -->
                                         @php
                                             $id_modal = '#modal_delete' . $user->id;
+                                            $text = '<i class="fa-solid fa-trash-can"></i>';
+                                            $tooltip = 'Eliminar usuario';
                                         @endphp
-                                        <x-buttons.open-modal :id="$id_modal" :text="'Eliminar'" :type="'danger'" />
+                                        <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                                     </td>
                                 </tr>
 

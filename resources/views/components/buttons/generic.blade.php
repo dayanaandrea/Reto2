@@ -12,6 +12,6 @@
     }
 @endphp
 
-<a href="{{$route}}" class="btn btn-{{$class}} btn-sm">
-    {{ $text }}
+<a href="{{$route}}" class="btn btn-{{$class}} btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="{{$tooltip}}">
+    {!! $text !!}
 </a>
