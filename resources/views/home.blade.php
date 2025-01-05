@@ -18,23 +18,37 @@
             <table class="table table-striped">
                 <thead>
                     <tr class="table-dark text-uppercase">
-                        <th scope="col">#</th>
-                        <th scope="col">Apellidos</th>
+                        <th scope="col"></th>
+                        <th scope="col">Apellido</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Correo</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($teachers as $teacher)
                         <tr>
-                            <th scope="col">{{ $loop->iteration }}</th>
+                            <td><img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle"
+                                    style="max-width: 30px; max-height: 30px;"></td>
                             <td>{{$teacher->lastname}}</td>
                             <td>{{$teacher->name}}</td>
                             <td>{{$teacher->email}}</td>
+                            <td>
+                                @php
+                                    $route = route('users.show', $teacher);
+                                    $type = "show";
+                                    $text = "Ver";
+                                @endphp
+                                <x-buttons.generic :route="$route" :type="$type" :text="$text" />
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            <!-- Paginación -->
+            <div>
+                {!! $teachers->links('vendor.pagination.bootstrap-5') !!}
+            </div>
         @elseif ($user->role->role == 'estudiante')
             <div class="container">
                 <h2>Home de estudiante</h2>
