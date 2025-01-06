@@ -12,8 +12,8 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        $enrollments = Enrollment::all();
-        return view('enrollment.index', compact('enrollments'));
+        $enrollments = Enrollment::orderBy('id', 'asc')->paginate(10);
+        return view('admin.enrollment.index',['enrollments' => $enrollments]);
     }
 
     /**
@@ -37,7 +37,7 @@ class EnrollmentController extends Controller
      */
     public function show(Enrollment $enrollment)
     {
-        //
+        return view('admin.enrollment.show',['enrollment'=>$enrollment]);
     }
 
     /**

@@ -24,13 +24,12 @@
             @foreach ($enrollments as $enrollment)
                 <tr >
                     <th scope="col">{{ $loop->iteration }}</th>
-                    <td>{{$cycle->code}}</td>
-                    <td>{{$user->name}}</td>
-                    <td>{{$module->name}}</td>
-                    <td>{{$cycle->name}}</td>
+                    <td>{{ $enrollment->user->name . ', ' . $enrollment->user->lastname }}</td>
+                    <td>{{$enrollment->module->name}}</td>
+                    <td>{{$enrollment->cycle->code}}</td>
                     <td>{{$enrollment->date}}</td>
                     <td>{{$enrollment->course}}</td>
-                    
+
                     <td><a href="{{route('admin.enrollments.show', $enrollment)}}" class="btn btn-secondary btn-sm">
                             Ver
                         </a>

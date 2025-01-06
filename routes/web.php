@@ -8,6 +8,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\EnrollmentController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -46,6 +47,9 @@ Route::middleware('auth')->group(function () {
 
     // Rutas de ciclos
     Route::resource('cycles', CycleController::class);
+
+    // Rutas de matriculas
+    Route::resource('enrollments', EnrollmentController::class);
   });
 
 });
