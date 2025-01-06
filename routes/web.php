@@ -23,8 +23,11 @@ Route::middleware('auth')->group(function () {
 
   // Ruta para cambiar la contraseña de un usuario
   Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
+
   // Ruta para cambiar la contraseña de un usuario
-  Route::put('users/{user}/changePass', [UserController::class, 'changePass'])->name('users.changePass');
+  Route::get('users/{user}/change-pass', [UserController::class, 'changePass'])->name('users.change-pass');
+  // Ruta para guardar la nueva contraseña de un usuario
+  Route::put('users/{user}/store-pass', [UserController::class, 'storePass'])->name('users.store-pass');
 
   // Rutas del administrador
   Route::prefix('admin')->name('admin.')->middleware(CheckAdminRole::class)->group(function () {

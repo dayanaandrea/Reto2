@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('auth.register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.users.store') }}"" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.users.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <h4>{{ __('auth.account') }}</h4>
@@ -129,7 +129,7 @@
                     <label for="photo" class="col-md-4 col-form-label text-md-end">{{ __('auth.photo') }}</label>
 
                     <div class="col-md-6">
-                        <input id="photo" type="file" class="form-control" name="photo" autocomplete="photo">
+                        <input id="photo" type="file" class="form-control" name="photo" autocomplete="photo" accept="image/*">
                     </div>
                 </div>
 
