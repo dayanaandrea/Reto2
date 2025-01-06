@@ -136,11 +136,19 @@ class UserController extends Controller
     /**
      * Change the current password.
      */
-    public function changePass(Request $request, User $user)
+    public function changePass(User $user)
+    {
+        return view('admin.users.change-pass', ['user' => $user]);
+    }
+
+    /**
+     * Store the new password.
+     */
+    public function storePass(Request $request, User $user)
     {
         // Verificar si el usuario logueado es el mismo que el usuario cuya contraseña se quiere cambiar
         if (Auth::user()->id !== $user->id) {
-            return redirect()->route('admin.users.show', $user)->with('permission', 'No tienes permiso para cambiar la contraseña de este usuario.');
+            return back()->with('permission', 'No tienes permiso para cambiar la contraseña de este usuario.');
         }
 
         $validated = $request->validate([
@@ -176,7 +184,7 @@ class UserController extends Controller
         // Guardar el nuevo usuario
         $user->save();
 
-        if (Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')){
+        if (Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')) {
             return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
         } else {
             return redirect()->route('users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
@@ -188,8 +196,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if ($user->role){
-            if ($user->role->role == 'god'){
+        if ($user->role) {
+            if ($user->role->role == 'god') {
                 return redirect()->route('admin.users.index')->with('permission', 'No tiene permisos para eliminar el usuario ' . $user->email . '.');
             }
         } else {
