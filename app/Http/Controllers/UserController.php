@@ -166,12 +166,12 @@ class UserController extends Controller
             'new_password_confirmation' => 'required',
         ], [
             // Mensajes de error personalizados según lo que falle
-            'new_password.regex' => 'La nueva contraseña debe contener al menos una letra, un número y un carácter especial.',
-            'new_password.confirmed' => 'La confirmación de la nueva contraseña no coincide con la nueva contraseña.',
-            'new_password.min' => 'La nueva contraseña debe tener al menos 8 caracteres.',
-            'new_password.max' => 'La nueva contraseña no puede tener más de 255 caracteres.',
-            'new_password_confirmation.min' => 'La confirmación de la nueva contraseña debe tener al menos 8 caracteres.',
-            'new_password_confirmation.max' => 'La confirmación de la nueva contraseña no puede tener más de 255 caracteres.',
+            'new_password.regex' => 'La contraseña debe contener al menos una letra, un número y un carácter especial.',
+            'new_password.confirmed' => 'Las contraseñas no coinciden.',
+            'new_password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'new_password.max' => 'La contraseña no puede tener más de 255 caracteres.',
+            'new_password_confirmation.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'new_password_confirmation.max' => 'La contraseña no puede tener más de 255 caracteres.',
         ]);
 
         // Verificar si la contraseña actual es correcta
