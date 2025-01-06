@@ -151,28 +151,7 @@ class UserController extends Controller
             return back()->with('permission', 'No tienes permiso para cambiar la contraseña de este usuario.');
         }
 
-        $validated = $request->validate([
-            'current_password' => 'required',
-            // Confirmed busca automáticamente un campo con el nombre new_password_confirmation
-            'new_password' => [
-                'required',
-                'min:8',
-                'max:255',
-                'confirmed',
-                'regex:/[A-Za-z]/',
-                'regex:/[0-9]/',
-                'regex:/[@$!%*?&]/',
-            ],
-            'new_password_confirmation' => 'required',
-        ], [
-            // Mensajes de error personalizados según lo que falle
-            'new_password.regex' => 'La contraseña debe contener al menos una letra, un número y un carácter especial.',
-            'new_password.confirmed' => 'Las contraseñas no coinciden.',
-            'new_password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-            'new_password.max' => 'La contraseña no puede tener más de 255 caracteres.',
-            'new_password_confirmation.min' => 'La contraseña debe tener al menos 8 caracteres.',
-            'new_password_confirmation.max' => 'La contraseña no puede tener más de 255 caracteres.',
-        ]);
+        $this->validatePass($request);
 
         // Verificar si la contraseña actual es correcta
         if (!Hash::check($request->current_password, $user->password)) {
@@ -204,5 +183,31 @@ class UserController extends Controller
             $user->delete();
             return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' eliminado correctamente.');
         }
+    }
+
+    private function validatePass(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            // Confirmed busca automáticamente un campo con el nombre new_password_confirmation
+            'new_password' => [
+                'required',
+                'min:8',
+                'max:255',
+                'confirmed',
+                'regex:/[A-Za-z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*?&]/',
+            ],
+            'new_password_confirmation' => 'required',
+        ], [
+            // Mensajes de error personalizados según lo que falle
+            'new_password.regex' => 'La contraseña debe contener al menos una letra, un número y un carácter especial.',
+            'new_password.confirmed' => 'Las contraseñas no coinciden.',
+            'new_password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'new_password.max' => 'La contraseña no puede tener más de 255 caracteres.',
+            'new_password_confirmation.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'new_password_confirmation.max' => 'La contraseña no puede tener más de 255 caracteres.',
+        ]);
     }
 }
