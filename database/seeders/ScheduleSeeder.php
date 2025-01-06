@@ -4,10 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\DB;
->>>>>>> main
 
 class ScheduleSeeder extends Seeder
 {
@@ -16,15 +13,8 @@ class ScheduleSeeder extends Seeder
      */
     public function run(): void
     {
-<<<<<<< HEAD
-        DB::table('shedules')->insert([
-
-            //Id's de los modulos 2DAM: 6ACD,7DI,8PMDM,9PSP,10SGE
-=======
         DB::table('schedule')->insert([
            //Id's de los modulos 2DAM: 6ACD,7DI,8PMDM,9PSP,10SGE
->>>>>>> main
-            
             // Koldo -> 10 
             // Ruben -> 11
             // Borja -> 12
@@ -34,41 +24,6 @@ class ScheduleSeeder extends Seeder
             //El id del modulo es el orden en el que se insertan los modulos en el seeder
 
             //Dia 1
-<<<<<<< HEAD
-            ['id_teacher' => 10,'id_module' => 6,'day' => 1,'hour' => '1'],
-            ['id_teacher' => 10,'id_module' => 6,'day' => 1,'hour' => '2'],
-            ['id_teacher' => 11,'id_module' => 7,'day' => 1,'hour' => '3'],
-            ['id_teacher' => 11,'id_module' => 7,'day' => 1,'hour' => '4'],
-            ['id_teacher' => 11,'id_module' => 7,'day' => 1,'hour' => '5'],
-
-            //Dia 2
-            ['id_teacher' => 12,'id_module' => 8,'day' => 2,'hour' => '1'],
-            ['id_teacher' => 12,'id_module' => 8,'day' => 2,'hour' => '2'],
-
-            //Dia 3
-            ['id_teacher' => 11,'id_module' => 10,'day' => 3,'hour' => '1'],
-            ['id_teacher' => 11,'id_module' => 10,'day' => 3,'hour' => '2'],
-            ['id_teacher' => 10,'id_module' => 9,'day' => 3,'hour' => '3'],
-            ['id_teacher' => 10,'id_module' => 9,'day' => 3,'hour' => '4'],
-            ['id_teacher' => 10,'id_module' => 9,'day' => 3,'hour' => '5'],
-
-            //Dia 4
-            ['id_teacher' => 11,'id_module' => 10,'day' => 4,'hour' => '1'],
-            ['id_teacher' => 11,'id_module' => 10,'day' => 4,'hour' => '2'],
-            ['id_teacher' => 11,'id_module' => 7,'day' => 4,'hour' => '3'],
-            ['id_teacher' => 11,'id_module' => 7,'day' => 4,'hour' => '4'],
-            ['id_teacher' => 11,'id_module' => 7,'day' => 4,'hour' => '5'],
-
-            //Dia 5
-            ['id_teacher' => 10,'id_module' => 6,'day' => 5,'hour' => '1'],
-            ['id_teacher' => 10,'id_module' => 6,'day' => 5,'hour' => '2'],
-            ['id_teacher' => 10,'id_module' => 6,'day' => 5,'hour' => '3'],
-            ['id_teacher' => 12,'id_module' => 8,'day' => 5,'hour' => '4'],
-            ['id_teacher' => 12,'id_module' => 8,'day' => 5,'hour' => '5'],
-         ]);
-    }
-}
-=======
             ['user_id' => 10,'module_id' => 6,'day' => 1,'hour' => '1', 'created_at'=>now(),'updated_at'=>now()],
             ['user_id' => 10,'module_id' => 6,'day' => 1,'hour' => '2', 'created_at'=>now(),'updated_at'=>now()],
             ['user_id' => 11,'module_id' => 7,'day' => 1,'hour' => '3', 'created_at'=>now(),'updated_at'=>now()],
@@ -102,4 +57,3 @@ class ScheduleSeeder extends Seeder
          ]);
     }
 }
->>>>>>> main
