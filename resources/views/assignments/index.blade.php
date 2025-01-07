@@ -19,20 +19,6 @@
         </thead>
         <tbody>
             @foreach ($assignments as $assignment)
-                        @php
-                            // Definir la clase dependiendo del rol del usuario
-                            $clase = '';
-
-                            if ($enrollment->role->role == 'god') {
-                                $clase = 'table-danger';
-                            } elseif ($user->role->role == 'administrador') {
-                                $clase = 'table-warning';
-                            } elseif ($user->role->role == 'profesor') {
-                                $clase = 'table-primary';
-                            } else {
-                                $clase = 'table-success';
-                            }
-                        @endphp
                         <tr class="{{$clase}}">
                             <th scope="col">{{ $loop->iteration }}</th>
                             <td>{{$enrollment->user.name}}</td>
@@ -53,8 +39,8 @@
                             </td>
                         </tr>
 
-                        <!-- Modal para eliminar un usuario -->
-                        <div class="modal fade" id="modalUsuario{{ $user->id }}" tabindex="-1" aria-labelledby="deleteModalLabel"
+                        <!-- Modal para eliminar un assignment -->
+                        <div class="modal fade" id="modalAssignment{{ $assignment->id }}" tabindex="-1" aria-labelledby="deleteModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -67,7 +53,7 @@
 
                                     <!-- Cuerpo del Modal -->
                                     <div class="modal-body">
-                                        ¿Estás seguro de que deseas eliminar al usuario <b>{{$user->email}}</b>? Esta acción no se puede deshacer.
+                                        ¿Estás seguro de que deseas eliminar la asignación <b>{{$assignment->user.name}} - {{$assignment->user.name}} </b>? Esta acción no se puede deshacer.
                                     </div>
 
                                     <!-- Pie del Modal -->
