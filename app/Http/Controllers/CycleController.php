@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Cycle;
 use Illuminate\Http\Request;
 
+use function Symfony\Component\String\b;
+
 class CycleController extends Controller
 {
     /**
@@ -39,7 +41,7 @@ class CycleController extends Controller
         // Guardar el nuevo ciclo
         $cycles->save();
 
-        return redirect()->route('admin.cycles.index')->with('success', 'Ciclo  ' . $cycles->name . ' creado correctamente.');
+        return redirect()->route('admin.cycles.index')->with('success', 'Ciclo   <b>' . $cycles->name . '</b> creado correctamente.');
     
     }
 
@@ -74,7 +76,7 @@ class CycleController extends Controller
     {
         $name = $cycle->name; 
         $cycle->delete(); 
-        return redirect()->route('admin.cycles.index')->with('success', 'Ciclo  ' . $cycle->name . ' eliminado correctamente.');
+        return redirect()->route('admin.cycles.index')->with('success', 'Ciclo  <b>' . $cycle->name . '</b> eliminado correctamente.');
        
     }
 }
