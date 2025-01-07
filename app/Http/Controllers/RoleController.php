@@ -24,7 +24,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.roles.create');
+        return view('admin.roles.create-edit', ['type' => 'POST']);
     }
 
     /**
@@ -32,9 +32,12 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        // Validar los datos
+        $this->validateRole($request);
+
         // Crear el rol
         $role = new Role();
-        $role->role = $request->role;
+        $role->role = strtolower($request->role);
         $role->description = $request->description;
 
         // Guardar el nuevo rol
@@ -62,7 +65,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return view('admin.roles.create-edit', ['role' => $role, 'type' => 'PUT']);
     }
 
     /**
@@ -70,7 +73,16 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        // Validar los datos
+        $this->validateRole($request);
+
+        $role->role = strtolower($request->role);
+        $role->description = $request->description;
+
+        // Guardar el nuevo rol
+        $role->save();
+
+        return redirect()->route('admin.roles.show', $role)->with('success', 'Rol ' . $role->role . ' actualizado correctamente.');
     }
 
     /**
@@ -84,5 +96,24 @@ class RoleController extends Controller
             $role->delete();
             return redirect()->route('admin.roles.index')->with('success', 'Rol ' . $role->role . ' eliminado correctamente.');
         }
+    }
+
+    /**
+     * Validates role's data.
+     */
+    private function validateRole(Request $request)
+    {
+        $request->validate([
+            'role' => 'required',
+            'description' => [
+                'required',
+                'min:10',
+                'max:255'
+            ],
+        ], [
+            // Mensajes de error personalizados según lo que falle
+            'description.min' => 'La descripción debe tener al menos 10 caracteres.',
+            'description.max' => 'La descripción no puede tener más de 255 caracteres.',
+        ]);
     }
 }

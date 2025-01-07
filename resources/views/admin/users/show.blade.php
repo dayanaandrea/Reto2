@@ -62,31 +62,30 @@
                         <div>
                             <!-- Los botones de las operaciones CRUD solo aparecen para los god y admin -->
                             @if(Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god'))
-                                                        @php
-                                                            $route = route('admin.users.edit', $user);
-                                                            $type = "edit";
-                                                            $text = '<i class="fa-solid fa-pen"></i>';
-                                                            $tooltip = 'Editar datos del usuario';
-                                                        @endphp
-                                                        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
-                                                        <x-buttons.reset :user="$user" />
-                                                        @php
-                                                            $id_modal = '#modal_delete' . $user->id;
-                                                            $text = '<i class="fa-solid fa-trash-can"></i>';
-                                                            $tooltip = 'Eliminar usuario';
-                                                        @endphp
-                                                        <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
+                                @php
+                                    $route = route('admin.users.edit', $user);
+                                    $type = "edit";
+                                    $text = '<i class="fa-solid fa-pen"></i>';
+                                    $tooltip = 'Editar datos del usuario';
+                                @endphp
+                                <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
+                                <x-buttons.reset :user="$user" />
+                                @php
+                                    $id_modal = '#modal_delete' . $user->id;
+                                    $text = '<i class="fa-solid fa-trash-can"></i>';
+                                    $tooltip = 'Eliminar usuario';
+                                @endphp
+                                <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                             @endif
                             <!-- El botón de cambiar contraseña solo aparece si es el usuario logueado -->
                             @if(Auth::user()->id === $user->id)
-                                                        @php
-                                                            $id_modal = '#modal_change' . $user->id;
-                                                            $btn_open = 'btn_open' . $user->id;
-                                                            $text = '<i class="fa-solid fa-lock"></i>';
-                                                            $tooltip = 'Cambiar contraseña';
-                                                        @endphp
-                                                        <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'secondary'" :tooltip="$tooltip"
-                                                            :btnOpen="$btn_open" />
+                                @php
+                                    $route = route('users.change-pass', $user);
+                                    $type = "show";
+                                    $text = '<i class="fa-solid fa-lock"></i>';
+                                    $tooltip = 'Cambiar contraseña';
+                                @endphp
+                                <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                             @endif
                         </div>
                     </div>
@@ -102,16 +101,4 @@
     $ruta = route('admin.users.destroy', $user);
 @endphp
 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
-
-<!-- Modal para actualizar la contraseña de un usuario -->
-@php
-    $id = 'modal_change' . $user->id;
-    if (Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')) {
-        $ruta = route('admin.users.changePass', $user);
-    } else {
-        $ruta = route('users.changePass', $user);
-    }
-    $btn_open = 'btn_open' . $user->id;
-@endphp
-<x-modals.change-pass :id="$id" :mensaje="$mensaje" :ruta="$ruta" :btnOpen="$btn_open" />
 @endsection

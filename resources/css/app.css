@@ -13,7 +13,12 @@ body#elorrieta_body {
     font-family: 'Ubuntu', sans-serif;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Ubuntu Condensed', sans-serif;
 }
 
@@ -22,49 +27,57 @@ body#elorrieta_body div#app nav#barra {
 }
 
 /* BOTONES */
-button.btn-primary, a.btn-primary {
+button.btn-primary,
+a.btn-primary {
     background-color: var(--pantone-medium);
     border-color: var(--pantone-medium);
     color: white;
 }
 
-button.btn-primary:hover, a.btn-primary:hover {
+button.btn-primary:hover,
+a.btn-primary:hover {
     background-color: var(--pantone-light);
     border-color: var(--pantone-light);
     color: white;
 }
 
-button.btn-danger, a.btn-danger {
+button.btn-danger,
+a.btn-danger {
     background-color: var(--pink);
     border-color: var(--pink);
     color: white;
 }
 
-button.btn-danger:hover, a.btn-danger:hover {
+button.btn-danger:hover,
+a.btn-danger:hover {
     background-color: var(--pink-light);
     border-color: var(--pink-light);
     color: white;
 }
 
-button.btn-secondary, a.btn-secondary {
+button.btn-secondary,
+a.btn-secondary {
     background-color: var(--pantone-dark);
     border-color: var(--pantone-dark);
     color: white;
 }
 
-button.btn-secondary:hover, a.btn-secondary:hover {
+button.btn-secondary:hover,
+a.btn-secondary:hover {
     background-color: black;
     border-color: black;
     color: white;
 }
 
-button.btn-warning, a.btn-warning {
+button.btn-warning,
+a.btn-warning {
     background-color: var(--green);
     border-color: var(--green);
     color: white;
 }
 
-button.btn-warning:hover, a.btn-warning:hover {
+button.btn-warning:hover,
+a.btn-warning:hover {
     background-color: var(--green-dark);
     border-color: var(--green-dark);
     color: white;
@@ -76,34 +89,50 @@ button.btn-warning:hover, a.btn-warning:hover {
     font-weight: 400;
     color: white;
 }
+
 #elorrieta_body span.badge.bg-warning {
     background-color: var(--pantone-dark) !important;
 }
+
 #elorrieta_body span.badge.bg-danger {
     background-color: var(--pink) !important;
 }
+
 #elorrieta_body span.badge.bg-primary {
     background-color: var(--pantone-medium) !important;
 }
+
 #elorrieta_body span.badge.bg-success {
     background-color: var(--green) !important;
 }
 
 /* PAGINACIÓN */
 .pagination .page-link {
-    color: var(--pantone-medium); 
-    background-color: #f1f1f1; 
-    border-color: #ddd; 
+    color: var(--pantone-medium);
+    background-color: #f1f1f1;
+    border-color: #ddd;
 }
 
 .pagination .page-link:hover {
     color: white;
     background-color: var(--pantone-medium);
-    border-color: var(--pantone-medium); 
+    border-color: var(--pantone-medium);
 }
 
 .pagination .page-item.active .page-link {
-    color: white; 
-    background-color: var(--pantone-dark); 
-    border-color: var(--pantone-dark); 
+    color: white;
+    background-color: var(--pantone-dark);
+    border-color: var(--pantone-dark);
 }
+
+#carousel .carousel-item img {
+    object-fit: cover;
+    object-position: center;
+    height: 60vh;
+    overflow: hidden;
+}
+
+#carousel .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.65);
+}
+

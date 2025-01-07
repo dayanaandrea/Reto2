@@ -38,6 +38,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // Validar los datos del usuario
+        $this->validateUser($request);
+
         // Crear el usuario
         $user = new User();
         $user->name = $request->name;
@@ -49,11 +52,6 @@ class UserController extends Controller
         $user->phone2 = $request->has('phone2');
         $user->role_id = $request->role_id;
         $user->password = Hash::make('1234');
-
-        // Comprobar si la imagen es válida
-        $request->validate([
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
 
         // La imagen se guarda como binary en la base de datos
         if ($request->hasFile('photo')) {
@@ -93,6 +91,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        // Validar los datos del usuario
+        $this->validateUser($request, $user);
+
         $user->name = $request->name;
         $user->lastname = $request->lastname;
         $user->email = $request->email;
@@ -101,11 +102,6 @@ class UserController extends Controller
         $user->phone1 = $request->phone1;
         $user->phone2 = $request->has('phone2');
         $user->role_id = $request->role_id;
-
-        // Comprobar si la imagen es válida
-        $request->validate([
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
 
         // La imagen se guarda como binary en la base de datos
         if ($request->hasFile('photo')) {
@@ -136,14 +132,58 @@ class UserController extends Controller
     /**
      * Change the current password.
      */
-    public function changePass(Request $request, User $user)
+    public function changePass(User $user)
+    {
+        return view('admin.users.change-pass', ['user' => $user]);
+    }
+
+    /**
+     * Store the new password.
+     */
+    public function storePass(Request $request, User $user)
     {
         // Verificar si el usuario logueado es el mismo que el usuario cuya contraseña se quiere cambiar
         if (Auth::user()->id !== $user->id) {
-            return redirect()->route('admin.users.show', $user)->with('permission', 'No tienes permiso para cambiar la contraseña de este usuario.');
+            return back()->with('permission', 'No tienes permiso para cambiar la contraseña de este usuario.');
         }
 
-        $validated = $request->validate([
+        $this->validatePass($request);
+
+        // Verificar si la contraseña actual es correcta
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'La contraseña actual es incorrecta.'])->withInput();
+        }
+
+        $user->password = Hash::make($request->new_password);
+
+        // Guardar el nuevo usuario
+        $user->save();
+
+        if (Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')) {
+            return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
+        } else {
+            return redirect()->route('users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(User $user)
+    {
+        if ($user->role) {
+            if ($user->role->role == 'god') {
+                return redirect()->route('admin.users.index')->with('permission', 'No tiene permisos para eliminar el usuario ' . $user->email . '.');
+            }
+        } else {
+            $user->delete();
+            return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' eliminado correctamente.');
+        }
+    }
+
+    private function validatePass(Request $request)
+    {
+        $request->validate([
             'current_password' => 'required',
             // Confirmed busca automáticamente un campo con el nombre new_password_confirmation
             'new_password' => [
@@ -158,43 +198,60 @@ class UserController extends Controller
             'new_password_confirmation' => 'required',
         ], [
             // Mensajes de error personalizados según lo que falle
-            'new_password.regex' => 'La nueva contraseña debe contener al menos una letra, un número y un carácter especial.',
-            'new_password.confirmed' => 'La confirmación de la nueva contraseña no coincide con la nueva contraseña.',
-            'new_password.min' => 'La nueva contraseña debe tener al menos 8 caracteres.',
-            'new_password.max' => 'La nueva contraseña no puede tener más de 255 caracteres.',
-            'new_password_confirmation.min' => 'La confirmación de la nueva contraseña debe tener al menos 8 caracteres.',
-            'new_password_confirmation.max' => 'La confirmación de la nueva contraseña no puede tener más de 255 caracteres.',
+            'new_password.regex' => 'La contraseña debe contener al menos una letra, un número y un carácter especial.',
+            'new_password.confirmed' => 'Las contraseñas no coinciden.',
+            'new_password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'new_password.max' => 'La contraseña no puede tener más de 255 caracteres.',
+            'new_password_confirmation.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'new_password_confirmation.max' => 'La contraseña no puede tener más de 255 caracteres.',
         ]);
-
-        // Verificar si la contraseña actual es correcta
-        if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'La contraseña actual es incorrecta.'])->withInput();
-        }
-
-        $user->password = Hash::make($request->new_password);
-
-        // Guardar el nuevo usuario
-        $user->save();
-
-        if (Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')){
-            return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
-        } else {
-            return redirect()->route('users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
-        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
+    private function validateUser(Request $request, $user = null)
     {
-        if ($user->role){
-            if ($user->role->role == 'god'){
-                return redirect()->route('admin.users.index')->with('permission', 'No tiene permisos para eliminar el usuario ' . $user->email . '.');
-            }
-        } else {
-            $user->delete();
-            return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' eliminado correctamente.');
-        }
+        // Excluir el email del usuario actual durante la actualización
+        $emailValidation = 'required|email|unique:users,email,' . ($user ? $user->id : 'NULL') . '|max:255';
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => $emailValidation,
+            'pin' => [
+                'required',
+                'string',
+                'min:9',
+                'max:9',
+                'regex:/^[XYZ]?\d{7}[A-Za-z]$|^\d{8}[A-Za-z]$/', // Validación para DNI o NIE
+            ],
+            'address' => 'required|string|max:255',
+            'phone1' => 'required|string|max:15',
+            'phone2' => 'nullable|string|max:15',
+            'role_id' => 'required|exists:roles,id',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ], [
+            // Mensajes de error personalizados
+            'name.required' => 'El nombre es obligatorio.',
+            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'lastname.required' => 'El apellido es obligatorio.',
+            'lastname.max' => 'El apellido no puede tener más de 255 caracteres.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico debe ser válido.',
+            'email.unique' => 'El correo electrónico ya está en uso. Por favor, elige otro.',
+            'pin.required' => 'El DNI/NIE es obligatorio.',
+            'pin.min' => 'El DNI/NIE debe tener 9 caracteres.',
+            'pin.max' => 'El DNI/NIE no puede tener más de 9 caracteres.',
+            'pin.regex' => 'Un DNI tiene 8 dígitos seguidos de una letra, o un NIE tiene una letra inicial seguida de 7 dígitos y una letra al final.',
+            'address.required' => 'La dirección es obligatoria.',
+            'address.max' => 'La dirección no puede tener más de 255 caracteres.',
+            'phone1.required' => 'El número de teléfono principal es obligatorio.',
+            'phone1.max' => 'El número de teléfono principal no puede tener más de 15 caracteres.',
+            'phone2.max' => 'El número de teléfono secundario no puede tener más de 15 caracteres.',
+            'role_id.required' => 'El rol es obligatorio.',
+            'role_id.exists' => 'El rol seleccionado no existe.',
+            'photo.image' => 'La foto debe ser una imagen válida.',
+            'photo.mimes' => 'La foto debe tener uno de los siguientes formatos: jpg, jpeg, png.',
+            'photo.max' => 'La foto no puede exceder los 2MB.',
+        ]);
     }
+
 }
