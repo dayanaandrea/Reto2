@@ -31,16 +31,16 @@ class CycleController extends Controller
      */
     public function store(Request $request)
     {
-                // Crear el ciclo
-                $cycles = new Cycle();
-                $cycles->code = $request->code;
-                $cycles->name = $request->name;
-        
-                // Guardar el nuevo ciclo
-                $cycles->save();
-        
-                return redirect()->route('admin.cycles.index')->with('success', 'Ciclo  ' . $cycles->name . ' creado correctamente.');
-            
+        // Crear el ciclo
+        $cycles = new Cycle();
+        $cycles->code = $request->code;
+        $cycles->name = $request->name;
+
+        // Guardar el nuevo ciclo
+        $cycles->save();
+
+        return redirect()->route('admin.cycles.index')->with('success', 'Ciclo  ' . $cycles->name . ' creado correctamente.');
+    
     }
 
     /**
@@ -72,6 +72,8 @@ class CycleController extends Controller
      */
     public function destroy(Cycle $cycle)
     {
-        //
+        $code = $cycle->code; 
+        $cycle->delete(); 
+        return view('admin.cycle.success', ['code'=>$code]); 
     }
 }

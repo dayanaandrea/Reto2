@@ -32,11 +32,39 @@
                             Editar
                         </a>
                         <!-- Para generar un modal diferente siempre, se debe incluir el id --> 
-                        <a href="#" class="btn btn-danger btn-sm" >
+                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalCycle{{$cycle->id}}"
+                        data-cycle-id="{{ $cycle->id }}">
                             Eliminar
                         </a>
                     </td>
                 </tr>
+                <!-- Modal para eliminar un ciclo -->
+                <div class="modal fade" id="modalCycle{{$cycle->id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title">Confirmar eliminación</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <!-- Cuerpo del Modal -->
+                        <div class="modal-body">
+                            ¿Estás seguro de que deseas eliminar el ciclo <b>{{ $cycle->name }}</b>? Esta acción no se puede deshacer.
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <!-- Formulario de eliminación -->
+                            <form action="{{ route('admin.cycles.destroy', $cycle->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit" > Eliminar </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endforeach
         </tbody>
     </table>
