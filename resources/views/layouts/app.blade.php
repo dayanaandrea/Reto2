@@ -58,10 +58,10 @@
                                 <a class="nav-link" href="{{ route('admin.enrollments.index') }}">Matriculas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.enrollments.index') }}">Matriculas</a>
+                                <a class="nav-link" href="{{ route('admin.schedules.index') }}">Horarios</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.enrollments.index') }}">Asignaciones</a>
+                                <a class="nav-link" href="{{ route('admin.asignments.index') }}">Asignaciones</a>
                             </li>
                         @endif
                     </ul>
