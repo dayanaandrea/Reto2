@@ -25,7 +25,7 @@ class CycleController extends Controller
     public function create()
     {
         $cycles = Cycle::orderBy('code')->get();
-        return view('admin.cycle.create', ['cycles'=>$cycles]);
+        return view('admin.cycle.create-edit', ['cycles'=>$cycles]);
     }
 
     /**
@@ -58,7 +58,8 @@ class CycleController extends Controller
      */
     public function edit(Cycle $cycle)
     {
-        //
+                                            // Aqui se le pueden mandar los datos de los modulos para el combo 
+        return view('admin.cycle.create-edit', ['cycle'=>$cycle]);
     }
 
     /**

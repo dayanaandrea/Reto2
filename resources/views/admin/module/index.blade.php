@@ -2,24 +2,18 @@
 
 @section('content')
 <div class="container">
-    <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
     @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {!! session('success') !!}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    @if(session('permission'))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {!! session('permission')!!}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-    
+
     <h2>Crear un nuevo modulo</h2>
     <div>
         <p>Accede a la creación de un modulo:</p>
-        <p><a href="{{ route('admin.modules.create') }}" class="btn btn-primary">Crear modulo</a></p>
+        <p><a href="{{ route('admin.modules.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Crear un nuevo modulo"><i class="fa-solid fa-plus"></i></a></p>
     </div>
     <h2>Modulos</h2>
     <table class="table table-hover">
@@ -36,29 +30,42 @@
         </thead>
         <tbody>
             @foreach ($modules as $module)
-                <tr >
-                    <th scope="col">{{ $loop->iteration }}</th>
-                    <td>{{$module->code}}</td>
-                    <td>{{$module->name}}</td>
-                    <td>{{$module->hours}}</td>
-                    <td>{{$module->course}}</td>
-                    <td>{{$module->cycle->code}}</td>
-                    
-                    <td><a href="{{route('admin.modules.show', $module)}}" class="btn btn-secondary btn-sm">
-                            Ver
-                        </a>
-                        <a href="#" class="btn btn-warning btn-sm">
-                            Editar
-                        </a>
-                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalModule{{$module->id}}"
-                    data-module-id="{{ $module->id }}">
-                        Eliminar
-                    </a>
+            <tr>
+                <th scope="col">{{ $loop->iteration }}</th>
+                <td>{{$module->code}}</td>
+                <td>{{$module->name}}</td>
+                <td>{{$module->hours}}</td>
+                <td>{{$module->course}}</td>
+                <td>{{$module->cycle->code}}</td>
+
+                <td>
+                    @php
+                    $route = route('admin.modules.show', $module);
+                    $type = "show";
+                    $text = '<i class="fa-solid fa-eye"></i>';
+                    $tooltip = 'Ver datos del modulo';
+                    @endphp
+                    <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
+                    @php
+                    $route = route('admin.modules.edit', $module);
+                    $type = "edit";
+                    $text = '<i class="fa-solid fa-pen"></i>';
+                    $tooltip = 'Editar datos del modulo';
+                    @endphp
+                    <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
+
+                    <!-- Para generar un modal diferente siempre, se debe incluir el id -->
+                    @php
+                    $id_modal = '#modal_delete' . $module->id;
+                    $text = '<i class="fa-solid fa-trash-can"></i>';
+                    $tooltip = 'Eliminar modulo';
+                    @endphp
+                    <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                 </td>
             </tr>
 
             <!-- Modal para eliminar un modulo -->
-            <div class="modal fade" id="modalModule{{ $module->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modal_delete{{ $module->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
 
@@ -78,7 +85,7 @@
                             <form action="{{ route('admin.modules.destroy', $module->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit" > Eliminar </button>
+                                <button class="btn btn-danger" type="submit"> Eliminar </button>
                             </form>
                         </div>
                     </div>
