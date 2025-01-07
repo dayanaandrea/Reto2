@@ -57,6 +57,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.enrollments.index') }}">Matriculas</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.enrollments.index') }}">Matriculas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.enrollments.index') }}">Asignaciones</a>
+                            </li>
                         @endif
                     </ul>
 
