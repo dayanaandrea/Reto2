@@ -77,5 +77,7 @@ class ModuleController extends Controller
         $name = $module->name; 
         $module->delete(); 
         return view('admin.module.success', ['name'=>$name]); 
+        //return redirect()->route('admin.module.index')->with('success', 'Usuario ' . $user->email . ' eliminado correctamente.');
+            
     }
 }

@@ -22,7 +22,8 @@ class CycleController extends Controller
      */
     public function create()
     {
-        //
+        $cycles = Cycle::orderBy('code')->get();
+        return view('admin.cycle.create', ['cycles'=>$cycles]);
     }
 
     /**
@@ -30,7 +31,16 @@ class CycleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                // Crear el ciclo
+                $cycles = new Cycle();
+                $cycles->code = $request->code;
+                $cycles->name = $request->name;
+        
+                // Guardar el nuevo ciclo
+                $cycles->save();
+        
+                return redirect()->route('admin.cycles.index')->with('success', 'Ciclo  ' . $cycles->name . ' creado correctamente.');
+            
     }
 
     /**
