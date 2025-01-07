@@ -72,8 +72,9 @@ class CycleController extends Controller
      */
     public function destroy(Cycle $cycle)
     {
-        $code = $cycle->code; 
+        $name = $cycle->name; 
         $cycle->delete(); 
-        return view('admin.cycle.success', ['code'=>$code]); 
+        return redirect()->route('admin.cycles.index')->with('success', 'Ciclo  ' . $cycle->name . ' eliminado correctamente.');
+       
     }
 }
