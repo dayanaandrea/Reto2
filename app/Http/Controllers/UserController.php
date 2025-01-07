@@ -71,6 +71,11 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        // Esto es para controlar lo que se puede ver en el perfil. Si es estudiante solo puede ver su perfil.
+        if ((Auth::user()->role && (Auth::user()->role->role == 'estudiante')) && (Auth::check() && $user->id != Auth::user()->id)){
+            abort(404);
+        }
+
         return view('admin.users.show', ['user' => $user]);
     }
 

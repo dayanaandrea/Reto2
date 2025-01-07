@@ -21,9 +21,10 @@
                     // Definir la clase dependiendo del rol del usuario
                     $clase = obtenerEstiloRol($role->role);
                     $badge = '<span class="badge ' . $clase . ' text-capitalize">' . $role->role . '</span>';
+                    $description = $role->description;
                 @endphp
                 <x-detail :label="'Rol:'" :value="$badge" />
-                <x-detail :label="'Descripción:'" :value="$role->description" />
+                <x-detail :label="'Descripción:'" :value="$description" />
                 <x-detail :label="'Usuarios:'" :value="$userCount" />
                 <div>
                     @php
