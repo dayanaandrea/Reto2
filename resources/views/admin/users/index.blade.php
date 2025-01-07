@@ -3,18 +3,9 @@
 @section('content')
 <div class="container">
     <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-    @if(session('permission'))
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        {{ session('permission') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+
     <h2>Crear un nuevo usuario</h2>
     <p><a href="{{ route('admin.users.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
             data-bs-placement="top" title="Crear un nuevo usuario"><i class="fa-solid fa-plus"></i></a></p>

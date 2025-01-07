@@ -63,7 +63,7 @@ class UserController extends Controller
         // Guardar el nuevo usuario
         $user->save();
 
-        return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' creado correctamente.');
+        return redirect()->route('admin.users.index')->with('success', 'Usuario <b>' . $user->email . '</b> creado correctamente.');
     }
 
     /**
@@ -118,7 +118,7 @@ class UserController extends Controller
         // Guardar el nuevo usuario
         $user->save();
 
-        return redirect()->route('admin.users.show', $user)->with('success', 'Usuario ' . $user->email . ' actualizado correctamente.');
+        return redirect()->route('admin.users.show', $user)->with('success', 'Usuario <b>' . $user->email . '</b> actualizado correctamente.');
     }
 
     /**
@@ -131,7 +131,7 @@ class UserController extends Controller
         // Guardar el nuevo usuario
         $user->save();
 
-        return redirect()->route('admin.users.index', $user)->with('success', 'Contraseña del usuario ' . $user->email . ' restablecida correctamente.');
+        return redirect()->route('admin.users.index', $user)->with('success', 'Contraseña del usuario <b>' . $user->email . '</b> restablecida correctamente.');
     }
 
     /**
@@ -178,11 +178,11 @@ class UserController extends Controller
     {
         if ($user->role) {
             if ($user->role->role == 'god') {
-                return redirect()->route('admin.users.index')->with('permission', 'No tiene permisos para eliminar el usuario ' . $user->email . '.');
+                return redirect()->route('admin.users.index')->with('permission', 'No tiene permisos para eliminar el usuario <b>' . $user->email . '</b>.');
             }
         } else {
             $user->delete();
-            return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' eliminado correctamente.');
+            return redirect()->route('admin.users.index')->with('success', 'Usuario <b>' . $user->email . '</b> eliminado correctamente.');
         }
     }
 

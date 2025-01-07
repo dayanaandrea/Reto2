@@ -2,12 +2,7 @@
 
 @section('content')
 <div class="container">
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+    <x-alert :key="'success'" :class="'success'" />
     <h2 class="mb-4">Detalles del rol</h2>
 
     <!-- Tarjeta para mostrar detalles de los roles -->
