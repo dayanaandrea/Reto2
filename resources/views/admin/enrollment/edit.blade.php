@@ -8,7 +8,7 @@
                 <div class="card-header">Actualización del Matricula</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.enrollment.update', $enrollment->id) }}"
+                    <form method="POST" action="{{ route('admin.enrollments.update', $enrollment->id) }}"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

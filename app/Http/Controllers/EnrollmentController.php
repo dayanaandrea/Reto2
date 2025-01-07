@@ -84,7 +84,8 @@ class EnrollmentController extends Controller
     
         $enrollment->update($validatedData);
     
-        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula actualizada correctamente.');    
+        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula actualizada correctamente.');   
+         
     }
 
     /**

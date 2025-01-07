@@ -50,7 +50,7 @@ Route::middleware('auth')->group(function () {
 
     // Rutas de matriculas
     Route::resource('enrollments', EnrollmentController::class);
-    
+   
   });
 
 });
