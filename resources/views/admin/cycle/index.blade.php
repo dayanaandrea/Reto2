@@ -11,7 +11,7 @@
     <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark ">
-                <th scope="col/"></th>
+                <th scope="col"></th>
                 <th scope="col">Codigo</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Acciones </th>

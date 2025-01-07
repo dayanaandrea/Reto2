@@ -2,33 +2,17 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-use App\Models\assignment;
+use App\Models\assignments;
 use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
-=======
-use App\Models\Schedule;
-use Illuminate\Http\Request;
-
-<<<<<<<< HEAD:app/Http/Controllers/ScheduleController.php
-class ScheduleController extends Controller
-========
-class AssignmentController extends Controller
->>>>>>>> main:app/Http/Controllers/AssignmentController.php
->>>>>>> main
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-<<<<<<< HEAD
-        $assignments = Assignment::orderBy('created_at')->get();
-        return view('assignments.index', ['assignments'=> $assignments]);
-=======
         //
->>>>>>> main
     }
 
     /**
@@ -50,25 +34,15 @@ class AssignmentController extends Controller
     /**
      * Display the specified resource.
      */
-<<<<<<< HEAD
-    public function show(Assignment $assignment)
-    {
-        return view('assignments.show',['assignment'=>$assignment]);
-=======
-    public function show(Schedule $schedule)
+    public function show(assignments $assignments)
     {
         //
->>>>>>> main
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-<<<<<<< HEAD
-    public function edit(assignment $assignment)
-=======
-    public function edit(Schedule $schedule)
->>>>>>> main
+    public function edit(assignments $assignments)
     {
         //
     }
@@ -76,11 +50,7 @@ class AssignmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-<<<<<<< HEAD
-    public function update(Request $request, assignment $assignment)
-=======
-    public function update(Request $request, Schedule $schedule)
->>>>>>> main
+    public function update(Request $request, assignments $assignments)
     {
         //
     }
@@ -88,11 +58,7 @@ class AssignmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-<<<<<<< HEAD
-    public function destroy(assignment $assignment)
-=======
-    public function destroy(Schedule $schedule)
->>>>>>> main
+    public function destroy(assignments $assignments)
     {
         //
     }

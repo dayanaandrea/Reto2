@@ -11,7 +11,7 @@
     <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark ">
-                <th scope="col/"></th>
+                <th scope="col"></th>
                 <th scope="col">Estudiante</th>
                 <th scope="col">Modulo</th>
                 <th scope="col">Ciclo </th>
@@ -30,16 +30,14 @@
                     <td>{{$enrollment->date}}</td>
                     <td>{{$enrollment->course}}</td>
 
-                    <td><a href="{{route('admin.enrollments.show', $enrollment)}}" class="btn btn-secondary btn-sm">
-                            Ver
-                        </a>
-                        <a href="#" class="btn btn-warning btn-sm">
-                            Editar
-                        </a>
-                        <!-- Para generar un modal diferente siempre, se debe incluir el id --> 
-                        <a href="#" class="btn btn-danger btn-sm" >
-                            Eliminar
-                        </a>
+                    <td>
+                        <a href="{{ route('admin.enrollments.show', $enrollment) }}" class="btn btn-secondary btn-sm">Ver</a>
+                        <a href="{{ route('admin.enrollments.edit', $enrollment) }}" class="btn btn-warning btn-sm">Editar</a>
+                        <form action="{{ route('admin.enrollments.destroy', $enrollment) }}" method="POST" style="display:inline-block;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta matrícula?')">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
