@@ -13,9 +13,8 @@
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>
                 <th scope="col">Profesor</th>
-                <th scope="col">Id profesor</th>
                 <th scope="col">Modulo</th>
-                <th scope="col">Id modulo</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -23,10 +22,8 @@
                 <tr>
                     <th scope="col">{{ $loop->iteration }}</th>
                     <td>{{$assignment->user->name . ', ' . $assignment->user->lastname }}</td>
-                    <td>{{$assignment->user->id}}</td>
                     <td>{{$assignment->module->name}}</td>
-                    <td>{{$assignment->module->id}}</td>
-
+                    {{--Acciones--}}
                     <td>
                         <a href="{{ route('admin.assignments.show', $assignment) }}" class="btn btn-secondary btn-sm">Ver</a>
                         <a href="{{ route('admin.assignments.edit', $assignment) }}" class="btn btn-warning btn-sm">Editar</a>
