@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -17,7 +18,7 @@ class UserController extends Controller
         // Paginar, para no mostrar todos de golpe
         $users = User::orderBy('created_at', 'desc')->paginate(10, ['*'], 'active');
         $del_users = User::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(10, ['*'], 'inactive');
-        return view('admin.users.index',['users' => $users, 'del_users' => $del_users]);
+        return view('admin.users.index', ['users' => $users, 'del_users' => $del_users]);
     }
 
     /**
@@ -27,7 +28,7 @@ class UserController extends Controller
     {
         // Datos que queremos pasar a la vista
         $roles = Role::orderBy('id')->get();
-        
+
         // Pasar los datos a la vista usando with()
         return view('admin.users.create', ['roles' => $roles]);
     }
@@ -37,6 +38,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // Validar los datos del usuario
+        $this->validateUser($request);
+
         // Crear el usuario
         $user = new User();
         $user->name = $request->name;
@@ -46,22 +50,33 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->phone1 = $request->phone1;
         $user->phone2 = $request->has('phone2');
-        $user->photo = $request->has('photo');
         $user->role_id = $request->role_id;
         $user->password = Hash::make('1234');
 
+        // La imagen se guarda como binary en la base de datos
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+            $imageData = file_get_contents($image->getRealPath());
+            $user->photo = $imageData;
+        }
+
         // Guardar el nuevo usuario
         $user->save();
-    
-        return redirect()->route('admin.users.index')->with('success', 'Usuario ' . $user->email . ' creado correctamente.');
-    }    
+
+        return redirect()->route('admin.users.index')->with('success', 'Usuario <b>' . $user->email . '</b> creado correctamente.');
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(User $user)
     {
-        return view('admin.users.show',['user'=>$user]);
+        // Esto es para controlar lo que se puede ver en el perfil. Si es estudiante solo puede ver su perfil.
+        if ((Auth::user()->role && (Auth::user()->role->role == 'estudiante')) && (Auth::check() && $user->id != Auth::user()->id)) {
+            abort(404);
+        }
+
+        return view('admin.users.show', ['user' => $user]);
     }
 
     /**
@@ -69,7 +84,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        // Datos que queremos pasar a la vista
+        $roles = Role::orderBy('id')->get();
+
+        // Pasar los datos a la vista usando with()
+        return view('admin.users.edit', ['roles' => $roles, 'user' => $user]);
     }
 
     /**
@@ -77,7 +96,79 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        // Validar los datos del usuario
+        $this->validateUser($request, $user);
+
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->pin = $request->pin;
+        $user->address = $request->address;
+        $user->phone1 = $request->phone1;
+        $user->phone2 = $request->has('phone2');
+        $user->role_id = $request->role_id;
+
+        // La imagen se guarda como binary en la base de datos
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+            $imageData = file_get_contents($image->getRealPath());
+            $user->photo = $imageData;
+        }
+
+        // Guardar el nuevo usuario
+        $user->save();
+
+        return redirect()->route('admin.users.show', $user)->with('success', 'Usuario <b>' . $user->email . '</b> actualizado correctamente.');
+    }
+
+    /**
+     * Reset the password to 1234.
+     */
+    public function reset(User $user)
+    {
+        $user->password = Hash::make('1234');
+
+        // Guardar el nuevo usuario
+        $user->save();
+
+        return redirect()->route('admin.users.index', $user)->with('success', 'Contraseña del usuario <b>' . $user->email . '</b> restablecida correctamente.');
+    }
+
+    /**
+     * Change the current password.
+     */
+    public function changePass(User $user)
+    {
+        return view('admin.users.change-pass', ['user' => $user]);
+    }
+
+    /**
+     * Store the new password.
+     */
+    public function storePass(Request $request, User $user)
+    {
+        // Verificar si el usuario logueado es el mismo que el usuario cuya contraseña se quiere cambiar
+        if (Auth::user()->id !== $user->id) {
+            return back()->with('permission', 'No tienes permiso para cambiar la contraseña de este usuario.');
+        }
+
+        $this->validatePass($request);
+
+        // Verificar si la contraseña actual es correcta
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'La contraseña actual es incorrecta.'])->withInput();
+        }
+
+        $user->password = Hash::make($request->new_password);
+
+        // Guardar el nuevo usuario
+        $user->save();
+
+        if (Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')) {
+            return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
+        } else {
+            return redirect()->route('users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
+        }
     }
 
     /**
@@ -85,8 +176,84 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $email = $user->email;
-        $user->delete();
-        return view('admin.users.success', ['email'=>$email]);
+        if (!($user->role) || ($user->role->role == 'god' && Auth::user()->role->role != 'god')) {
+            return redirect()->route('admin.users.index')->with('permission', 'No tiene permisos para eliminar el usuario <b>' . $user->email . '</b>.');
+        } else {
+            $user->delete();
+            return redirect()->route('admin.users.index')->with('success', 'Usuario <b>' . $user->email . '</b> eliminado correctamente.');
+        }
+    }
+
+    private function validatePass(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            // Confirmed busca automáticamente un campo con el nombre new_password_confirmation
+            'new_password' => [
+                'required',
+                'min:8',
+                'max:255',
+                'confirmed',
+                'regex:/[A-Za-z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*?&]/',
+            ],
+            'new_password_confirmation' => 'required',
+        ], [
+            // Mensajes de error personalizados según lo que falle
+            'new_password.regex' => 'La contraseña debe contener al menos una letra, un número y un carácter especial.',
+            'new_password.confirmed' => 'Las contraseñas no coinciden.',
+            'new_password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'new_password.max' => 'La contraseña no puede tener más de 255 caracteres.',
+            'new_password_confirmation.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'new_password_confirmation.max' => 'La contraseña no puede tener más de 255 caracteres.',
+        ]);
+    }
+
+    private function validateUser(Request $request, $user = null)
+    {
+        // Excluir el email del usuario actual durante la actualización
+        $emailValidation = 'required|email|unique:users,email,' . ($user ? $user->id : 'NULL') . '|max:255';
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => $emailValidation,
+            'pin' => [
+                'required',
+                'string',
+                'min:9',
+                'max:9',
+                'regex:/^[XYZ]?\d{7}[A-Za-z]$|^\d{8}[A-Za-z]$/', // Validación para DNI o NIE
+            ],
+            'address' => 'required|string|max:255',
+            'phone1' => 'required|string|max:15',
+            'phone2' => 'nullable|string|max:15',
+            'role_id' => 'required|exists:roles,id',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ], [
+            // Mensajes de error personalizados
+            'name.required' => 'El nombre es obligatorio.',
+            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'lastname.required' => 'El apellido es obligatorio.',
+            'lastname.max' => 'El apellido no puede tener más de 255 caracteres.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo electrónico debe ser válido.',
+            'email.unique' => 'El correo electrónico ya está en uso. Por favor, elige otro.',
+            'pin.required' => 'El DNI/NIE es obligatorio.',
+            'pin.min' => 'El DNI/NIE debe tener 9 caracteres.',
+            'pin.max' => 'El DNI/NIE no puede tener más de 9 caracteres.',
+            'pin.regex' => 'Un DNI tiene 8 dígitos seguidos de una letra, o un NIE tiene una letra inicial seguida de 7 dígitos y una letra al final.',
+            'address.required' => 'La dirección es obligatoria.',
+            'address.max' => 'La dirección no puede tener más de 255 caracteres.',
+            'phone1.required' => 'El número de teléfono principal es obligatorio.',
+            'phone1.max' => 'El número de teléfono principal no puede tener más de 15 caracteres.',
+            'phone2.max' => 'El número de teléfono secundario no puede tener más de 15 caracteres.',
+            'role_id.required' => 'El rol es obligatorio.',
+            'role_id.exists' => 'El rol seleccionado no existe.',
+            'photo.image' => 'La foto debe ser una imagen válida.',
+            'photo.mimes' => 'La foto debe tener uno de los siguientes formatos: jpg, jpeg, png.',
+            'photo.max' => 'La foto no puede exceder los 2MB.',
+        ]);
     }
 }

@@ -19,12 +19,10 @@ return new class extends Migration
             $table->time('hour');
             $table->timestamps();
 
-            /*Añadimos las claves foráneas*/
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('module_id')->references('id')->on('modules')->onUpdate('cascade')->onDelete('cascade');
-        });
+        });      
     }
-
 
     /**
      * Reverse the migrations.
