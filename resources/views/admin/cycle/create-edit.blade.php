@@ -1,3 +1,17 @@
+@php
+    if (isset($cycle)) {
+        $code = $cycle->code;
+        $name = $cycle->name;
+        $button = "Actualizar";
+        $title = "Actualización del Ciclo";
+    } else {
+        $code = "";
+        $name = "";
+        $button = "Crear";
+        $title = "Creación de Ciclo";
+    }
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -5,51 +19,65 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Create') }}</div>
+                <div class="card-header">{{$title}}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.cycles.store') }}" enctype="multipart/form-data">
-                        @csrf
+                    @if($type == 'PUT')
+                        <form class="mt-2" name="create_platform" action="{{ route('admin.cycles.update', $cycle) }}"
+                            method="POST" enctype="multipart/form-data">
 
-                        <h4>{{ __('Cycle') }}</h4>
+                            @method('PUT')
+                    @else
+                        <form class="mt-2" name="create_platform" action="{{ route('admin.cycles.store') }}"
+                            method="POST" enctype="multipart/form-data">
 
-                        <!-- Campo para Código -->
-                        <div class="row mb-3">
-                            <label for="code" class="col-md-4 col-form-label text-md-end">{{ __('Code') }}</label>
+                            @method('POST')
+                    @endif
+                            @csrf
 
-                            <div class="col-md-6">
-                                <input id="code" type="text" class="form-control @error('code') is-invalid @enderror" name="code" value="{{ old('code') }}" required autocomplete="code" autofocus>
+                            <h4>Ciclo</h4>
+                            <div class=" row mb-3">
+                                <label for="code" class="col-md-4 col-form-label text-md-end">Code</label>
 
-                                @error('code')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <div class="col-md-6">
+                                    <input id="code" type="text"
+                                        class="form-control @error('code') is-invalid @enderror" name="code"
+                                        value="{{ old('code', $code) }}" required autocomplete="code" autofocus>
+
+                                    @error('code')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Campo para Nombre -->
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+                            <div class="row mb-3">
+                                <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <div class="col-md-6">
+                                    <textarea id="name"
+                                        class="form-control @error('name') is-invalid @enderror"
+                                        name="name" required autocomplete="name"
+                                        autofocus>{{ old('name', $name) }}</textarea>
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                    @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('auth.submit') }}
-                                </button>
+
+
+                            <div class="row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{$button}}
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
                 </div>
             </div>
         </div>

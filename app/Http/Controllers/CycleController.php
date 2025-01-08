@@ -24,8 +24,8 @@ class CycleController extends Controller
      */
     public function create()
     {
-        $cycles = Cycle::orderBy('code')->get();
-        return view('admin.cycle.create-edit', ['cycles'=>$cycles]);
+    
+        return view('admin.cycle.create-edit', ['type'=>'POST']);
     }
 
     /**
@@ -33,9 +33,12 @@ class CycleController extends Controller
      */
     public function store(Request $request)
     {
+        // Validar los datos
+        $this->validateCycle($request);
+
         // Crear el ciclo
         $cycles = new Cycle();
-        $cycles->code = $request->code;
+        $cycles->code = strtoupper($request->code);
         $cycles->name = $request->name;
 
         // Guardar el nuevo ciclo
@@ -58,8 +61,8 @@ class CycleController extends Controller
      */
     public function edit(Cycle $cycle)
     {
-                                            // Aqui se le pueden mandar los datos de los modulos para el combo 
-        return view('admin.cycle.create-edit', ['cycle'=>$cycle]);
+        // Aqui se le pueden mandar los datos de los modulos para el combo 
+        return view('admin.cycle.create-edit', ['cycle'=>$cycle, 'type'=>'PUT']);
     }
 
     /**
@@ -67,17 +70,43 @@ class CycleController extends Controller
      */
     public function update(Request $request, Cycle $cycle)
     {
-        //
-    }
+       // Validar los datos
+       $this->validateCycle($request);
+
+       $cycle->code = strtoupper($request->code);
+       $cycle->name = $request->name;
+
+       // Guardar el nuevo ciclo
+       $cycle->save();
+
+       return redirect()->route('admin.cycles.show', $cycle)->with('success', 'Ciclo <b>' . $cycle->cycle . '</b> actualizado correctamente.');
+   }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Cycle $cycle)
     {
-        $name = $cycle->name; 
+      
         $cycle->delete(); 
         return redirect()->route('admin.cycles.index')->with('success', 'Ciclo  <b>' . $cycle->name . '</b> eliminado correctamente.');
        
     }
+    /**
+     * Validates cycle's data.
+     */
+    private function validateCycle(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|min:3|max:5',
+            'name' => 'required|string|min:10|max:255',
+        ], [
+            // Mensajes de error personalizados según lo que falle
+            'code.min' => 'El código debe tener al menos 3 caracteres.',
+            'code.max' => 'El código no puede tener más de 5 caracteres.',
+            'name.min' => 'El nombre debe tener al menos 10 caracteres.',
+            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+        ]);
+    }
 }
+
