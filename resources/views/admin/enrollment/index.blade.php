@@ -17,14 +17,14 @@
                 <th scope="col">Ciclo </th>
                 <th scope="col">Fecha </th>
                 <th scope="col">Curso </th>
-       
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($enrollments as $enrollment)
                 <tr >
                     <th scope="col">{{ $loop->iteration }}</th>
-                    <td>{{ $enrollment->user->name . ', ' . $enrollment->user->lastname }}</td>
+                    <td>{{ $enrollment->user->lastname . ', ' . $enrollment->user->name }}</td>
                     <td>{{$enrollment->module->name}}</td>
                     <td>{{$enrollment->cycle->code}}</td>
                     <td>{{$enrollment->date}}</td>

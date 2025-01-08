@@ -21,7 +21,7 @@
             @foreach ($assignments as $assignment)
                 <tr>
                     <th scope="col">{{ $loop->iteration }}</th>
-                    <td>{{$assignment->user->name . ', ' . $assignment->user->lastname }}</td>
+                    <td>{{$assignment->user->lastname . ', ' . $assignment->user->name }}</td>
                     <td>{{$assignment->module->name}}</td>
                     {{--Acciones--}}
                     <td>
