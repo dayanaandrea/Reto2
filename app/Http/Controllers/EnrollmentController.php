@@ -12,8 +12,8 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        $enrollments = Enrollment::all();
-        return view('enrollment.index', compact('enrollments'));
+        $enrollments = Enrollment::orderBy('id', 'asc')->paginate(10);
+        return view('admin.enrollment.index',['enrollments' => $enrollments]);
     }
 
     /**
@@ -21,7 +21,8 @@ class EnrollmentController extends Controller
      */
     public function create()
     {
-        //
+        $enrollments = Enrollment::orderBy('id')->get();
+        return view('admin.module.create', ['enrollments'=>$enrollments]);
     }
 
     /**
@@ -29,7 +30,27 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Crear la matricula
+        $enrollments = new Enrollment();
+        $enrollments->student_id = $request->student_id;
+        $enrollments->module_id = $request->module_id;
+        $enrollments->cycle_id = $request->cycle_id;
+        $enrollments->date = $request->date;
+        $enrollments->course = $request->course;
+
+        // Validar datos
+        $validatedData = $request->validate([
+            'student_id' => 'required|unsignedBigInteger|min:1',
+            'module_id' => 'required|unsignedBigInteger|min:1',
+            'cycle_id' => 'required|unsignedBigInteger|min:1',
+            'date' => 'required|date',
+            'course' => 'required|integer|min:1|max:9',
+        ]);
+
+        // Guardar la nueva matricula
+        $enrollments->save();
+
+        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula  ' . $enrollments->id . ' creado correctamente.');
     }
 
     /**
@@ -37,7 +58,7 @@ class EnrollmentController extends Controller
      */
     public function show(Enrollment $enrollment)
     {
-        //
+        return view('admin.enrollment.show',['enrollment'=>$enrollment]);
     }
 
     /**
@@ -45,7 +66,7 @@ class EnrollmentController extends Controller
      */
     public function edit(Enrollment $enrollment)
     {
-        //
+        return view('admin.enrollment.edit', ['enrollment' => $enrollment]);
     }
 
     /**
@@ -53,7 +74,18 @@ class EnrollmentController extends Controller
      */
     public function update(Request $request, Enrollment $enrollment)
     {
-        //
+        $validatedData = $request->validate([
+            'student_id' => 'required|integer',
+            'module_id' => 'required|integer',
+            'cycle_id' => 'required|integer',
+            'date' => 'required|date',
+            'course' => 'required|string|max:255',
+        ]);
+    
+        $enrollment->update($validatedData);
+    
+        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula actualizada correctamente.');   
+         
     }
 
     /**
@@ -61,6 +93,12 @@ class EnrollmentController extends Controller
      */
     public function destroy(Enrollment $enrollment)
     {
-        //
+        $enrollment->delete();
+        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula eliminada correctamente.');
+        /*
+        $id = $enrollment->id; 
+        $enrollment->delete(); 
+        return view('admin.enrollment.success', ['id'=>$id]); 
+        */
     }
 }

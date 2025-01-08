@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shedules', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_teacher');
-            $table->unsignedBigInteger('id_module');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('module_id');
             $table->tinyInteger('day');
             $table->time('hour');
             $table->timestamps();
 
-            $table->foreign('id_teacher')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('id_module')->references('id')->on('modules')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('module_id')->references('id')->on('modules')->onUpdate('cascade')->onDelete('cascade');
         });      
     }
 

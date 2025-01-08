@@ -15,11 +15,11 @@ class Enrollment extends Model
 
     public function module()
     {
-        return $this->hasMany(Module::class, 'module_id');
+        return $this->belongsTo(Module::class, 'module_id');
     }
 
     public function cycle()
     {
-        return $this->hasMany(Cycle::class, 'cycle_id');
+        return $this->belongsTo(Cycle::class, 'cycle_id');
     }
 }
