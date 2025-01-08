@@ -5,13 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('auth.register') }}</div>
+                <div class="card-header">{{ __('Create') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.modules.store') }}" enctype="multipart/form-data">
                         @csrf
 
-                        <h4>{{ __('auth.account') }}</h4>
+                        <h4>{{ __('Module') }}</h4>
 
                         <!-- Campo para Código -->
                         <div class="row mb-3">
