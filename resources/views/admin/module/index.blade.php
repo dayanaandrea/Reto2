@@ -2,12 +2,8 @@
 
 @section('content')
 <div class="container">
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {!! session('success') !!}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
+    <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
+    <x-alert :key="'success'" :class="'success'" />
 
     <h2>Crear un nuevo modulo</h2>
     <div>
@@ -16,7 +12,7 @@
                 data-bs-placement="top" title="Crear un nuevo modulo"><i class="fa-solid fa-plus"></i></a></p>
     </div>
     <h2>Modulos</h2>
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>
