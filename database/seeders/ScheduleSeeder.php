@@ -15,7 +15,6 @@ class ScheduleSeeder extends Seeder
     {
         DB::table('schedule')->insert([
            //Id's de los modulos 2DAM: 6ACD,7DI,8PMDM,9PSP,10SGE
-            
             // Koldo -> 10 
             // Ruben -> 11
             // Borja -> 12

@@ -2,12 +2,7 @@
 
 @section('content')
 <div class="container">
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+    <x-alert :key="'success'" :class="'success'" />
     <h2 class="mb-4">Detalles del rol</h2>
 
     <!-- Tarjeta para mostrar detalles de los roles -->
@@ -21,9 +16,10 @@
                     // Definir la clase dependiendo del rol del usuario
                     $clase = obtenerEstiloRol($role->role);
                     $badge = '<span class="badge ' . $clase . ' text-capitalize">' . $role->role . '</span>';
+                    $description = $role->description;
                 @endphp
                 <x-detail :label="'Rol:'" :value="$badge" />
-                <x-detail :label="'Descripción:'" :value="$role->description" />
+                <x-detail :label="'Descripción:'" :value="$description" />
                 <x-detail :label="'Usuarios:'" :value="$userCount" />
                 <div>
                     @php

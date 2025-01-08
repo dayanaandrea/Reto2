@@ -22,7 +22,7 @@ class ModuleController extends Controller
     public function create()
     {
         $modules = Module::orderBy('code')->get();
-        return view('admin.module.create', ['modules'=>$modules]);
+        return view('admin.module.create-edit', ['modules'=>$modules]);
     }
 
     /**
@@ -58,7 +58,7 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
-        //
+        return view('admin.module.create-edit', ['module'=>$module]);
     }
 
     /**
@@ -76,6 +76,6 @@ class ModuleController extends Controller
     {
         $name = $module->name; 
         $module->delete(); 
-        return view('admin.module.success', ['name'=>$name]); 
+        return view('admin.module.success', ['name'=>$name]);     
     }
 }

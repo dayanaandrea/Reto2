@@ -4,12 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class assignments extends Model
+class Assignment extends Model
 {
     protected $fillable = ['user_id', 'module_id']; 
 
-
-    public function user()
+    public function teacher()
     {
         return $this->belongsToMany(User::class);
     }
