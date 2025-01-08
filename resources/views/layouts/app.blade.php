@@ -61,7 +61,7 @@
                                 <a class="nav-link" href="{{ route('admin.schedules.index') }}">Horarios</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.asignments.index') }}">Asignaciones</a>
+                                <a class="nav-link" href="{{ route('admin.assignments.index') }}">Asignaciones</a>
                             </li>
                         @endif
                     </ul>
