@@ -15,13 +15,12 @@ class AssignmentController extends Controller
         $assignments = Assignment::orderBy('id', 'asc')->paginate(10);
         return view('admin.assignments.index',['assignments' => $assignments]);
     }
-
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('admin.assignments.create-edit', ['type'=>'POST']);
     }
 
     /**
@@ -45,8 +44,9 @@ class AssignmentController extends Controller
      */
     public function edit(Assignment $assignment)
     {
-        //
+        return view('admin.assignments.create-edit', ['assignment'=>$assignment, 'type'=>'PUT']);
     }
+    
 
     /**
      * Update the specified resource in storage.
