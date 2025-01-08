@@ -21,8 +21,8 @@
                 <!-- Contenedor de texto -->
                 <div class="col-6">
                     <div class="row">
-                        <x-detail :label="'Correo electrónico:'" :value="$user->email" />
-                        <x-detail :label="'Nombre completo:'" :value="$user->name . ' ' . $user->lastname" />
+                        <x-detail :label=" __('user.email')" :value="$user->email" />
+                        <x-detail :label="__('user.name')" :value="$user->name . ' ' . $user->lastname" />
                         @php
                         if ($user->role) {
                         // Definir la clase dependiendo del rol del usuario
@@ -34,19 +34,19 @@
                         $badge = '<span class="badge text-dark ' . $clase . ' text-capitalize">Sin Rol</span>';
                         }
                         @endphp
-                        <x-detail :label="'Rol:'" :value="$badge" :route="$route" />
+                        <x-detail :label="__('user.role')" :value="$badge" :route="$route" />
 
                         <!-- La información personal solo aparece para los god o admin, o el propio usuario logueado (su perfil) -->
                         @if((Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')) || Auth::user()->id === $user->id)
-                        <x-detail :label="'DNI:'" :value="$user->pin" />
-                        <x-detail :label="'Dirección:'" :value="$user->address" />
-                        <x-detail :label="'Teléfono:'" :value="$user->phone1" />
+                        <x-detail :label="__('user.pin')" :value="$user->pin" />
+                        <x-detail :label="__('user.address')" :value="$user->address" />
+                        <x-detail :label="__('user.phone1')" :value="$user->phone1" />
                         @if ($user->phone2 != null)
-                        <x-detail :label="'Teléfono secundario:'" :value="$user->phone2" />
+                        <x-detail :label="__('user.phone2')" :value="$user->phone2" />
                         @endif
 
-                        <x-detail :label="'Fecha de Creación:'" :value="$user->created_at->format('d/m/Y')" />
-                        <x-detail :label="'Última actualización:'" :value="$user->updated_at->format('d/m/Y')" />
+                        <x-detail :label="__('user.creation_date')" :value="$user->created_at->format('d/m/Y')" />
+                        <x-detail :label="__('user.update_date')" :value="$user->updated_at->format('d/m/Y')" />
                         @endif
                         <div>
                             <!-- Los botones de las operaciones CRUD solo aparecen para los god y admin -->
@@ -55,14 +55,14 @@
                             $route = route('admin.users.edit', $user);
                             $type = "edit";
                             $text = '<i class="fa-solid fa-pen"></i>';
-                            $tooltip = 'Editar datos del usuario';
+                            $tooltip = __('user.tp_edit');
                             @endphp
                             <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                             <x-buttons.reset :user="$user" />
                             @php
                             $id_modal = '#modal_delete' . $user->id;
                             $text = '<i class="fa-solid fa-trash-can"></i>';
-                            $tooltip = 'Eliminar usuario';
+                            $tooltip = __('user.tp_delete');
                             @endphp
                             <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                             @endif
