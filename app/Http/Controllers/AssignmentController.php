@@ -35,7 +35,7 @@ class AssignmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(assignments $assignments)
+    public function show(Assignment $assignment)
     {
         //
     }
@@ -43,7 +43,7 @@ class AssignmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(assignments $assignments)
+    public function edit(Assignment $assignment)
     {
         //
     }
@@ -51,7 +51,7 @@ class AssignmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, assignments $assignments)
+    public function update(Request $request, Assignment $assignment)
     {
         //
     }
@@ -59,7 +59,7 @@ class AssignmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(assignments $assignments)
+    public function destroy(Assignment $assignment)
     {
         //
     }

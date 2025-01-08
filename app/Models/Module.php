@@ -11,4 +11,9 @@ class Module extends Model
     {
         return $this->belongsTo(Cycle::class, 'cycle_id');
     }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }
