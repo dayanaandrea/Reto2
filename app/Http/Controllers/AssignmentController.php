@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\assignments;
+use App\Models\Assignment;
 use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
@@ -12,7 +12,8 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        //
+        $assignments = Assignment::orderBy('id', 'asc')->paginate(10);
+        return view('admin.assignments.index',['assignments' => $assignments]);
     }
 
     /**

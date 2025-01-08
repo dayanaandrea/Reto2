@@ -53,6 +53,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.modules.index') }}">Modulos</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.enrollments.index') }}">Matriculas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.schedules.index') }}">Horarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.assignments.index') }}">Asignaciones</a>
+                            </li>
                         @endif
                     </ul>
 
