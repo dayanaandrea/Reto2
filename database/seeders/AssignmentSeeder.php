@@ -13,7 +13,7 @@ class AssignmentSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('assignment')->insert([
+        DB::table('assignments')->insert([
 
               //Profesor id 10
               ['user_id' => 10,'module_id' => 6, 'created_at'=>now(),'updated_at'=>now()],

@@ -43,7 +43,7 @@ class RoleController extends Controller
         // Guardar el nuevo rol
         $role->save();
 
-        return redirect()->route('admin.roles.index')->with('success', 'Rol ' . $role->role . ' creado correctamente.');
+        return redirect()->route('admin.roles.index')->with('success', 'Rol <b>' . $role->role . '</b> creado correctamente.');
     }
 
     /**
@@ -82,7 +82,7 @@ class RoleController extends Controller
         // Guardar el nuevo rol
         $role->save();
 
-        return redirect()->route('admin.roles.show', $role)->with('success', 'Rol ' . $role->role . ' actualizado correctamente.');
+        return redirect()->route('admin.roles.show', $role)->with('success', 'Rol <b>' . $role->role . '</b> actualizado correctamente.');
     }
 
     /**
@@ -91,10 +91,10 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         if ($role->role == 'god' || $role->role == 'administrador' || $role->role == 'estudiante' || $role->role == 'profesor') {
-            return redirect()->route('admin.roles.index')->with('permission', 'El rol ' . $role->role . ' no puede ser eliminado.');
+            return redirect()->route('admin.roles.index')->with('permission', 'El rol <b>' . $role->role . '</b> no puede ser eliminado.');
         } else {
             $role->delete();
-            return redirect()->route('admin.roles.index')->with('success', 'Rol ' . $role->role . ' eliminado correctamente.');
+            return redirect()->route('admin.roles.index')->with('success', 'Rol <b>' . $role->role . '</b> eliminado correctamente.');
         }
     }
 

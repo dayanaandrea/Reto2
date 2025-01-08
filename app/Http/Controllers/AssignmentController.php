@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\assignments;
+use App\Models\Assignment;
 use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
@@ -12,7 +12,8 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        //
+        $assignments = Assignment::orderBy('id', 'asc')->paginate(10);
+        return view('admin.assignments.index',['assignments' => $assignments]);
     }
 
     /**
@@ -34,7 +35,7 @@ class AssignmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(assignments $assignments)
+    public function show(Assignment $assignment)
     {
         //
     }
@@ -42,7 +43,7 @@ class AssignmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(assignments $assignments)
+    public function edit(Assignment $assignment)
     {
         //
     }
@@ -50,7 +51,7 @@ class AssignmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, assignments $assignments)
+    public function update(Request $request, Assignment $assignment)
     {
         //
     }
@@ -58,7 +59,7 @@ class AssignmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(assignments $assignments)
+    public function destroy(Assignment $assignment)
     {
         //
     }

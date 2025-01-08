@@ -8,6 +8,8 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ScheduleController;
 
 use Illuminate\Support\Facades\Auth;
@@ -50,11 +52,20 @@ Route::middleware('auth')->group(function () {
 
     // Rutas de ciclos
     Route::resource('cycles', CycleController::class);
-    
+
+    // Rutas de matriculas
+    Route::resource('enrollments', EnrollmentController::class);
+   
+    // Rutas de asignaciones
+    Route::resource('assignments', AssignmentController::class);
+
     // Rutas de horarios
     Route::resource('schedules', ScheduleController::class);
 
+    // Rutas de reuniones
 
+    
   });
 
 });
+

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class schedules extends Model
+class Schedule extends Model
 {
     protected $fillable = ['user_id', 'module_id', 'day', 'hour']; 
     public function user()
