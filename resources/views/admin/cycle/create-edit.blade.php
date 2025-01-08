@@ -1,15 +1,15 @@
 @php
-    if (isset($cycle)) {
-        $code = $cycle->code;
-        $name = $cycle->name;
-        $button = "Actualizar";
-        $title = "Actualización del Ciclo";
-    } else {
-        $code = "";
-        $name = "";
-        $button = "Crear";
-        $title = "Creación de Ciclo";
-    }
+if (isset($cycle)) {
+$code = $cycle->code;
+$name = $cycle->name;
+$button = "Actualizar";
+$title = "Actualización del Ciclo";
+} else {
+$code = "";
+$name = "";
+$button = "Crear";
+$title = "Creación de Ciclo";
+}
 @endphp
 
 @extends('layouts.app')
@@ -23,16 +23,16 @@
 
                 <div class="card-body">
                     @if($type == 'PUT')
-                        <form class="mt-2" name="create_platform" action="{{ route('admin.cycles.update', $cycle) }}"
-                            method="POST" enctype="multipart/form-data">
+                    <form class="mt-2" name="create_platform" action="{{ route('admin.cycles.update', $cycle) }}"
+                        method="POST" enctype="multipart/form-data">
 
-                            @method('PUT')
-                    @else
+                        @method('PUT')
+                        @else
                         <form class="mt-2" name="create_platform" action="{{ route('admin.cycles.store') }}"
                             method="POST" enctype="multipart/form-data">
 
                             @method('POST')
-                    @endif
+                            @endif
                             @csrf
 
                             <h4>Ciclo</h4>
@@ -45,9 +45,9 @@
                                         value="{{ old('code', $code) }}" required autocomplete="code" autofocus>
 
                                     @error('code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -62,9 +62,9 @@
                                         autofocus>{{ old('name', $name) }}</textarea>
 
                                     @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
