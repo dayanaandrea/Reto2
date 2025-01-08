@@ -22,18 +22,13 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
 
   // Ruta para cambiar el idioma
-  Route::get('/set-language/{locale}', function (string $locale) {
+  Route::get('/set-locale/{locale}', function (string $locale) {
     if (! in_array($locale, ['en', 'es', 'eus'])) {
       abort(400);
     }
 
     App::setLocale($locale);
-
-    session()->put('locale', $locale);
-    session()->flash('success', 'Idioma cambiado a ' . strtoupper($locale));
-
-    return redirect()->back();
-  })->name('set-language');
+  })->name('set-locale');
 
   // Ruta para el home, solo accesible para usuarios autenticados
   Route::get('home', [HomeController::class, 'index'])->name('home');
