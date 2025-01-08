@@ -16,6 +16,7 @@
                 <th scope="col">Id profesor</th>
                 <th scope="col">Modulo</th>
                 <th scope="col">Id modulo</th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>

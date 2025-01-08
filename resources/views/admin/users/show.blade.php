@@ -5,7 +5,7 @@
     <x-alert :key="'success'" :class="'success'" />
     <x-alert :key="'permission'" :class="'danger'" />
 
-    <h2 class="mb-4">Detalles del Usuario</h2>
+    <h2 class="mb-4">{{ __('user.title_show') }}</h2>
     <!-- Tarjeta para mostrar detalles del usuario -->
     <div class="card">
         <div class="card-header">
@@ -76,6 +76,18 @@
                             @endphp
                             <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                             @endif
+                        </div>
+                        <div>
+                            <p>Cambiar idioma</p>
+                            <a href="{{ route('set-language', 'en') }}">
+                                EN
+                            </a>
+                            <a href="{{ route('set-language', 'es') }}">
+                                ES
+                            </a>
+                            <a href="{{ route('set-language', 'eus') }}">
+                                EUS
+                            </a>
                         </div>
                     </div>
                 </div>
