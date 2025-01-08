@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
     }
 
     App::setLocale($locale);
+    return redirect()->back();
   })->name('set-locale');
 
   // Ruta para el home, solo accesible para usuarios autenticados

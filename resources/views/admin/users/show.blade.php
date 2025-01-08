@@ -79,13 +79,13 @@
                         </div>
                         <div>
                             <p>Cambiar idioma</p>
-                            <a href="{{ route('set-language', 'en') }}">
+                            <a href="{{ route('set-locale', 'en') }}">
                                 EN
                             </a>
-                            <a href="{{ route('set-language', 'es') }}">
+                            <a href="{{ route('set-locale', 'es') }}">
                                 ES
                             </a>
-                            <a href="{{ route('set-language', 'eus') }}">
+                            <a href="{{ route('set-locale', 'eus') }}">
                                 EUS
                             </a>
                         </div>
