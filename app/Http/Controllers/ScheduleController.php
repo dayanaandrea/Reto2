@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\schedules;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -13,10 +13,8 @@ class ScheduleController extends Controller
     public function index()
     {
         // Paginar, para no mostrar todos de golpe
-        $schedules = Schedules::orderBy('day', 'asc')->paginate(10);
-        return view('admin.schedule.index',['schedules' => $schedules]);
-
-
+        $schedules = Schedule::orderBy('hour', 'asc')->paginate(10);
+        return view('admin.schedules.index',['schedules' => $schedules]);
     }
 
     /**
@@ -25,7 +23,7 @@ class ScheduleController extends Controller
     public function create()
     {
         $schedules = Schedule::orderBy('user_id')->get();
-        return view('admin.schedule.create', ['schedules'=>$schedules]);
+        return view('admin.schedules.create', ['schedules'=>$schedules]);
     }
 
     /**
