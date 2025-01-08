@@ -22,10 +22,10 @@
             @foreach ($assignments as $assignment)
                 <tr>
                     <th scope="col">{{ $loop->iteration }}</th>
-                    <td>{{ $assignment->user->name . ', ' . $assignment->user->lastname }}</td>
-                    <td>{{$assignment->user.id}}</td>
-                    <td>{{$assignment->module.name}}</td>
-                    <td>{{$assignment->module.id}}</td>
+                    <td>{{$assignment->user->name . ', ' . $assignment->user->lastname }}</td>
+                    <td>{{$assignment->user->id}}</td>
+                    <td>{{$assignment->module->name}}</td>
+                    <td>{{$assignment->module->id}}</td>
 
                     <td>
                         <a href="{{ route('admin.assignments.show', $assignment) }}" class="btn btn-secondary btn-sm">Ver</a>

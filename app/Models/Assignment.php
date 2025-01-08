@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Assignment extends Model
 {
-    protected $fillable = ['user_id', 'module_id']; 
-
-    public function teacher()
+    protected $fillable = ['user_id', 'module_id'];
+    public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function module()
     {
-        return $this->belongsToMany(Module::class);
+        return $this->belongsTo(Module::class);
     }
 }
