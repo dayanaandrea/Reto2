@@ -37,7 +37,7 @@ class AssignmentController extends Controller
      */
     public function show(Assignment $assignment)
     {
-        //
+        return view('admin.assignments.show',['assignment'=>$assignment]);
     }
 
     /**
