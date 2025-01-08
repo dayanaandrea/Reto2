@@ -8,6 +8,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ScheduleController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -49,6 +50,11 @@ Route::middleware('auth')->group(function () {
 
     // Rutas de ciclos
     Route::resource('cycles', CycleController::class);
+    
+    // Rutas de horarios
+    Route::resource('schedules', ScheduleController::class);
+
+
   });
 
 });
