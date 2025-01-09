@@ -20,7 +20,8 @@ class AssignmentController extends Controller
      */
     public function create()
     {
-        $users = \App\Models\User::orderBy('id')->get();
+        //where('role_id',2) is used to get only teachers
+        $users = \App\Models\User::where('role_id',2)->orderBy('id')->get();
         $modules = \App\Models\Module::orderBy('id')->get();
 
         return view('admin.assignments.create-edit', [
@@ -34,7 +35,19 @@ class AssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'user' => 'required|exists:users,id',  // Suponiendo que 'user' es el ID de usuario
+            'module' => 'required|exists:modules,id',  // Suponiendo que 'module' es el ID del módulo
+        ]);
+
+        // Crear la asignación
+        Assignment::create([
+            'user_id' => $request->user,
+            'module_id' => $request->module,
+        ]);
+
+        // Redirigir a la lista de asignaciones
+        return redirect()->route('admin.assignments.index')->with('success', 'Asignación creada correctamente.');
     }
 
     /**
@@ -50,7 +63,15 @@ class AssignmentController extends Controller
      */
     public function edit(Assignment $assignment)
     {
-        return view('admin.assignments.create-edit', ['assignment'=>$assignment, 'type'=>'PUT']);
+        //where('role_id',2) is used to get only teachers
+        $users = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $modules = \App\Models\Module::orderBy('id')->get();
+
+        return view('admin.assignments.create-edit', [
+            'assignment'=>$assignment,
+            'users' => $users,
+            'modules' => $modules,
+            'type'=>'PUT']);
     }
     
 
@@ -59,7 +80,20 @@ class AssignmentController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
-        //
+        // Validación de los datos del formulario (puedes agregar reglas de validación aquí)
+        $validated = $request->validate([
+            'user' => 'required|exists:users,id',  // Suponiendo que 'user' es el ID de usuario
+            'module' => 'required|exists:modules,id',  // Suponiendo que 'module' es el ID del módulo
+        ]);
+
+        // Actualizar la asignación
+        $assignment->update([
+            'user_id' => $request->user,
+            'module_id' => $request->module,
+        ]);
+
+        // Redirigir a la lista de asignaciones
+        return redirect()->route('admin.assignments.index')->with('success', 'Asignación actualizada correctamente.');
     }
 
     /**
