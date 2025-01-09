@@ -18,14 +18,10 @@
                 <p class="col-sm-9">{{$enrollment->module->name }}</p>
 
                 <p class="col-sm-3 fw-bold">Ciclo:</p>
-                <p class="col-sm-9">{{$enrollment->cycle->code}}</p>
+                <p class="col-sm-9">{{$enrollment->module->cycle->name}} ({{$enrollment->module->cycle->code}})</p>
 
                 <p class="col-sm-3 fw-bold">Fecha:</p>
                 <p class="col-sm-9">{{$enrollment->date}}</p>
-
-                <p class="col-sm-3 fw-bold">Curso:</p>
-                <p class="col-sm-9">{{$enrollment->course }}</p>
-
             </div>
         </div>
     </div>

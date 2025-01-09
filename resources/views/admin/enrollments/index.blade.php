@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-    <h2>Crear nueva matricula</h2>
+    <h2>Crear nueva matrícula</h2>
     <div>
-        <p>Accede a la creación de una matricula:</p>
+        <p>Accede a la creación de una matrícula:</p>
         <p><a href="{{ route('admin.enrollments.create') }}" class="btn btn-primary"data-bs-toggle="tooltip"
         data-bs-placement="top" title="Crear matricula"><i class="fa-solid fa-plus"></i></a></p>
     </div>
@@ -14,10 +14,9 @@
             <tr class="text-uppercase table-dark ">
                 <th scope="col"></th>
                 <th scope="col">Estudiante</th>
-                <th scope="col">Modulo</th>
-                <th scope="col">Ciclo </th>
+                <th scope="col">Módulo</th>
+                <th scope="col">Ciclo</th>
                 <th scope="col">Fecha </th>
-                <th scope="col">Curso </th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
@@ -27,9 +26,8 @@
                     <th scope="col">{{ $loop->iteration }}</th>
                     <td>{{ $enrollment->user->lastname . ', ' . $enrollment->user->name }}</td>
                     <td>{{$enrollment->module->name}}</td>
-                    <td>{{$enrollment->cycle->code}}</td>
+                    <td>{{$enrollment->module->cycle->code}}</td>
                     <td>{{$enrollment->date}}</td>
-                    <td>{{$enrollment->course}}</td>
 
                     <td>
                     @php
