@@ -15,6 +15,7 @@ class AssignmentSeeder extends Seeder
     {
         DB::table('assignments')->insert([
 
+            
               //Profesor id 10
               ['user_id' => 10,'module_id' => 6, 'created_at'=>now(),'updated_at'=>now()],
               ['user_id' => 10,'module_id' => 9, 'created_at'=>now(),'updated_at'=>now()],

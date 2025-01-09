@@ -4,7 +4,7 @@
         <div class="modal-content">
             <!-- Encabezado del Modal -->
             <div class="modal-header">
-                <h5 class="modal-title">Confirmar eliminación</h5>
+                <h5 class="modal-title">{{ __('modals.detele_title') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -16,12 +16,12 @@
 
             <!-- Pie del Modal -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('modals.cancel') }}</button>
                 <!-- Formulario de eliminación -->
                 <form action="{{ $ruta }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                    <button class="btn btn-danger" type="submit">{{ __('modals.confirm') }}</button>
                 </form>
             </div>
         </div>
