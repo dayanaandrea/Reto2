@@ -14,7 +14,7 @@ class ModuleController extends Controller
     public function index()
     {
         $modules = Module::orderBy('course', 'asc')->paginate(10);
-        return view('admin.module.index', ['modules' => $modules]);
+        return view('admin.modules.index', ['modules' => $modules]);
     }
 
     /**
@@ -23,8 +23,8 @@ class ModuleController extends Controller
     public function create()
     {
         // Datos que queremos pasar a la vista
-        $cycles = Cycle::orderBy('id')->get();
-        return view('admin.module.create-edit',['type'=>'POST', 'cycles' => $cycles]);
+        $cycles = Cycle::orderBy('code')->get();
+        return view('admin.modules.create-edit',['type'=>'POST', 'cycles' => $cycles]);
     }
 
     /**
@@ -53,7 +53,7 @@ class ModuleController extends Controller
      */
     public function show(Module $module)
     {
-        return view('admin.module.show', ['module' => $module]);
+        return view('admin.modules.show', ['module' => $module]);
     }
 
     /**
@@ -61,7 +61,7 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
-        return view('admin.module.create-edit', ['module' => $module, 'type'=>'PUT']);
+        return view('admin.modules.create-edit', ['module' => $module, 'type'=>'PUT']);
     }
 
     /**

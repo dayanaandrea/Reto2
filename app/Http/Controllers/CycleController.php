@@ -13,7 +13,7 @@ class CycleController extends Controller
     public function index()
     {
         $cycles = Cycle::orderBy('name', 'desc')->paginate(10);
-        return view('admin.cycle.index',['cycles' => $cycles]);
+        return view('admin.cycles.index',['cycles' => $cycles]);
     }
 
     /**
@@ -21,7 +21,7 @@ class CycleController extends Controller
      */
     public function create()
     {
-        return view('admin.cycle.create-edit', ['type'=>'POST']);
+        return view('admin.cycles.create-edit', ['type'=>'POST']);
     }
 
     /**
@@ -49,7 +49,7 @@ class CycleController extends Controller
      */
     public function show(Cycle $cycle)
     {
-        return view('admin.cycle.show',['cycle'=>$cycle]);
+        return view('admin.cycles.show',['cycle'=>$cycle]);
     }
 
     /**
@@ -58,7 +58,7 @@ class CycleController extends Controller
     public function edit(Cycle $cycle)
     {
         // Aqui se le pueden mandar los datos de los modulos para el combo 
-        return view('admin.cycle.create-edit', ['cycle'=>$cycle, 'type'=>'PUT']);
+        return view('admin.cycles.create-edit', ['cycle'=>$cycle, 'type'=>'PUT']);
     }
 
     /**
