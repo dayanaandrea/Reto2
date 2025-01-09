@@ -1,18 +1,14 @@
 @php
     if (isset($enrollment)) {
-        $user = $enrollment->student_id;
+        $user = $enrollment->user_id;
         $module = $enrollment->module_id;
-        $cycle = $enrollment->cycle_id;
         $date = $enrollment->date;
-        $course = $enrollment->course;
         $button = "Actualizar";
         $title = "Actualización de la matrícula";
     } else {
         $user = "";
         $module = "";
-        $cycle = "";
         $date = "";
-        $course = "";
         $button = "Crear";
         $title = "Creación de una matrícula";
     }
@@ -45,12 +41,12 @@
                             
                             {{-- Usuario --}}
                             <div class="row mb-3">
-                                <label for="student_id" class="col-md-4 col-form-label text-md-end">Alumno</label>
+                                <label for="user_id" class="col-md-4 col-form-label text-md-end">Alumno</label>
                                 <div class="col-md-6">
-                                <select name="student_id" id="user" class="form-select">
+                                <select name="user_id" id="user" class="form-select">
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}" 
-                                            {{ $user->id == old('student_id', $enrollment->student_id ?? '') ? 'selected' : '' }}>
+                                            {{ $user->id == old('user_id', $enrollment->user_id ?? '') ? 'selected' : '' }}>
                                             {{ ucfirst($user->lastname . ', ' . $user->name) }}
                                         </option>
                                     @endforeach
@@ -62,32 +58,15 @@
                             {{-- Módulo --}}
                             <div class="row mb-3">
                                 <label for="module_id" class="col-md-4 col-form-label text-md-end">Módulo</label>
-                                <div class="col-md-6">
-                                <select name="module_id" id="module" class="form-select">
-                                    @foreach ($modules as $module)
-                                        <option value="{{ $module->id }}" 
-                                            {{ $module->id == old('module_id', isset($enrollment) ? $enrollment->module_id : '') ? 'selected' : '' }}>
-                                            {{ ucfirst($module->name) }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                </div>
-                            </div>
-
-                            {{-- Ciclo --}}
-                            <div class="row mb-3">
-                                <label for="cycle_id" class="col-md-4 col-form-label text-md-end">Ciclo</label>
-                                <div class="col-md-6">
-                                <select name="cycle_id" id="cycle" class="form-select">
-                                    @foreach ($cycles as $cycle)
-                                        <option value="{{ $cycle->id }}" 
-                                            {{ $cycle->id == old('cycle_id', isset($enrollment) ? $enrollment->cycle_id : '') ? 'selected' : '' }}>
-                                            {{ ucfirst($cycle->name) }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
+                                <div class="col-md-7">
+                                <select name="module_id[]" id="module" class="form-select">
+                                        @foreach ($modules as $module)
+                                            <option value="{{ $module->id }}" 
+                                                {{ $module->id == old('module_id', isset($enrollment) ? $enrollment->module_id : '') ? 'selected' : '' }}>
+                                                {{ ucfirst('('. $module->cycle->code ."-". $module->course  . ')'." " . $module->name) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -98,21 +77,6 @@
                                 <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date', $enrollment->date ?? '') }}" required>
 
                                     @error('date')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <!-- Campo para curso -->
-                            <div class="row mb-3">
-                                <label for="course" class="col-md-4 col-form-label text-md-end">{{ __('Curso') }}</label>
-
-                                <div class="col-md-6">
-                                <input id="course" type="course" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course', $enrollment->course ?? '') }}" required>
-
-                                    @error('course')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
