@@ -21,7 +21,7 @@ class AssignmentController extends Controller
     public function create()
     {
         //where('role_id',2) is used to get only teachers
-        $users = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $users = \App\Models\User::where('role_id',1)->orderBy('id')->get();
         $modules = \App\Models\Module::orderBy('id')->get();
 
         return view('admin.assignments.create-edit', [
@@ -64,8 +64,11 @@ class AssignmentController extends Controller
     public function edit(Assignment $assignment)
     {
         //where('role_id',2) is used to get only teachers
-        $users = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $users = \App\Models\User::where('role_id',1)->orderBy('id')->get();
         $modules = \App\Models\Module::orderBy('id')->get();
+
+        //para comprobar que el usuario se ha asignado correctamente
+        //dd($assignment->user_id);  // Esto debería mostrarte el ID del usuario asignado
 
         return view('admin.assignments.create-edit', [
             'assignment'=>$assignment,

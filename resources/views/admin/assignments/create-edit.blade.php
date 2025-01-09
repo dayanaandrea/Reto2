@@ -36,13 +36,13 @@
                             @csrf
 
                             <h4>Asignación</h4>
-                            <div class=" row mb-3">
+                            <div class="row mb-3">
                                 <label for="user" class="col-md-4 col-form-label text-md-end">Profesor</label>
-
                                 <div class="col-md-6">
                                     <select name="user" id="user" class="form-select">
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" {{ $user->id == old('user', $user) ? 'selected' : '' }}>
+                                            <option value="{{ $user->id }}" 
+                                                {{ $user->id == old('user', $assignment->user_id ?? '') ? 'selected' : '' }}>
                                                 {{ ucfirst($user->lastname . ', ' . $user->name) }}
                                             </option>
                                         @endforeach
@@ -52,11 +52,11 @@
 
                             <div class="row mb-3">
                                 <label for="module" class="col-md-4 col-form-label text-md-end">Módulo</label>
-
                                 <div class="col-md-6">
                                     <select name="module" id="module" class="form-select">
                                         @foreach ($modules as $module)
-                                            <option value="{{ $module->id }}" {{ $module->id == old('module', $module) ? 'selected' : '' }}>
+                                            <option value="{{ $module->id }}" 
+                                                {{ $module->id == old('module', isset($assignment) ? $assignment->module_id : '') ? 'selected' : '' }}>
                                                 {{ ucfirst($module->name) }}
                                             </option>
                                         @endforeach
