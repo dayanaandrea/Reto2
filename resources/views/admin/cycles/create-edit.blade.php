@@ -1,15 +1,15 @@
 @php
-    if (isset($cycle)) {
-        $code = $cycle->code;
-        $name = $cycle->name;
-        $button = "Actualizar";
-        $title = "Actualización del Ciclo";
-    } else {
-        $code = "";
-        $name = "";
-        $button = "Crear";
-        $title = "Creación de Ciclo";
-    }
+if (isset($cycle)) {
+$code = $cycle->code;
+$name = $cycle->name;
+$button = "Actualizar";
+$title = "Actualización del Ciclo";
+} else {
+$code = "";
+$name = "";
+$button = "Crear";
+$title = "Creación de Ciclo";
+}
 @endphp
 
 @extends('layouts.app')
@@ -23,16 +23,16 @@
 
                 <div class="card-body">
                     @if($type == 'PUT')
-                        <form class="mt-2" name="create_platform" action="{{ route('admin.cycles.update', $cycle) }}"
-                            method="POST" enctype="multipart/form-data">
+                    <form class="mt-2" name="create_platform" action="{{ route('admin.cycles.update', $cycle) }}"
+                        method="POST" enctype="multipart/form-data">
 
-                            @method('PUT')
-                    @else
+                        @method('PUT')
+                        @else
                         <form class="mt-2" name="create_platform" action="{{ route('admin.cycles.store') }}"
                             method="POST" enctype="multipart/form-data">
 
                             @method('POST')
-                    @endif
+                            @endif
                             @csrf
 
                             <h4>Ciclo</h4>
@@ -45,9 +45,9 @@
                                         value="{{ old('code', $code) }}" required autocomplete="code" autofocus>
 
                                     @error('code')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -56,15 +56,14 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="name"
-                                        class="form-control @error('name') is-invalid @enderror"
-                                        name="name" required autocomplete="name"
-                                        autofocus>{{ old('name', $name) }}</textarea>
+                                <input id="name" type="text"
+                                        class="form-control @error('name') is-invalid @enderror" name="name"
+                                        value="{{ old('name', $name) }}" required autocomplete="name" autofocus>
 
                                     @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>

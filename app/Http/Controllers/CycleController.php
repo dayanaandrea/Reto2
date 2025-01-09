@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Cycle;
 use Illuminate\Http\Request;
 
-use function Symfony\Component\String\b;
-
 class CycleController extends Controller
 {
     /**
@@ -15,8 +13,7 @@ class CycleController extends Controller
     public function index()
     {
         $cycles = Cycle::orderBy('name', 'desc')->paginate(10);
-        return view('admin.cycle.index',['cycles' => $cycles]);
-       
+        return view('admin.cycles.index',['cycles' => $cycles]);
     }
 
     /**
@@ -24,8 +21,7 @@ class CycleController extends Controller
      */
     public function create()
     {
-    
-        return view('admin.cycle.create-edit', ['type'=>'POST']);
+        return view('admin.cycles.create-edit', ['type'=>'POST']);
     }
 
     /**
@@ -53,7 +49,7 @@ class CycleController extends Controller
      */
     public function show(Cycle $cycle)
     {
-        return view('admin.cycle.show',['cycle'=>$cycle]);
+        return view('admin.cycles.show',['cycle'=>$cycle]);
     }
 
     /**
@@ -62,7 +58,7 @@ class CycleController extends Controller
     public function edit(Cycle $cycle)
     {
         // Aqui se le pueden mandar los datos de los modulos para el combo 
-        return view('admin.cycle.create-edit', ['cycle'=>$cycle, 'type'=>'PUT']);
+        return view('admin.cycles.create-edit', ['cycle'=>$cycle, 'type'=>'PUT']);
     }
 
     /**
@@ -79,7 +75,7 @@ class CycleController extends Controller
        // Guardar el nuevo ciclo
        $cycle->save();
 
-       return redirect()->route('admin.cycles.show', $cycle)->with('success', 'Ciclo <b>' . $cycle->cycle . '</b> actualizado correctamente.');
+       return redirect()->route('admin.cycles.index', $cycle)->with('success', 'Ciclo <b>' . $cycle->cycle . '</b> actualizado correctamente.');
    }
 
     /**
@@ -87,10 +83,8 @@ class CycleController extends Controller
      */
     public function destroy(Cycle $cycle)
     {
-      
         $cycle->delete(); 
         return redirect()->route('admin.cycles.index')->with('success', 'Ciclo  <b>' . $cycle->name . '</b> eliminado correctamente.');
-       
     }
     /**
      * Validates cycle's data.
