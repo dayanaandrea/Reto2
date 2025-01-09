@@ -6,22 +6,22 @@
     <x-alert :key="'success'" :class="'success'" />
     <x-alert :key="'permission'" :class="'danger'" />
 
-    <h2>Crear un nuevo usuario</h2>
+    <h2>{{ __('user.title_index_1') }}</h2>
     <p><a href="{{ route('admin.users.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
             data-bs-placement="top" title="Crear un nuevo usuario"><i class="fa-solid fa-plus"></i></a></p>
     @if ($users->count() > 0)
-    <h2>Usuarios</h2>
+    <h2>{{ __('user.title_index_2') }}</h2>
     <div>
         <table class="table table-hover table-striped lista">
             <thead>
                 <tr class="text-uppercase table-dark">
                     <th scope="col"></th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Rol</th>
-                    <th scope="col">Fecha de creación</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col">{{ __('user.email') }}</th>
+                    <th scope="col">{{ __('user.name') }}</th>
+                    <th scope="col">{{ __('user.lastname') }}</th>
+                    <th scope="col">{{ __('user.role') }}</th>
+                    <th scope="col">{{ __('user.creation_date') }}</th>
+                    <th scope="col">{{ __('user.actions') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,7 +50,7 @@
                     </td>
                     @else
                     <td class="text-capitalize">
-                        <span class="badge {{$clase}} text-capitalize text-dark">Sin rol</span>
+                        <span class="badge {{$clase}} text-capitalize text-dark">{{ __('user.no_role') }}</span>
                     </td>
                     @endif
 
@@ -60,14 +60,14 @@
                         $route = route('admin.users.show', $user);
                         $type = "show";
                         $text = '<i class="fa-solid fa-eye"></i>';
-                        $tooltip = 'Ver datos del usuario';
+                        $tooltip = __('user.tp_show');
                         @endphp
                         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                         @php
                         $route = route('admin.users.edit', $user);
                         $type = "edit";
                         $text = '<i class="fa-solid fa-pen"></i>';
-                        $tooltip = 'Editar datos del usuario';
+                        $tooltip = __('user.tp_edit');
                         @endphp
                         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                         <x-buttons.reset :user="$user" />
@@ -75,7 +75,7 @@
                         @php
                         $id_modal = '#modal_delete' . $user->id;
                         $text = '<i class="fa-solid fa-trash-can"></i>';
-                        $tooltip = 'Eliminar usuario';
+                        $tooltip = __('user.tp_edit');
                         @endphp
                         <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                     </td>
@@ -84,7 +84,7 @@
                 <!-- Modal para eliminar un usuario -->
                 @php
                 $id = 'modal_delete' . $user->id;
-                $mensaje = "¿Estás seguro de que deseas eliminar el usuario <strong>$user->email</strong>? Esta acción no se puede deshacer.";
+                $mensaje = __('modals.delete_msg', ['email' => $user->email, 'item' => 'el usuario']);
                 $ruta = route('admin.users.destroy', $user);
                 @endphp
                 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
@@ -99,17 +99,17 @@
     @endif
 
     @if ($del_users->count() > 0)
-    <h2>Usuarios Eliminados</h2>
+    <h2>{{ __('user.title_index_3') }}</h2>
     <div>
         <table class="table table-hover table-striped">
             <thead>
                 <tr class="text-uppercase table-dark">
                     <th scope="col"></th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Rol</th>
-                    <th scope="col">Fecha de eliminación</th>
+                    <th scope="col">{{ __('user.email') }}</th>
+                    <th scope="col">{{ __('user.name') }}</th>
+                    <th scope="col">{{ __('user.lastname') }}</th>
+                    <th scope="col">{{ __('user.role') }}</th>
+                    <th scope="col">{{ __('user.deletion_date') }}</th>
                 </tr>
             </thead>
             <tbody>
