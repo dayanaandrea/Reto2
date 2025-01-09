@@ -62,7 +62,7 @@ class ModuleController extends Controller
     public function edit(Module $module)
     {
         $cycles = Cycle::orderBy('code')->get();
-        return view('admin.modules.create-edit', ['module' => $module, 'type' => 'PUT' , 'cycles' => $cycles]);
+        return view('admin.modules.create-edit', ['module' => $module, 'type' => 'PUT', 'cycles' => $cycles]);
     }
 
     /**
