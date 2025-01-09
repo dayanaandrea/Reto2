@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cycle extends Model
 {
-    protected $fillable = ['user_id', 'module_id', 'code' , 'name']; 
+    protected $fillable = ['code', 'name'];
+    
     public function modules()
-{
-    return $this->belongsToMany(Module::class, 'offers');
-}
+    {
+        return $this->hasMany(Module::class);
+    }
 }

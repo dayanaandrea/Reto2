@@ -15,6 +15,14 @@
                 <div class="row">
                     <x-detail :label="'Código:'" :value="$cycle->code" />
                     <x-detail :label="'Nombre:'" :value="$cycle->name" />
+                    <p class="col-sm-3 fw-bold d-inline">Módulos</p>
+                    <div class="col-sm-9 d-inline">
+                        <ul class="list-group">
+                            @foreach($cycle->modules as $module)
+                            <li class="list-group-item">{{$module->name}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                     <div>
                         <!-- Los botones de las operaciones CRUD solo aparecen para los god y admin -->
                         @if(Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god'))
@@ -35,7 +43,6 @@
                         <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                         @endif
                     </div>
-
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@ class Module extends Model
     protected $fillable = ['code', 'name','hours', 'course' , 'cycle_id']; 
     public function cycle()
     {
-        return $this->belongsTo(Cycle::class, 'cycle_id');
+        return $this->belongsTo(Cycle::class);
     }
 
     public function assignments()
