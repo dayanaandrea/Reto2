@@ -43,13 +43,17 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
+        //dd('Antes de la validación');
+        //dd($request->all());
         $validatedData = $request->validate([
-            'student_id' => 'required|unsignedBigInteger',
-            'module_id' => 'required|unsignedBigInteger',
-            'cycle_id' => 'required|unsignedBigInteger',
+            'student_id' => 'required|exists:users,id',
+            'module_id' => 'required|exists:modules,id',
+            'cycle_id' => 'required|exists:cycles,id',
             'date' => 'required|date',
             'course' => 'required|integer|min:1|max:9',
         ]);
+        //dd($validatedData);
+
 
         $enrollment = new Enrollment();
         $enrollment->student_id = $validatedData['student_id'];
@@ -58,12 +62,12 @@ class EnrollmentController extends Controller
         $enrollment->date = $validatedData['date'];
         $enrollment->course = $validatedData['course'];
 
-        dd($enrollment->student_id,$enrollment->module_id,$enrollment->cycle_id,$enrollment->date,$enrollment->course);  // Esto debería mostrarte el ID del usuario asignado
+        //dd($enrollment->student_id,$enrollment->module_id,$enrollment->cycle_id,$enrollment->date,$enrollment->course);  // Esto debería mostrarte el ID del usuario asignado
 
         // Guardar la nueva matrícula
         $enrollment->save();
 
-        return redirect()->route('admin.enrollment.index')->with('success', 'Matricula  ' . $enrollments->id . ' creado correctamente.');
+        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula  ' . $enrollment->id . ' creado correctamente.');
     }
 
     /**

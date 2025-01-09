@@ -42,49 +42,52 @@
                             @csrf
 
                             <h4>Matrícula</h4>
-
+                            
                             {{-- Usuario --}}
                             <div class="row mb-3">
-                                <label for="user" class="col-md-4 col-form-label text-md-end">Alumno</label>
+                                <label for="student_id" class="col-md-4 col-form-label text-md-end">Alumno</label>
                                 <div class="col-md-6">
-                                    <select name="user" id="user" class="form-select">
-                                        @foreach ($users as $user)
-                                            <option value="{{ $user->id }}" 
-                                                {{ $user->id == old('user', $enrollment->student_id ?? '') ? 'selected' : '' }}>
-                                                {{ ucfirst($user->lastname . ', ' . $user->name) }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                <select name="student_id" id="user" class="form-select">
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" 
+                                            {{ $user->id == old('student_id', $enrollment->student_id ?? '') ? 'selected' : '' }}>
+                                            {{ ucfirst($user->lastname . ', ' . $user->name) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
                                 </div>
                             </div>
 
                             {{-- Módulo --}}
                             <div class="row mb-3">
-                                <label for="module" class="col-md-4 col-form-label text-md-end">Módulo</label>
+                                <label for="module_id" class="col-md-4 col-form-label text-md-end">Módulo</label>
                                 <div class="col-md-6">
-                                    <select name="module" id="module" class="form-select">
-                                        @foreach ($modules as $module)
-                                            <option value="{{ $module->id }}" 
-                                                {{ $module->id == old('module', isset($enrollment) ? $enrollment->module_id : '') ? 'selected' : '' }}>
-                                                {{ ucfirst($module->name) }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                <select name="module_id" id="module" class="form-select">
+                                    @foreach ($modules as $module)
+                                        <option value="{{ $module->id }}" 
+                                            {{ $module->id == old('module_id', isset($enrollment) ? $enrollment->module_id : '') ? 'selected' : '' }}>
+                                            {{ ucfirst($module->name) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
                                 </div>
                             </div>
 
                             {{-- Ciclo --}}
                             <div class="row mb-3">
-                                <label for="cycle" class="col-md-4 col-form-label text-md-end">Ciclo</label>
+                                <label for="cycle_id" class="col-md-4 col-form-label text-md-end">Ciclo</label>
                                 <div class="col-md-6">
-                                    <select name="cycle" id="cycle" class="form-select">
-                                        @foreach ($cycles as $cycle)
-                                            <option value="{{ $cycle->id }}" 
-                                                {{ $cycle->id == old('cycle', isset($enrollment) ? $enrollment->cycle_id : '') ? 'selected' : '' }}>
-                                                {{ ucfirst($cycle->name) }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                <select name="cycle_id" id="cycle" class="form-select">
+                                    @foreach ($cycles as $cycle)
+                                        <option value="{{ $cycle->id }}" 
+                                            {{ $cycle->id == old('cycle_id', isset($enrollment) ? $enrollment->cycle_id : '') ? 'selected' : '' }}>
+                                            {{ ucfirst($cycle->name) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
                                 </div>
                             </div>
 
