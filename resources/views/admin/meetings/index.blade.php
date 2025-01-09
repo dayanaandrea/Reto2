@@ -96,7 +96,7 @@
     </table>
     <!-- Paginación -->
     <div>
-        {!! $modules->links('vendor.pagination.bootstrap-5') !!}
+        {!! $meetings->links('vendor.pagination.bootstrap-5') !!}
     </div>
 </div>
 @endsection

@@ -37,10 +37,10 @@
             @foreach ($schedules as $schedule)
                 <tr >
                     <th scope="col">{{ $loop->iteration }}</th>
+                    <td>{{$schedule->user->name}}</td>
+                    <td>{{$schedule->module->code}}</td>
                     <td>{{$schedule->day}}</td>
                     <td>{{$schedule->hour}}</td>
-                    <td>{{$schedule->module->code}}</td>
-                    <td>{{$schedule->user->code}}</td>
                     
                     <td><a href="{{route('admin.schedules.show', $schedule)}}" class="btn btn-secondary btn-sm">
                             Ver
