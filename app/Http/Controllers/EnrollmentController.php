@@ -23,8 +23,7 @@ class EnrollmentController extends Controller
     {
         //where('role_id',2) is used to get only students
         $users = \App\Models\User::where('role_id',2)->orderBy('id')->get();
-        $modules = \App\Models\Module::orderBy('id')->get();
-        $cycles = \App\Models\Cycle::orderBy('id')->get();
+        $modules = \App\Models\Module::orderBy('id')->where('')->get();
 
         $enrollments = Enrollment::orderBy('id')->get();
 
@@ -34,7 +33,6 @@ class EnrollmentController extends Controller
             'enrollments'=>$enrollments,
             'users' => $users,
             'modules' => $modules,
-            'cycles' => $cycles,
             'type'=>'POST']);            
     }
 
