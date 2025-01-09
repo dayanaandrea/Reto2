@@ -21,8 +21,21 @@ class EnrollmentController extends Controller
      */
     public function create()
     {
+        //where('role_id',2) is used to get only students
+        $users = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $modules = \App\Models\Module::orderBy('id')->get();
+        $cycles = \App\Models\Cycle::orderBy('id')->get();
+
         $enrollments = Enrollment::orderBy('id')->get();
-        return view('admin.module.create', ['enrollments'=>$enrollments]);
+
+        //dd('Llegó aquí');
+
+        return view('admin.enrollment.create-edit', [
+            'enrollments'=>$enrollments,
+            'users' => $users,
+            'modules' => $modules,
+            'cycles' => $cycles,
+            'type'=>'POST']);            
     }
 
     /**
@@ -30,27 +43,27 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        // Crear la matricula
-        $enrollments = new Enrollment();
-        $enrollments->student_id = $request->student_id;
-        $enrollments->module_id = $request->module_id;
-        $enrollments->cycle_id = $request->cycle_id;
-        $enrollments->date = $request->date;
-        $enrollments->course = $request->course;
-
-        // Validar datos
         $validatedData = $request->validate([
-            'student_id' => 'required|unsignedBigInteger|min:1',
-            'module_id' => 'required|unsignedBigInteger|min:1',
-            'cycle_id' => 'required|unsignedBigInteger|min:1',
+            'student_id' => 'required|unsignedBigInteger',
+            'module_id' => 'required|unsignedBigInteger',
+            'cycle_id' => 'required|unsignedBigInteger',
             'date' => 'required|date',
             'course' => 'required|integer|min:1|max:9',
         ]);
 
-        // Guardar la nueva matricula
-        $enrollments->save();
+        $enrollment = new Enrollment();
+        $enrollment->student_id = $validatedData['student_id'];
+        $enrollment->module_id = $validatedData['module_id'];
+        $enrollment->cycle_id = $validatedData['cycle_id'];
+        $enrollment->date = $validatedData['date'];
+        $enrollment->course = $validatedData['course'];
 
-        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula  ' . $enrollments->id . ' creado correctamente.');
+        dd($enrollment->student_id,$enrollment->module_id,$enrollment->cycle_id,$enrollment->date,$enrollment->course);  // Esto debería mostrarte el ID del usuario asignado
+
+        // Guardar la nueva matrícula
+        $enrollment->save();
+
+        return redirect()->route('admin.enrollment.index')->with('success', 'Matricula  ' . $enrollments->id . ' creado correctamente.');
     }
 
     /**
@@ -66,7 +79,19 @@ class EnrollmentController extends Controller
      */
     public function edit(Enrollment $enrollment)
     {
-        return view('admin.enrollment.edit', ['enrollment' => $enrollment]);
+        //where('role_id',2) is used to get only students
+        $users = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $modules = \App\Models\Module::orderBy('id')->get();
+        $cycles = \App\Models\Cycle::orderBy('id')->get();
+
+        return view('admin.enrollment.create-edit', [
+            'enrollment'=>$enrollment,
+            'users' => $users,
+            'modules' => $modules,
+            'cycles' => $cycles,
+            //'date' => $date,
+            //'course' => $course,
+            'type'=>'PUT']);
     }
 
     /**
