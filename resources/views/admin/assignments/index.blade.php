@@ -34,7 +34,7 @@
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                     @php
-                    $route = route('admin.assignments.edit', $assignment);
+                    $route = route('admin.assignments.edit', $assignment->id);
                     $type = "edit";
                     $text = '<i class="fa-solid fa-pen"></i>';
                     $tooltip = 'Editar datos de la asignación';

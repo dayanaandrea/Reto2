@@ -24,7 +24,6 @@ class CycleController extends Controller
      */
     public function create()
     {
-    
         return view('admin.cycle.create-edit', ['type'=>'POST']);
     }
 
