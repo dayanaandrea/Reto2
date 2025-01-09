@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meeting;
+use App\Models\User; 
 use Illuminate\Http\Request;
 
 class MeetingController extends Controller
@@ -46,7 +47,7 @@ class MeetingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Meeting $meeting)
+    public function show(Meetings $meetings)
     {
         return view('admin.meetings.show',['meetings'=>$meetings]);
     }
@@ -72,9 +73,8 @@ class MeetingController extends Controller
      */
     public function destroy(Meeting $meeting)
     {
-        $meetings = $meetings->date; 
-        $meetings->delete(); 
-        return redirect()->route('admin.meetings.index')->with('success', 'Reunión  <b>' . $meetings->date . '</b> eliminada correctamente.');
+        $meeting->delete();
+        return redirect()->route('admin.meetings.index')->with('success', 'Reunión eliminada correctamente.');
        
     }
 }

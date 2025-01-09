@@ -18,6 +18,8 @@ return new class extends Migration
             $table->tinyInteger('day');
             $table->time('hour');
             $table->timestamps();
+            
+            /*un constrint unique para los campos user_id y module que sea todo unico*/
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('module_id')->references('id')->on('modules')->onUpdate('cascade')->onDelete('cascade');

@@ -7,7 +7,7 @@
     <!-- Tarjeta para mostrar detalles de los modulos -->
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">{{ $meeting->date }}</h4>
+            <h4 class="card-title">{{ $meetings->date }}</h4>
         </div>
         <div class="card-body">
             <div class="row">

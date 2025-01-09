@@ -12,9 +12,11 @@
     <h2>Crear una nueva reunión</h2>
     <div>
         <p>Accede a la creación de una reunión:</p>
-        
+        <p><a href="{{ route('admin.meetings.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
+        data-bs-placement="top" title="Crear un nuevo ciclo"><i class="fa-solid fa-plus"></i></a></p>
+    
     </div>
-    <h2>Modulos</h2>
+    <h2>Reuniones</h2>
     <table class="table table-hover">
         <thead>
             <tr class="text-uppercase table-dark">
@@ -31,11 +33,11 @@
             @foreach ($meetings as $meeting)
             <tr>
                 <th scope="col">{{ $loop->iteration }}</th>
+                <td>{{$meeting->teacher->name}}</td>
+                <td>{{$meeting->student->name}}</td>
                 <td>{{$meeting->date}}</td>
                 <td>{{$meeting->time}}</td>
                 <td>{{$meeting->status}}</td>
-                <td>{{$meeting->teacher->name}}</td>
-                <td>{{$meeting->student->name}}</td>
                
                 <td>
                     @php

@@ -31,6 +31,7 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        
         // Crear el horario
         $schedules = new Schedule();
         $schedules->user_id = $request->user_id;
@@ -38,10 +39,11 @@ class ScheduleController extends Controller
         $schedules->day = $request->day;
         $schedules->hour = $request->hour;
 
+        //dd($request);
         // Guardar el nuevo horario
         $schedules->save();
 
-        return redirect()->route('admin.schedule.index')->with('success', 'Horario  ' . $schedules->day . ' creado correctamente.');
+        return redirect()->route('admin.schedules.index')->with('success', 'Horario  ' . $schedules->day . ' creado correctamente.');
     
     }
 
@@ -50,7 +52,7 @@ class ScheduleController extends Controller
      */
     public function show(schedules $schedules)
     {
-        return view('admin.schedule.show',['schedule'=>$schedule]);
+        return view('admin.schedules.show',['schedules'=>$schedule]);
     }
 
     /**
@@ -76,6 +78,6 @@ class ScheduleController extends Controller
     {
         $user_id = $schedule->user_id; 
         $schedule->delete(); 
-        return view('admin.schedule.success', ['user_id'=>$user_id]); 
+        return view('admin.schedules.success', ['user_id'=>$user_id]); 
     }
 }
