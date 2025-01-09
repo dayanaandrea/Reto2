@@ -17,3 +17,4 @@ class Schedule extends Model
         return $this->belongsToMany(Module::class);
     }
 }
+

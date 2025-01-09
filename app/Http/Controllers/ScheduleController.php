@@ -23,7 +23,7 @@ class ScheduleController extends Controller
     public function create()
     {
         $schedules = Schedule::orderBy('user_id')->get();
-        return view('admin.schedules.create', ['schedules'=>$schedules]);
+        return view('admin.schedules.create-edit', ['schedules'=>$schedules]);
     }
 
     /**

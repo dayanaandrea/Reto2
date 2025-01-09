@@ -62,6 +62,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.schedules.index') }}">Horarios</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.meetings.index') }}">Reuniones</a>
+                            </li>
+            
                         @endif
                     </ul>
 
