@@ -20,7 +20,13 @@ class AssignmentController extends Controller
      */
     public function create()
     {
-        return view('admin.assignments.create-edit', ['type'=>'POST']);
+        $users = \App\Models\User::orderBy('id')->get();
+        $modules = \App\Models\Module::orderBy('id')->get();
+
+        return view('admin.assignments.create-edit', [
+            'users' => $users,
+            'modules' => $modules,
+            'type'=>'POST']);
     }
 
     /**

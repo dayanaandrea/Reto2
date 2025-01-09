@@ -40,32 +40,30 @@
                                 <label for="user" class="col-md-4 col-form-label text-md-end">Profesor</label>
 
                                 <div class="col-md-6">
-                                    <input id="user" type="text"
-                                        class="form-control @error('user') is-invalid @enderror" name="user"
-                                        value="{{ old('user', $user) }}" required autocomplete="user" autofocus>
-
-                                    @error('user')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <select name="user" id="user" class="form-select">
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}" {{ $user->id == old('user', $user) ? 'selected' : '' }}>
+                                                {{ ucfirst($user->lastname . ', ' . $user->name) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
+                                
+                                
                             </div>
 
                             <div class="row mb-3">
                                 <label for="module" class="col-md-4 col-form-label text-md-end">Módulo</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="module"
-                                        class="form-control @error('module') is-invalid @enderror"
-                                        name="module" required autocomplete="module"
-                                        autofocus>{{ old('module', $module) }}</textarea>
-
-                                    @error('module')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <select name="module" id="module" class="form-select">
+                                        @foreach ($modules as $module)
+                                            <option value="{{ $module->id }}" {{ $module->id == old('module', $module) ? 'selected' : '' }}>
+                                                {{ ucfirst($module->name) }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
