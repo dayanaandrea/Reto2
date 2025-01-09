@@ -12,6 +12,7 @@ use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ScheduleController;
 use Illuminate\Support\Facades\App;
+use App\Http\Controllers\MeetingController;
 use Illuminate\Support\Facades\Auth;
 
 Route::permanentRedirect('/', '/home');
@@ -71,5 +72,8 @@ Route::middleware('auth')->group(function () {
 
     // Rutas de horarios
     Route::resource('schedules', ScheduleController::class);
+
+     // Rutas de reuniones
+     Route::resource('meetings', MeetingController::class);
   });
 });

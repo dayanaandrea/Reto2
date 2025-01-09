@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\schedules;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -12,7 +12,9 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        //
+        // Paginar, para no mostrar todos de golpe
+        $schedules = Schedule::orderBy('hour', 'asc')->paginate(10);
+        return view('admin.schedules.index',['schedules' => $schedules]);
     }
 
     /**
@@ -20,7 +22,8 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        //
+        $schedules = Schedule::orderBy('user_id')->get();
+        return view('admin.schedules.create-edit', ['schedules'=>$schedules]);
     }
 
     /**
@@ -28,7 +31,18 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Crear el horario
+        $schedules = new Schedule();
+        $schedules->user_id = $request->user_id;
+        $schedules->module_id = $request->module_id;
+        $schedules->day = $request->day;
+        $schedules->hour = $request->hour;
+
+        // Guardar el nuevo horario
+        $schedules->save();
+
+        return redirect()->route('admin.schedule.index')->with('success', 'Horario  ' . $schedules->day . ' creado correctamente.');
+    
     }
 
     /**
@@ -36,7 +50,7 @@ class ScheduleController extends Controller
      */
     public function show(schedules $schedules)
     {
-        //
+        return view('admin.schedule.show',['schedule'=>$schedule]);
     }
 
     /**
@@ -60,6 +74,8 @@ class ScheduleController extends Controller
      */
     public function destroy(schedules $schedules)
     {
-        //
+        $user_id = $schedule->user_id; 
+        $schedule->delete(); 
+        return view('admin.schedule.success', ['user_id'=>$user_id]); 
     }
 }

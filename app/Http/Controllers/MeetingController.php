@@ -12,7 +12,8 @@ class MeetingController extends Controller
      */
     public function index()
     {
-        //
+        $meetings = Meeting::orderBy('date', 'asc')->paginate(10);
+        return view('admin.meetings.index',['meetings' => $meetings]);
     }
 
     /**
@@ -20,7 +21,8 @@ class MeetingController extends Controller
      */
     public function create()
     {
-        //
+        $meetings = Meeting::orderBy('date')->get();
+        return view('admin.meetings.create-edit', ['meetings'=>$meetings]);
     }
 
     /**
@@ -28,7 +30,17 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          // Crear la reunión
+          $meetings = new Meeting();
+          $meetings->date = $request->date;
+          $meetings->time = $request->time;
+          $meetings->status = $request->status;
+          $meetings->teacher->name = $request->name;
+          $meetings->student->name = $request->name;
+  
+          // Guardar el nuevo usuario
+          $meetings->save();
+          return redirect()->route('admin.meetings.index')->with('success', 'Reunión  ' . $meetings->name . ' creado correctamente.');
     }
 
     /**
@@ -36,7 +48,7 @@ class MeetingController extends Controller
      */
     public function show(Meeting $meeting)
     {
-        //
+        return view('admin.meetings.show',['meetings'=>$meetings]);
     }
 
     /**
@@ -44,7 +56,7 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-        //
+        return view('admin.meetings.create-edit', ['meetings'=>$meetings]);
     }
 
     /**
@@ -60,6 +72,9 @@ class MeetingController extends Controller
      */
     public function destroy(Meeting $meeting)
     {
-        //
+        $meetings = $meetings->date; 
+        $meetings->delete(); 
+        return redirect()->route('admin.meetings.index')->with('success', 'Reunión  <b>' . $meetings->date . '</b> eliminada correctamente.');
+       
     }
 }

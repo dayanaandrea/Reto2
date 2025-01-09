@@ -5,65 +5,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('auth.register') }}</div>
+                <div class="card-header">{{ __('Create') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.enrollments.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.meetings.store') }}" enctype="multipart/form-data">
                         @csrf
 
-                        <h4>{{ __('auth.account') }}</h4>
+                        <h4>{{ __('Meeting') }}</h4>
 
-                        <!-- Campo para id_estudiante -->
+                        <!-- Campo para Fecha -->
                         <div class="row mb-3">
-                            <label for="student_id" class="col-md-4 col-form-label text-md-end">{{ __('Id estudiante') }}</label>
+                            <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('Date') }}</label>
 
                             <div class="col-md-6">
-                                <input id="student_id" type="text" class="form-control @error('student_id') is-invalid @enderror" name="student_id" value="{{ old('student_id') }}" required autocomplete="student_id" autofocus>
-
-                                @error('student_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Campo para id_modulo -->
-                        <div class="row mb-3">
-                            <label for="module_id" class="col-md-4 col-form-label text-md-end">{{ __('Id módulo') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="module_id" type="text" class="form-control @error('module_id') is-invalid @enderror" name="module_id" value="{{ old('module_id') }}" required autocomplete="module_id" autofocus>
-
-                                @error('module_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Campo para id_ciclo -->
-                        <div class="row mb-3">
-                            <label for="cycle_id" class="col-md-4 col-form-label text-md-end">{{ __('Id ciclo') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="cycle_id" type="number" class="form-control @error('cycle_id') is-invalid @enderror" name="cycle_id" value="{{ old('cycle_id') }}" required autocomplete="cycle_id" autofocus>
-
-                                @error('cycle_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Campo para fecha -->
-                        <div class="row mb-3">
-                            <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('Fecha') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date" autofocus>
+                                <input id="date" type="text" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date" autofocus>
 
                                 @error('date')
                                     <span class="invalid-feedback" role="alert">
@@ -73,14 +28,59 @@
                             </div>
                         </div>
 
-                        <!-- Campo para curso -->
+                        <!-- Campo para Hora -->
                         <div class="row mb-3">
-                            <label for="course" class="col-md-4 col-form-label text-md-end">{{ __('Curso') }}</label>
+                            <label for="time" class="col-md-4 col-form-label text-md-end">{{ __('Time') }}</label>
 
                             <div class="col-md-6">
-                                <input id="course" type="text" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course') }}" required autocomplete="course" autofocus>
+                                <input id="time" type="text" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ old('time') }}" required autocomplete="time" autofocus>
 
-                                @error('course')
+                                @error('time')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Campo para Estados (es un enum) -->
+                        <div class="row mb-3">
+                            <label for="status" class="col-md-4 col-form-label text-md-end">{{ __('Status') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="status" type="enum" class="form-control @error('status') is-invalid @enderror" name="status" value="{{ old('status') }}" required autocomplete="status" autofocus>
+
+                                @error('status')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Campo para Profesor -->
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Teacher') }}</label> 
+
+                            <div class="col-md-6">
+                                <input id="name" type="number" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Campo para Estudiante -->
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Student') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="number" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
