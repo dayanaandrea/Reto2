@@ -17,10 +17,10 @@ return new class extends Migration
         $table->string('name', 100);
         $table->integer('hours');
         $table->tinyInteger('course');
-        $table->unsignedBigInteger('offer_id');
+        $table->unsignedBigInteger('cycle_id');
         $table->timestamps();
 
-        $table->foreign('offer_id')->references('id')->on('cycles')->onUpdate('cascade')->onDelete('cascade');
+        $table->foreign('cycle_id')->references('id')->on('cycles')->onUpdate('cascade')->onDelete('cascade');
     });
 }
 
