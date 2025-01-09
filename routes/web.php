@@ -11,6 +11,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\MeetingController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -61,6 +62,10 @@ Route::middleware('auth')->group(function () {
 
     // Rutas de horarios
     Route::resource('schedules', ScheduleController::class);
+
+     // Rutas de reuniones
+     Route::resource('meetings', MeetingController::class);
+
 
   });
 
