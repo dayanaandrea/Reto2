@@ -20,7 +20,7 @@ class AssignmentController extends Controller
      */
     public function create()
     {
-        //where('role_id',2) is used to get only teachers
+        //where('role_id',1) is used to get only teachers
         $users = \App\Models\User::where('role_id',1)->orderBy('id')->get();
         $modules = \App\Models\Module::orderBy('id')->get();
 
@@ -63,7 +63,7 @@ class AssignmentController extends Controller
      */
     public function edit(Assignment $assignment)
     {
-        //where('role_id',2) is used to get only teachers
+        //where('role_id',1) is used to get only teachers
         $users = \App\Models\User::where('role_id',1)->orderBy('id')->get();
         $modules = \App\Models\Module::orderBy('id')->get();
 
