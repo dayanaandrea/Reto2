@@ -22,8 +22,7 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        $schedules = Schedule::orderBy('user_id')->get();
-        return view('admin.schedules.create-edit', ['schedules'=>$schedules]);
+        return view('admin.schedules.create-edit');
     }
 
     /**
@@ -33,32 +32,32 @@ class ScheduleController extends Controller
     {
         
         // Crear el horario
-        $schedules = new Schedule();
-        $schedules->user_id = $request->user_id;
-        $schedules->module_id = $request->module_id;
-        $schedules->day = $request->day;
-        $schedules->hour = $request->hour;
+        $schedule = new Schedule();
+        $schedule->user_id = $request->user_id;
+        $schedule->module_id = $request->module_id;
+        $schedule->day = $request->day;
+        $schedule->hour = $request->hour;
 
-        //dd($request);
+        dd($request);
         // Guardar el nuevo horario
-        $schedules->save();
+        $schedule->save();
 
-        return redirect()->route('admin.schedules.index')->with('success', 'Horario  ' . $schedules->day . ' creado correctamente.');
+        return redirect()->route('admin.schedules.index')->with('success', 'Horario  ' . $schedule->day . ' creado correctamente.');
     
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(schedules $schedules)
+    public function show(Schedule $schedule)
     {
-        return view('admin.schedules.show',['schedules'=>$schedule]);
+        return view('admin.schedules.show',['schedule'=>$schedule]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(schedules $schedules)
+    public function edit(Schedule $schedule)
     {
         //
     }
@@ -66,7 +65,7 @@ class ScheduleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, schedules $schedules)
+    public function update(Request $request, Schedule $schedule)
     {
         //
     }
@@ -74,10 +73,10 @@ class ScheduleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(schedules $schedules)
+    public function destroy(Schedule $schedule)
     {
-        $user_id = $schedule->user_id; 
-        $schedule->delete(); 
-        return view('admin.schedules.success', ['user_id'=>$user_id]); 
+
+        $schedule->delete();
+        return redirect()->route('admin.schedules.index')->with('success', 'Horario eliminado correctamente.');
     }
 }

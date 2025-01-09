@@ -22,8 +22,8 @@ class MeetingController extends Controller
      */
     public function create()
     {
-        $meetings = Meeting::orderBy('date')->get();
-        return view('admin.meetings.create-edit', ['meetings'=>$meetings]);
+       
+        return view('admin.meetings.create-edit');
     }
 
     /**
@@ -32,24 +32,24 @@ class MeetingController extends Controller
     public function store(Request $request)
     {
           // Crear la reunión
-          $meetings = new Meeting();
-          $meetings->date = $request->date;
-          $meetings->time = $request->time;
-          $meetings->status = $request->status;
-          $meetings->teacher->name = $request->name;
-          $meetings->student->name = $request->name;
+          $meeting = new Meeting();
+          $meeting->date = $request->date;
+          $meeting->time = $request->time;
+          $meeting->status = $request->status;
+          $meeting->teacher->name = $request->name;
+          $meeting->student->name = $request->name;
   
           // Guardar el nuevo usuario
-          $meetings->save();
-          return redirect()->route('admin.meetings.index')->with('success', 'Reunión  ' . $meetings->name . ' creado correctamente.');
+          $meeting->save();
+          return redirect()->route('admin.meetings.index')->with('success', 'Reunión  ' . $meeting->name . ' creado correctamente.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Meetings $meetings)
+    public function show(Meeting $meeting)
     {
-        return view('admin.meetings.show',['meetings'=>$meetings]);
+        return view('admin.meetings.show',['meetings'=>$meeting]);
     }
 
     /**
@@ -57,7 +57,7 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-        return view('admin.meetings.create-edit', ['meetings'=>$meetings]);
+        return view('admin.meetings.create-edit', ['meetings'=>$meeting]);
     }
 
     /**
