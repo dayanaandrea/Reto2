@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container">
+
+    <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
+    <x-alert :key="'success'" :class="'success'" />
+
     <h2>Crear nueva asignación</h2>
     <div>
         <p>Accede a la creación de una nueva asignación:</p>

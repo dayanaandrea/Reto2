@@ -67,7 +67,7 @@ class EnrollmentController extends Controller
         // Guardar la nueva matrícula
         $enrollment->save();
 
-        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula  ' . $enrollment->id . ' creado correctamente.');
+        return redirect()->route('admin.enrollments.show')->with('success', 'Matricula  <b>' . $enrollment->enrollment . '</b> creado correctamente.');
     }
 
     /**
@@ -113,7 +113,7 @@ class EnrollmentController extends Controller
     
         $enrollment->update($validatedData);
     
-        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula actualizada correctamente.');   
+        return redirect()->route('admin.enrollments.show',$enrollment)->with('success', 'Matricula  <b>' . $enrollment->enrollment . '</b> creado correctamente.');   
          
     }
 

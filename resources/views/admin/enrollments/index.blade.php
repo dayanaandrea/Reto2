@@ -3,6 +3,10 @@
 @section('content')
 <div class="container">
     <h2>Crear nueva matricula</h2>
+
+    <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
+    <x-alert :key="'success'" :class="'success'" />
+
     <div>
         <p>Accede a la creación de una matricula:</p>
         <p><a href="{{ route('admin.enrollments.create') }}" class="btn btn-primary"data-bs-toggle="tooltip"
