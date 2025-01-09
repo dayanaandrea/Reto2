@@ -57,6 +57,7 @@ $title = "Creación de Modulo";
                                     @enderror
                                 </div>
                             </div>
+                            
                             <div class=" row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">Nombre</label>
 
@@ -83,8 +84,6 @@ $title = "Creación de Modulo";
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-
-
                                 </div>
                             </div>
 
@@ -105,7 +104,7 @@ $title = "Creación de Modulo";
                                 <div class="col-md-6">
                                     <select name="cycle_id" id="cycle_id" class="form-select">
                                         @foreach ($cycles as $cycle)
-                                        <option value="{{$cycle->cycle_id}}">{{ucfirst($cycle->code)}}</option>
+                                        <option value="{{$cycle->id}}">{{ucfirst($cycle->code)}}</option>
                                         @endforeach
                                     </select>
                                 </div>
