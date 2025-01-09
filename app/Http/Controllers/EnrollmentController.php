@@ -13,7 +13,7 @@ class EnrollmentController extends Controller
     public function index()
     {
         $enrollments = Enrollment::orderBy('id', 'asc')->paginate(10);
-        return view('admin.enrollment.index',['enrollments' => $enrollments]);
+        return view('admin.enrollments.index',['enrollments' => $enrollments]);
     }
 
     /**
@@ -30,7 +30,7 @@ class EnrollmentController extends Controller
 
         //dd('Llegó aquí');
 
-        return view('admin.enrollment.create-edit', [
+        return view('admin.enrollments.create-edit', [
             'enrollments'=>$enrollments,
             'users' => $users,
             'modules' => $modules,
@@ -75,7 +75,7 @@ class EnrollmentController extends Controller
      */
     public function show(Enrollment $enrollment)
     {
-        return view('admin.enrollment.show',['enrollment'=>$enrollment]);
+        return view('admin.enrollments.show',['enrollment'=>$enrollment]);
     }
 
     /**
@@ -88,7 +88,7 @@ class EnrollmentController extends Controller
         $modules = \App\Models\Module::orderBy('id')->get();
         $cycles = \App\Models\Cycle::orderBy('id')->get();
 
-        return view('admin.enrollment.create-edit', [
+        return view('admin.enrollments.create-edit', [
             'enrollment'=>$enrollment,
             'users' => $users,
             'modules' => $modules,
@@ -127,7 +127,7 @@ class EnrollmentController extends Controller
         /*
         $id = $enrollment->id; 
         $enrollment->delete(); 
-        return view('admin.enrollment.success', ['id'=>$id]); 
+        return view('admin.enrollments.success', ['id'=>$id]); 
         */
     }
 }
