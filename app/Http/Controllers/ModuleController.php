@@ -114,21 +114,24 @@ class ModuleController extends Controller
     private function validateModule(Request $request)
     {
         $request->validate([
-            // hours debe ser numerico, int
+           
             'code' => 'required|min:3|max:5',
             'name' => 'required|string|min:10|max:255',
-            'hours' => 'required',
-            'course' => 'required|in:1,2', // Solo permite que sea 1 o 2
+            'hours' => 'required|integer',
+            'course' => 'required|in:1,2', 
             'cycle_id' => 'required',
         ], [
+            'code.required' => 'El campo de código es obligatorio.',
             'code.min' => 'El código debe tener al menos 3 caracteres.',
             'code.max' => 'El código no puede tener más de 5 caracteres.',
+            'name.required' => 'El campo de nombre es obligatorio.',
             'name.min' => 'El nombre debe tener al menos 10 caracteres.',
             'name.max' => 'El nombre no puede tener más de 255 caracteres.',
             'hours.required' => 'El campo de horas es obligatorio.',
+            'hours.numeric' => 'Ingrese un número válido para las horas.',
             'course.in' => 'El curso solo puede ser 1 o 2.',
-            'cycle_id.required' => 'Debe seleccionar un ciclo.',
-
+            'course.required' => 'El campo de curso es obligatorio.',
+            'cycle_id.required' => 'El campo de ciclo es obligatorio.',
         ]);
     }
 }
