@@ -3,14 +3,14 @@
         $user = $enrollment->user_id;
         $module = $enrollment->module_id;
         $date = $enrollment->date;
-        $button = "Actualizar";
-        $title = "Actualización de la matrícula";
+        $button = __('enrollment.update');
+        $title = __('enrollment.update_enrollment');
     } else {
         $user = "";
         $module = "";
         $date = "";
-        $button = "Crear";
-        $title = "Creación de una matrícula";
+        $button = __('enrollment.create');
+        $title = __('enrollment.create_enrollment');
     }
 @endphp
 
@@ -37,11 +37,11 @@
                     @endif
                             @csrf
 
-                            <h4>Matrícula</h4>
+                            <h4>{{__('enrollment.enrollment')}}</h4>
                             
                             {{-- Usuario --}}
                             <div class="row mb-3">
-                                <label for="user_id" class="col-md-4 col-form-label text-md-end">Alumno</label>
+                                <label for="user_id" class="col-md-4 col-form-label text-md-end">{{__('enrollment.student')}}</label>
                                 <div class="col-md-6">
                                 <select name="user_id" id="user" class="form-select">
                                     @foreach ($users as $user)
@@ -57,7 +57,7 @@
 
                             {{-- Módulo --}}
                             <div class="row mb-3">
-                                <label for="module_id" class="col-md-4 col-form-label text-md-end">Módulo</label>
+                                <label for="module_id" class="col-md-4 col-form-label text-md-end">{{__('enrollment.module')}}</label>
                                 <div class="col-md-7">
                                 <select name="module_id[]" id="module" class="form-select">
                                         @foreach ($modules as $module)
@@ -72,7 +72,7 @@
 
                             <!-- Campo para fecha -->
                             <div class="row mb-3">
-                                <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('Fecha') }}</label>
+                                <label for="date" class="col-md-4 col-form-label text-md-end">{{__('enrollment.date')}}</label>
                                 <div class="col-md-6">
                                 <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date', $enrollment->date ?? '') }}" required>
 

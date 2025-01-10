@@ -6,29 +6,29 @@
     <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
     <x-alert :key="'success'" :class="'success'" />
 
-    <h2 class="mb-4">Detalles de la matrícula</h2>
+    <h2 class="mb-4">{{__('enrollment.title_show_1')}}</h2>
 
     <!-- Tarjeta para mostrar detalles de los modulos -->
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Número de matrícula: {{ $enrollment->id }}</h4>
+            <h4 class="card-title">{{__('enrollment.title_show_2')}}{{ $enrollment->id }}</h4>
         </div>
         <div class="card-body">
             <div class="row">
-                <p class="col-sm-3 fw-bold">Estudiante :</p>
+                <p class="col-sm-3 fw-bold">{{__('enrollment.student')}}</p>
                 <p class="col-sm-9">{{$enrollment->user->name . ', ' . $enrollment->user->lastname}}</p>
                 
-                <p class="col-sm-3 fw-bold">Modulo:</p>
+                <p class="col-sm-3 fw-bold">{{__('enrollment.module')}}</p>
                 <p class="col-sm-9">{{$enrollment->module->name }}</p>
 
-                <p class="col-sm-3 fw-bold">Ciclo:</p>
+                <p class="col-sm-3 fw-bold">{{__('enrollment.cycle')}}</p>
                 <p class="col-sm-9">{{$enrollment->module->cycle->name}} ({{$enrollment->module->cycle->code}})</p>
 
-                <p class="col-sm-3 fw-bold">Fecha:</p>
+                <p class="col-sm-3 fw-bold">{{__('enrollment.date')}}</p>
                 <p class="col-sm-9">{{$enrollment->date}}</p>
 
-                <p class="col-sm-3 fw-bold">Curso:</p>
-                <p class="col-sm-9">{{$enrollment->course }}</p>
+                <p class="col-sm-3 fw-bold">{{__('enrollment.course')}}</p>
+                <p class="col-sm-9">{{$enrollment->module->course }}</p>
 
                 <!-- Botones de Editar y Eliminar -->
                 <div class="mt-4">
@@ -55,22 +55,21 @@
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h5 class="modal-title">Confirmar eliminación</h5>
+                            <h5 class="modal-title">{{__('enrollment.delete_confirmation')}}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <!-- Cuerpo del Modal -->
                         <div class="modal-body">
-                            ¿Estás seguro de que deseas eliminar esta matrícula <b>{{ $enrollment->name }}</b>? Esta acción no se puede deshacer.
-                        </div>
+                        {{__('enrollment.ask_for_delete_confirmation_1')}} <b>{{ $enrollment->name }}</b>{{__('enrollment.ask_for_delete_confirmation_2')}}                        </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('enrollment.cancel')}}</button>
                             <!-- Formulario de eliminación -->
                             <form action="{{ route('admin.enrollments.destroy', $enrollment->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit"> Eliminar </button>
+                                <button class="btn btn-danger" type="submit"> {{__('enrollment.delete')}} </button>
                             </form>
                         </div>
                     </div>

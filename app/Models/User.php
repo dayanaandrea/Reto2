@@ -15,7 +15,8 @@ class User extends Authenticatable
     use HasFactory, Notifiable, SoftDeletes;
 
     // Un usuario puede tener un único rol
-    public function role(): BelongsTo{
+    public function role(): BelongsTo
+    {
         return $this->belongsTo(Role::class);
     }
 
@@ -26,15 +27,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'lastname',    
+        'lastname',
         'email',
         'password',
-        'pin',          
-        'address',         
-        'phone1',        
-        'phone2',         
-        'photo',           
-        'role_id',         
+        'pin',
+        'address',
+        'phone1',
+        'phone2',
+        'photo',
+        'role_id',
     ];
 
     /**
@@ -60,9 +61,19 @@ class User extends Authenticatable
         ];
     }
 
-    public function assignments()
+    public function modules()
     {
-        return $this->hasMany(Assignment::class);
+        return $this->hasMany(Module::class);
+    }
+
+    public function teacherSchedules()
+    {
+        return $this->hasManyThrough(Schedule::class, Module::class);
+    }
+
+    public function studentSchedules()
+    {
+        return $this->hasManyThrough(Schedule::class, Enrollment::class, 'user_id', 'module_id', 'id', 'module_id');
     }
 
     public function teacherMeetings()
@@ -75,9 +86,4 @@ class User extends Authenticatable
         return $this->hasMany(Meeting::class, 'student_id');
     }
 
-    public function schedules()
-    {
-        return $this->hasMany(Schedule::class);
-    }
-    
 }

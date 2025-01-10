@@ -6,11 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
-    protected $fillable = ['user_id', 'module_id', 'day', 'hour']; 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $fillable = ['module_id', 'day', 'hour']; 
 
     public function module()
     {

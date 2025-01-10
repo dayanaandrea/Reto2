@@ -19,7 +19,7 @@ class CheckAdminRole
         $user = Auth::user();
 
         if (!$user->role || ($user->role->role != 'administrador' && $user->role->role != 'god')) {
-            return redirect('/home')->with('permission', 'No tienes permisos para acceder a esta área.');
+            abort(404);
         }
 
         return $next($request);
