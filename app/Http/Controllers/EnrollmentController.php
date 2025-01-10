@@ -12,7 +12,7 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        $enrollments = Enrollment::orderBy('id', 'asc')->paginate(10);
+        $enrollments = Enrollment::orderBy('id', 'desc')->paginate(10);
         return view('admin.enrollments.index',['enrollments' => $enrollments]);
     }
 
@@ -23,7 +23,9 @@ class EnrollmentController extends Controller
     {
         //where('role_id',2) is used to get only students
         $users = \App\Models\User::where('role_id',2)->orderBy('id')->get();
-        $modules = \App\Models\Module::orderBy('id')->where('')->get();
+        $modules = \App\Models\Module::orderBy('id')->get();
+
+        //$modules = \App\Models\Module::orderBy('id')->where('')->get();
 
         $enrollments = Enrollment::orderBy('id')->get();
 
@@ -44,28 +46,29 @@ class EnrollmentController extends Controller
         //dd('Antes de la validación');
         //dd($request->all());
         $validatedData = $request->validate([
-            'student_id' => 'required|exists:users,id',
+            'user_id' => 'required|exists:users,id',
             'module_id' => 'required|exists:modules,id',
-            'cycle_id' => 'required|exists:cycles,id',
             'date' => 'required|date',
-            'course' => 'required|integer|min:1|max:9',
         ]);
         //dd($validatedData);
 
 
         $enrollment = new Enrollment();
-        $enrollment->student_id = $validatedData['student_id'];
+        $enrollment->user_id = $validatedData['user_id'];
         $enrollment->module_id = $validatedData['module_id'];
-        $enrollment->cycle_id = $validatedData['cycle_id'];
         $enrollment->date = $validatedData['date'];
-        $enrollment->course = $validatedData['course'];
+        
+        //dd($enrollment->user_id,$enrollment->module_id,$enrollment->cycle_id,$enrollment->date,$enrollment->course);  // Esto debería mostrarte el ID del usuario asignado
 
-        //dd($enrollment->student_id,$enrollment->module_id,$enrollment->cycle_id,$enrollment->date,$enrollment->course);  // Esto debería mostrarte el ID del usuario asignado
+        //dd para comprobar la multiple selección de módulos
+        dd($enrollment->module_id,$enrollment->user_id,$enrollment->date);
+
+
+        //foreach($validatedData[$module_id] as )
 
         // Guardar la nueva matrícula
         $enrollment->save();
-
-        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula  ' . $enrollment->id . ' creado correctamente.');
+        return redirect()->route('admin.enrollments.show')->with('success', 'Matricula  <b>' . $enrollment->enrollment . '</b> creado correctamente.');
     }
 
     /**
@@ -90,7 +93,6 @@ class EnrollmentController extends Controller
             'enrollment'=>$enrollment,
             'users' => $users,
             'modules' => $modules,
-            'cycles' => $cycles,
             //'date' => $date,
             //'course' => $course,
             'type'=>'PUT']);
@@ -102,16 +104,14 @@ class EnrollmentController extends Controller
     public function update(Request $request, Enrollment $enrollment)
     {
         $validatedData = $request->validate([
-            'student_id' => 'required|integer',
+            'user_id' => 'required|integer',
             'module_id' => 'required|integer',
-            'cycle_id' => 'required|integer',
             'date' => 'required|date',
-            'course' => 'required|string|max:255',
         ]);
     
         $enrollment->update($validatedData);
     
-        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula actualizada correctamente.');   
+        return redirect()->route('admin.enrollments.show',$enrollment)->with('success', 'Matricula  <b>' . $enrollment->enrollment . '</b> creado correctamente.');   
          
     }
 
