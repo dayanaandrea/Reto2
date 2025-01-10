@@ -11,8 +11,7 @@ $button = "Crear";
 $title = "Creación de Ciclo";
 }
 @endphp
-
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">

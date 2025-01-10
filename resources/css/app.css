@@ -136,3 +136,21 @@ a.btn-warning:hover {
     background-color: rgba(0, 0, 0, 0.65);
 }
 
+#sideMenu a.nav-link.active {
+    background-color: #3cb4e5;
+}
+
+#sideMenu {
+    background-color: #211261;
+}
+
+#logo_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sideMenu .nav-link i {
+    font-size: 18px;
+    text-align: center; 
+}
