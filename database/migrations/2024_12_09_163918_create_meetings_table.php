@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->time('time');
+            $table->tinyInteger('time');
             //Establecer los valores por defecto que va a tener el enum
             $table->enum('status', ['accepted', 'rejected', 'pending'])->default('pending');
 

@@ -10,14 +10,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(range(15, 19) as $hour)
+        @foreach(range(1, 5) as $hour)
             <tr>
-                <th>{{ $hour }}:00</th>
+                <th>{{ $hour }}</th>
 
                 @foreach(range(1, 5) as $day)
                     <td>
                         @foreach($schedules as $schedule)
-                            @if($schedule->day == $day && $schedule->hour == $hour . ':00:00')
+                            @if($schedule->day == $day && $schedule->hour == $hour)
                                 {{ $schedule->module->code }}
                             @endif
                         @endforeach
