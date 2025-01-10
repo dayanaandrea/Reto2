@@ -15,7 +15,9 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = Module::orderBy('course', 'asc')->paginate(10);
+        $modules = Module::orderBy('cycle_id', 'desc')   
+        ->orderBy('course', 'asc')     
+        ->paginate(10);               
         return view('admin.modules.index', ['modules' => $modules]);
     }
 
