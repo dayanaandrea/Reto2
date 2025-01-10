@@ -43,7 +43,7 @@ $title = "Creación de Modulo";
 
                             <h4>Modulo</h4>
                             <div class=" row mb-3">
-                                <label for="code" class="col-md-4 col-form-label text-md-end">Código</label>
+                                <label for="code" class="col-md-4 col-form-label text-md-end">{{__('module.code')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="code" type="text"
@@ -59,7 +59,7 @@ $title = "Creación de Modulo";
                             </div>
 
                             <div class=" row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">Nombre</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-end">{{__('module.name')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -75,7 +75,7 @@ $title = "Creación de Modulo";
                             </div>
 
                             <div class="row mb-3">
-                                <label for="hours" class="col-md-4 col-form-label text-md-end">Horas</label>
+                                <label for="hours" class="col-md-4 col-form-label text-md-end">{{__('module.hours')}}</label>
                                 <div class="col-md-6">
                                     <input id="hours" type="number" class="form-control @error('hours') is-invalid @enderror" name="hours" value="{{ old('hours', $hours) }}"  autocomplete="hours">
 
@@ -88,7 +88,7 @@ $title = "Creación de Modulo";
                             </div>
 
                             <div class="row mb-3">
-                                <label for="course" class="col-md-4 col-form-label text-md-end">Curso</label>
+                                <label for="course" class="col-md-4 col-form-label text-md-end">{{__('module.course')}}</label>
                                 <div class="col-md-6">
                                     <input id="course" type="number" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course', $course) }}"  autocomplete="course">
                                     @error('course')
@@ -100,7 +100,7 @@ $title = "Creación de Modulo";
                             </div>
 
                             <div class="row mb-3">
-                                <label for="cycle_id" class="col-md-4 col-form-label text-md-end">Ciclo</label>
+                                <label for="cycle_id" class="col-md-4 col-form-label text-md-end">{{__('module.cycle')}}</label>
                                 <div class="col-md-6">
                                     <select name="cycle_id" id="cycle_id" class="form-select">
                                         @foreach ($cycles as $cycle)
@@ -114,7 +114,7 @@ $title = "Creación de Modulo";
                             </div>  
 
                             <div class="row mb-3">
-                                <label for="user_id" class="col-md-4 col-form-label text-md-end">Profesor</label>
+                                <label for="user_id" class="col-md-4 col-form-label text-md-end">{{__('module.teacher')}}</label>
                                 <div class="col-md-6">
                                     <select name="user_id" id="user_id" class="form-select">
                                         <option value="" selected> -- Selecciona un profesor -- </option>

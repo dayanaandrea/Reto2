@@ -2,10 +2,10 @@
 
 return [
     // INDEX
-    'index_title_1' => 'Crear un nuevo modulo',
-    'index_title_2' => 'Accede a la creación de un modulo :',
-    'module' => 'Modulos',
-    'code' => 'Codigo',
+    'index_title_1' => 'Crear un nuevo módulo',
+    'index_title_2' => 'Accede a la creación de un módulo :',
+    'module' => 'Módulos',
+    'code' => 'Código',
     'name' => 'Nombre',
     'hours' => 'Horas',
     'course' => 'Curso',
@@ -22,15 +22,10 @@ return [
     'cancel'=>'Cancelar',
     'delete'=>'Eliminar',
 
-    // SHOW
+    // SHOW  {{ $module->name }}
     'show_title' => 'Detalles del modulo',
-    'code' => 'Crear un nuevo modulo',
-    'hours' => '',
-    'course' => '',
-    'cycle' => '',
-    'teacher' => '',
-    'not_assigned' => 'No asignado',
+
     // CREATE-EDIT
-   
+    'select_teacher' => ' -- Selecciona un profesor -- ',
 ];
 
