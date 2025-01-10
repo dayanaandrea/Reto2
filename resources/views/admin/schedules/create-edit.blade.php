@@ -13,7 +13,7 @@
 
                         <h4>{{ __('Schedule') }}</h4>
 
-                        <!-- Campo para Profesor -->
+                        <!-- Campo para el usuario -->
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('User') }}</label>
 

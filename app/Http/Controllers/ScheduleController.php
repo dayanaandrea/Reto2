@@ -38,7 +38,7 @@ class ScheduleController extends Controller
         $schedule->day = $request->day;
         $schedule->hour = $request->hour;
 
-        dd($request);
+        /*dd($request);*/
         // Guardar el nuevo horario
         $schedule->save();
 
@@ -59,7 +59,7 @@ class ScheduleController extends Controller
      */
     public function edit(Schedule $schedule)
     {
-        //
+        return view('admin.schedules.create-edit',['schedule'=>$schedule]);
     }
 
     /**
@@ -67,7 +67,16 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        //
+        /* // Validar los datos
+         $this->validateSchedule($request);
+
+         $schedule->schedule = strtolower($request->schedule);
+         $schedule->description = $request->description;
+ 
+         // Guardar el nuevo horario
+         $schedule->save();
+ 
+         return redirect()->route('admin.schedules.show', $schedule)->with('success', 'Horario <b>' . $schedule->schedule . '</b> actualizado correctamente.');*/
     }
 
     /**
