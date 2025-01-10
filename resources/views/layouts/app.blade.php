@@ -1,27 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="{{ asset('storage/images/EEM-icono.png') }}" type="image/x-icon">
-
-    <!-- Fonts -->
-    <!--
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    -->
-
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-</head>
+@include('layouts.head')
 
 <body id="elorrieta_body" class="d-flex flex-column min-vh-100">
     <div id="app" class="d-flex flex-column flex-grow-1">
@@ -57,15 +37,12 @@
                                 <a class="nav-link" href="{{ route('admin.enrollments.index') }}">Matriculas</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.assignments.index') }}">Asignaciones</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.schedules.index') }}">Horarios</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.meetings.index') }}">Reuniones</a>
                             </li>
-            
+
                         @endif
                     </ul>
 
@@ -101,7 +78,7 @@
 
                                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                                             onclick="event.preventDefault();
-                                                                                                                                                                                                                                     document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
                                                             {{ __('nav.logout') }}
                                                         </a>
 
