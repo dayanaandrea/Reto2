@@ -41,22 +41,22 @@ class ScheduleController extends Controller
         // Guardar el nuevo horario
         $schedules->save();
 
-        return redirect()->route('admin.schedule.index')->with('success', 'Horario  ' . $schedules->day . ' creado correctamente.');
+        return redirect()->route('admin.schedules.index')->with('success', 'Horario  ' . $schedules->day . ' creado correctamente.');
     
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(schedules $schedules)
+    public function show(Schedule $schedule)
     {
-        return view('admin.schedule.show',['schedule'=>$schedule]);
+        return view('admin.schedules.show',['schedule'=>$schedule]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(schedules $schedules)
+    public function edit(Schedule $schedules)
     {
         //
     }
@@ -64,7 +64,7 @@ class ScheduleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, schedules $schedules)
+    public function update(Request $request, Schedule $schedule)
     {
         //
     }
@@ -72,10 +72,10 @@ class ScheduleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(schedules $schedules)
+    public function destroy(Schedule $schedule)
     {
         $user_id = $schedule->user_id; 
         $schedule->delete(); 
-        return view('admin.schedule.success', ['user_id'=>$user_id]); 
+        return view('admin.schedules.success', ['user_id'=>$user_id]); 
     }
 }

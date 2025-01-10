@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    protected $fillable = ['code', 'name','hours', 'course' , 'cycle_id']; 
+    protected $fillable = ['code', 'name','hours', 'course', 'user_id', 'cycle_id']; 
     public function cycle()
     {
         return $this->belongsTo(Cycle::class);
     }
 
-    public function assignments()
+    public function user()
     {
-        return $this->hasMany(Assignment::class);
+        return $this->belongsTo(User::class);
     }
 
     public function schedules()

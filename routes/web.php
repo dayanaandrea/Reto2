@@ -67,9 +67,6 @@ Route::middleware('auth')->group(function () {
     // Rutas de matriculas
     Route::resource('enrollments', EnrollmentController::class);
 
-    // Rutas de asignaciones
-    Route::resource('assignments', AssignmentController::class);
-
     // Rutas de horarios
     Route::resource('schedules', ScheduleController::class);
 
