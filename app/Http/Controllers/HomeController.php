@@ -23,7 +23,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function home()
     {
         // Obtener el usuario logueado
         $user = Auth::user();
@@ -36,7 +36,22 @@ class HomeController extends Controller
             } elseif ($role->role == 'estudiante') {
                 return view('home');
             } elseif ($role->role == 'god' || $role->role == 'administrador') {
-                return redirect('/admin');
+                return redirect('/admin/home');
+            }
+        } else {
+            // Lanzar page not found
+            abort(404);
+        }
+    }
+    
+    public function homeAdmin()
+    {
+        // Obtener el usuario logueado
+        $user = Auth::user();
+        if ($user->role) {
+            $role = $user->role;
+            if ($role->role == 'god' || $role->role == 'administrador') {
+                return view('admin.home');
             }
         } else {
             // Lanzar page not found

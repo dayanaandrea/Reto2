@@ -46,9 +46,9 @@
                             @endif
 
                             <!--
-                                                            <x-detail :label="__('user.creation_date')" :value="$user->created_at->format('d/m/Y')" />
-                                                            <x-detail :label="__('user.update_date')" :value="$user->updated_at->format('d/m/Y')" />
-                                                        -->
+                                                                <x-detail :label="__('user.creation_date')" :value="$user->created_at->format('d/m/Y')" />
+                                                                <x-detail :label="__('user.update_date')" :value="$user->updated_at->format('d/m/Y')" />
+                                                            -->
                         @endif
 
                         <!--
@@ -66,23 +66,25 @@
                         </div>
                         -->
 
-                        @if($user->role && ($user->role->role == 'profesor' || $user->role->role == 'estudiante'))
-                                                <p class="col-sm-3 fw-bold">Horario:</p>
-                                                <div class="col-sm-9">
-                                                    @php
-                                                        if ($user->role->role == 'profesor') {
-                                                            $schedules = $user->teacherSchedules;
-                                                        } else {
-                                                            $schedules = $user->studentSchedules;
-                                                        }
-                                                    @endphp
+                        @if(Auth::user()->role && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador'))
+                                            @if($user->role && ($user->role->role == 'profesor' || $user->role->role == 'estudiante'))
+                                                                <p class="col-sm-3 fw-bold">Horario:</p>
+                                                                <div class="col-sm-9">
+                                                                    @php
+                                                                        if ($user->role->role == 'profesor') {
+                                                                            $schedules = $user->teacherSchedules;
+                                                                        } else {
+                                                                            $schedules = $user->studentSchedules;
+                                                                        }
+                                                                    @endphp
 
-                                                    @if($schedules->isEmpty())
-                                                        <p>No tiene horarios asignados.</p>
-                                                    @else
-                                                        <x-tables.schedule :schedules="$schedules" />
-                                                    @endif
-                                                </div>
+                                                                    @if($schedules->isEmpty())
+                                                                        <p>No tiene horarios asignados.</p>
+                                                                    @else
+                                                                        <x-tables.schedule :schedules="$schedules" />
+                                                                    @endif
+                                                                </div>
+                                            @endif
                         @endif
 
                         <div>
