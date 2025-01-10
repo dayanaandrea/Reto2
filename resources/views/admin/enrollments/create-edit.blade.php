@@ -59,7 +59,7 @@
                             <div class="row mb-3">
                                 <label for="module_id" class="col-md-4 col-form-label text-md-end">{{__('enrollment.module')}}</label>
                                 <div class="col-md-7">
-                                <select name="module_id[]" id="module" class="form-select">
+                                <select name="module_id[]" id="module" class="form-select" multiple size="20">
                                         @foreach ($modules as $module)
                                             <option value="{{ $module->id }}" 
                                                 {{ $module->id == old('module_id', isset($enrollment) ? $enrollment->module_id : '') ? 'selected' : '' }}>

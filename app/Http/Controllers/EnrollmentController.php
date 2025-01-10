@@ -57,12 +57,17 @@ class EnrollmentController extends Controller
         $enrollment->user_id = $validatedData['user_id'];
         $enrollment->module_id = $validatedData['module_id'];
         $enrollment->date = $validatedData['date'];
-
+        
         //dd($enrollment->user_id,$enrollment->module_id,$enrollment->cycle_id,$enrollment->date,$enrollment->course);  // Esto debería mostrarte el ID del usuario asignado
+
+        //dd para comprobar la multiple selección de módulos
+        dd($enrollment->module_id,$enrollment->user_id,$enrollment->date);
+
+
+        //foreach($validatedData[$module_id] as )
 
         // Guardar la nueva matrícula
         $enrollment->save();
-
         return redirect()->route('admin.enrollments.show')->with('success', 'Matricula  <b>' . $enrollment->enrollment . '</b> creado correctamente.');
     }
 
