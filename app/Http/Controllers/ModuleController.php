@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cycle;
 use App\Models\Module;
+use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
@@ -24,7 +26,12 @@ class ModuleController extends Controller
     {
         // Datos que queremos pasar a la vista
         $cycles = Cycle::orderBy('code')->get();
-        return view('admin.modules.create-edit', ['type' => 'POST', 'cycles' => $cycles]);
+
+        // Esto es para poder cargar los datos de el usuario que tenga el rol 'profesor'
+        $profesorRole = Role::where('role', 'profesor')->first();
+        $users = User::where('role_id', $profesorRole->id)->orderBy('name')->get();
+
+        return view('admin.modules.create-edit', ['type' => 'POST', 'cycles' => $cycles, 'users' => $users]);
     }
 
     /**
@@ -42,6 +49,7 @@ class ModuleController extends Controller
         $module->hours = $request->hours;
         $module->course = $request->course;
         $module->cycle_id = $request->cycle_id;
+        $module->user_id = $request->user_id;
         // Guardar el nuevo modulo
         $module->save();
 
@@ -62,7 +70,11 @@ class ModuleController extends Controller
     public function edit(Module $module)
     {
         $cycles = Cycle::orderBy('code')->get();
-        return view('admin.modules.create-edit', ['module' => $module, 'type' => 'PUT', 'cycles' => $cycles]);
+         // Esto es para poder cargar los datos de el usuario que tenga el rol 'profesor'
+         $profesorRole = Role::where('role', 'profesor')->first();
+         $users = User::where('role_id', $profesorRole->id)->orderBy('name')->get();
+
+        return view('admin.modules.create-edit', ['module' => $module, 'type' => 'PUT', 'cycles' => $cycles, 'users' => $users]);
     }
 
     /**
@@ -78,6 +90,7 @@ class ModuleController extends Controller
         $module->hours = $request->hours;
         $module->course = $request->course;
         $module->cycle_id = $request->cycle_id;
+        $module->user_id = $request->user_id;
 
         // Guardar el nuevo modulo
         $module->save();
@@ -90,7 +103,6 @@ class ModuleController extends Controller
      */
     public function destroy(Module $module)
     {
-
         $module->delete();
         return redirect()->route('admin.modules.index')->with('success', 'Modulo  <b>' . $module->name . '</b> eliminado correctamente.');
     }

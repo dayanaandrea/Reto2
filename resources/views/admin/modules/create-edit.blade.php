@@ -57,7 +57,7 @@ $title = "Creación de Modulo";
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div class=" row mb-3">
                                 <label for="name" class="col-md-4 col-form-label text-md-end">Nombre</label>
 
@@ -100,11 +100,33 @@ $title = "Creación de Modulo";
                             </div>
 
                             <div class="row mb-3">
-                            <label for="cycle_id" class="col-md-4 col-form-label text-md-end">Ciclo</label>
+                                <label for="cycle_id" class="col-md-4 col-form-label text-md-end">Ciclo</label>
                                 <div class="col-md-6">
                                     <select name="cycle_id" id="cycle_id" class="form-select">
+                                        <option value="" selected disabled> -- Selecciona un ciclo -- </option>
                                         @foreach ($cycles as $cycle)
-                                        <option value="{{$cycle->id}}">{{ucfirst($cycle->code)}}</option>
+                                        <!-- Esto verifica si la variable $module está definida y contiene un valor.
+                                        Si estamos creando un nuevo módulo, no existe $module por lo que sería false 
+                                        y te enseñaria la primera opción --->
+                                        <option value="{{ $cycle->id }}"
+                                            @if(isset($module) && $module->cycle_id == $cycle->id) selected @endif>
+                                            {{ ucfirst($cycle->code) }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>  
+
+                            <div class="row mb-3">
+                                <label for="user_id" class="col-md-4 col-form-label text-md-end">Profesor</label>
+                                <div class="col-md-6">
+                                    <select name="user_id" id="user_id" class="form-select">
+                                        <option value="" selected> -- Selecciona un profesor -- </option>
+                                        @foreach ($users as $user)
+                                        <option value="{{ $user->id }}"
+                                            @if(isset($module) && $module->user_id == $user->id) selected @endif>
+                                            {{ ucfirst($user->name) }} {{ ucfirst($user->lastname) }}
+                                        </option>
                                         @endforeach
                                     </select>
                                 </div>
