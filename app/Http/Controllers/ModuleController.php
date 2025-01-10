@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cycle;
 use App\Models\Module;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class ModuleController extends Controller
     public function index()
     {
         $modules = Module::orderBy('course', 'asc')->paginate(10);
-        return view('admin.module.index',['modules' => $modules]);
+        return view('admin.modules.index', ['modules' => $modules]);
     }
 
     /**
@@ -21,8 +22,9 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        $modules = Module::orderBy('code')->get();
-        return view('admin.module.create-edit', ['modules'=>$modules]);
+        // Datos que queremos pasar a la vista
+        $cycles = Cycle::orderBy('code')->get();
+        return view('admin.modules.create-edit', ['type' => 'POST', 'cycles' => $cycles]);
     }
 
     /**
@@ -30,19 +32,20 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-        // Crear el usuario
-        $modules = new Module();
-        $modules->code = $request->code;
-        $modules->name = $request->name;
-        $modules->hours = $request->hours;
-        $modules->course = $request->course;
-        $modules->cycle_id = $request->cycle_id;
+        // Validar los datos
+        $this->validateModule($request);
 
-        // Guardar el nuevo usuario
-        $modules->save();
+        // Crear el modulo
+        $module = new Module();
+        $module->code = strtoupper($request->code);
+        $module->name = $request->name;
+        $module->hours = $request->hours;
+        $module->course = $request->course;
+        $module->cycle_id = $request->cycle_id;
+        // Guardar el nuevo modulo
+        $module->save();
 
-        return redirect()->route('admin.modules.index')->with('success', 'Modulo  ' . $modules->name . ' creado correctamente.');
-    
+        return redirect()->route('admin.modules.index')->with('success', 'Modulo  ' . $module->name . ' creado correctamente.');
     }
 
     /**
@@ -50,7 +53,7 @@ class ModuleController extends Controller
      */
     public function show(Module $module)
     {
-        return view('admin.module.show',['module'=>$module]);
+        return view('admin.modules.show', ['module' => $module]);
     }
 
     /**
@@ -58,7 +61,8 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
-        return view('admin.module.create-edit', ['module'=>$module]);
+        $cycles = Cycle::orderBy('code')->get();
+        return view('admin.modules.create-edit', ['module' => $module, 'type' => 'PUT', 'cycles' => $cycles]);
     }
 
     /**
@@ -66,7 +70,19 @@ class ModuleController extends Controller
      */
     public function update(Request $request, Module $module)
     {
-        //
+        // Validar los datos
+        $this->validateModule($request);
+
+        $module->code = strtoupper($request->code);
+        $module->name = $request->name;
+        $module->hours = $request->hours;
+        $module->course = $request->course;
+        $module->cycle_id = $request->cycle_id;
+
+        // Guardar el nuevo modulo
+        $module->save();
+
+        return redirect()->route('admin.modules.index', $module)->with('success', 'Modulo <b>' . $module->name . '</b> actualizado correctamente.');
     }
 
     /**
@@ -74,8 +90,31 @@ class ModuleController extends Controller
      */
     public function destroy(Module $module)
     {
-        $name = $module->name; 
-        $module->delete(); 
-        return view('admin.module.success', ['name'=>$name]);     
+
+        $module->delete();
+        return redirect()->route('admin.modules.index')->with('success', 'Modulo  <b>' . $module->name . '</b> eliminado correctamente.');
+    }
+    /**
+     * Validates module's data.
+     */
+    private function validateModule(Request $request)
+    {
+        $request->validate([
+            // hours debe ser numerico, int
+            'code' => 'required|min:3|max:5',
+            'name' => 'required|string|min:10|max:255',
+            'hours' => 'required',
+            'course' => 'required|in:1,2', // Solo permite que sea 1 o 2
+            'cycle_id' => 'required',
+        ], [
+            'code.min' => 'El código debe tener al menos 3 caracteres.',
+            'code.max' => 'El código no puede tener más de 5 caracteres.',
+            'name.min' => 'El nombre debe tener al menos 10 caracteres.',
+            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'hours.required' => 'El campo de horas es obligatorio.',
+            'course.in' => 'El curso solo puede ser 1 o 2.',
+            'cycle_id.required' => 'Debe seleccionar un ciclo.',
+
+        ]);
     }
 }

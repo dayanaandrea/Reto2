@@ -1,21 +1,20 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Tables;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\Schedule;
 
-class Alert extends Component
+class ScheduleTable extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $key,
-        public string $class
-    )
-    {
+        public Schedule $schedules,
+    ) {
         //
     }
 
@@ -24,6 +23,6 @@ class Alert extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.alert');
+        return view('components.tables.schedule');
     }
 }

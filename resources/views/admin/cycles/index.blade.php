@@ -2,19 +2,15 @@
 
 @section('content')
 <div class="container">
-    <!--<x-alert :key="'success'";class="success"/>-->
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {!! session('success') !!}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
+    <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
+    <x-alert :key="'success'" :class="'success'" />
+
     <h2>Crear un nuevo ciclo</h2>
     <div>
         <p>Accede a la creación de ciclo:</p>
         <p><a href="{{ route('admin.cycles.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
-        data-bs-placement="top" title="Crear un nuevo ciclo"><i class="fa-solid fa-plus"></i></a></p>
-    
+                data-bs-placement="top" title="Crear un nuevo ciclo"><i class="fa-solid fa-plus"></i></a></p>
+
     </div>
     <h2>Ciclos</h2>
     <table class="table table-hover table-striped">
@@ -49,7 +45,7 @@
                     $tooltip = 'Editar datos del ciclo';
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
-                    
+
                     <!-- Para generar un modal diferente siempre, se debe incluir el id -->
                     @php
                     $id_modal = '#modal_delete' . $cycle->id;

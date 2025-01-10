@@ -3,27 +3,36 @@
 use App\Http\Middleware\CheckAdminRole;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CycleController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EnrollmentController;
-use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ScheduleController;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\MeetingController;
-
 use Illuminate\Support\Facades\Auth;
 
 Route::permanentRedirect('/', '/home');
+Route::permanentRedirect('/admin', '/admin/home');
 
 Auth::routes();
 
 // Rutas protegidas por autenticación (middleware 'auth')
 Route::middleware('auth')->group(function () {
 
+  // Ruta para cambiar el idioma
+  Route::get('/set-locale/{locale}', function (string $locale) {
+    if (! in_array($locale, ['en', 'es', 'eus'])) {
+      abort(400);
+    }
+
+    App::setLocale($locale);
+    return redirect()->back();
+  })->name('set-locale');
+
   // Ruta para el home, solo accesible para usuarios autenticados
-  Route::get('home', [HomeController::class, 'index'])->name('home');
+  Route::get('home', [HomeController::class, 'home'])->name('home');
 
   // Ruta para cambiar la contraseña de un usuario
   Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
@@ -36,7 +45,7 @@ Route::middleware('auth')->group(function () {
   // Rutas del administrador
   Route::prefix('admin')->name('admin.')->middleware(CheckAdminRole::class)->group(function () {
     // Ruta principal del panel de administración
-    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('/home', [HomeController::class, 'homeAdmin'])->name('admin.home');
 
     // Rutas de users
     Route::resource('users', UserController::class);
@@ -56,18 +65,11 @@ Route::middleware('auth')->group(function () {
 
     // Rutas de matriculas
     Route::resource('enrollments', EnrollmentController::class);
-   
-    // Rutas de asignaciones
-    Route::resource('assignments', AssignmentController::class);
 
     // Rutas de horarios
     Route::resource('schedules', ScheduleController::class);
 
      // Rutas de reuniones
      Route::resource('meetings', MeetingController::class);
-
-
   });
-
 });
-
