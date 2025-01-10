@@ -18,9 +18,11 @@ return new class extends Migration
         $table->integer('hours');
         $table->tinyInteger('course');
         $table->unsignedBigInteger('cycle_id');
+        $table->unsignedBigInteger('user_id')->nullable();
         $table->timestamps();
 
         $table->foreign('cycle_id')->references('id')->on('cycles')->onUpdate('cascade')->onDelete('cascade');
+        $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
     });
 }
 

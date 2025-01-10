@@ -17,10 +17,10 @@
                 <p class="col-sm-3 fw-bold">Hora:</p>
                 <p class="col-sm-9">{{ $schedule-> hour }}</p>
  
-                <p class="col-sm-3 fw-bold">Nombre del profesor al que pertenece :</p>
-                <p class="col-sm-9">{{ $schedule->user->name }}</p>
+                <p class="col-sm-3 fw-bold">Profesor :</p>
+                <p class="col-sm-9">{{ $schedule->module->user->name }} {{ $schedule->module->user->lastname }}</p>
 
-                <p class="col-sm-3 fw-bold">Nombre del modulo al que pertenece :</p>
+                <p class="col-sm-3 fw-bold">Módulo pertenece :</p>
                 <p class="col-sm-9">{{ $schedule->module->code }} {{ $schedule->module->name }}</p>
 
             </div>
