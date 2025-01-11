@@ -11,6 +11,7 @@ use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 
 Route::permanentRedirect('/', '/home');
@@ -28,12 +29,13 @@ Route::middleware('auth')->group(function () {
   Route::get('home', [HomeController::class, 'home'])->name('home');
 
   // Ruta para cambiar la contraseña de un usuario
-  Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
+  Route::get('profile', [ProfileController::class, 'show'])->name('profile');
 
   // Ruta para cambiar la contraseña de un usuario
-  Route::get('users/{user}/change-pass', [UserController::class, 'changePass'])->name('users.change-pass');
+  Route::get('change-pass', [ProfileController::class, 'changePass'])->name('change-pass');
   // Ruta para guardar la nueva contraseña de un usuario
-  Route::put('users/{user}/store-pass', [UserController::class, 'storePass'])->name('users.store-pass');
+  Route::put('store-pass', [ProfileController::class, 'storePass'])->name('store-pass');
+  Route::put('store-image', [ProfileController::class, 'storeImage'])->name('store-image');
 
   // Rutas del administrador
   Route::prefix('admin')->name('admin.')->middleware(CheckAdminRole::class)->group(function () {
@@ -45,7 +47,8 @@ Route::middleware('auth')->group(function () {
     // Ruta para resetear la contraseña de un usuario
     Route::put('users/{user}/reset', [UserController::class, 'reset'])->name('users.reset');
     // Ruta para cambiar la contraseña de un usuario
-    Route::put('users/{user}/changePass', [UserController::class, 'changePass'])->name('users.changePass');
+    Route::put('users/{user}/store-pass', [UserController::class, 'storePass'])->name('users.store-pass');
+    Route::get('users/{user}/change-pass', [UserController::class, 'changePass'])->name('users.change-pass');
 
     // Rutas de roles
     Route::resource('roles', RoleController::class);

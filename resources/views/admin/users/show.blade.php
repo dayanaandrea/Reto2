@@ -4,6 +4,7 @@
 <div class="container">
     <x-alert :key="'success'" :class="'success'" />
     <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
 
     <h2 class="mb-4">{{ __('user.title_show') }}</h2>
     <!-- Tarjeta para mostrar detalles del usuario -->
@@ -16,7 +17,9 @@
             <div class="d-flex align-items-center">
                 <!-- Contenedor de imagen -->
                 <div class="col-2 d-flex justify-content-center mx-5">
-                    <img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle">
+                    <!-- Contenedor de imagen con fondo -->
+                    <div class="rounded-image-container" style="background-image: url('{{ obtenerFoto($user) }}');">
+                    </div>
                 </div>
                 <!-- Contenedor de texto -->
                 <div class="col-6">
@@ -46,9 +49,9 @@
                             @endif
 
                             <!--
-                                                                <x-detail :label="__('user.creation_date')" :value="$user->created_at->format('d/m/Y')" />
-                                                                <x-detail :label="__('user.update_date')" :value="$user->updated_at->format('d/m/Y')" />
-                                                            -->
+                                                                        <x-detail :label="__('user.creation_date')" :value="$user->created_at->format('d/m/Y')" />
+                                                                        <x-detail :label="__('user.update_date')" :value="$user->updated_at->format('d/m/Y')" />
+                                                                    -->
                         @endif
 
                         @if(Auth::user()->role && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador'))
@@ -93,7 +96,7 @@
                             <!-- El botón de cambiar contraseña solo aparece si es el usuario logueado -->
                             @if(Auth::user()->id === $user->id)
                                                         @php
-                                                            $route = route('users.change-pass', $user);
+                                                            $route = route('admin.users.change-pass', $user);
                                                             $type = "show";
                                                             $text = '<i class="fa-solid fa-lock"></i>';
                                                             $tooltip = 'Cambiar contraseña';

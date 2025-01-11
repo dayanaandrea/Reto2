@@ -19,37 +19,38 @@
                     </li>
                 @endif
             @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false" v-pre>
-                                <img src="{{ obtenerFoto(Auth::user()) }}" alt="usuario" class="img-fluid rounded-circle mx-2"
-                                    style="max-width: 30px; max-height: 30px;">
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                @php
-                                    if (Auth::user() && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador')) {
-                                        $perfil_ruta = route('admin.users.show', Auth::user());
-                                    } else {
-                                        $perfil_ruta = route('users.show', Auth::user());
-                                    }
-                                @endphp
-                                <a class="dropdown-item" href="{{$perfil_ruta}}">
-                                    Perfil
-                                </a>
-
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                                                                                                                                                                                                                                         document.getElementById('logout-form').submit();">
-                                    {{ __('nav.logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="d-flex align-items-center nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" v-pre>
+                        <div class="d-flex align-items-center">
+                            <!-- Contenedor de la imagen de perfil -->
+                            <div style="width:30px;" class="me-2">
+                                <div class="rounded-image-container"
+                                    style="background-image: url('{{ obtenerFoto(Auth::user()) }}');">
+                                </div>
                             </div>
-                        </li>
+                            <!-- Nombre del usuario -->
+                            <span>{{ Auth::user()->name }}</span>
+                        </div>
+                    </a>
+
+
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{route('profile')}}">
+                            Perfil
+                        </a>
+
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                                                                                                                                                                                                                                                                                 document.getElementById('logout-form').submit();">
+                            {{ __('nav.logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
             @endguest
         </ul>
     </div>

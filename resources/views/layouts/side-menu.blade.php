@@ -25,22 +25,22 @@
     <div class="dropdown dropup">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
             data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-            <img src="{{ obtenerFoto(Auth::user()) }}" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>{{ Auth::user()->name }}</strong>
+            <div class="d-flex align-items-center">
+                <!-- Contenedor de la imagen de perfil -->
+                <div style="width:30px;" class="me-2">
+                    <div class="rounded-image-container" style="background-image: url('{{ obtenerFoto(Auth::user()) }}');">
+                    </div>
+                </div>
+                <!-- Nombre del usuario -->
+                <span>{{ Auth::user()->name }}</span>
+            </div>
         </a>
         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
             <li class="dropdown dropend">
                 @include('layouts.lang-selector-admin')
             </li>
             <li>
-                @php
-                    if (Auth::user() && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador')) {
-                        $perfil_ruta = route('admin.users.show', Auth::user());
-                    } else {
-                        $perfil_ruta = route('users.show', Auth::user());
-                    }
-                @endphp
-                <a class="dropdown-item" href="{{$perfil_ruta}}">
+                <a class="dropdown-item" href="{{route('admin.users.show', Auth::user())}}">
                     Perfil
                 </a>
             </li>

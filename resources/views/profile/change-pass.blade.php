@@ -1,4 +1,4 @@
-@extends('layouts.app-admin')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="card-header">Cambio de Contraseña</div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.users.store-pass', $user) }}" method="POST">
+                    <form action="{{ route('store-pass') }}" method="POST">
                         @csrf
                         @method('PUT')
 
