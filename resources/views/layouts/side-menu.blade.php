@@ -22,13 +22,16 @@
             :icon="'fa-solid fa-handshake-simple'" />
     </ul>
     <hr>
-    <div class="dropdown">
+    <div class="dropdown dropup">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1"
-            data-bs-toggle="dropdown" aria-expanded="false">
+            data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
             <img src="{{ obtenerFoto(Auth::user()) }}" alt="" width="32" height="32" class="rounded-circle me-2">
             <strong>{{ Auth::user()->name }}</strong>
         </a>
         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
+            <li class="dropdown dropend">
+                @include('layouts.lang-selector-admin')
+            </li>
             <li>
                 @php
                     if (Auth::user() && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador')) {
@@ -42,11 +45,9 @@
                 </a>
             </li>
             <hr class="dropdown-divider">
-            </li>
             <li>
-                <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
                     {{ __('nav.logout') }}
                 </a>
 
