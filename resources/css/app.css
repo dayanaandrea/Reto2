@@ -1,5 +1,6 @@
 :root {
     --pantone-dark: #211261;
+    --pantone-darkest: #150c3e;
     --pantone-medium: #3cb4e5;
     --pantone-light: #7ac5f4;
     --pantone-lightest: #ebf7ff;
@@ -151,11 +152,15 @@ a.btn-warning:hover {
 }
 
 #sideMenu .nav-link i {
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
-    width: 18px;
-    height: 18px;
-    line-height: 18px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+}
+
+#sideMenu .nav-link:hover {
+    background-color: #150c3e;
 }
 
 #sideMenu .dropdown-menu .dropdown-item {
