@@ -9,27 +9,20 @@ use App\Http\Controllers\CycleController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\ScheduleController;
-use Illuminate\Support\Facades\App;
 use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Auth;
 
 Route::permanentRedirect('/', '/home');
 Route::permanentRedirect('/admin', '/admin/home');
 
+// Cambio de idioma
+Route::get('lang/{locale}', [LocaleController::class, 'setLocale'])->name('lang');
+
 Auth::routes();
 
 // Rutas protegidas por autenticación (middleware 'auth')
 Route::middleware('auth')->group(function () {
-
-  // Ruta para cambiar el idioma
-  Route::get('/set-locale/{locale}', function (string $locale) {
-    if (! in_array($locale, ['en', 'es', 'eus'])) {
-      abort(400);
-    }
-
-    App::setLocale($locale);
-    return redirect()->back();
-  })->name('set-locale');
 
   // Ruta para el home, solo accesible para usuarios autenticados
   Route::get('home', [HomeController::class, 'home'])->name('home');
@@ -69,7 +62,7 @@ Route::middleware('auth')->group(function () {
     // Rutas de horarios
     Route::resource('schedules', ScheduleController::class);
 
-     // Rutas de reuniones
-     Route::resource('meetings', MeetingController::class);
+    // Rutas de reuniones
+    Route::resource('meetings', MeetingController::class);
   });
 });

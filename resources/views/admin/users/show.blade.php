@@ -51,21 +51,6 @@
                                                             -->
                         @endif
 
-                        <!--
-                        <div>
-                            <p>Cambiar idioma</p>
-                            <a href="{{ route('set-locale', 'en') }}">
-                                EN
-                            </a>
-                            <a href="{{ route('set-locale', 'es') }}">
-                                ES
-                            </a>
-                            <a href="{{ route('set-locale', 'eus') }}">
-                                EUS
-                            </a>
-                        </div>
-                        -->
-
                         @if(Auth::user()->role && (Auth::user()->role->role == 'god' || Auth::user()->role->role == 'administrador'))
                                             @if($user->role && ($user->role->role == 'profesor' || $user->role->role == 'estudiante'))
                                                                 <p class="col-sm-3 fw-bold">Horario:</p>
