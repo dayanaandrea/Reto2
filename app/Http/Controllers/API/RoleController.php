@@ -66,8 +66,9 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        $name = $role->role;
         $role->delete();
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+        return response()->json(['message' => 'Role ' . $name . ' has been deleted.'], Response::HTTP_OK);
     }
 }
 

@@ -19,7 +19,7 @@ class CheckAdminRoleAPI
         $user = Auth::user();
 
         if (!$user->role || ($user->role->role != 'administrador' && $user->role->role != 'god')) {
-            response()->json(['message' => 'No tienes permisos suficientes'], 403);
+            return response()->json(['message' => 'You are not authorized.'], Response::HTTP_UNAUTHORIZED);
         }
         return $next($request);
     }
