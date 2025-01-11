@@ -4,6 +4,7 @@
 <div class="container">
     <x-alert :key="'success'" :class="'success'" />
     <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
 
     <h2 class="mb-4">{{ __('user.title_show') }}</h2>
     <!-- Tarjeta para mostrar detalles del usuario -->
@@ -93,7 +94,7 @@
                             <!-- El botón de cambiar contraseña solo aparece si es el usuario logueado -->
                             @if(Auth::user()->id === $user->id)
                                                         @php
-                                                            $route = route('users.change-pass', $user);
+                                                            $route = route('admin.users.change-pass', $user);
                                                             $type = "show";
                                                             $text = '<i class="fa-solid fa-lock"></i>';
                                                             $tooltip = 'Cambiar contraseña';
