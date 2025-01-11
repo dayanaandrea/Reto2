@@ -8,54 +8,18 @@
     </div>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
-            <a href="{{ url('/home') }}"
-                class="fs-5 mb-2 nav-link text-white {{ Request::is('*home') ? 'active' : ''}}">
-                <i class="fa-solid fa-house me-2"></i>Home
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.users.index') }}"
-                class="fs-5 mb-2 nav-link text-white {{ Request::is('*users*') ? 'active' : ''}}">
-                <i class="fa-solid fa-user me-2"></i>Usuarios
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.roles.index') }}"
-                class="fs-5 mb-2 nav-link text-white {{ Request::is('*roles*') ? 'active' : ''}}">
-                <i class="fa-solid fa-user-gear me-2"></i>Roles
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.cycles.index') }}"
-                class="fs-5 mb-2 nav-link text-white {{ Request::is('*cycles*') ? 'active' : ''}}">
-                <i class="fa-solid fa-school me-2"></i>Ciclos
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.modules.index') }}"
-                class="fs-5 mb-2 nav-link text-white {{ Request::is('*modules*') ? 'active' : ''}}">
-                <i class="fa-solid fa-book me-2"></i>Módulos
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.enrollments.index') }}"
-                class="fs-5 mb-2 nav-link text-white {{ Request::is('*enrollments*') ? 'active' : ''}}">
-                <i class="fa-solid fa-graduation-cap me-2"></i>Matrículas
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.schedules.index') }}"
-                class="fs-5 mb-2 nav-link text-white {{ Request::is('*schedules*') ? 'active' : ''}}">
-                <i class="fa-solid fa-clock me-2"></i>Horarios
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('admin.meetings.index') }}"
-                class="fs-5 nav-link text-white {{ Request::is('*meetings*') ? 'active' : ''}}">
-                <i class="fa-solid fa-handshake-simple me-2"></i>Reuniones
-            </a>
-        </li>
+        <x-side-menu-link :route="route('admin.home')" :pattern="'*home*'" :text="'Home'" :icon="'fa-solid fa-house'" />
+        <x-side-menu-link :route="route('admin.users.index')" :pattern="'*users*'" :text="'Usuarios'" :icon="'fa-solid fa-user'" />
+        <x-side-menu-link :route="route('admin.roles.index')" :pattern="'*roles*'" :text="'Roles'" :icon="'fa-solid fa-user-gear'" />
+        <x-side-menu-link :route="route('admin.cycles.index')" :pattern="'*cycles*'" :text="'Ciclos'" :icon="'fa-solid fa-school'" />
+        <x-side-menu-link :route="route('admin.modules.index')" :pattern="'*modules*'" :text="'Módulos'"
+            :icon="'fa-solid fa-book'" />
+        <x-side-menu-link :route="route('admin.enrollments.index')" :pattern="'*enrollments*'" :text="'Matrículas'"
+            :icon="'fa-solid fa-graduation-cap'" />
+        <x-side-menu-link :route="route('admin.schedules.index')" :pattern="'*schedules*'" :text="'Horarios'"
+            :icon="'fa-solid fa-clock'" />
+        <x-side-menu-link :route="route('admin.meetings.index')" :pattern="'*meetings*'" :text="'Reuniones'"
+            :icon="'fa-solid fa-handshake-simple'" />
     </ul>
     <hr>
     <div class="dropdown">
@@ -81,8 +45,7 @@
             </li>
             <li>
                 <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                                                                                                                                                                                                                                                             document.getElementById('logout-form').submit();">
+                    onclick="event.preventDefault();                                                                                                                                                                                                                                                            document.getElementById('logout-form').submit();">
                     {{ __('nav.logout') }}
                 </a>
             </li>

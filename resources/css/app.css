@@ -152,5 +152,8 @@ a.btn-warning:hover {
 
 #sideMenu .nav-link i {
     font-size: 18px;
-    text-align: center; 
+    text-align: center;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
 }
