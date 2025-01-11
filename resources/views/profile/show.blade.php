@@ -17,8 +17,10 @@
             <div class="d-flex align-items-center">
                 <!-- Contenedor de imagen -->
                 <div class="col-2 d-flex justify-content-center mx-5">
-                    <img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle"
-                        data-bs-toggle="modal" data-bs-target="#changeImageModal" id="profile_img">
+                    <!-- Contenedor de imagen con fondo -->
+                    <div class="rounded-image-container" style="background-image: url('{{ obtenerFoto($user) }}');"
+                        data-bs-toggle="modal" data-bs-target="#changeImageModal">
+                    </div>
                 </div>
                 <!-- Contenedor de texto -->
                 <div class="col-6">

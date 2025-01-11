@@ -41,8 +41,13 @@
                                     }
                                 @endphp
                                 <tr>
-                                    <td><img src="{{obtenerFoto($user)}}" alt="profile_img" class="img-fluid rounded-circle"
-                                            style="max-width: 30px; max-height: 30px;"></td>
+                                    <td>
+                                        <div style="width:30px;">
+                                            <div class="rounded-image-container"
+                                                style="background-image: url('{{ obtenerFoto($user) }}');">
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>{{$user->name}} {{$user->lastname}}</td>
                                     <td>{{$user->email}}</td>
                                     @if ($user->role)

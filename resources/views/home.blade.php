@@ -88,8 +88,13 @@
                 <tbody>
                     @foreach ($teachers as $teacher)
                         <tr>
-                            <td><img src="{{obtenerFoto($teacher)}}" alt="profile_img" class="img-fluid rounded-circle"
-                                    style="max-width: 30px; max-height: 30px;"></td>
+                            <td>
+                                <div style="width:30px;">
+                                    <div class="rounded-image-container"
+                                        style="background-image: url('{{ obtenerFoto($teacher) }}');">
+                                    </div>
+                                </div>
+                            </td>
                             <td>{{$teacher->lastname}}</td>
                             <td>{{$teacher->name}}</td>
                             <td>{{$teacher->email}}</td>
