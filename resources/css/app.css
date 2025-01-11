@@ -158,6 +158,20 @@ a.btn-warning:hover {
     line-height: 18px;
 }
 
+#sideMenu .dropdown-menu .dropdown-item {
+    background-color: #3cb4e5;
+}
+
+#sideMenu .dropdown-menu .dropdown-item:hover {
+    background-color: #7ac5f4;
+}
+
+#sideMenu .dropdown-menu {
+    background-color: #3cb4e5;
+    color: black;
+}
+
+/* SCROLLBAR */
 ::-webkit-scrollbar {
     width: 16px;
 }
