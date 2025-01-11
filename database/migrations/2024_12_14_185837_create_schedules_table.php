@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('module_id');
             $table->tinyInteger('day');
-            $table->time('hour');
+            $table->tinyInteger('hour');
             $table->timestamps();
 
             $table->foreign('module_id')->references('id')->on('modules')->onUpdate('cascade')->onDelete('cascade');

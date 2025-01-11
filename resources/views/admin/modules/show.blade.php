@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.app-admin')
 @section('content')
 <div class="container">
     <h2 class="mb-4">Detalles del modulo</h2>

@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
   // Rutas del administrador
   Route::prefix('admin')->name('admin.')->middleware(CheckAdminRole::class)->group(function () {
     // Ruta principal del panel de administración
-    Route::get('/home', [HomeController::class, 'homeAdmin'])->name('admin.home');
+    Route::get('/home', [HomeController::class, 'homeAdmin'])->name('home');
 
     // Rutas de users
     Route::resource('users', UserController::class);
