@@ -6,7 +6,7 @@
     <x-alert :key="'success'" :class="'success'" />
     <x-alert :key="'permission'" :class="'danger'" />
 
-    <div class="mb-2">
+    <div class="mb-2 text-end">
         @php
             $route = route('admin.users.create');
             $type = "show";
