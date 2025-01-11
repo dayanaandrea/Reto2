@@ -138,11 +138,11 @@ a.btn-warning:hover {
 }
 
 #sideMenu a.nav-link.active {
-    background-color: #3cb4e5;
+    background-color: var(--pantone-medium);
 }
 
 #sideMenu {
-    background-color: #211261;
+    background-color: var(--pantone-dark);
 }
 
 #logo_div {
@@ -160,20 +160,20 @@ a.btn-warning:hover {
 }
 
 #sideMenu .nav-link:hover {
-    background-color: #150c3e;
+    background-color: var(--pantone-darkest);
 }
 
 #sideMenu .dropdown-menu .dropdown-item {
-    background-color: #3cb4e5;
+    background-color: var(--pantone-darkest);
+    color: white;
 }
 
 #sideMenu .dropdown-menu .dropdown-item:hover {
-    background-color: #7ac5f4;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 #sideMenu .dropdown-menu {
-    background-color: #3cb4e5;
-    color: black;
+    background-color: var(--pantone-darkest);
 }
 
 /* SCROLLBAR */
@@ -191,5 +191,5 @@ a.btn-warning:hover {
     border-radius: 8px;
     border: 3px solid transparent;
     background-clip: content-box;
-    background-color: #211261;
+    background-color: var(--pantone-dark);
 }
