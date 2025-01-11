@@ -1,7 +1,7 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white" style="width: 280px; height: 100vh;" id="sideMenu">
     <div id="logo_div">
         <a class="navbar-brand" href="{{ url('/home') }}">
-            <img src="{{Storage::url('public/images/vectorpaint.svg')}}" alt="logo" class="img-fluid w-100 px-4">
+            <img src="{{Storage::url('public/images/logo-elorrieta-white.svg')}}" alt="logo" class="img-fluid w-100 px-4">
         </a>
     </div>
     <hr>
