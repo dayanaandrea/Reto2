@@ -2,23 +2,27 @@
 
 @section('content')
 <div class="container">
-    <h2>Crear nueva matrícula</h2>
+    <h2>{{__('enrollment.title_show_1')}}</h2>
+
+    <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
+    <x-alert :key="'success'" :class="'success'" />
+
     <div>
-        <p>Accede a la creación de una matrícula:</p>
+        <p>{{__('enrollment.title_show_2')}}</p>
         <p><a href="{{ route('admin.enrollments.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
                 data-bs-placement="top" title="Crear matricula"><i class="fa-solid fa-plus"></i></a></p>
     </div>
-    <h2>Matriculas</h2>
+    <h2>{{__('enrollment.enrollments')}}</h2>
     <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark ">
                 <th scope="col"></th>
-                <th scope="col">Estudiante</th>
-                <th scope="col">Módulo</th>
-                <th scope="col">Ciclo</th>
-                <th scope="col">Curso</th>
-                <th scope="col">Fecha </th>
-                <th scope="col">Acciones</th>
+                <th scope="col">{{__('enrollment.student')}}</th>
+                <th scope="col">{{__('enrollment.module')}}</th>
+                <th scope="col">{{__('enrollment.cycle')}}</th>
+                <th scope="col">{{__('enrollment.course')}}</th>
+                <th scope="col">{{__('enrollment.date')}}</th>
+                <th scope="col">{{__('enrollment.actions')}}</th>
             </tr>
         </thead>
         <tbody>

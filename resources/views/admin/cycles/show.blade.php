@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    
     <h2 class="mb-4">Detalles del ciclo</h2>
 
     <!-- Tarjeta para mostrar detalles de los modulos -->
