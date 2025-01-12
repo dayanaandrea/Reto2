@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Role;
+use App\Models\Meeting;
+use App\Models\Cycle;
+use App\Models\Module;
 
 class HomeController extends Controller
 {
@@ -43,19 +47,46 @@ class HomeController extends Controller
             abort(404);
         }
     }
-    
+
     public function homeAdmin()
     {
         // Obtener el usuario logueado
         $user = Auth::user();
+
+        // Verificar si el usuario tiene un rol y si es admin o god
         if ($user->role) {
             $role = $user->role;
             if ($role->role == 'god' || $role->role == 'administrador') {
-                return view('admin.home');
+
+                //Verificar para ssaber si hay alumnos, y si no hay que me aparezca 0 
+                $alumnoRole = Role::where('role', 'estudiante')->first();
+                if ($alumnoRole) {
+                    $totalAlumnos = User::where('role_id', $alumnoRole->id)->count();
+                } else {
+                    $totalAlumnos = 0;
+                }
+
+
+                // Ciclos formativos
+                $totalCiclos = Cycle::count();
+
+                // Usuarios sin rol
+                $usuariosSinRol = User::whereNull('role_id')->count();
+
+                // Módulos
+                $totalModulos = Module::count();
+
+                // Pasar los datos a la vista
+                return view('admin.home', compact(
+                    'totalAlumnos',
+                    'totalCiclos',
+                    'usuariosSinRol',
+                    'totalModulos'
+                ));
             }
-        } else {
-            // Lanzar page not found
-            abort(404);
         }
+
+        // Si el usuario no tiene rol adecuado, lanzar error
+        abort(404);
     }
 }
