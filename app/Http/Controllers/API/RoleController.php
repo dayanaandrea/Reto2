@@ -12,10 +12,26 @@ class RoleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Role::orderBy('created_at')->get();
-        return response()->json(['roles' => $roles], Response::HTTP_OK);
+        // Obtener la paginación antes de realizar la consulta
+        $pagination = getPagination($request);
+
+        $roles = Role::orderBy('id')->paginate($pagination);
+
+        // Obtener los datos de la paginación
+        $paginationData = [
+            'per_page' => $pagination,
+            'page' => $roles->currentPage(),
+            'total_pages' => $roles->lastPage(),
+            'total_items' => $roles->total(),
+        ];
+
+        // Retornar resultados + datos de la paginación
+        return response()->json([
+            'pagination' => $paginationData,
+            'roles' => $roles->items(),
+        ], Response::HTTP_OK);
     }
 
     /**
