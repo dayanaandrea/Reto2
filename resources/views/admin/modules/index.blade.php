@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.app-admin')
 @section('content')
 <div class="container">
     <!-- Esto se usa para llamar a un componente que renderiza una alerta -->

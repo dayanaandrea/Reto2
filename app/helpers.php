@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 /**
  * Retorna un string que contiene el valor del atributo src de una etiqueta img de HTML.
@@ -40,4 +41,20 @@ function obtenerEstiloRol($role)
         return 'bg-light';
     }
 
+}
+
+function validateRole(Request $request)
+{
+    $request->validate([
+        'role' => 'required',
+        'description' => [
+            'required',
+            'min:10',
+            'max:255'
+        ],
+    ], [
+        // Mensajes de error personalizados según lo que falle
+        'description.min' => 'La descripción debe tener al menos 10 caracteres.',
+        'description.max' => 'La descripción no puede tener más de 255 caracteres.',
+    ]);
 }

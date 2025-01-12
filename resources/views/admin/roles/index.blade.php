@@ -1,13 +1,19 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
     <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
     <x-alert :key="'success'" :class="'success'" />
     <x-alert :key="'permission'" :class="'danger'" />
-    <h2>Crear un nuevo rol</h2>
-    <p><a href="{{ route('admin.roles.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
-            data-bs-placement="top" title="Crear un nuevo rol"><i class="fa-solid fa-plus"></i></a></p>
+    <div class="mb-2 text-end">
+        @php
+            $route = route('admin.roles.create');
+            $type = "show";
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $tooltip = 'Crear un nuevo rol';
+        @endphp
+        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
+    </div>
     @if ($roles->count() > 0)
         <h2>Roles</h2>
         <div>

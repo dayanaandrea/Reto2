@@ -53,13 +53,6 @@ class UserController extends Controller
         $user->role_id = $request->role_id;
         $user->password = Hash::make('1234');
 
-        // La imagen se guarda como binary en la base de datos
-        if ($request->hasFile('photo')) {
-            $image = $request->file('photo');
-            $imageData = file_get_contents($image->getRealPath());
-            $user->photo = $imageData;
-        }
-
         // Guardar el nuevo usuario
         $user->save();
 
@@ -108,17 +101,13 @@ class UserController extends Controller
         $user->phone2 = $request->has('phone2');
         $user->role_id = $request->role_id;
 
-        // La imagen se guarda como binary en la base de datos
-        if ($request->hasFile('photo')) {
-            $image = $request->file('photo');
-            $imageData = file_get_contents($image->getRealPath());
-            $user->photo = $imageData;
+        try {
+            // Guardar el nuevo usuario
+            $user->save();
+            return redirect()->route('admin.users.show', $user)->with('success', 'Usuario <b>' . $user->email . '</b> actualizado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.users.show', $user)->with('error', 'Error al actualizar el usuario <b>' . $user->email . '</b>X.');
         }
-
-        // Guardar el nuevo usuario
-        $user->save();
-
-        return redirect()->route('admin.users.show', $user)->with('success', 'Usuario <b>' . $user->email . '</b> actualizado correctamente.');
     }
 
     /**
@@ -164,11 +153,7 @@ class UserController extends Controller
         // Guardar el nuevo usuario
         $user->save();
 
-        if (Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')) {
-            return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
-        } else {
-            return redirect()->route('users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
-        }
+        return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
     }
 
     /**
@@ -230,7 +215,6 @@ class UserController extends Controller
             'phone1' => 'required|string|max:15',
             'phone2' => 'nullable|string|max:15',
             'role_id' => 'required|exists:roles,id',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ], [
             // Mensajes de error personalizados
             'name.required' => 'El nombre es obligatorio.',
@@ -251,9 +235,6 @@ class UserController extends Controller
             'phone2.max' => 'El número de teléfono secundario no puede tener más de 15 caracteres.',
             'role_id.required' => 'El rol es obligatorio.',
             'role_id.exists' => 'El rol seleccionado no existe.',
-            'photo.image' => 'La foto debe ser una imagen válida.',
-            'photo.mimes' => 'La foto debe tener uno de los siguientes formatos: jpg, jpeg, png.',
-            'photo.max' => 'La foto no puede exceder los 2MB.',
         ]);
     }
 }
