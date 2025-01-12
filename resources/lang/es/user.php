@@ -24,4 +24,6 @@ return [
     'phone1' => 'Teléfono principal',
     'phone2' => 'Teléfono secundario',
     'pin' => 'DNI/NIE',
+    'schedule'=> 'Horario',
+    'no_schedule'=> 'No tiene horarios asignados.',
 ];

@@ -34,9 +34,9 @@ $title = "Creación de Ciclo";
                             @endif
                             @csrf
 
-                            <h4>Ciclo</h4>
+                            <h4>{{__('cycle.cycle')}}</h4>
                             <div class=" row mb-3">
-                                <label for="code" class="col-md-4 col-form-label text-md-end">Code</label>
+                                <label for="code" class="col-md-4 col-form-label text-md-end">{{__('cycle.code')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="code" type="text"
@@ -52,7 +52,7 @@ $title = "Creación de Ciclo";
                             </div>
 
                             <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">Name</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-end">{{__('cycle.name')}}</label>
 
                                 <div class="col-md-6">
                                 <input id="name" type="text"

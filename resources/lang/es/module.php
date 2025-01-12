@@ -13,16 +13,16 @@ return [
     'teacher' => 'Profesor',
     'actions' => 'Acciones',
     'not_assigned' => 'No asignado',
-    'see_data_module'=>'Ver datos del modulo',
-    'edit_data_module'=>'Editar datos del modulo',
-    'delete_module'=>'Eliminar modulo',
+    'see_data_module'=>'Ver datos del módulo',
+    'edit_data_module'=>'Editar datos del módulo',
+    'delete_module'=>'Eliminar módulo',
     'confirm_deletes'=>'Confirmar eliminación',
     'confirm_1'=>'¿Estás seguro de que deseas eliminar el módulo ',
     'confirm_2'=>'? Esta acción no se puede deshacer.',
     'cancel'=>'Cancelar',
     'delete'=>'Eliminar',
 
-    // SHOW  {{ $module->name }}
+    // SHOW  
     'show_title' => 'Detalles del modulo',
 
     // CREATE-EDIT
