@@ -8,10 +8,64 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
+/**
+ * @OA\Schema(
+ *     schema="User",
+ *     type="object",
+ *     required={"name", "lastname", "email", "pin", "address", "phone1", "role_id"},
+ *                 @OA\Property(property="name", type="string"),
+ *                 @OA\Property(property="lastname", type="string"),
+ *                 @OA\Property(property="email", type="string"),
+ *                 @OA\Property(property="pin", type="string"),
+ *                 @OA\Property(property="address", type="string"),
+ *                 @OA\Property(property="phone1", type="string"),
+ *                 @OA\Property(property="phone2", type="string"),
+ *                 @OA\Property(property="role_id", type="integer")
+ * )
+ */
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/users",
+     *     summary="Show users",
+     *     description="Returns a list of all users with pagination data.",
+     *     @OA\Parameter(
+     *         name="page",
+     *         in="query",
+     *         description="The page number to retrieve.",
+     *         required=false,
+     *         @OA\Schema(type="integer", default=1)
+     *     ),
+     *     @OA\Parameter(
+     *         name="per_page",
+     *         in="query",
+     *         description="The number of results per page.",
+     *         required=false,
+     *         @OA\Schema(type="integer", default=10)
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully retrieved the list of users.",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="pagination", type="object",
+     *                 @OA\Property(property="per_page", type="integer"),
+     *                 @OA\Property(property="page", type="integer"),
+     *                 @OA\Property(property="total_pages", type="integer"),
+     *                 @OA\Property(property="total_items", type="integer")
+     *             ),
+     *             @OA\Property(property="users", type="array",
+     *                 @OA\Items(ref="#/components/schemas/User")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
      */
     public function index(Request $request)
     {
@@ -41,7 +95,39 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/users",
+     *     summary="Create a new user",
+     *     description="Creates a new user in the system.",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"name", "lastname", "email", "pin", "address", "phone1", "role_id"},
+     *                 @OA\Property(property="name", type="string"),
+     *                 @OA\Property(property="lastname", type="string"),
+     *                 @OA\Property(property="email", type="string"),
+     *                 @OA\Property(property="pin", type="string"),
+     *                 @OA\Property(property="address", type="string"),
+     *                 @OA\Property(property="phone1", type="string"),
+     *                 @OA\Property(property="phone2", type="string"),
+     *                 @OA\Property(property="role_id", type="integer")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="User successfully created.",
+     *         @OA\JsonContent(ref="#/components/schemas/User")
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
      */
     public function store(Request $request)
     {
@@ -68,7 +154,32 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/users/{id}",
+     *     summary="Show a specific user",
+     *     description="Fetches the details of a single user.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="The ID of the user to retrieve.",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully retrieved the user details.",
+     *         @OA\JsonContent(ref="#/components/schemas/User")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="User not found."
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
      */
     public function show(User $user)
     {
@@ -77,7 +188,49 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/api/users/{id}",
+     *     summary="Update an existing user",
+     *     description="Updates an existing user in the system.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="The ID of the user to update.",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(property="name", type="string"),
+     *                 @OA\Property(property="lastname", type="string"),
+     *                 @OA\Property(property="email", type="string"),
+     *                 @OA\Property(property="pin", type="string"),
+     *                 @OA\Property(property="address", type="string"),
+     *                 @OA\Property(property="phone1", type="string"),
+     *                 @OA\Property(property="phone2", type="string"),
+     *                 @OA\Property(property="role_id", type="integer")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully updated the user.",
+     *         @OA\JsonContent(ref="#/components/schemas/User")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="User not found."
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
      */
     public function update(Request $request, User $user)
     {
@@ -124,7 +277,35 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/users/{id}",
+     *     summary="Delete a specific user",
+     *     description="Deletes a user from the system.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="The ID of the user to delete.",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="User successfully deleted.",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="User not found."
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
      */
     public function destroy(User $user)
     {
