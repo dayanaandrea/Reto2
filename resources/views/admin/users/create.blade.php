@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
@@ -121,15 +121,6 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                    </div>
-                </div>
-
-
-                <div class="row mb-3">
-                    <label for="photo" class="col-md-4 col-form-label text-md-end">{{ __('auth.photo') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="photo" type="file" class="form-control" name="photo" autocomplete="photo" accept="image/*">
                     </div>
                 </div>
 

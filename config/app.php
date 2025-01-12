@@ -92,11 +92,7 @@ return [
     | List all locales that your application works with
     |
     */
-    'available_locales' => [
-        'English' => 'en',
-        'Español' => 'es',
-        'Euskera' => 'eus',
-    ],
+    'available_locales' => ['es', 'en', 'eus'],
 
     /*
     |--------------------------------------------------------------------------

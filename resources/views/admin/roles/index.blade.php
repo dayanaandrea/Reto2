@@ -1,24 +1,30 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
     <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
     <x-alert :key="'success'" :class="'success'" />
     <x-alert :key="'permission'" :class="'danger'" />
-    <h2>Crear un nuevo rol</h2>
-    <p><a href="{{ route('admin.roles.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
-            data-bs-placement="top" title="Crear un nuevo rol"><i class="fa-solid fa-plus"></i></a></p>
+    <div class="mb-2 text-end">
+        @php
+            $route = route('admin.roles.create');
+            $type = "show";
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $tooltip =  __('role.create_role');
+        @endphp
+        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
+    </div>
     @if ($roles->count() > 0)
-        <h2>Roles</h2>
+        <h2>{{__('role.roles')}}</h2>
         <div>
             <table class="table table-hover table-striped">
                 <thead>
                     <tr class="text-uppercase table-dark">
                         <th scope="col"></th>
-                        <th scope="col">Rol</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Usuarios</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">{{__('role.role')}}</th>
+                        <th scope="col">{{__('role.description')}}</th>
+                        <th scope="col">{{__('role.user')}}</th>
+                        <th scope="col">{{__('role.actions')}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,21 +44,21 @@
                                             $route = route('admin.roles.show', $role);
                                             $type = "show";
                                             $text = '<i class="fa-solid fa-eye"></i>';
-                                            $tooltip = 'Ver datos del rol';
+                                            $tooltip = __('role.see_data_role');
                                         @endphp
                                         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                                         @php
                                             $route = route('admin.roles.edit', $role);
                                             $type = "edit";
                                             $text = '<i class="fa-solid fa-pen"></i>';
-                                            $tooltip = 'Editar datos del rol';
+                                            $tooltip = __('role.edit_data_role');
                                         @endphp
                                         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                                         <!-- Para generar un modal diferente siempre, se debe incluir el id -->
                                         @php
                                             $id_modal = '#modal_delete' . $role->id;
                                             $text = '<i class="fa-solid fa-trash-can"></i>';
-                                            $tooltip = 'Eliminar rol';
+                                            $tooltip = __('role.delete_role');
                                         @endphp
                                         <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                                     </td>
@@ -69,7 +75,7 @@
                 </tbody>
             </table>
             @if($sin_roles > 0)
-                <p class="text-muted">Usuarios sin roles: <strong>{{$sin_roles}}</strong></p>
+                <p class="text-muted">{{__('role.user_without_role')}} <strong>{{$sin_roles}}</strong></p>
             @endif
             <!-- Paginación -->
             <div>

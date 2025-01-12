@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cycle;
 use App\Models\Module;
+use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class ModuleController extends Controller
@@ -13,7 +15,9 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = Module::orderBy('course', 'asc')->paginate(10);
+        $modules = Module::orderBy('cycle_id', 'desc')   
+        ->orderBy('course', 'asc')     
+        ->paginate(10);               
         return view('admin.modules.index', ['modules' => $modules]);
     }
 
@@ -24,7 +28,12 @@ class ModuleController extends Controller
     {
         // Datos que queremos pasar a la vista
         $cycles = Cycle::orderBy('code')->get();
-        return view('admin.modules.create-edit', ['type' => 'POST', 'cycles' => $cycles]);
+
+        // Esto es para poder cargar los datos de el usuario que tenga el rol 'profesor'
+        $profesorRole = Role::where('role', 'profesor')->first();
+        $users = User::where('role_id', $profesorRole->id)->orderBy('name')->get();
+
+        return view('admin.modules.create-edit', ['type' => 'POST', 'cycles' => $cycles, 'users' => $users]);
     }
 
     /**
@@ -42,6 +51,7 @@ class ModuleController extends Controller
         $module->hours = $request->hours;
         $module->course = $request->course;
         $module->cycle_id = $request->cycle_id;
+        $module->user_id = $request->user_id;
         // Guardar el nuevo modulo
         $module->save();
 
@@ -62,7 +72,11 @@ class ModuleController extends Controller
     public function edit(Module $module)
     {
         $cycles = Cycle::orderBy('code')->get();
-        return view('admin.modules.create-edit', ['module' => $module, 'type' => 'PUT', 'cycles' => $cycles]);
+         // Esto es para poder cargar los datos de el usuario que tenga el rol 'profesor'
+         $profesorRole = Role::where('role', 'profesor')->first();
+         $users = User::where('role_id', $profesorRole->id)->orderBy('name')->get();
+
+        return view('admin.modules.create-edit', ['module' => $module, 'type' => 'PUT', 'cycles' => $cycles, 'users' => $users]);
     }
 
     /**
@@ -78,6 +92,7 @@ class ModuleController extends Controller
         $module->hours = $request->hours;
         $module->course = $request->course;
         $module->cycle_id = $request->cycle_id;
+        $module->user_id = $request->user_id;
 
         // Guardar el nuevo modulo
         $module->save();
@@ -90,7 +105,6 @@ class ModuleController extends Controller
      */
     public function destroy(Module $module)
     {
-
         $module->delete();
         return redirect()->route('admin.modules.index')->with('success', 'Modulo  <b>' . $module->name . '</b> eliminado correctamente.');
     }
@@ -100,21 +114,24 @@ class ModuleController extends Controller
     private function validateModule(Request $request)
     {
         $request->validate([
-            // hours debe ser numerico, int
+           
             'code' => 'required|min:3|max:5',
             'name' => 'required|string|min:10|max:255',
-            'hours' => 'required',
-            'course' => 'required|in:1,2', // Solo permite que sea 1 o 2
+            'hours' => 'required|integer',
+            'course' => 'required|in:1,2', 
             'cycle_id' => 'required',
         ], [
+            'code.required' => 'El campo de código es obligatorio.',
             'code.min' => 'El código debe tener al menos 3 caracteres.',
             'code.max' => 'El código no puede tener más de 5 caracteres.',
+            'name.required' => 'El campo de nombre es obligatorio.',
             'name.min' => 'El nombre debe tener al menos 10 caracteres.',
             'name.max' => 'El nombre no puede tener más de 255 caracteres.',
             'hours.required' => 'El campo de horas es obligatorio.',
+            'hours.numeric' => 'Ingrese un número válido para las horas.',
             'course.in' => 'El curso solo puede ser 1 o 2.',
-            'cycle_id.required' => 'Debe seleccionar un ciclo.',
-
+            'course.required' => 'El campo de curso es obligatorio.',
+            'cycle_id.required' => 'El campo de ciclo es obligatorio.',
         ]);
     }
 }

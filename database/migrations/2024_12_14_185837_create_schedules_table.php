@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('module_id');
             $table->tinyInteger('day');
-            $table->time('hour');
+            $table->tinyInteger('hour');
             $table->timestamps();
             
             /*un constrint unique para los campos user_id y module que sea todo unico*/

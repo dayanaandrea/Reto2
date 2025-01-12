@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\User;
 
@@ -27,10 +26,14 @@ class UserFactory extends Factory
         $name = fake()->firstName();
         $lastname = fake()->lastName();
 
+        // Quitar posibles espacios en blanco
+        $name_ = str_replace(' ', '', $name);
+        $lastname_ = str_replace(' ', '', $lastname);
+
         return [
             'name' => $name,
             'lastname' => $lastname,
-            'email' => $this->generateUniqueEmail(trim($name), $lastname),
+            'email' => $this->generateUniqueEmail($name_, $lastname_),
             'email_verified_at' => now(),
             'password' => '1234',
             'remember_token' => Str::random(10),
