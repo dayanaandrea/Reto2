@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meeting;
+use App\Models\User; 
 use Illuminate\Http\Request;
 
 class MeetingController extends Controller
@@ -21,8 +22,18 @@ class MeetingController extends Controller
      */
     public function create()
     {
+        $teachers = \App\Models\User::where('role_id',1)->orderBy('id')->get();
+        $students = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $status = \App\Models\Meeting::getStatusOptions();
+
         $meetings = Meeting::orderBy('date')->get();
-        return view('admin.meetings.create-edit', ['meetings'=>$meetings]);
+
+        return view('admin.meetings.create-edit', [
+           'meetings' => $meetings,
+           'teachers' => $teachers,
+           'students' => $students,
+           'status' => $status,
+           'type'=>'POST']);    
     }
 
     /**
@@ -31,16 +42,16 @@ class MeetingController extends Controller
     public function store(Request $request)
     {
           // Crear la reunión
-          $meetings = new Meeting();
-          $meetings->date = $request->date;
-          $meetings->time = $request->time;
-          $meetings->status = $request->status;
-          $meetings->teacher->name = $request->name;
-          $meetings->student->name = $request->name;
+          $meeting = new Meeting();
+          $meeting->date = $request->date;
+          $meeting->time = $request->time;
+          $meeting->status = $request->status;
+          $meeting->teacher_id = $request->teacher_id;
+          $meeting->student_id = $request->student_id;
   
           // Guardar el nuevo usuario
-          $meetings->save();
-          return redirect()->route('admin.meetings.index')->with('success', 'Reunión  ' . $meetings->name . ' creado correctamente.');
+          $meeting->save();
+          return redirect()->route('admin.meetings.index')->with('success', 'Reunión  ' . $meeting->name . ' creado correctamente.');
     }
 
     /**
@@ -48,7 +59,7 @@ class MeetingController extends Controller
      */
     public function show(Meeting $meeting)
     {
-        return view('admin.meetings.show',['meetings'=>$meetings]);
+        return view('admin.meetings.show',['meetings'=>$meeting]);
     }
 
     /**
@@ -56,7 +67,7 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-        return view('admin.meetings.create-edit', ['meetings'=>$meetings]);
+        return view('admin.meetings.create-edit', ['meetings'=>$meeting]);
     }
 
     /**
@@ -72,9 +83,8 @@ class MeetingController extends Controller
      */
     public function destroy(Meeting $meeting)
     {
-        $meetings = $meetings->date; 
-        $meetings->delete(); 
-        return redirect()->route('admin.meetings.index')->with('success', 'Reunión  <b>' . $meetings->date . '</b> eliminada correctamente.');
+        $meeting->delete();
+        return redirect()->route('admin.meetings.index')->with('success', 'Reunión eliminada correctamente.');
        
     }
 }

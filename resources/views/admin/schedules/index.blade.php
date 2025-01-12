@@ -42,17 +42,28 @@
                     <td>{{$schedule->day}}</td>
                     <td>{{$schedule->hour}}</td>
 
-                    <td><a href="{{route('admin.schedules.show', $schedule)}}" class="btn btn-secondary btn-sm">
-                            Ver
-                        </a>
-                        <a href="#" class="btn btn-warning btn-sm">
-                            Editar
-                        </a>
-                        <!-- Para generar un modal diferente siempre, se debe incluir el id -->
-                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#modalSchedule{{$schedule->id}}" data-schedule-id="{{ $schedule->id }}">
-                            Eliminar
-                        </a>
+                    <td>@php
+                    $route = route('admin.schedules.show', $schedule);
+                    $type = "show";
+                    $text = '<i class="fa-solid fa-eye"></i>';
+                    $tooltip = 'Ver datos de la reunión';
+                    @endphp
+                    <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
+                    @php
+                    $route = route('admin.schedules.edit', $schedule);
+                    $type = "edit";
+                    $text = '<i class="fa-solid fa-pen"></i>';
+                    $tooltip = 'Editar datos del horario';
+                    @endphp
+                    <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
+
+                    <!-- Para generar un modal diferente siempre, se debe incluir el id -->
+                    @php
+                    $id_modal = '#modal_delete' . $schedule->id;
+                    $text = '<i class="fa-solid fa-trash-can"></i>';
+                    $tooltip = 'Eliminar reunión';
+                    @endphp
+                    <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                     </td>
                 </tr>
 

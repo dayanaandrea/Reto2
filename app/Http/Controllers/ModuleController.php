@@ -53,6 +53,9 @@ class ModuleController extends Controller
         $module->cycle_id = $request->cycle_id;
         $module->user_id = $request->user_id;
         // Guardar el nuevo modulo
+
+        dd($request);
+
         $module->save();
 
         return redirect()->route('admin.modules.index')->with('success', 'Modulo  ' . $module->name . ' creado correctamente.');
