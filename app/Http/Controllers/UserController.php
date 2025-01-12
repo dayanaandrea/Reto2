@@ -39,7 +39,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // Validar los datos del usuario
-        $this->validateUser($request);
+        validateUser($request);
 
         // Crear el usuario
         $user = new User();
@@ -49,7 +49,7 @@ class UserController extends Controller
         $user->pin = $request->pin;
         $user->address = $request->address;
         $user->phone1 = $request->phone1;
-        $user->phone2 = $request->has('phone2');
+        $user->phone2 = $request->has('phone2') ? $request->phone2 : null;
         $user->role_id = $request->role_id;
         $user->password = Hash::make('1234');
 
@@ -90,7 +90,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         // Validar los datos del usuario
-        $this->validateUser($request, $user);
+        validateUser($request, $user);
 
         $user->name = $request->name;
         $user->lastname = $request->lastname;
@@ -98,7 +98,7 @@ class UserController extends Controller
         $user->pin = $request->pin;
         $user->address = $request->address;
         $user->phone1 = $request->phone1;
-        $user->phone2 = $request->has('phone2');
+        $user->phone2 = $request->has('phone2') ? $request->phone2 : $user->phone2;
         $user->role_id = $request->role_id;
 
         try {
@@ -192,49 +192,6 @@ class UserController extends Controller
             'new_password.max' => 'La contraseña no puede tener más de 255 caracteres.',
             'new_password_confirmation.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'new_password_confirmation.max' => 'La contraseña no puede tener más de 255 caracteres.',
-        ]);
-    }
-
-    private function validateUser(Request $request, $user = null)
-    {
-        // Excluir el email del usuario actual durante la actualización
-        $emailValidation = 'required|email|unique:users,email,' . ($user ? $user->id : 'NULL') . '|max:255';
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'email' => $emailValidation,
-            'pin' => [
-                'required',
-                'string',
-                'min:9',
-                'max:9',
-                'regex:/^[XYZ]?\d{7}[A-Za-z]$|^\d{8}[A-Za-z]$/', // Validación para DNI o NIE
-            ],
-            'address' => 'required|string|max:255',
-            'phone1' => 'required|string|max:15',
-            'phone2' => 'nullable|string|max:15',
-            'role_id' => 'required|exists:roles,id',
-        ], [
-            // Mensajes de error personalizados
-            'name.required' => 'El nombre es obligatorio.',
-            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
-            'lastname.required' => 'El apellido es obligatorio.',
-            'lastname.max' => 'El apellido no puede tener más de 255 caracteres.',
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'El correo electrónico debe ser válido.',
-            'email.unique' => 'El correo electrónico ya está en uso. Por favor, elige otro.',
-            'pin.required' => 'El DNI/NIE es obligatorio.',
-            'pin.min' => 'El DNI/NIE debe tener 9 caracteres.',
-            'pin.max' => 'El DNI/NIE no puede tener más de 9 caracteres.',
-            'pin.regex' => 'Un DNI tiene 8 dígitos seguidos de una letra, o un NIE tiene una letra inicial seguida de 7 dígitos y una letra al final.',
-            'address.required' => 'La dirección es obligatoria.',
-            'address.max' => 'La dirección no puede tener más de 255 caracteres.',
-            'phone1.required' => 'El número de teléfono principal es obligatorio.',
-            'phone1.max' => 'El número de teléfono principal no puede tener más de 15 caracteres.',
-            'phone2.max' => 'El número de teléfono secundario no puede tener más de 15 caracteres.',
-            'role_id.required' => 'El rol es obligatorio.',
-            'role_id.exists' => 'El rol seleccionado no existe.',
         ]);
     }
 }
