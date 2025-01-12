@@ -13,7 +13,7 @@
     <div>
         <p>Accede a la creación de una reunión:</p>
         <p><a href="{{ route('admin.meetings.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
-        data-bs-placement="top" title="Crear un nuevo ciclo"><i class="fa-solid fa-plus"></i></a></p>
+        data-bs-placement="top" title="Crear una nueva reunión"><i class="fa-solid fa-plus"></i></a></p>
     
     </div>
     <h2>Reuniones</h2>

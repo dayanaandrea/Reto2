@@ -22,7 +22,10 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        return view('admin.schedules.create-edit');
+        
+         // Datos que queremos pasar a la vista
+         $schedules = Schedule::orderBy('hour')->get();
+         return view('admin.schedules.create-edit', ['type' => 'POST', 'schedules' => $schedules]);
     }
 
     /**
@@ -67,16 +70,15 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        /* // Validar los datos
+         // Validar los datos
          $this->validateSchedule($request);
 
          $schedule->schedule = strtolower($request->schedule);
-         $schedule->description = $request->description;
- 
+         $schedule->module_id = $request->module_id;
          // Guardar el nuevo horario
          $schedule->save();
  
-         return redirect()->route('admin.schedules.show', $schedule)->with('success', 'Horario <b>' . $schedule->schedule . '</b> actualizado correctamente.');*/
+         return redirect()->route('admin.schedules.index', $schedule)->with('success', 'Horario <b>' . $schedule->schedule . '</b> actualizado correctamente.');
     }
 
     /**

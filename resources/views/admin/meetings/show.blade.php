@@ -21,10 +21,10 @@
                 <p class="col-sm-9">{{ $meetings-> status }} </p>
                 
                 <p class="col-sm-3 fw-bold">Nombre del profesor al que pertenece :</p>
-                <p class="col-sm-9">{{$meetings->teacher->name}}</p>
+                <p class="col-sm-9">{{$meetings->teacher->name}} {{$meetings->teacher->lastname}}</p>
           
                 <p class="col-sm-3 fw-bold">Nombre del estudiante al que pertenece :</p>
-                <p class="col-sm-9">{{ $meetings->student->name }} </p>
+                <p class="col-sm-9">{{ $meetings->student->name }} {{$meetings->student->lastname}}</p>
             </div>
         </div>
     </div>
