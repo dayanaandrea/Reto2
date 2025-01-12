@@ -7,10 +7,58 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ * @OA\Schema(
+ *     schema="Role",
+ *     type="object",
+ *     required={"role", "description"},
+ *     @OA\Property(property="role", type="string", example="admin"),
+ *     @OA\Property(property="description", type="string", example="Administrator role")
+ * )
+ */
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/roles",
+     *     summary="Show roles",
+     *     description="Returns a list of all roles with pagination data.",
+     *     @OA\Parameter(
+     *         name="page",
+     *         in="query",
+     *         description="The page number to retrieve.",
+     *         required=false,
+     *         @OA\Schema(type="integer", default=1)
+     *     ),
+     *     @OA\Parameter(
+     *         name="per_page",
+     *         in="query",
+     *         description="The number of results per page.",
+     *         required=false,
+     *         @OA\Schema(type="integer", default=10)
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully retrieved the list of roles.",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="pagination", type="object",
+     *                 @OA\Property(property="per_page", type="integer"),
+     *                 @OA\Property(property="page", type="integer"),
+     *                 @OA\Property(property="total_pages", type="integer"),
+     *                 @OA\Property(property="total_items", type="integer")
+     *             ),
+     *             @OA\Property(property="roles", type="array",
+     *                 @OA\Items(ref="#/components/schemas/Role")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
      */
     public function index(Request $request)
     {
@@ -35,7 +83,33 @@ class RoleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/roles",
+     *     summary="Create a new role",
+     *     description="Creates a new role in the system.",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 required={"role", "description"},
+     *                 @OA\Property(property="role", type="string"),
+     *                 @OA\Property(property="description", type="string")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Role successfully created.",
+     *         @OA\JsonContent(ref="#/components/schemas/Role")
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
      */
     public function store(Request $request)
     {
@@ -54,7 +128,32 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/roles/{id}",
+     *     summary="Show a specific role",
+     *     description="Fetches the details of a single role.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="The ID of the role to retrieve.",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully retrieved the role details.",
+     *         @OA\JsonContent(ref="#/components/schemas/Role")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Role not found."
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
      */
     public function show(Role $role)
     {
@@ -62,7 +161,43 @@ class RoleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/api/roles/{id}",
+     *     summary="Update an existing role",
+     *     description="Updates an existing role in the system.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="The ID of the role to update.",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 @OA\Property(property="role", type="string"),
+     *                 @OA\Property(property="description", type="string")
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successfully updated the role.",
+     *         @OA\JsonContent(ref="#/components/schemas/Role")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Role not found."
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
      */
     public function update(Request $request, Role $role)
     {
@@ -78,7 +213,35 @@ class RoleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/roles/{id}",
+     *     summary="Delete a specific role",
+     *     description="Deletes a role from the system.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="The ID of the role to delete.",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Role successfully deleted.",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Role not found."
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Unauthenticated",
+     *     ),
+     *     security={{"bearerAuth": {}}}
+     * )
      */
     public function destroy(Role $role)
     {
