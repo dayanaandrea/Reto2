@@ -1,8 +1,19 @@
 @php
-    if (isset($schedule)) {
+    if (isset($meeting)) {
         $button = __('meeting.update');
+        $teacher_id = $meeting->teacher_id;
+        $student_id = $meeting->student_id;
+        $date = $meeting->date;
+        $time = $meeting->time;
+        $status = $meeting->status;
+
     } else {
         $button = __('meeting.create');
+        $teacher_id = "";
+        $student_id = "";
+        $date = "";
+        $time = "";
+        $status = "";
     }
 @endphp
 

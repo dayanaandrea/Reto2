@@ -67,9 +67,18 @@ class ScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Schedule $schedules)
+    public function edit(Schedule $schedule)
     {
-        return view('admin.schedules.create-edit');
+        $modules = \App\Models\Module::orderBy('id')->get();
+        $users = \App\Models\User::where('role_id',1)->orderBy('id')->get();
+
+         //dd($schedule);
+
+         return view('admin.schedules.create-edit', [
+            'schedule' => $schedule,
+            'users' => $users,
+            'modules' => $modules,
+            'type'=>'POST']);    
     }
 
     /**

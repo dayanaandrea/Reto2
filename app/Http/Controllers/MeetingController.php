@@ -67,7 +67,18 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-        return view('admin.meetings.create-edit', ['meetings'=>$meeting]);
+        $teachers = \App\Models\User::where('role_id',1)->orderBy('id')->get();
+        $students = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $status = \App\Models\Meeting::getStatusOptions();
+
+        $meetings = Meeting::orderBy('date')->get();
+
+        return view('admin.meetings.create-edit', [
+           'meetings' => $meetings,
+           'teachers' => $teachers,
+           'students' => $students,
+           'status' => $status,
+           'type'=>'POST']); 
     }
 
     /**
@@ -75,7 +86,7 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-        //
+        
     }
 
     /**

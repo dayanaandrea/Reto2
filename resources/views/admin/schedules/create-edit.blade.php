@@ -1,10 +1,14 @@
 @php
     if (isset($schedule)) {
         $module = $schedule->module_id;
-        $button = __('enrollment.update');
+        $day = $schedule->day;
+        $hour = $schedule->hour;
+        $button = __('schedule.update');
     } else {
         $module = "";
-        $button = __('enrollment.create');
+        $day = "";
+        $hour = "";
+        $button = __('schedule.create');
     }
 @endphp
 
@@ -61,7 +65,7 @@
                             <label for="day" class="col-md-4 col-form-label text-md-end">{{ __('Day') }}</label>
 
                             <div class="col-md-6">
-                                <input id="day" type="number" min = "1" max = "31" class="form-control @error('day') is-invalid @enderror" name="day" value="{{ old('day') }}" required autocomplete="day" autofocus>
+                                <input id="day" type="number" min = "1" max = "31" class="form-control @error('day') is-invalid @enderror" name="day" value="{{ old('day', $day) }}" required autocomplete="day" autofocus>
 
                                 @error('day')
                                     <span class="invalid-feedback" role="alert">
@@ -76,7 +80,7 @@
                             <label for="hour" class="col-md-4 col-form-label text-md-end">{{ __('Hour') }}</label>
 
                             <div class="col-md-6">
-                                <input id="hour" type="time" min="08:00" max="22:00" class="form-control @error('hour') is-invalid @enderror" name="hour" value="{{ old('hour') }}" required autocomplete="hour" autofocus>
+                                <input id="hour" type="time" min="08:00" max="22:00" class="form-control @error('hour') is-invalid @enderror" name="hour" value="{{ old('hour', $hour) }}" required autocomplete="hour" autofocus>
 
                                 @error('hour')
                                     <span class="invalid-feedback" role="alert">
