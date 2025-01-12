@@ -22,10 +22,17 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        
+        $modules = \App\Models\Module::orderBy('id')->get();
+        $users = \App\Models\User::where('role_id',1)->orderBy('id')->get();
+
          // Datos que queremos pasar a la vista
          $schedules = Schedule::orderBy('hour')->get();
-         return view('admin.schedules.create-edit', ['type' => 'POST', 'schedules' => $schedules]);
+
+         return view('admin.schedules.create-edit', [
+            'schedules' => $schedules,
+            'users' => $users,
+            'modules' => $modules,
+            'type'=>'POST']);    
     }
 
     /**
@@ -36,12 +43,12 @@ class ScheduleController extends Controller
         
         // Crear el horario
         $schedule = new Schedule();
-        $schedule->user_id = $request->user_id;
+        //$schedule->user_id = $request->user_id;
         $schedule->module_id = $request->module_id;
         $schedule->day = $request->day;
         $schedule->hour = $request->hour;
 
-        /*dd($request);*/
+        //dd($request);
         // Guardar el nuevo horario
         $schedule->save();
 

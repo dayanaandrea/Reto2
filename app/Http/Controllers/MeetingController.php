@@ -22,8 +22,18 @@ class MeetingController extends Controller
      */
     public function create()
     {
-       
-        return view('admin.meetings.create-edit');
+        $teachers = \App\Models\User::where('role_id',1)->orderBy('id')->get();
+        $students = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $status = \App\Models\Meeting::getStatusOptions();
+
+        $meetings = Meeting::orderBy('date')->get();
+
+        return view('admin.meetings.create-edit', [
+           'meetings' => $meetings,
+           'teachers' => $teachers,
+           'students' => $students,
+           'status' => $status,
+           'type'=>'POST']);    
     }
 
     /**
@@ -36,8 +46,8 @@ class MeetingController extends Controller
           $meeting->date = $request->date;
           $meeting->time = $request->time;
           $meeting->status = $request->status;
-          $meeting->teacher->name = $request->name;
-          $meeting->student->name = $request->name;
+          $meeting->teacher_id = $request->teacher_id;
+          $meeting->student_id = $request->student_id;
   
           // Guardar el nuevo usuario
           $meeting->save();

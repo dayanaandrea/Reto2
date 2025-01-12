@@ -17,4 +17,9 @@ class Meeting extends Model
     {
         return $this->belongsTo(User::class, 'student_id');
     }
+
+    public static function getStatusOptions()
+    {
+        return ['accepted', 'rejected', 'pending'];
+    }
 }
