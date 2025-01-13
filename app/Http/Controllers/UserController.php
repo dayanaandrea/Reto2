@@ -20,7 +20,6 @@ class UserController extends Controller
         $user = User::orderBy('created_at', 'desc');
 
         if ($rolFiltro) {
-
             if ($rolFiltro === 'estudiante') {
                 $user->whereHas('role', function ($query) {
                     $query->where('role', 'estudiante'); 
@@ -29,7 +28,10 @@ class UserController extends Controller
                 $user->whereHas('role', function ($query) {
                     $query->where('role', 'profesor'); 
                 });
+            } elseif ($rolFiltro === 'sin_rol') { 
+                $user->whereDoesntHave('role');
             }
+        
         }
 
         $users = $user->paginate(10, ['*'], 'active');
