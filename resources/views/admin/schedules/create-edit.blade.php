@@ -24,8 +24,18 @@
                 <div class="card-header">{{ __('Create') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.schedules.store') }}" enctype="multipart/form-data">
-                        @csrf
+                    @if($type == 'PUT')
+                        <form class="mt-2" name="create_platform" action="{{ route('admin.schedules.update', $schedule) }}"
+                            method="POST" enctype="multipart/form-data">
+
+                            @method('PUT')
+                    @else
+                        <form class="mt-2" name="create_platform" action="{{ route('admin.schedules.store') }}"
+                            method="POST" enctype="multipart/form-data">
+
+                            @method('POST')
+                    @endif
+                            @csrf
 
                         <h4>{{ __('Schedule') }}</h4>
 
@@ -82,7 +92,7 @@
                             <label for="hour" class="col-md-4 col-form-label text-md-end">{{ __('Hour') }}</label>
 
                             <div class="col-md-6">
-                                <input id="hour" type="time" min="08:00" max="22:00" class="form-control @error('hour') is-invalid @enderror" name="hour" value="{{ old('hour', $hour) }}" required autocomplete="hour" autofocus>
+                                <input id="hour" type="number" min="1" max="6" class="form-control @error('hour') is-invalid @enderror" name="hour" value="{{ old('hour', $hour) }}" required autocomplete="hour" autofocus>
 
                                 @error('hour')
                                     <span class="invalid-feedback" role="alert">

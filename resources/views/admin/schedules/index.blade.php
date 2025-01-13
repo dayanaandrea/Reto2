@@ -38,7 +38,12 @@
                 <tr>
                     <th scope="col">{{ $loop->iteration }}</th>
                     <td>{{$schedule->module->code}}</td>
-                    <td>{{$schedule->module->user->name}} {{$schedule->module->user->lastname}}</td>
+                    @if ($schedule->module->user)
+                                <td><a href="{{route('admin.schedules.show', $schedule->module->user)}}">{{$schedule->module->user->name}}
+                                        {{$schedule->module->user->lastname}}</a></td>
+                            @else
+                                <td>{{__('module.not_assigned')}}</td>
+                            @endif
                     <td>{{$schedule->day}}</td>
                     <td>{{$schedule->hour}}</td>
 

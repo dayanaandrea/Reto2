@@ -5,7 +5,6 @@
         $student_id = $meeting->student_id;
         $date = $meeting->date;
         $time = $meeting->time;
-        $status = $meeting->status;
 
     } else {
         $button = __('meeting.create');
@@ -13,7 +12,6 @@
         $student_id = "";
         $date = "";
         $time = "";
-        $status = "";
     }
 @endphp
 
@@ -27,8 +25,18 @@
                 <div class="card-header">{{ __('Create') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.meetings.store') }}" enctype="multipart/form-data">
-                        @csrf
+                    @if($type == 'PUT')
+                        <form class="mt-2" name="create_platform" action="{{ route('admin.meetings.update', $meeting) }}"
+                            method="POST" enctype="multipart/form-data">
+
+                            @method('PUT')
+                    @else
+                        <form class="mt-2" name="create_platform" action="{{ route('admin.meetings.store') }}"
+                            method="POST" enctype="multipart/form-data">
+
+                            @method('POST')
+                    @endif
+                            @csrf
 
                         <h4>{{ __('Meeting') }}</h4>
 
@@ -43,7 +51,7 @@
                                     Si estamos creando un nuevo módulo, no existe $meeting por lo que sería false 
                                     y te enseñaria la primera opción --->
                                     <option value="{{ $teacher->id }}"
-                                        @if(isset($meeting) && $meeting->user_id == $teacher->id) selected @endif>
+                                        {{ $teacher->id == old('teacher_id', isset($meeting) ? $meeting->teacher_id : '') ? 'selected' : '' }}>
                                         {{ ucfirst($teacher->name) }} {{ ucfirst($teacher->lastname) }}
                                     </option>
                                     @endforeach
@@ -62,7 +70,7 @@
                                     Si estamos creando un nuevo módulo, no existe $meeting por lo que sería false 
                                     y te enseñaria la primera opción --->
                                     <option value="{{ $student->id }}"
-                                        @if(isset($meeting) && $meeting->user_id == $student->id) selected @endif>
+                                        {{ $student->id == old('student_id', isset($meeting) ? $meeting->student_id : '') ? 'selected' : '' }}>
                                         {{ ucfirst($student->name) }} {{ ucfirst($student->lastname) }}
                                     </option>
                                     @endforeach
@@ -90,7 +98,7 @@
                             <label for="time" class="col-md-4 col-form-label text-md-end">{{ __('Time') }}</label>
 
                             <div class="col-md-6">
-                            <input id="time" type="time" min="08:00" max="22:00" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ old('time') }}" required autocomplete="time" autofocus>
+                            <input id="time" type="number" min="1" max="6" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ old('time', $time) }}" required autocomplete="time" autofocus>
 
                                 @error('time')
                                     <span class="invalid-feedback" role="alert">
@@ -107,7 +115,7 @@
                             <div class="col-md-6">
                                 <select name="status" id="status" class="form-select">
                                     @foreach ($status as $status)
-                                        <option value="{{ $status }}" {{ old('status', $meeting->status ?? 'pending') == $status ? 'selected' : '' }}>
+                                    <option value="{{ $status }}" {{ old('status', $model->status ?? 'pending') == $status ? 'selected' : '' }}>
                                     {{ ucfirst($status) }}
                                     </option>
                                 @endforeach
