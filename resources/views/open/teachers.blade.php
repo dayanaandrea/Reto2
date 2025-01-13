@@ -25,7 +25,7 @@
                 </td>
                 <td>{{$teacher->lastname}}</td>
                 <td>{{$teacher->name}}</td>
-                <td>{{$teacher->email}}</td>
+                <td><a href="mailto:{{$teacher->email}}">{{$teacher->email}}</a></td>
                 <td>{{$teacher->phone1}}</td>
             </tr>
             @endforeach
