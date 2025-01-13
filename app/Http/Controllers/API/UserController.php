@@ -142,7 +142,7 @@ class UserController extends Controller
         $user->pin = $request->pin;
         $user->address = $request->address;
         $user->phone1 = $request->phone1;
-        $user->phone2 = $request->has('phone2');
+        $user->phone2 = $request->has('phone2') ? $request->phone2 : $user->phone2;
         $user->role_id = $request->role_id;
         $user->password = Hash::make('1234');
 

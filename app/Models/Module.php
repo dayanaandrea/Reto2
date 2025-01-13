@@ -21,4 +21,8 @@ class Module extends Model
     {
         return $this->hasMany(Schedule::class);
     }
+
+    public function enrollments(){
+        return $this->hasMany(Enrollment::class);
+    }
 }
