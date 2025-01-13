@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Detalles del modulo</h2>
+    <h2 class="mb-4">Detalles de la reunión</h2>
 
     <!-- Tarjeta para mostrar detalles de los modulos -->
     <div class="card">
