@@ -27,6 +27,9 @@ Route::middleware('auth')->group(function () {
 
   // Ruta para el home, solo accesible para usuarios autenticados
   Route::get('home', [HomeController::class, 'home'])->name('home');
+  Route::get('teachers', [HomeController::class, 'teachers'])->name('teachers');
+  Route::get('cycles', [HomeController::class, 'cycles'])->name('cycles');
+  Route::get('students', [HomeController::class, 'students'])->name('students');
 
   // Ruta para cambiar la contraseña de un usuario
   Route::get('profile', [ProfileController::class, 'show'])->name('profile');

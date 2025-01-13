@@ -87,4 +87,8 @@ class User extends Authenticatable
         return $this->hasMany(Meeting::class, 'student_id');
     }
 
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
 }

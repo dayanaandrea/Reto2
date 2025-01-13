@@ -13,7 +13,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::withCount('users')->orderBy('role', 'asc')->paginate(5);
+        $roles = Role::withCount('users')->orderBy('role', 'asc')->paginate(config('app.pagination', 10));
         // Contar usuarios sin rol
         $sin_roles = User::whereNull('role_id')->count();
         return view('admin.roles.index', ['roles' => $roles, 'sin_roles' => $sin_roles]);
