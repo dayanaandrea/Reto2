@@ -1,19 +1,9 @@
 @php
-    if (isset($enrollment)) {
         $user = $enrollment->user_id;
-        $module = is_array($enrollment->module_id) ? $enrollment-> module_id: (array)$enrollment->module_id;
+        $module = $enrollment->module_id;
         $date = $enrollment->date;
         $button = __('enrollment.update');
         $title = __('enrollment.update_enrollment');
-        $isEdit = true; 
-    } else {
-        $user = "";
-        $module = [];
-        $date = "";
-        $button = __('enrollment.create');
-        $title = __('enrollment.create_enrollment');
-        $isEdit = false; 
-    }
 @endphp
 
 @extends('layouts.app')
@@ -59,14 +49,12 @@
 
                             {{-- Módulo --}}
                             <div class="row mb-3">
-                                <label for="module_id[]" class="col-md-4 col-form-label text-md-end">{{__('enrollment.module')}}</label>
+                                <label for="module_id" class="col-md-4 col-form-label text-md-end">{{__('enrollment.module')}}</label>
                                 <div class="col-md-7">
-                                <select name="module_id[]" id="module" class="form-select"
-                                    @if($isEdit) disabled @endif
-                                    @if(!$isEdit)  multiple size="20" @endif>
+                                <select name="module_id[]" id="module" class="form-select" size="20">
                                         @foreach ($modules as $module)
                                             <option value="{{ $module->id }}" 
-                                            {{ (in_array($module->id, old('module_id', isset($enrollment) ? $enrollment->module_id : []))) ? 'selected' : '' }}>
+                                                {{ $module->id == old('module_id', isset($enrollment) ? $enrollment->module_id : '') ? 'selected' : '' }}>
                                                 {{ ucfirst('('. $module->cycle->code ."-". $module->course  . ')'." " . $module->name) }}
                                             </option>
                                         @endforeach
