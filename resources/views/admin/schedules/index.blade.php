@@ -66,7 +66,7 @@
                 </tr>
 
                 <!-- Modal para eliminar un horario -->
-                <div class="modal fade" id="modalSchedule{{ $schedule->id }}" tabindex="-1"
+                <div class="modal fade" id="modal_delete{{ $schedule->id }}" tabindex="-1"
                     aria-labelledby="deleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -79,7 +79,7 @@
 
                             <!-- Cuerpo del Modal -->
                             <div class="modal-body">
-                                ¿Estás seguro de que deseas eliminar el horario <b>{{ $schedule->name }}</b>? Esta acción no
+                                ¿Estás seguro de que deseas eliminar el horario <b>{{ $schedule->day }}</b>? Esta acción no
                                 se puede deshacer.
                             </div>
 
