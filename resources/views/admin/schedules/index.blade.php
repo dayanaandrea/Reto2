@@ -2,27 +2,20 @@
 
 @section('content')
 <div class="container">
-
     <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" schedule="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-    @if(session('permission'))
-        <div class="alert alert-warning alert-dismissible fade show" schedule="alert">
-            {{ session('permission') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-    <h2>Crear un nuevo horario</h2>
-    <div>
-        <p>Accede a la creación de un horario:</p>
-        <p><a href="{{ route('admin.schedules.create') }}" class="btn btn-primary">Crear horario</a></p>
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <div class="mb-2 text-end">
+        @php
+            $route = route('admin.schedules.create');
+            $type = "show";
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $tooltip =  __('schedule.create_schedule');
+        @endphp
+        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
     <h2>Horarios</h2>
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>

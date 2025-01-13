@@ -2,22 +2,20 @@
 
 @section('content')
 <div class="container">
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {!! session('success') !!}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
-    <h2>Crear una nueva reunión</h2>
-    <div>
-        <p>Accede a la creación de una reunión:</p>
-        <p><a href="{{ route('admin.meetings.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
-        data-bs-placement="top" title="Crear una nueva reunión"><i class="fa-solid fa-plus"></i></a></p>
-    
+    <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <div class="mb-2 text-end">
+        @php
+            $route = route('admin.meetings.create');
+            $type = "show";
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $tooltip =  __('meetings.create_meeting');
+        @endphp
+        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
     <h2>Reuniones</h2>
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>

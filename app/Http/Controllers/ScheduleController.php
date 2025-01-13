@@ -48,7 +48,7 @@ class ScheduleController extends Controller
         $schedule->day = $request->day;
         $schedule->hour = $request->hour;
 
-        dd($request);
+        //dd($request);
         // Guardar el nuevo horario
         $schedule->save();
 
