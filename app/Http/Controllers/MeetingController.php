@@ -51,7 +51,7 @@ class MeetingController extends Controller
   
           // Guardar el nuevo usuario
           $meeting->save();
-          return redirect()->route('admin.meetings.index')->with('success', 'Reunión ' . $meeting->date . ' creada correctamente.');
+          return redirect()->route('admin.meetings.index')->with('success', 'La reunión con la fecha <b>' . $meeting->date . '</b> ha sido creada correctamente.');
     }
 
     /**
@@ -97,7 +97,7 @@ class MeetingController extends Controller
         // Guardar el nuevo horario
         $meeting->save();
 
-        return redirect()->route('admin.meetings.index', $meeting)->with('success', 'La reunión <b>' . $meeting->date . '</b> ha sido actualizada correctamente.');
+        return redirect()->route('admin.meetings.index', $meeting)->with('success', 'La reunión con la fecha <b>' . $meeting->date . '</b> ha sido actualizada correctamente.');
     }
 
     /**

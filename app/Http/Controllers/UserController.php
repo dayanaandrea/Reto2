@@ -13,12 +13,32 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Paginar, para no mostrar todos de golpe
-        $users = User::orderBy('id', 'desc')->paginate(config('app.pagination', 10), ['*'], 'active');
-        $del_users = User::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(config('app.pagination', 10), ['*'], 'inactive');
-        return view('admin.users.index', ['users' => $users, 'del_users' => $del_users]);
+        $rolFiltro = $request->get('role', ''); 
+
+        $user = User::orderBy('created_at', 'desc');
+
+        if ($rolFiltro) {
+            if ($rolFiltro === 'estudiante') {
+                $user->whereHas('role', function ($query) {
+                    $query->where('role', 'estudiante'); 
+                });
+            } elseif ($rolFiltro === 'profesor') {
+                $user->whereHas('role', function ($query) {
+                    $query->where('role', 'profesor'); 
+                });
+            } elseif ($rolFiltro === 'sin_rol') { 
+                $user->whereDoesntHave('role');
+            }
+        
+        }
+
+        $users = $user->paginate(10, ['*'], 'active');
+
+        $del_users = User::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(10, ['*'], 'inactive');
+
+        return view('admin.users.index', compact('users', 'del_users' ));
     }
 
     /**

@@ -103,7 +103,7 @@
             </table>
             <!-- Paginación -->
             <div>
-                {!! $users->appends(['active' => request()->active, 'inactive' => request()->inactive])->links('vendor.pagination.bootstrap-5') !!}
+                {!! $users->appends(['active' => request()->active, 'inactive' => request()->inactive , 'role' => request()->role])->links('vendor.pagination.bootstrap-5') !!}
             </div>
         </div>
     @endif
