@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         // Paginar, para no mostrar todos de golpe
-        $users = User::orderBy('created_at', 'desc')->paginate(10, ['*'], 'active');
+        $users = User::orderBy('id', 'desc')->paginate(10, ['*'], 'active');
         $del_users = User::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(10, ['*'], 'inactive');
         return view('admin.users.index', ['users' => $users, 'del_users' => $del_users]);
     }

@@ -23,14 +23,11 @@ class ModuleSeeder extends Seeder
             ['user_id' => null, 'code' => 'EDE', 'name' => 'Entornos de desarrollo', 'hours' => 99, 'course' => 1, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
             //se insertan 5 módulos en el ciclo 1 (DAM) de segundo
             //Id's de los modulos 2DAM: 6ACD,7DI,8PMDM,9PSP,10SGE
-            // Koldo -> 10 
-            // Ruben -> 11
-            // Borja -> 12E
-            ['user_id'=> 10, 'code' => 'ACD', 'name' => 'Acceso a datos', 'hours' => 120, 'course' => 2, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id'=> 11, 'code' => 'DI', 'name' => 'Desarrollo de interfaces', 'hours' => 140, 'course' => 2, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id'=> 12, 'code' => 'PMDM', 'name' => 'Programación multimedia y dispositivos móviles', 'hours' => 100, 'course' => 2, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id'=> 10, 'code' => 'PSP', 'name' => 'Programación de servicios y procesos', 'hours' => 80, 'course' => 2, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id'=> 11, 'code' => 'SGE', 'name' => 'Sistemas de gestión empresarial', 'hours' => 100, 'course' => 2, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id'=> 11, 'code' => 'ACD', 'name' => 'Acceso a datos', 'hours' => 120, 'course' => 2, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id'=> 12, 'code' => 'DI', 'name' => 'Desarrollo de interfaces', 'hours' => 140, 'course' => 2, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id'=> 13, 'code' => 'PMDM', 'name' => 'Programación multimedia y dispositivos móviles', 'hours' => 100, 'course' => 2, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id'=> 11, 'code' => 'PSP', 'name' => 'Programación de servicios y procesos', 'hours' => 80, 'course' => 2, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id'=> 12, 'code' => 'SGE', 'name' => 'Sistemas de gestión empresarial', 'hours' => 100, 'course' => 2, 'cycle_id' => 1, 'created_at' => now(), 'updated_at' => now()],
 
             //se insertan 5 módulos en el ciclo 2 (DAW) de primero
             ['user_id' => null, 'code' => 'SIW', 'name' => 'Sistemas informaticos', 'hours' => 165, 'course' => 1, 'cycle_id' => 2, 'created_at' => now(), 'updated_at' => now()],
