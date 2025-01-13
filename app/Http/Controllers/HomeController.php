@@ -50,15 +50,12 @@ class HomeController extends Controller
 
     public function homeAdmin()
     {
-        // Obtener el usuario logueado
         $user = Auth::user();
 
-        // Verificar si el usuario tiene un rol y si es admin o god
         if ($user->role) {
             $role = $user->role;
             if ($role->role == 'god' || $role->role == 'administrador') {
 
-                //Verificar para ssaber si hay alumnos, y si no hay que me aparezca 0 
                 $alumnoRole = Role::where('role', 'estudiante')->first();
                 if ($alumnoRole) {
                     $totalAlumnos = User::where('role_id', $alumnoRole->id)->count();
@@ -66,19 +63,26 @@ class HomeController extends Controller
                     $totalAlumnos = 0;
                 }
 
+                $personalRole = Role::where('role', 'profesor')->first();
+                if ($personalRole) {
+                    $totalPersonal = User::where('role_id', $personalRole->id)->count();
+                } else {
+                    $totalPersonal = 0;
+                }
 
-                // Ciclos formativos
+                $reunionesAccepted = Meeting::where('status', 'accepted')->count();
+                $reunionesPendientes = Meeting::where('status', 'pending')->count();
+                $reunionesTotales = Meeting::get()->count();
                 $totalCiclos = Cycle::count();
-
-                // Usuarios sin rol
                 $usuariosSinRol = User::whereNull('role_id')->count();
-
-                // Módulos
                 $totalModulos = Module::count();
 
-                // Pasar los datos a la vista
-                return view('admin.home', compact(
+                return view('admin.home',  compact(
                     'totalAlumnos',
+                    'totalPersonal',
+                    'reunionesAccepted',
+                    'reunionesPendientes',
+                    'reunionesTotales',
                     'totalCiclos',
                     'usuariosSinRol',
                     'totalModulos'
@@ -86,7 +90,6 @@ class HomeController extends Controller
             }
         }
 
-        // Si el usuario no tiene rol adecuado, lanzar error
         abort(404);
     }
 }

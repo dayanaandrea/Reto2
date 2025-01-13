@@ -204,3 +204,7 @@ a.btn-warning:hover {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+#totales .bg-dark{
+    background-color: var(--pantone-darkest) !important;
+}
