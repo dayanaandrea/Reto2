@@ -8,6 +8,16 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 
+/**
+ * @OA\Info(title="API", version="1.0"),
+ * @OA\SecurityScheme(
+ *     in="header",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ *     securityScheme="bearerAuth",
+ *     type="http",
+ * ),
+ */
 class AuthController extends Controller
 {
     public function login(Request $request)

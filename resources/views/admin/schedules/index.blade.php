@@ -2,27 +2,20 @@
 
 @section('content')
 <div class="container">
-
     <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" schedule="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-    @if(session('permission'))
-        <div class="alert alert-warning alert-dismissible fade show" schedule="alert">
-            {{ session('permission') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-    <h2>Crear un nuevo horario</h2>
-    <div>
-        <p>Accede a la creación de un horario:</p>
-        <p><a href="{{ route('admin.schedules.create') }}" class="btn btn-primary">Crear horario</a></p>
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <div class="mb-2 text-end">
+        @php
+            $route = route('admin.schedules.create');
+            $type = "show";
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $tooltip =  __('schedule.create_schedule');
+        @endphp
+        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
     <h2>Horarios</h2>
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>
@@ -38,21 +31,37 @@
                 <tr>
                     <th scope="col">{{ $loop->iteration }}</th>
                     <td>{{$schedule->module->code}}</td>
-                    <td>{{$schedule->module->user->name}} {{$schedule->module->user->lastname}}</td>
+                    @if ($schedule->module->user)
+                                <td><a href="{{route('admin.schedules.show', $schedule->module->user)}}">{{$schedule->module->user->name}}
+                                        {{$schedule->module->user->lastname}}</a></td>
+                            @else
+                                <td>{{__('module.not_assigned')}}</td>
+                            @endif
                     <td>{{$schedule->day}}</td>
                     <td>{{$schedule->hour}}</td>
 
-                    <td><a href="{{route('admin.schedules.show', $schedule)}}" class="btn btn-secondary btn-sm">
-                            Ver
-                        </a>
-                        <a href="#" class="btn btn-warning btn-sm">
-                            Editar
-                        </a>
-                        <!-- Para generar un modal diferente siempre, se debe incluir el id -->
-                        <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#modalSchedule{{$schedule->id}}" data-schedule-id="{{ $schedule->id }}">
-                            Eliminar
-                        </a>
+                    <td>@php
+                    $route = route('admin.schedules.show', $schedule);
+                    $type = "show";
+                    $text = '<i class="fa-solid fa-eye"></i>';
+                    $tooltip = 'Ver datos de la reunión';
+                    @endphp
+                    <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
+                    @php
+                    $route = route('admin.schedules.edit', $schedule);
+                    $type = "edit";
+                    $text = '<i class="fa-solid fa-pen"></i>';
+                    $tooltip = 'Editar datos del horario';
+                    @endphp
+                    <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
+
+                    <!-- Para generar un modal diferente siempre, se debe incluir el id -->
+                    @php
+                    $id_modal = '#modal_delete' . $schedule->id;
+                    $text = '<i class="fa-solid fa-trash-can"></i>';
+                    $tooltip = 'Eliminar reunión';
+                    @endphp
+                    <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                     </td>
                 </tr>
 
