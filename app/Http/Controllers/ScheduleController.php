@@ -67,9 +67,18 @@ class ScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Schedule $schedules)
+    public function edit(Schedule $schedule)
     {
-        return view('admin.schedules.create-edit');
+        $modules = \App\Models\Module::orderBy('id')->get();
+        $users = \App\Models\User::where('role_id',1)->orderBy('id')->get();
+
+         //dd($schedule);
+
+         return view('admin.schedules.create-edit', [
+            'schedule' => $schedule,
+            'users' => $users,
+            'modules' => $modules,
+            'type'=>'PUT']);    
     }
 
     /**
@@ -80,12 +89,15 @@ class ScheduleController extends Controller
          // Validar los datos
          $this->validateSchedule($request);
 
-         $schedule->schedule = strtolower($request->schedule);
+         //$schedule->schedule = strtolower($request->schedule);
+         //dd($request);
          $schedule->module_id = $request->module_id;
+         $schedule->day = $request->day;
+         $schedule->hour = $request->hour;
          // Guardar el nuevo horario
          $schedule->save();
  
-         return redirect()->route('admin.schedules.index', $schedule)->with('success', 'Horario <b>' . $schedule->schedule . '</b> actualizado correctamente.');
+         return redirect()->route('admin.schedules.index', $schedule)->with('success', 'Horario <b>' . $schedule->day . '</b> actualizado correctamente.');
     }
 
     /**
@@ -96,5 +108,22 @@ class ScheduleController extends Controller
 
         $schedule->delete();
         return redirect()->route('admin.schedules.index')->with('success', 'Horario eliminado correctamente.');
+    }
+
+    /**
+     * Validates module's data.
+     */
+    private function validateSchedule(Request $request)
+    {
+        $request->validate([
+           
+            'module_id' => 'required',
+            'day' => 'required',
+            'hour' => 'required',
+        ], [
+            'module_id.required' => 'El campo de módulo es obligatorio.',
+            'day.required' => 'El campo día es obligatorio.',
+            'hour.required' => 'El campo de horas es obligatorio.',
+        ]);
     }
 }

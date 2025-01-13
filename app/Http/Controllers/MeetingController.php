@@ -51,7 +51,7 @@ class MeetingController extends Controller
   
           // Guardar el nuevo usuario
           $meeting->save();
-          return redirect()->route('admin.meetings.index')->with('success', 'Reunión  ' . $meeting->name . ' creado correctamente.');
+          return redirect()->route('admin.meetings.index')->with('success', 'Reunión ' . $meeting->date . ' creada correctamente.');
     }
 
     /**
@@ -67,7 +67,16 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-        return view('admin.meetings.create-edit', ['meetings'=>$meeting]);
+        $teachers = \App\Models\User::where('role_id',1)->orderBy('id')->get();
+        $students = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $status = \App\Models\Meeting::getStatusOptions();
+
+        return view('admin.meetings.create-edit', [
+           'meeting' => $meeting,
+           'teachers' => $teachers,
+           'students' => $students,
+           'status' => $status,
+           'type'=>'PUT']); 
     }
 
     /**
@@ -75,7 +84,20 @@ class MeetingController extends Controller
      */
     public function update(Request $request, Meeting $meeting)
     {
-        //
+        // Validar los datos
+        $this->validateMeeting($request);
+
+        //$schedule->schedule = strtolower($request->schedule);
+        //dd($request);
+        $meeting->date = $request->date;
+        $meeting->time = $request->time;
+        $meeting->status = $request->status;
+        $meeting->teacher_id = $request->teacher_id;
+        $meeting->student_id = $request->student_id;
+        // Guardar el nuevo horario
+        $meeting->save();
+
+        return redirect()->route('admin.meetings.index', $meeting)->with('success', 'La reunión <b>' . $meeting->date . '</b> ha sido actualizada correctamente.');
     }
 
     /**
@@ -86,5 +108,26 @@ class MeetingController extends Controller
         $meeting->delete();
         return redirect()->route('admin.meetings.index')->with('success', 'Reunión eliminada correctamente.');
        
+    }
+    
+     /**
+     * Validates module's data.
+     */
+    private function validateMeeting(Request $request)
+    {
+        $request->validate([
+           
+            'date' => 'required',
+            'time' => 'required',
+            'status' => 'required',
+            'teacher_id' => 'required',
+            'student_id' => 'required',
+        ], [
+            'date.required' => 'La fecha es obligatoria.',
+            'time.required' => 'El campo hora es obligatorio.',
+            'status.required' => 'El campo del estado de la reunión es obligatorio.',
+            'teacher_id.required' => 'El campo del profesor es obligatorio.',
+            'student_id.required' => 'El campo del estudiante es obligatorio.',
+        ]);
     }
 }
