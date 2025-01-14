@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
     
-    <h2 class="mb-4">Detalles del ciclo</h2>
+    <h2 class="mb-4">{{__('cycle.show_title_1')}}</h2>
 
     <!-- Tarjeta para mostrar detalles de los modulos -->
     <div class="card">
@@ -14,9 +14,9 @@
             <div class="col-6">
 
                 <div class="row">
-                    <x-detail :label="'Código:'" :value="$cycle->code" />
-                    <x-detail :label="'Nombre:'" :value="$cycle->name" />
-                    <p class="col-sm-3 fw-bold d-inline">Módulos</p>
+                    <x-detail :label="__('cycle.code')" :value="$cycle->code" />
+                    <x-detail :label="__('cycle.name')" :value="$cycle->name" />
+                    <p class="col-sm-3 fw-bold d-inline">{{__('cycle.module')}}</p>
                     <div class="col-sm-9 d-inline">
                         <ul class="list-group">
                             @foreach($cycle->modules as $module)
@@ -31,14 +31,14 @@
                         $route = route('admin.cycles.edit', $cycle);
                         $type = "edit";
                         $text = '<i class="fa-solid fa-pen"></i>';
-                        $tooltip = 'Editar datos del ciclo';
+                        $tooltip = __('cycle.edit_data_module');
                         @endphp
                         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
 
                         @php
                         $id_modal = '#modal_delete' . $cycle->id;
                         $text = '<i class="fa-solid fa-trash-can"></i>';
-                        $tooltip = 'Eliminar ciclo';
+                        $tooltip =  __('cycle.delete_module');
                         @endphp
 
                         <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />

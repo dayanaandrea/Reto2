@@ -44,8 +44,8 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        //dd('Antes de la validación');
-        //dd($request->all());
+       /* //dd('Antes de la validación');
+        //dd($request->all());*/
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
             'module_id' => 'required|array',                    //Hay que asegurarse de que sea un array

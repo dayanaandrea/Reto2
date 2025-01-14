@@ -12,7 +12,7 @@
     }
 @endphp
 
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
@@ -35,9 +35,9 @@
                     @endif
                             @csrf
 
-                            <h4>Detalles del rol</h4>
+                            <h4>{{__('role.details')}}</h4>
                             <div class=" row mb-3">
-                                <label for="role" class="col-md-4 col-form-label text-md-end">Rol</label>
+                                <label for="role" class="col-md-4 col-form-label text-md-end">{{__('role.role')}}</label>
 
                                 <div class="col-md-6">
                                     <input id="role" type="text"
@@ -53,7 +53,7 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="description" class="col-md-4 col-form-label text-md-end">Descripción</label>
+                                <label for="description" class="col-md-4 col-form-label text-md-end">{{__('role.description')}}</label>
 
                                 <div class="col-md-6">
                                     <textarea id="description"

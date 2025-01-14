@@ -17,10 +17,13 @@ return [
     'tp_show' => 'Ver datos del usuario',
     'tp_edit' => 'Editar datos del usuario',
     'tp_delete' => 'Eliminar usuario',
+    'tp_create' => 'Crear un nuevo usuario',
     // SHOW
     'title_show' => 'Detalles del Usuario',
     'address' => 'Dirección',
     'phone1' => 'Teléfono principal',
     'phone2' => 'Teléfono secundario',
     'pin' => 'DNI/NIE',
+    'schedule'=> 'Horario',
+    'no_schedule'=> 'No tiene horarios asignados.',
 ];

@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
     <x-alert :key="'success'" :class="'success'" />
-    <h2 class="mb-4">Detalles del rol</h2>
+    <h2 class="mb-4">{{__('role.details')}}</h2>
 
     <!-- Tarjeta para mostrar detalles de los roles -->
     <div class="card">
@@ -18,22 +18,22 @@
                     $badge = '<span class="badge ' . $clase . ' text-capitalize">' . $role->role . '</span>';
                     $description = $role->description;
                 @endphp
-                <x-detail :label="'Rol:'" :value="$badge" />
-                <x-detail :label="'Descripción:'" :value="$description" />
-                <x-detail :label="'Usuarios:'" :value="$userCount" />
+                <x-detail :label="__('role.role')" :value="$badge" />
+                <x-detail :label="__('role.description')" :value="$description" />
+                <x-detail :label="__('role.user')" :value="$userCount" />
                 <div>
                     @php
                         $route = route('admin.roles.edit', $role);
                         $type = "edit";
                         $text = '<i class="fa-solid fa-pen"></i>';
-                        $tooltip = 'Editar datos del rol';
+                        $tooltip =  __('role.edit_data_role');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                     <!-- Para generar un modal diferente siempre, se debe incluir el id -->
                     @php
                         $id_modal = '#modal_delete' . $role->id;
                         $text = '<i class="fa-solid fa-trash-can"></i>';
-                        $tooltip = 'Eliminar rol';
+                        $tooltip = __('role.delete_role');
                     @endphp
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                 </div>

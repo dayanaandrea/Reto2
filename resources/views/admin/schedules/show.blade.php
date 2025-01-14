@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
@@ -11,18 +11,22 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <p class="col-sm-3 fw-bold">Dia :</p>
+                <p class="col-sm-3 fw-bold">Dia:</p>
                 <p class="col-sm-9">{{ $schedule->day }}</p>
                 
                 <p class="col-sm-3 fw-bold">Hora:</p>
                 <p class="col-sm-9">{{ $schedule-> hour }}</p>
- 
-                <p class="col-sm-3 fw-bold">Profesor :</p>
-                <p class="col-sm-9">{{ $schedule->module->user->name }} {{ $schedule->module->user->lastname }}</p>
 
-                <p class="col-sm-3 fw-bold">Módulo pertenece :</p>
-                <p class="col-sm-9">{{ $schedule->module->code }} {{ $schedule->module->name }}</p>
+                <p class="col-sm-3 fw-bold">Módulo pertenece:</p>
+                <p class="col-sm-9">{{$schedule->module->code}} {{$schedule->module->name}}</p>
 
+               <p class="col-sm-3 fw-bold">Profesor :</p>
+               @if ($schedule->module->user)
+                    <td><a href="{{route('admin.schedules.show', $schedule->module->user)}}"
+                    >{{$schedule->module->user->name}} {{$schedule->module->user->lastname}}</a></td>
+               @else
+                     <td>{{__('module.not_assigned')}}</td>
+               @endif
             </div>
         </div>
     </div>

@@ -1,21 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
-    @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {!! session('success') !!}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <div class="mb-2 text-end">
+        @php
+            $route = route('admin.meetings.create');
+            $type = "show";
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $tooltip =  __('meetings.create_meeting');
+        @endphp
+        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
-    @endif
-
-    <h2>Crear una nueva reunión</h2>
-    <div>
-        <p>Accede a la creación de una reunión:</p>
-        
-    </div>
-    <h2>Modulos</h2>
-    <table class="table table-hover">
+    <h2>Reuniones</h2>
+    <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>
@@ -31,11 +31,11 @@
             @foreach ($meetings as $meeting)
             <tr>
                 <th scope="col">{{ $loop->iteration }}</th>
+                <td>{{$meeting->teacher->name}}</td>
+                <td>{{$meeting->student->name}}</td>
                 <td>{{$meeting->date}}</td>
                 <td>{{$meeting->time}}</td>
                 <td>{{$meeting->status}}</td>
-                <td>{{$meeting->teacher->name}}</td>
-                <td>{{$meeting->student->name}}</td>
                
                 <td>
                     @php

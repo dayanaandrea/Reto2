@@ -13,12 +13,32 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Paginar, para no mostrar todos de golpe
-        $users = User::orderBy('created_at', 'desc')->paginate(10, ['*'], 'active');
+        $rolFiltro = $request->get('role', ''); 
+
+        $user = User::orderBy('created_at', 'desc');
+
+        if ($rolFiltro) {
+            if ($rolFiltro === 'estudiante') {
+                $user->whereHas('role', function ($query) {
+                    $query->where('role', 'estudiante'); 
+                });
+            } elseif ($rolFiltro === 'profesor') {
+                $user->whereHas('role', function ($query) {
+                    $query->where('role', 'profesor'); 
+                });
+            } elseif ($rolFiltro === 'sin_rol') { 
+                $user->whereDoesntHave('role');
+            }
+        
+        }
+
+        $users = $user->paginate(10, ['*'], 'active');
+
         $del_users = User::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(10, ['*'], 'inactive');
-        return view('admin.users.index', ['users' => $users, 'del_users' => $del_users]);
+
+        return view('admin.users.index', compact('users', 'del_users' ));
     }
 
     /**
@@ -39,7 +59,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // Validar los datos del usuario
-        $this->validateUser($request);
+        validateUser($request);
 
         // Crear el usuario
         $user = new User();
@@ -49,16 +69,9 @@ class UserController extends Controller
         $user->pin = $request->pin;
         $user->address = $request->address;
         $user->phone1 = $request->phone1;
-        $user->phone2 = $request->has('phone2');
+        $user->phone2 = $request->has('phone2') ? $request->phone2 : null;
         $user->role_id = $request->role_id;
         $user->password = Hash::make('1234');
-
-        // La imagen se guarda como binary en la base de datos
-        if ($request->hasFile('photo')) {
-            $image = $request->file('photo');
-            $imageData = file_get_contents($image->getRealPath());
-            $user->photo = $imageData;
-        }
 
         // Guardar el nuevo usuario
         $user->save();
@@ -97,7 +110,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         // Validar los datos del usuario
-        $this->validateUser($request, $user);
+        validateUser($request, $user);
 
         $user->name = $request->name;
         $user->lastname = $request->lastname;
@@ -105,20 +118,16 @@ class UserController extends Controller
         $user->pin = $request->pin;
         $user->address = $request->address;
         $user->phone1 = $request->phone1;
-        $user->phone2 = $request->has('phone2');
+        $user->phone2 = $request->has('phone2') ? $request->phone2 : $user->phone2;
         $user->role_id = $request->role_id;
 
-        // La imagen se guarda como binary en la base de datos
-        if ($request->hasFile('photo')) {
-            $image = $request->file('photo');
-            $imageData = file_get_contents($image->getRealPath());
-            $user->photo = $imageData;
+        try {
+            // Guardar el nuevo usuario
+            $user->save();
+            return redirect()->route('admin.users.show', $user)->with('success', 'Usuario <b>' . $user->email . '</b> actualizado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.users.show', $user)->with('error', 'Error al actualizar el usuario <b>' . $user->email . '</b>X.');
         }
-
-        // Guardar el nuevo usuario
-        $user->save();
-
-        return redirect()->route('admin.users.show', $user)->with('success', 'Usuario <b>' . $user->email . '</b> actualizado correctamente.');
     }
 
     /**
@@ -164,11 +173,7 @@ class UserController extends Controller
         // Guardar el nuevo usuario
         $user->save();
 
-        if (Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god')) {
-            return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
-        } else {
-            return redirect()->route('users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
-        }
+        return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
     }
 
     /**
@@ -207,53 +212,6 @@ class UserController extends Controller
             'new_password.max' => 'La contraseña no puede tener más de 255 caracteres.',
             'new_password_confirmation.min' => 'La contraseña debe tener al menos 8 caracteres.',
             'new_password_confirmation.max' => 'La contraseña no puede tener más de 255 caracteres.',
-        ]);
-    }
-
-    private function validateUser(Request $request, $user = null)
-    {
-        // Excluir el email del usuario actual durante la actualización
-        $emailValidation = 'required|email|unique:users,email,' . ($user ? $user->id : 'NULL') . '|max:255';
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'email' => $emailValidation,
-            'pin' => [
-                'required',
-                'string',
-                'min:9',
-                'max:9',
-                'regex:/^[XYZ]?\d{7}[A-Za-z]$|^\d{8}[A-Za-z]$/', // Validación para DNI o NIE
-            ],
-            'address' => 'required|string|max:255',
-            'phone1' => 'required|string|max:15',
-            'phone2' => 'nullable|string|max:15',
-            'role_id' => 'required|exists:roles,id',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ], [
-            // Mensajes de error personalizados
-            'name.required' => 'El nombre es obligatorio.',
-            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
-            'lastname.required' => 'El apellido es obligatorio.',
-            'lastname.max' => 'El apellido no puede tener más de 255 caracteres.',
-            'email.required' => 'El correo electrónico es obligatorio.',
-            'email.email' => 'El correo electrónico debe ser válido.',
-            'email.unique' => 'El correo electrónico ya está en uso. Por favor, elige otro.',
-            'pin.required' => 'El DNI/NIE es obligatorio.',
-            'pin.min' => 'El DNI/NIE debe tener 9 caracteres.',
-            'pin.max' => 'El DNI/NIE no puede tener más de 9 caracteres.',
-            'pin.regex' => 'Un DNI tiene 8 dígitos seguidos de una letra, o un NIE tiene una letra inicial seguida de 7 dígitos y una letra al final.',
-            'address.required' => 'La dirección es obligatoria.',
-            'address.max' => 'La dirección no puede tener más de 255 caracteres.',
-            'phone1.required' => 'El número de teléfono principal es obligatorio.',
-            'phone1.max' => 'El número de teléfono principal no puede tener más de 15 caracteres.',
-            'phone2.max' => 'El número de teléfono secundario no puede tener más de 15 caracteres.',
-            'role_id.required' => 'El rol es obligatorio.',
-            'role_id.exists' => 'El rol seleccionado no existe.',
-            'photo.image' => 'La foto debe ser una imagen válida.',
-            'photo.mimes' => 'La foto debe tener uno de los siguientes formatos: jpg, jpeg, png.',
-            'photo.max' => 'La foto no puede exceder los 2MB.',
         ]);
     }
 }

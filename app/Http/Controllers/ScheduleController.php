@@ -22,8 +22,17 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        $schedules = Schedule::orderBy('user_id')->get();
-        return view('admin.schedules.create-edit', ['schedules'=>$schedules]);
+        $modules = \App\Models\Module::orderBy('id')->get();
+        $users = \App\Models\User::where('role_id',1)->orderBy('id')->get();
+
+         // Datos que queremos pasar a la vista
+         $schedules = Schedule::orderBy('hour')->get();
+
+         return view('admin.schedules.create-edit', [
+            'schedules' => $schedules,
+            'users' => $users,
+            'modules' => $modules,
+            'type'=>'POST']);    
     }
 
     /**
@@ -31,17 +40,19 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+        
         // Crear el horario
-        $schedules = new Schedule();
-        $schedules->user_id = $request->user_id;
-        $schedules->module_id = $request->module_id;
-        $schedules->day = $request->day;
-        $schedules->hour = $request->hour;
+        $schedule = new Schedule();
+        //$schedule->user_id = $request->user_id;
+        $schedule->module_id = $request->module_id;
+        $schedule->day = $request->day;
+        $schedule->hour = $request->hour;
 
+        //dd($request);
         // Guardar el nuevo horario
-        $schedules->save();
+        $schedule->save();
 
-        return redirect()->route('admin.schedules.index')->with('success', 'Horario  ' . $schedules->day . ' creado correctamente.');
+        return redirect()->route('admin.schedules.index')->with('success', 'Horario  ' . $schedule->day . ' creado correctamente.');
     
     }
 
@@ -56,9 +67,18 @@ class ScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Schedule $schedules)
+    public function edit(Schedule $schedule)
     {
-        //
+        $modules = \App\Models\Module::orderBy('id')->get();
+        $users = \App\Models\User::where('role_id',1)->orderBy('id')->get();
+
+         //dd($schedule);
+
+         return view('admin.schedules.create-edit', [
+            'schedule' => $schedule,
+            'users' => $users,
+            'modules' => $modules,
+            'type'=>'PUT']);    
     }
 
     /**
@@ -66,7 +86,18 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, Schedule $schedule)
     {
-        //
+         // Validar los datos
+         $this->validateSchedule($request);
+
+         //$schedule->schedule = strtolower($request->schedule);
+         //dd($request);
+         $schedule->module_id = $request->module_id;
+         $schedule->day = $request->day;
+         $schedule->hour = $request->hour;
+         // Guardar el nuevo horario
+         $schedule->save();
+ 
+         return redirect()->route('admin.schedules.index', $schedule)->with('success', 'Horario <b>' . $schedule->day . '</b> actualizado correctamente.');
     }
 
     /**
@@ -74,8 +105,25 @@ class ScheduleController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
-        $user_id = $schedule->user_id; 
-        $schedule->delete(); 
-        return view('admin.schedules.success', ['user_id'=>$user_id]); 
+
+        $schedule->delete();
+        return redirect()->route('admin.schedules.index')->with('success', 'Horario eliminado correctamente.');
+    }
+
+    /**
+     * Validates module's data.
+     */
+    private function validateSchedule(Request $request)
+    {
+        $request->validate([
+           
+            'module_id' => 'required',
+            'day' => 'required',
+            'hour' => 'required',
+        ], [
+            'module_id.required' => 'El campo de módulo es obligatorio.',
+            'day.required' => 'El campo día es obligatorio.',
+            'hour.required' => 'El campo de horas es obligatorio.',
+        ]);
     }
 }

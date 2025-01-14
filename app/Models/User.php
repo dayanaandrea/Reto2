@@ -8,11 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     // Un usuario puede tener un único rol
     public function role(): BelongsTo
@@ -86,4 +87,8 @@ class User extends Authenticatable
         return $this->hasMany(Meeting::class, 'student_id');
     }
 
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
 }

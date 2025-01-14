@@ -92,11 +92,7 @@ return [
     | List all locales that your application works with
     |
     */
-    'available_locales' => [
-        'English' => 'en',
-        'Español' => 'es',
-        'Euskera' => 'eus',
-    ],
+    'available_locales' => ['es', 'en', 'eus'],
 
     /*
     |--------------------------------------------------------------------------
@@ -136,4 +132,6 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+
+    'pagination' => env('PAGINATION', 10),
 ];

@@ -13,7 +13,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::withCount('users')->orderBy('role', 'asc')->paginate(5);
+        $roles = Role::withCount('users')->orderBy('role', 'asc')->paginate(config('app.pagination', 10));
         // Contar usuarios sin rol
         $sin_roles = User::whereNull('role_id')->count();
         return view('admin.roles.index', ['roles' => $roles, 'sin_roles' => $sin_roles]);
@@ -33,7 +33,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         // Validar los datos
-        $this->validateRole($request);
+        validateRole($request);
 
         // Crear el rol
         $role = new Role();
@@ -74,7 +74,7 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         // Validar los datos
-        $this->validateRole($request);
+        validateRole($request);
 
         $role->role = strtolower($request->role);
         $role->description = $request->description;
@@ -96,24 +96,5 @@ class RoleController extends Controller
             $role->delete();
             return redirect()->route('admin.roles.index')->with('success', 'Rol <b>' . $role->role . '</b> eliminado correctamente.');
         }
-    }
-
-    /**
-     * Validates role's data.
-     */
-    private function validateRole(Request $request)
-    {
-        $request->validate([
-            'role' => 'required',
-            'description' => [
-                'required',
-                'min:10',
-                'max:255'
-            ],
-        ], [
-            // Mensajes de error personalizados según lo que falle
-            'description.min' => 'La descripción debe tener al menos 10 caracteres.',
-            'description.max' => 'La descripción no puede tener más de 255 caracteres.',
-        ]);
     }
 }

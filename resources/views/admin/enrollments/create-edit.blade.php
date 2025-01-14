@@ -16,7 +16,7 @@
     }
 @endphp
 
-@extends('layouts.app')
+@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
