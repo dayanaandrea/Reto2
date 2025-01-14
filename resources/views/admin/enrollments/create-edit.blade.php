@@ -1,3 +1,4 @@
+@extends('layouts.app-admin')
 @php
     if (isset($enrollment)) {
         $user = $enrollment->user_id;
@@ -15,8 +16,6 @@
         $isEdit = false; 
     }
 @endphp
-
-@extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
