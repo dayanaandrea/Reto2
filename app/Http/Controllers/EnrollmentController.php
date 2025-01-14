@@ -116,9 +116,15 @@ class EnrollmentController extends Controller
             'date' => 'required',
         ]);
         
-        dd($validatedData);
-    
+        //dd($validatedData);
+
+         // Si 'module_id' es un array, obtenemos el primer valor
+        if (is_array($validatedData['module_id'])) {
+            $validatedData['module_id'] = $validatedData['module_id'][0];
+        }
+
         $enrollment->update($validatedData);
+    
     
         return redirect()->route('admin.enrollments.show',$enrollment)->with('success', 'Matricula  <b>' . $enrollment->enrollment . '</b> creado correctamente.');   
          
