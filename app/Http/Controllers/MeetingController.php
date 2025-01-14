@@ -59,7 +59,7 @@ class MeetingController extends Controller
      */
     public function show(Meeting $meeting)
     {
-        return view('admin.meetings.show',['meetings'=>$meeting]);
+        return view('admin.meetings.show',['meeting'=>$meeting]);
     }
 
     /**
