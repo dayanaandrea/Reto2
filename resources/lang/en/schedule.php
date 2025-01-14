@@ -6,6 +6,7 @@ return [
     'index_title_2' => 'Access schedule creation:',
     'schedule' => 'Schedules',
     'name' => 'Name',
+    'day' => 'Day',
     'hour' => 'Hour',
     'module' => 'Module',
     'teacher' => 'Teacher',
