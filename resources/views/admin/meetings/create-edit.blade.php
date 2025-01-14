@@ -22,7 +22,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Create') }}</div>
+                <div class="card-header">{{ __('Creación de reuniones') }}</div>
 
                 <div class="card-body">
                     @if($type == 'PUT')
