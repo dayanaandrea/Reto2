@@ -35,7 +35,7 @@
                                 <td><a href="{{route('admin.schedules.show', $schedule->module->user)}}">{{$schedule->module->user->name}}
                                         {{$schedule->module->user->lastname}}</a></td>
                             @else
-                                <td>{{__('module.not_assigned')}}</td>
+                                <td>{{__('schedule.not_assigned')}}</td>
                             @endif
                     <td>{{$schedule->day}}</td>
                     <td>{{$schedule->hour}}</td>
@@ -79,7 +79,7 @@
 
                             <!-- Cuerpo del Modal -->
                             <div class="modal-body">
-                                ¿Estás seguro de que deseas eliminar el horario <b>{{ $schedule->day }}</b>? Esta acción no
+                                ¿Estás seguro de que deseas eliminar este horario <!--<b>{{ $schedule->day }}</b>-->? Esta acción no
                                 se puede deshacer.
                             </div>
 
