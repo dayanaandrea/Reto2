@@ -34,50 +34,44 @@
                 <div class="mt-4">
                     @if(Auth::user()->role && (Auth::user()->role->role === 'administrador' || Auth::user()->role->role === 'god'))
                         @php
+                        // Ruta de edición para la matrícula
                         $routeEdit = route('admin.enrollments.edit', $enrollment);
                         $typeEdit = "edit";
                         $textEdit = '<i class="fa-solid fa-pen"></i>';
                         $tooltipEdit = 'Editar datos de la matrícula';
 
+                        // Ruta para la eliminación
+                        $routeDelete = route('admin.enrollments.destroy', $enrollment->id);
                         $id_modal = 'modal_delete' . $enrollment->id;
                         $textDelete = '<i class="fa-solid fa-trash-can"></i>';
                         $tooltipDelete = 'Eliminar matrícula';
+                        $mensajeDelete = __('enrollment.ask_for_delete_confirmation_1') . ' <b>' . $enrollment->name . '</b>' . __('enrollment.ask_for_delete_confirmation_2');
                         @endphp
                         
+                        <!-- Botón de editar -->
                         <x-buttons.generic :route="$routeEdit" :type="$typeEdit" :text="$textEdit" :tooltip="$tooltipEdit" />
-                        <x-buttons.open-modal :id="$id_modal" :text="$textDelete" :type="'danger'" :tooltip="$tooltipDelete" />
+
+                        <!-- Modal para eliminar la matrícula -->
+                        @php
+                        $id_modal = '#modal_delete' . $enrollment->id;
+                        $text = '<i class="fa-solid fa-trash-can"></i>';
+                        $tooltip =  __('enrollment.delete_enrollment');
+                        @endphp
+
+                        <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
+                        
                     @endif
                 </div>
-
-                <!-- Modal para eliminar la matrícula -->
-                <div class="modal fade" id="modal_delete{{ $enrollment->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            <h5 class="modal-title">{{__('enrollment.delete_confirmation')}}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <!-- Cuerpo del Modal -->
-                        <div class="modal-body">
-                        {{__('enrollment.ask_for_delete_confirmation_1')}} <b>{{ $enrollment->name }}</b>{{__('enrollment.ask_for_delete_confirmation_2')}}                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('enrollment.cancel')}}</button>
-                            <!-- Formulario de eliminación -->
-                            <form action="{{ route('admin.enrollments.destroy', $enrollment->id) }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit"> {{__('enrollment.delete')}} </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             </div>
         </div>
     </div>
 </div>
-@endsection
+<!-- Modal para eliminar un horario -->
+@php
+$id = 'modal_delete' . $enrollment->id;
+$mensaje = "¿Estás seguro de que deseas eliminar el horario <strong>$enrollment->name</strong>? Esta acción no se puede deshacer.";
+$ruta = route('admin.enrollments.destroy', $enrollment);
+@endphp
+<x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
+@endsection    
