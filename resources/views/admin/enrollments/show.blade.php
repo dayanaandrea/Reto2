@@ -6,7 +6,7 @@
     <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
     <x-alert :key="'success'" :class="'success'" />
 
-    <h2 class="mb-4">{{__('enrollment.title_show_1')}}</h2>
+    
 
     <!-- Tarjeta para mostrar detalles de los modulos -->
     <div class="card">

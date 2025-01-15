@@ -2,16 +2,21 @@
 
 @section('content')
 <div class="container">
-    <h2>{{__('enrollment.title_show_1')}}</h2>
 
     <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
     <x-alert :key="'success'" :class="'success'" />
 
-    <div>
-        <p>{{__('enrollment.title_show_2')}}</p>
-        <p><a href="{{ route('admin.enrollments.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
-                data-bs-placement="top" title="Crear matricula"><i class="fa-solid fa-plus"></i></a></p>
+    {{-- Boton para añadir matrículas --}}
+    <div class="mb-2 text-end">
+        @php
+            $route = route('admin.enrollments.create');
+            $type = "show";
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $tooltip = __('enrollment.tp_create');
+        @endphp
+        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
+
     <h2>{{__('enrollment.enrollments')}}</h2>
     <table class="table table-hover table-striped">
         <thead>
