@@ -100,7 +100,7 @@
                     <label for="phone1" class="col-md-4 col-form-label text-md-end">{{ __('auth.phone1') }}</label>
 
                     <div class="col-md-6">
-                        <input id="phone1" type="text" class="form-control @error('address') is-invalid @enderror" name="phone1" value="{{ old('phone1') }}" required autocomplete="phone1" autofocus>
+                        <input id="phone1" type="text" class="form-control @error('phone1') is-invalid @enderror" name="phone1" value="{{ old('phone1') }}" required autocomplete="phone1" autofocus>
 
                         @error('phone1')
                         <span class="invalid-feedback" role="alert">
@@ -114,7 +114,7 @@
                     <label for="phone2" class="col-md-4 col-form-label text-md-end">{{ __('auth.phone2') }}</label>
 
                     <div class="col-md-6">
-                        <input id="phone2" type="text" class="form-control @error('address') is-invalid @enderror" name="phone2" value="{{ old('phone2') }}" autocomplete="phone2" autofocus>
+                        <input id="phone2" type="text" class="form-control @error('phone2') is-invalid @enderror" name="phone2" value="{{ old('phone2') }}" autocomplete="phone2" autofocus>
 
                         @error('phone2')
                         <span class="invalid-feedback" role="alert">
