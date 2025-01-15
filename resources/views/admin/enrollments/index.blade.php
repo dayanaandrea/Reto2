@@ -39,8 +39,8 @@
                             </td>
                             <td>{{$enrollment->module->name}}</td>
                             <td>{{$enrollment->module->cycle->code}}</td>
-                            <td>{{$enrollment->module->course}}</td>
-                            <td>{{$enrollment->date}}</td>
+                            <td>{{$enrollment->module->course}}</td> 
+                            <td>{{ date('d-m-Y', strtotime($enrollment->created_at)) }}</td>
 
                             <td>
                                 @php

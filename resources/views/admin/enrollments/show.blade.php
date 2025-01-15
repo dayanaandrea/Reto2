@@ -25,8 +25,8 @@
                 <p class="col-sm-9">{{$enrollment->module->cycle->name}} ({{$enrollment->module->cycle->code}})</p>
 
                 <p class="col-sm-3 fw-bold">{{__('enrollment.date')}}</p>
-                <p class="col-sm-9">{{$enrollment->date}}</p>
-
+                <p class="col-sm-9">{{ date('d-m-Y', strtotime($enrollment->created_at)) }}</p>
+                
                 <p class="col-sm-3 fw-bold">{{__('enrollment.course')}}</p>
                 <p class="col-sm-9">{{$enrollment->module->course }}</p>
 
