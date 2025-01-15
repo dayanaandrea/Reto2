@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -35,7 +36,7 @@ class UserFactory extends Factory
             'lastname' => $lastname,
             'email' => $this->generateUniqueEmail($name_, $lastname_),
             'email_verified_at' => now(),
-            'password' => '1234',
+            'password' => Hash::make('1234'),
             'remember_token' => Str::random(10),
             'address' => fake()->address(),
             'phone1' => fake()->phoneNumber(),
@@ -63,7 +64,6 @@ class UserFactory extends Factory
         $counter = 1;
 
         while (User::where('email', $email)->exists()) {
-            // Si existe, se agrega un número aleatorio al correo
             $email = strtolower($name . '.' . $lastname . '.' . $counter) . '@elorrieta-errekamari.com';
             $counter++;
         }
@@ -117,16 +117,6 @@ class UserFactory extends Factory
     {
         return $this->state(fn(array $attributes) => [
             'role_id' => 4,
-        ]);
-    }
-
-    /**
-     * Crear un usuario con un ID personalizado
-     */
-    public function conId(int $id): static
-    {
-        return $this->state(fn(array $attributes) => [
-            'id' => $id,
         ]);
     }
 }

@@ -128,7 +128,7 @@ class UserController extends Controller
             $user->save();
             return redirect()->route('admin.users.show', $user)->with('success', 'Usuario <b>' . $user->email . '</b> actualizado correctamente.');
         } catch (\Exception $e) {
-            return redirect()->route('admin.users.show', $user)->with('error', 'Error al actualizar el usuario <b>' . $user->email . '</b>X.');
+            return redirect()->route('admin.users.show', $user)->with('error', 'Error al actualizar el usuario <b>' . $user->email . '</b>.');
         }
     }
 
