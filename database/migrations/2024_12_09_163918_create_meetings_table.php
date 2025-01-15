@@ -13,17 +13,14 @@ return new class extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->tinyInteger('day');
             $table->tinyInteger('time');
+            $table->tinyInteger('week');
             //Establecer los valores por defecto que va a tener el enum
-            $table->enum('status', ['accepted', 'rejected', 'pending'])->default('pending');
-
-
-            $table->unsignedBigInteger ('teacher_id');
-            $table->unsignedBigInteger ('student_id');
-            $table->foreign('teacher_id')-> references('id')-> on('users')-> onUpdate('cascade')-> onDelete('cascade');
-            $table->foreign('student_id')-> references('id')-> on('users')-> onUpdate('cascade')-> onDelete('cascade');
-
+            $table->enum('status', ['aceptada', 'rechazada', 'pendiente'])->default('pendiente');
+            $table->unsignedBigInteger ('user_id');
+            $table->foreign('user_id')-> references('id')-> on('users')-> onUpdate('cascade')-> onDelete('cascade');
+            $table->unique(array('user_id', 'id'));
             $table->timestamps();
         });
     }
