@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Enrollment extends Model
 {
-    protected $fillable = ['date', 'user_id', 'module_id']; 
+    protected $fillable = ['user_id', 'module_id', 'date']; 
     //Este clase modelo en un futuro podría borrarse(OPCIONAL) 
     public function user()
     {
@@ -15,6 +15,6 @@ class Enrollment extends Model
 
     public function module()
     {
-        return $this->belongsTo(Module::class, 'module_id');
+        return $this->belongsTo(Module::class);
     }
 }

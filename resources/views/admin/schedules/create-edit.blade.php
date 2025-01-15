@@ -21,7 +21,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Create') }}</div>
+                <div class="card-header">{{ __('schedule.index_title_1') }}</div>
 
                 <div class="card-body">
                     @if($type == 'PUT')
@@ -37,7 +37,7 @@
                     @endif
                             @csrf
 
-                        <h4>{{ __('Schedule') }}</h4>
+                        <h4>{{ __('schedule.schedule') }}</h4>
 
                         <!-- Campo para el profesor 
                         <div class="row mb-3">
@@ -61,7 +61,7 @@
                             <label for="module_id" class="col-md-4 col-form-label text-md-end">{{__('schedule.module')}}</label>
                             <div class="col-md-7">
                             <select name="module_id" id="module_id" class="form-select">
-                            <option value="" selected> -- Selecciona el módulo -- </option>
+                            <option value="" selected>{{__('schedule.select_teacher')}}</option>
                                     @foreach ($modules as $module)
                                         <option value="{{ $module->id }}" 
                                             {{ $module->id == old('module_id', isset($schedule) ? $schedule->module_id : '') ? 'selected' : '' }}>
@@ -74,7 +74,7 @@
 
                         <!-- Campo para Día -->
                         <div class="row mb-3">
-                            <label for="day" class="col-md-4 col-form-label text-md-end">{{ __('Day') }}</label>
+                            <label for="day" class="col-md-4 col-form-label text-md-end">{{ __('schedule.day') }}</label>
 
                             <div class="col-md-6">
                                 <input id="day" type="number" min = "1" max = "31" class="form-control @error('day') is-invalid @enderror" name="day" value="{{ old('day', $day) }}" required autocomplete="day" autofocus>
@@ -89,7 +89,7 @@
 
                         <!-- Campo para Hora -->
                         <div class="row mb-3">
-                            <label for="hour" class="col-md-4 col-form-label text-md-end">{{ __('Hour') }}</label>
+                            <label for="hour" class="col-md-4 col-form-label text-md-end">{{ __('schedule.hour') }}</label>
 
                             <div class="col-md-6">
                                 <input id="hour" type="number" min="1" max="6" class="form-control @error('hour') is-invalid @enderror" name="hour" value="{{ old('hour', $hour) }}" required autocomplete="hour" autofocus>

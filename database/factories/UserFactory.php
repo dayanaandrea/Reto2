@@ -56,10 +56,16 @@ class UserFactory extends Factory
         $lastname = iconv('UTF-8', 'ASCII//TRANSLIT', $lastname);
 
         // Generar el correo en formato nombre.apellido@elorrieta-errekamari.com
-        $email = strtolower($name . '.' . $lastname) . '@elorrieta-errekamari.com';
+        $emailBase = strtolower($name . '.' . $lastname) . '@elorrieta-errekamari.com';
 
-        if (User::where('email', $email)->exists()) {
-            $email = strtolower($name . '.' . $lastname . '.' . fake()->randomNumber(2)) . '@elorrieta-errekamari.com';
+        // Comprobar si el correo ya existe
+        $email = $emailBase;
+        $counter = 1;
+
+        while (User::where('email', $email)->exists()) {
+            // Si existe, se agrega un número aleatorio al correo
+            $email = strtolower($name . '.' . $lastname . '.' . $counter) . '@elorrieta-errekamari.com';
+            $counter++;
         }
 
         return $email;
@@ -92,6 +98,35 @@ class UserFactory extends Factory
     {
         return $this->state(fn(array $attributes) => [
             'role_id' => 2,
+        ]);
+    }
+
+    /**
+     * Crear un usuario con rol 3 - ADMINISTRADOS
+     */
+    public function conRolAdministrador(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'role_id' => 3,
+        ]);
+    }
+    /**
+     * Crear un usuario con rol 4 - GOD
+     */
+    public function conRolGod(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'role_id' => 4,
+        ]);
+    }
+
+    /**
+     * Crear un usuario con un ID personalizado
+     */
+    public function conId(int $id): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'id' => $id,
         ]);
     }
 }
