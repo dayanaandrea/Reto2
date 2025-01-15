@@ -6,20 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Meeting extends Model
 {
-    protected $fillable = ['date', 'time','status', 'teacher_id' , 'student_id']; 
+    protected $fillable = ['date', 'time','status', 'user_id' , 'week']; 
 
-    public function teacher()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'teacher_id');
+        return $this->belongsTo(User::class);
     }
 
-    public function student()
+    public function participants()
     {
-        return $this->belongsTo(User::class, 'student_id');
+        return $this->belongsToMany(User::class, 'participants', 'meeting_id', 'user_id');
     }
 
     public static function getStatusOptions()
     {
-        return ['accepted', 'rejected', 'pending'];
+        return ['aceptada', 'rechazada', 'pendiente'];
     }
 }

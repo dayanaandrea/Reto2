@@ -47,6 +47,14 @@
                         @if ($user->phone2 != null)
                         <x-detail :label="__('user.phone2')" :value="$user->phone2" />
                         @endif
+                        @php
+                        if($user->intensive==0){
+                            $value = 'No';
+                        } else {
+                            $value = 'Sí';
+                        }
+                        @endphp
+                        <x-detail :label="'Dual intensiva'" :value="$value" />
 
                         <!--
                                                                         <x-detail :label="__('user.creation_date')" :value="$user->created_at->format('d/m/Y')" />

@@ -28,7 +28,7 @@
                         </div>
                     </td>
                     <td>{{$student->name}} {{$student->lastname}}</td>
-                    <td>{{$student->email}}</td>
+                    <td><a href="mailto:{{$student->email}}">{{$student->email}}</a></td>
                     <td>
                         @if($student->enrollments)
                             @php
