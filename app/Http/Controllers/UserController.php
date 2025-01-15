@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $rolFiltro = $request->get('role', ''); 
 
-        $user = User::orderBy('created_at', 'desc');
+        $user = User::orderBy('id', 'desc');
 
         if ($rolFiltro) {
             if ($rolFiltro === 'estudiante') {
@@ -70,6 +70,7 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->phone1 = $request->phone1;
         $user->phone2 = $request->has('phone2') ? $request->phone2 : null;
+        $user->intensive = $request->has('intensive') ? 1 : 0;
         $user->role_id = $request->role_id;
         $user->password = Hash::make('1234');
 
@@ -119,6 +120,7 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->phone1 = $request->phone1;
         $user->phone2 = $request->has('phone2') ? $request->phone2 : $user->phone2;
+        $user->intensive = $request->has('intensive') ? 1 : $user->intensive;
         $user->role_id = $request->role_id;
 
         try {

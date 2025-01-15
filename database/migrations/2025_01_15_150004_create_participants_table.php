@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            /*
-            meeting_id
-receiver_id
-status
-            */
+            $table->unsignedBigInteger('meeting_id');
+            $table->unsignedBigInteger('receiver_id');
+            $table->enum('status', ['accepted', 'rejected', 'pending'])->default('pending');
         });
     }
 
