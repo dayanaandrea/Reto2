@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Detalles del horario</h2>
+    <h2 class="mb-4">{{__('schedule.show_title')}}</h2>
 
     <!-- Tarjeta para mostrar detalles de los horarios -->
     <div class="card">
@@ -11,21 +11,21 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <p class="col-sm-3 fw-bold">Dia:</p>
+                <p class="col-sm-3 fw-bold">{{__('schedule.day')}}</p>
                 <p class="col-sm-9">{{ $schedule->day }}</p>
                 
-                <p class="col-sm-3 fw-bold">Hora:</p>
+                <p class="col-sm-3 fw-bold">{{__('schedule.hour')}}</p>
                 <p class="col-sm-9">{{ $schedule-> hour }}</p>
 
-                <p class="col-sm-3 fw-bold">Módulo pertenece:</p>
+                <p class="col-sm-3 fw-bold">{{__('schedule.module')}}</p>
                 <p class="col-sm-9">{{$schedule->module->code}} {{$schedule->module->name}}</p>
 
-               <p class="col-sm-3 fw-bold">Profesor :</p>
+               <p class="col-sm-3 fw-bold">{{__('schedule.teacher')}}</p>
                  @if ($schedule->module->user)
                     <td><a href="{{route('admin.schedules.show', $schedule->module->user)}}"
                     >{{$schedule->module->user->name}} {{$schedule->module->user->lastname}}</a></td>
                 @else
-                     <td>{{__('module.not_assigned')}}</td>
+                     <td>{{__('schedule.not_assigned')}}</td>
                 @endif
                  <div>
                         <!-- Los botones de las operaciones CRUD solo aparecen para los god y admin -->

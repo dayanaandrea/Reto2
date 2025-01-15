@@ -22,7 +22,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Creación de reuniones') }}</div>
+                <div class="card-header">{{__('meeting.index_title_1') }}</div>
 
                 <div class="card-body">
                     @if($type == 'PUT')
@@ -38,14 +38,14 @@
                     @endif
                             @csrf
 
-                        <h4>{{ __('Meeting') }}</h4>
+                        <h4>{{__('meeting.meeting') }}</h4>
 
                         <!-- Campo para Profesor -->
                         <div class="row mb-3">
                         <label for="teacher_id" class="col-md-4 col-form-label text-md-end">{{__('meeting.teacher')}}</label>
                             <div class="col-md-6">
                                 <select name="teacher_id" id="teacher_id" class="form-select">
-                                    <option value="" selected> -- Selecciona un profesor -- </option>
+                                    <option value="" selected>{{__('meeting.select_teacher') }} </option>
                                     @foreach ($teachers as $teacher)
                                     <!-- Esto verifica si la variable $meeting está definida y contiene un valor.
                                     Si estamos creando un nuevo módulo, no existe $meeting por lo que sería false 
@@ -64,7 +64,7 @@
                             <label for="student_id" class="col-md-4 col-form-label text-md-end">{{__('meeting.student')}}</label>
                             <div class="col-md-6">
                                 <select name="student_id" id="student_id" class="form-select">
-                                    <option value="" selected> -- Selecciona un estudiante -- </option>
+                                    <option value="" selected> {{__('meeting.select_student') }}  </option>
                                     @foreach ($students as $student)
                                     <!-- Esto verifica si la variable $meeting está definida y contiene un valor.
                                     Si estamos creando un nuevo módulo, no existe $meeting por lo que sería false 
@@ -80,7 +80,7 @@
 
                         <!-- Campo para Fecha -->
                         <div class="row mb-3">
-                            <label for="date" class="col-md-4 col-form-label text-md-end">{{ __('Date') }}</label>
+                            <label for="date" class="col-md-4 col-form-label text-md-end">{{__('meeting.date') }} </label>
 
                             <div class="col-md-6">
                             <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date', $meeting->date ?? '') }}" required>
@@ -95,7 +95,7 @@
 
                         <!-- Campo para Hora -->
                         <div class="row mb-3">
-                            <label for="time" class="col-md-4 col-form-label text-md-end">{{ __('Time') }}</label>
+                            <label for="time" class="col-md-4 col-form-label text-md-end">{{__('meeting.time') }} </label>
 
                             <div class="col-md-6">
                             <input id="time" type="number" min="1" max="6" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ old('time', $time) }}" required autocomplete="time" autofocus>
@@ -110,7 +110,7 @@
 
                         <!-- Campo para Estados (es un enum) -->
                         <div class="row mb-3">
-                            <label for="status" class="col-md-4 col-form-label text-md-end">{{ __('Status') }}</label>
+                            <label for="status" class="col-md-4 col-form-label text-md-end">{{__('meeting.status') }}</label>
 
                             <div class="col-md-6">
                                 <select name="status" id="status" class="form-select">
