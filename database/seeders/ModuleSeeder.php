@@ -40,6 +40,7 @@ class ModuleSeeder extends Seeder
             ['user_id' => 16, 'code' => 'DWES', 'name' => 'Desarrollo web en entorno servidor', 'hours' => 180, 'course' => 2, 'cycle_id' => 2, 'created_at' => now(), 'updated_at' => now()],
             ['user_id' => 16, 'code' => 'DAW', 'name' => 'Despliegue de aplicaciones web', 'hours' => 100, 'course' => 2, 'cycle_id' => 2, 'created_at' => now(), 'updated_at' => now()],
             ['user_id' => 17, 'code' => 'DIW', 'name' => 'Diseño de interfaces web', 'hours' => 120, 'course' => 2, 'cycle_id' => 2, 'created_at' => now(), 'updated_at' => now()],
+           
             //se insertan 5 módulos en el ciclo 3 (ASIR) de primero
             ['user_id' => 17, 'code' => 'ISO', 'name' => 'Implantación de sistemas operativos', 'hours' => 264, 'course' => 1, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
             ['user_id' => 17, 'code' => 'PAR', 'name' => 'Planificación y administración de redes', 'hours' => 198, 'course' => 1, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
@@ -54,7 +55,7 @@ class ModuleSeeder extends Seeder
             ['user_id' => 20, 'code' => 'SAD', 'name' => 'Seguridad y alta disponibilidad', 'hours' => 100, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
         
             //Hay que crear el ciclo 4 (DFM)
-            //***se insertan 5 módulos en el ciclo 4 (DFM) de primero Diseño de fabricación mecánica
+            //***se insertan 5 módulos en el ciclo 4 (DFM) de primero - Diseño de fabricación mecánica
             ['user_id' => 20, 'code' => 'RGFM', 'name' => 'Representación gráfica en fabricación mecánica', 'hours' => 198 , 'course' => 1, 'cycle_id' => 4, 'created_at' => now(), 'updated_at' => now()],
             ['user_id' => 21, 'code' => 'DPM', 'name' => 'Diseño de productos mecánicos', 'hours' => 297 , 'course' => 1, 'cycle_id' => 4, 'created_at' => now(), 'updated_at' => now()],
             ['user_id' => 21, 'code' => 'ALF', 'name' => 'Automatización de la fabricación	', 'hours' => 198 , 'course' => 1, 'cycle_id' => 4, 'created_at' => now(), 'updated_at' => now()],
@@ -67,31 +68,32 @@ class ModuleSeeder extends Seeder
             ['user_id' => 23, 'code' => 'DMPP', 'name' => 'Diseño de moldes para productos poliméricos	', 'hours' => 140 , 'course' => 2, 'cycle_id' => 4, 'created_at' => now(), 'updated_at' => now()],
             ['user_id' => 23, 'code' => 'PDPM', 'name' => 'Proyecto de diseño de productos mecánicos	', 'hours' => 50 , 'course' => 2, 'cycle_id' => 4, 'created_at' => now(), 'updated_at' => now()],
 
-            //***se insertan 5 módulos en el ciclo 3 (ASIR) de segundo
-            ['user_id' => 24, 'code' => 'ASO', 'name' => 'Administración de sistemas operativos	', 'hours' => 120, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 24, 'code' => 'SRI', 'name' => 'Servicios de red e internet', 'hours' => 120, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 24, 'code' => 'IAW', 'name' => 'Implantación de aplicaciones web', 'hours' => 100, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 25, 'code' => 'ASGBD', 'name' => 'Administración de sistemas gestores de bases de datos', 'hours' => 60, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 25, 'code' => 'SAD', 'name' => 'Seguridad y alta disponibilidad', 'hours' => 100, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            //***se insertan 5 módulos en el ciclo 3 (ASIR) de segundo
-            ['user_id' => 25, 'code' => 'ASO', 'name' => 'Administración de sistemas operativos	', 'hours' => 120, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 26, 'code' => 'SRI', 'name' => 'Servicios de red e internet', 'hours' => 120, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 26, 'code' => 'IAW', 'name' => 'Implantación de aplicaciones web', 'hours' => 100, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 26, 'code' => 'ASGBD', 'name' => 'Administración de sistemas gestores de bases de datos', 'hours' => 60, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 27, 'code' => 'SAD', 'name' => 'Seguridad y alta disponibilidad', 'hours' => 100, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            //***se insertan 5 módulos en el ciclo 3 (ASIR) de segundo
-            ['user_id' => 27, 'code' => 'ASO', 'name' => 'Administración de sistemas operativos	', 'hours' => 120, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 27, 'code' => 'SRI', 'name' => 'Servicios de red e internet', 'hours' => 120, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 28, 'code' => 'IAW', 'name' => 'Implantación de aplicaciones web', 'hours' => 100, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 28, 'code' => 'ASGBD', 'name' => 'Administración de sistemas gestores de bases de datos', 'hours' => 60, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 28, 'code' => 'SAD', 'name' => 'Seguridad y alta disponibilidad', 'hours' => 100, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            //***se insertan 5 módulos en el ciclo 3 (ASIR) de segundo
-            ['user_id' => 29, 'code' => 'ASO', 'name' => 'Administración de sistemas operativos	', 'hours' => 120, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 29, 'code' => 'SRI', 'name' => 'Servicios de red e internet', 'hours' => 120, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 29, 'code' => 'IAW', 'name' => 'Implantación de aplicaciones web', 'hours' => 100, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 30, 'code' => 'ASGBD', 'name' => 'Administración de sistemas gestores de bases de datos', 'hours' => 60, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 30, 'code' => 'SAD', 'name' => 'Seguridad y alta disponibilidad', 'hours' => 100, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 30, 'code' => 'SAD', 'name' => 'Seguridad y alta disponibilidad', 'hours' => 100, 'course' => 2, 'cycle_id' => 3, 'created_at' => now(), 'updated_at' => now()]
+            //***se insertan 5 módulos en el ciclo 5 (POC) de primero - Proyectos de obra civil
+            ['user_id' => 24, 'code' => 'EDC', 'name' => 'Estructuras de construcción', 'hours' => 99 , 'course' => 1, 'cycle_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 24, 'code' => 'RDC', 'name' => 'Representaciones de construcción', 'hours' => 330 , 'course' => 1, 'cycle_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 24, 'code' => 'MVC', 'name' => 'Mediciones y valoraciones de construcción	', 'hours' => 99 , 'course' => 1, 'cycle_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 25, 'code' => 'UOB', 'name' => 'Urbanismo y obra civil', 'hours' => 99 , 'course' => 1, 'cycle_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 25, 'code' => 'RSOC', 'name' => 'Redes y servicios en obra civil', 'hours' => 99 , 'course' => 1, 'cycle_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            //***se insertan 5 módulos en el ciclo 5 (POC) de segundo
+            ['user_id' => 25, 'code' => 'RDP', 'name' => 'Replanteos de construcción	', 'hours' => 120, 'course' => 2, 'cycle_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 26, 'code' => 'PDC', 'name' => 'Planificación de construcción	', 'hours' => 80 , 'course' => 2, 'cycle_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 26, 'code' => 'DPU', 'name' => 'Desarrollo de proyectos urbanísticos	', 'hours' => 180 , 'course' => 2, 'cycle_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 26, 'code' => 'DPOL', 'name' => 'Desarrollo de proyectos de obras lineales	', 'hours' => 120 , 'course' => 2, 'cycle_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 27, 'code' => 'LT', 'name' => 'Levantamientos topográficos	', 'hours' => 165 , 'course' => 2, 'cycle_id' => 5, 'created_at' => now(), 'updated_at' => now()],
+            
+            //***se insertan 5 módulos en el ciclo 3 (CI) de primero - Comercio internacional
+            ['user_id' => 27, 'code' => 'TIM', 'name' => 'Transporte internacional de mercancías	', 'hours' => 165 , 'course' => 1, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 27, 'code' => 'GEFE', 'name' => 'Gestión económica y financiera de la empresa	', 'hours' => 198 , 'course' => 1, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 28, 'code' => 'GACI', 'name' => 'Gestión administrativa del comercio internacional	', 'hours' => 198 , 'course' => 1, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 28, 'code' => 'DASP', 'name' => 'Digitalización aplicada a los sectores productivos	', 'hours' => 198 , 'course' => 1, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 28, 'code' => 'SASP', 'name' => 'Sostenibilidad aplicada al sistema productivo	', 'hours' => 60 , 'course' => 1, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            //***se insertan 6 módulos en el ciclo 3 (CI) de segundo
+            ['user_id' => 29, 'code' => 'LDA', 'name' => 'Logística de almacenamiento', 'hours' => 132 , 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 29, 'code' => 'SIM', 'name' => 'Sistema de información de mercados	', 'hours' => 80 , 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 29, 'code' => 'MI', 'name' => 'Marketing internacional	', 'hours' => 140 , 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 30, 'code' => 'NI', 'name' => 'Negociación internacional	', 'hours' => 100 , 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 30, 'code' => 'FI', 'name' => 'Financiación internacional	', 'hours' => 100 , 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 30, 'code' => 'MPI', 'name' => 'Medios de pago internacionales	', 'hours' => 100, 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()]
         ]);
     }
 }
