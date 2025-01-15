@@ -23,9 +23,9 @@
                                     autofocus>
 
                                 @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -41,9 +41,9 @@
                                     autofocus>
 
                                 @error('lastname')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -57,9 +57,9 @@
                                     name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -69,9 +69,9 @@
                             <div class="col-md-6">
                                 <select name="role_id" id="role_id" class="form-select">
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}" {{ $role->id == $user->role_id ? 'selected' : '' }}>
-                                            {{ ucfirst($role->role) }}
-                                        </option>
+                                    <option value="{{ $role->id }}" {{ $role->id == $user->role_id ? 'selected' : '' }}>
+                                        {{ ucfirst($role->role) }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -88,9 +88,9 @@
                                     autofocus>
 
                                 @error('pin')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -106,9 +106,9 @@
                                     autofocus>
 
                                 @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -123,9 +123,9 @@
                                     value="{{ old('phone1', $user->phone1) }}" required autocomplete="phone1" autofocus>
 
                                 @error('phone1')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -140,9 +140,29 @@
                                     value="{{ old('phone2', $user->phone2) }}" autocomplete="phone2" autofocus>
 
                                 @error('phone2')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="intensive" class="col-md-4 col-form-label text-md-end">Dual intensiva</label>
+
+                            <div class="col-md-6">
+                                <div class="form-check form-switch">
+                                    @if($user->intensive==1)
+                                    <input class="form-check-input" type="checkbox" id="intensive" name="intensive" checked>
+                                    @else
+                                    <input class="form-check-input" type="checkbox" id="intensive" name="intensive">
+                                    @endif
+                                </div>
+
+                                @error('intensive')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
