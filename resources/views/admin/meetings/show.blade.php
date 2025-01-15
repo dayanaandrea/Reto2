@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <h2 class="mb-4">Detalles de la reunión</h2>
+    <h2 class="mb-4">{{__('meeting.show_title')}}</h2>
 
     <!-- Tarjeta para mostrar detalles de los modulos -->
     <div class="card">
@@ -11,19 +11,19 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <p class="col-sm-3 fw-bold">Fecha :</p>
+                <p class="col-sm-3 fw-bold">{{__('meeting.date')}}</p>
                 <p class="col-sm-9">{{ $meeting->date }}</p>
                 
-                <p class="col-sm-3 fw-bold">Hora:</p>
+                <p class="col-sm-3 fw-bold">{{__('meeting.time')}}</p>
                 <p class="col-sm-9">{{ $meeting-> time }}</p>
 
-                <p class="col-sm-3 fw-bold">Estados :</p>
+                <p class="col-sm-3 fw-bold">{{__('meeting.status')}}</p>
                 <p class="col-sm-9">{{ $meeting-> status }} </p>
                 
-                <p class="col-sm-3 fw-bold">Nombre del profesor al que pertenece :</p>
+                <p class="col-sm-3 fw-bold">{{__('meeting.teacher')}}</p>
                 <p class="col-sm-9">{{$meeting->teacher->name}} {{$meeting->teacher->lastname}}</p>
           
-                <p class="col-sm-3 fw-bold">Nombre del estudiante al que pertenece :</p>
+                <p class="col-sm-3 fw-bold">{{__('meeting.student')}}:</p>
                 <p class="col-sm-9">{{ $meeting->student->name }} {{$meeting->student->lastname}}</p>
 
                 <div>

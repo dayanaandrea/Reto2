@@ -14,17 +14,17 @@
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
-    <h2>Reuniones</h2>
+    <h2>{{__('meeting.meeting')}}</h2>
     <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>
-                <th scope="col">Profesor</th>
-                <th scope="col">Estudiante</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Hora </th>
-                <th scope="col">Estado</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">{{__('meeting.teacher')}}</th>
+                <th scope="col">{{__('meeting.student')}}</th>
+                <th scope="col">{{__('meeting.date')}}</th>
+                <th scope="col">{{__('meeting.time')}} </th>
+                <th scope="col">{{__('meeting.status')}}</th>
+                <th scope="col">{{__('meeting.actions')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -42,14 +42,14 @@
                     $route = route('admin.meetings.show', $meeting);
                     $type = "show";
                     $text = '<i class="fa-solid fa-eye"></i>';
-                    $tooltip = 'Ver datos de la reunión';
+                    $tooltip =  __('meeting.see_data_meeting');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                     @php
                     $route = route('admin.meetings.edit', $meeting);
                     $type = "edit";
                     $text = '<i class="fa-solid fa-pen"></i>';
-                    $tooltip = 'Editar datos del horario';
+                    $tooltip =  __('meeting.edit_data_meeting');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
 
@@ -57,7 +57,7 @@
                     @php
                     $id_modal = '#modal_delete' . $meeting->id;
                     $text = '<i class="fa-solid fa-trash-can"></i>';
-                    $tooltip = 'Eliminar reunión';
+                    $tooltip = __('meeting.delete_data_meeting');
                     @endphp
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                 </td>
@@ -69,22 +69,22 @@
                     <div class="modal-content">
 
                         <div class="modal-header">
-                            <h5 class="modal-title">Confirmar eliminación</h5>
+                            <h5 class="modal-title">{{__('meeting.confirm_deletes')}}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
 
                         <!-- Cuerpo del Modal -->
                         <div class="modal-body">
-                            ¿Estás seguro de que deseas eliminar la reunión <b>{{ $meeting->time }}</b>? Esta acción no se puede deshacer.
+                        {{__('meeting.confirm_1')}} <b>{{ $meeting->time }}</b>? {{__('meeting.confirm_2')}}
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('meeting.cancel')}}</button>
                             <!-- Formulario de eliminación -->
                             <form action="{{ route('admin.meetings.destroy', $meeting->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit"> Eliminar </button>
+                                <button class="btn btn-danger" type="submit">  {{__('meeting.delete')}} </button>
                             </form>
                         </div>
                     </div>

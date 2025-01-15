@@ -7,7 +7,7 @@ return [
     // INDEX
     'title_index_1' => 'Crear nueva matricula',
     'title_index_2' => 'Accede a la creación de una matrícula',
-    'enrollments' => 'Matriculas',
+    'enrollments' => 'Matrículas',
     'actions' => 'Acciones',
     'enrollment' => 'Matrícula',
     
@@ -15,7 +15,7 @@ return [
     'title_show_1' => 'Crear nueva matrícula',
     'title_show_2' => 'Detalles de la matrícula',
     'student' => 'Estudiante',
-    'module' => 'Modulo',
+    'module' => 'Módulo',
     'cycle' => 'Ciclo',
     'date' => 'Fecha',
     'course' => 'Curso',

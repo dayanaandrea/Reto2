@@ -14,16 +14,16 @@
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
-    <h2>Horarios</h2>
+    <h2>{{ __('schedule.schedule') }}</h2>
     <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>
-                <th scope="col">Módulo</th>
-                <th scope="col">Profesor</th>
-                <th scope="col">Día</th>
-                <th scope="col">Hora</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">{{__('schedule.module')}}</th>
+                <th scope="col">{{__('schedule.teacher')}}</th>
+                <th scope="col">{{__('schedule.day')}}</th>
+                <th scope="col">{{__('schedule.hour')}}</th>
+                <th scope="col">{{__('schedule.actions')}}</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@
                                 <td><a href="{{route('admin.schedules.show', $schedule->module->user)}}">{{$schedule->module->user->name}}
                                         {{$schedule->module->user->lastname}}</a></td>
                             @else
-                                <td>{{__('module.not_assigned')}}</td>
+                                <td>{{__('schedule.not_assigned')}}</td>
                             @endif
                     <td>{{$schedule->day}}</td>
                     <td>{{$schedule->hour}}</td>
@@ -44,14 +44,14 @@
                     $route = route('admin.schedules.show', $schedule);
                     $type = "show";
                     $text = '<i class="fa-solid fa-eye"></i>';
-                    $tooltip = 'Ver datos de la reunión';
+                    $tooltip =  __('schedule.see_data_schedule');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                     @php
                     $route = route('admin.schedules.edit', $schedule);
                     $type = "edit";
                     $text = '<i class="fa-solid fa-pen"></i>';
-                    $tooltip = 'Editar datos del horario';
+                    $tooltip =  __('schedule.edit_data_schedule');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
 
@@ -59,7 +59,7 @@
                     @php
                     $id_modal = '#modal_delete' . $schedule->id;
                     $text = '<i class="fa-solid fa-trash-can"></i>';
-                    $tooltip = 'Eliminar reunión';
+                    $tooltip =  __('schedule.delete_data_schedule');
                     @endphp
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                     </td>
@@ -73,25 +73,24 @@
 
                             <!-- Encabezado del Modal -->
                             <div class="modal-header">
-                                <h5 class="modal-title">Confirmar eliminación</h5>
+                                <h5 class="modal-title">{{__('schedule.confirm_deletes')}}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <!-- Cuerpo del Modal -->
                             <div class="modal-body">
-                                ¿Estás seguro de que deseas eliminar el horario <b>{{ $schedule->day }}</b>? Esta acción no
-                                se puede deshacer.
+                            {{__('schedule.confirm_1')}} <!--<b>{{ $schedule->day }}</b>-->? {{__('schedule.confirm_2')}}
                             </div>
 
                             <!-- Pie del Modal -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('schedule.cancel')}}</button>
                                 <!-- Formulario de eliminación -->
                                 <form action="{{ route('admin.schedules.destroy', $schedule->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" type="submit"> Eliminar </button>
+                                    <button class="btn btn-danger" type="submit"> {{__('schedule.delete')}}</button>
                                 </form>
                             </div>
                         </div>

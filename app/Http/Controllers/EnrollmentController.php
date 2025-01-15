@@ -95,7 +95,9 @@ class EnrollmentController extends Controller
         $modules = \App\Models\Module::orderBy('id')->get();
         $cycles = \App\Models\Cycle::orderBy('id')->get();
 
-        return view('admin.enrollments.edit', [
+        $moduleIds = is_array($enrollment->module_id) ? $enrollment->module_id : [$enrollment->module_id];
+
+        return view('admin.enrollments.create-edit', [
             'enrollment' => $enrollment,
             'users' => $users,
             'modules' => $modules,
