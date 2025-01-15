@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('meeting_id');
-            $table->unsignedBigInteger('receiver_id');
-            $table->enum('status', ['accepted', 'rejected', 'pending'])->default('pending');
+            $table->unsignedBigInteger('user_id');
+            $table->enum('status', ['aceptada', 'rechazada', 'pendiente', 'aceptada_F', 'rechazada_F'])->default('pendiente');
+            $table->unique(array('meeting_id', 'user_id'));
         });
     }
 

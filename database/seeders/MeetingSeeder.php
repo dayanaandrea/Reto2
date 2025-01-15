@@ -15,10 +15,9 @@ class MeetingSeeder extends Seeder
     {
 
         DB::table('meetings')->insert([
-            ['date' => now()->toDateString(), 'time'=> 1, 'status'=> 'pending','teacher_id'=> 10,'student_id'=> 25, 'created_at'=>now(),'updated_at'=>now()],
-            ['date' => now()->toDateString(), 'time'=> 1, 'status'=> 'accepted','teacher_id'=> 15,'student_id'=> 30, 'created_at'=>now(),'updated_at'=>now()],
-            ['date' => now()->toDateString(), 'time'=> 2, 'status'=> 'rejected','teacher_id'=> 20,'student_id'=> 50, 'created_at'=>now(),'updated_at'=>now()],
+            ['day' => 1, 'time' => 1, 'status' => 'pendiente', 'user_id' => 15, 'week' => 1, 'created_at' => now(), 'updated_at' => now()],
+            ['day' => 2, 'time' => 1, 'status' => 'aceptada', 'user_id' => 16, 'week' => 2, 'created_at' => now(), 'updated_at' => now()],
+            ['day' => 3, 'time' => 2, 'status' => 'rechazada', 'user_id' => 20, 'week' => 3, 'created_at' => now(), 'updated_at' => now()],
         ]);
-
     }
 }

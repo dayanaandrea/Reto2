@@ -78,14 +78,14 @@ class User extends Authenticatable
         return $this->hasManyThrough(Schedule::class, Enrollment::class, 'user_id', 'module_id', 'id', 'module_id');
     }
 
-    public function teacherMeetings()
+    public function createdMeetings()
     {
-        return $this->hasMany(Meeting::class, 'teacher_id');
+        return $this->hasMany(Meeting::class);
     }
 
-    public function studentMeetings()
+    public function invitedMeetings()
     {
-        return $this->hasMany(Meeting::class, 'student_id');
+       return $this->belongsToMany(Meeting::class, 'participants', 'user_id', 'meeting_id');
     }
 
     public function enrollments()
