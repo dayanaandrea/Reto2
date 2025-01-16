@@ -55,7 +55,7 @@
 <!-- Modal para eliminar un usuario -->
 @php
 $id = 'modal_delete' . $cycle->id;
-$mensaje = "¿Estás seguro de que deseas eliminar el ciclo <strong>$cycle->name</strong>? Esta acción no se puede deshacer.";
+$mensaje = __('cycle.confirm_1') . ' <strong>' . $cycle->name . '</strong>? ' . __('cycle.confirm_2');
 $ruta = route('admin.cycles.destroy', $cycle);
 @endphp
 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />

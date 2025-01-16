@@ -50,37 +50,15 @@
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                     @endif
                 </div>
-                <!-- Modal para eliminar un modulo -->
-                <div class="modal fade" id="modal_delete{{ $module->id }}" tabindex="-1" aria-labelledby="deleteModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-
-                            <div class="modal-header">
-                                <h5 class="modal-title"> {{__('module.confirm_deletes')}}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-
-                            <!-- Cuerpo del Modal -->
-                            <div class="modal-body">
-                                {{__('module.confirm_1')}}<b>{{ $module->name }}</b>? {{__('module.confirm_2')}}
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('module.cancel')}}</button>
-                                <!-- Formulario de eliminación -->
-                                <form action="{{ route('admin.modules.destroy', $module->id) }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger" type="submit">{{__('module.delete')}}</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Modal para eliminar un rol -->
+@php
+    $id = 'modal_delete' . $module->id;
+    $mensaje = "¿Estás seguro de que deseas eliminar el modulo <strong class='text-capitalize'>$module->name</strong>? Esta acción no se puede deshacer.";
+    $ruta = route('admin.modules.destroy', $module);
+ @endphp
+<x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
 @endsection

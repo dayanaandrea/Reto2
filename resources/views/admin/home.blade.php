@@ -6,8 +6,8 @@
 
     @section('content')
     <div class="container">
-        <h2>Home de admin</h2>
-        <p>Bienvenido {{$user->name}} {{$user->lastname}}</p>
+        <h2>{{__('home.title_admin')}}</h2>
+        <p>{{__('home.title2_admin')}} {{$user->name}} {{$user->lastname}}</p>
     </div>
 
     <div class="container mt-4" id="totales">
@@ -19,7 +19,7 @@
                     <div class="card text-white bg-dark mb-4 text-center p-2">
                         <h5 class="card-title fs-1">{{ $totalAlumnos }}</h5>
                         <div class="card-body">
-                            Alumnos
+                        {{__('home.students_admin')}}
                         </div>
                     </div>
                 </a>
@@ -30,7 +30,7 @@
                     <div class="card text-white bg-dark mb-4 text-center p-2">
                         <h5 class="card-title fs-1">{{ $totalPersonal }}</h5>
                         <div class="card-body">
-                            Personal
+                        {{__('home.personal_admin')}}
                         </div>
                     </div>
                 </a>
@@ -41,7 +41,7 @@
                     <div class="card text-white bg-dark mb-4 text-center p-2">
                         <h5 class="card-title fs-1">{{ $usuariosSinRol }}</h5>
                         <div class="card-body">
-                            Sin rol
+                        {{__('home.withOutRol_admin')}} 
                         </div>
                     </div>
                 </a>
@@ -56,7 +56,7 @@
                     <div class="card text-white bg-dark mb-4 text-center p-2">
                         <h5 class="card-title fs-1">{{ $reunionesAccepted }}</h5>
                         <div class="card-body">
-                            Reuniones aceptadas
+                        {{__('home.acceptedMeetings_admin')}}
                         </div>
                     </div>
                 </a>
@@ -67,7 +67,7 @@
                     <div class="card text-white bg-dark mb-4 text-center p-2">
                         <h5 class="card-title fs-1">{{ $reunionesPendientes }}</h5>
                         <div class="card-body">
-                            Reuniones pendientes
+                        {{__('home.pendingMeetings_admin')}}
                         </div>
                     </div>
                 </a>
@@ -78,7 +78,7 @@
                     <div class="card text-white bg-dark mb-4 text-center p-2">
                         <h5 class="card-title fs-1">{{ $reunionesTotales }}</h5>
                         <div class="card-body">
-                            Reuniones totales
+                        {{__('home.allMeetings_admin')}}
                         </div>
                     </div>
                 </a>
@@ -93,7 +93,7 @@
                     <div class="card text-white bg-dark mb-4 text-center p-2">
                         <h5 class="card-title fs-1">{{ $totalModulos }}</h5>
                         <div class="card-body">
-                            Módulos
+                        {{__('home.modules_admin')}}
                         </div>
                     </div>
                 </a>
@@ -104,7 +104,7 @@
                     <div class="card text-white bg-dark mb-4 text-center p-2">
                         <h5 class="card-title fs-1">{{ $totalCiclos }}</h5>
                         <div class="card-body">
-                            Ciclos 
+                        {{__('home.cycles_admin')}}
                         </div>
                     </div>
                 </a>
