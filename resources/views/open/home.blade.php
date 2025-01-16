@@ -82,35 +82,40 @@
     @endif
 
     @if($user->role)
-            @if ($user->role->role == 'estudiante')
-                    <div class="container">
-                        <h2>Home de estudiante</h2>
-                        <p>Bienvenido {{ $user->name }} {{ $user->lastname }}</p>
+        @if ($user->role->role == 'estudiante')
+            <div class="container">
+                <h2>Home de estudiante</h2>
+                <p>Bienvenido {{ $user->name }} {{ $user->lastname }}</p>
+                <div class="container">
+                    <!--Mostrar ciclos-->
+                    @if($user->enrollments)
+                        @php
+                            $cycles = $user->enrollments
+                                ->map(function ($enrollment) {
+                                    return $enrollment->module;
+                                })
+                                ->sortBy('created_at') // Ordenar los módulos por la fecha de creación
+                                ->map(function ($module) {
+                                    return $module->cycle; // Ahora extraemos el ciclo después de ordenar
+                                })
+                                ->unique('id'); // Asegúrate de que los ciclos sean únicos por id
+                                
+                            $modules = $user->enrollments->map(function ($enrollment) {
+
+                                return $enrollment->module;  // Obtener el módulo de la inscripción
+                            });
+                        @endphp
+
                         <div class="container">
-        <!--Mostrar ciclos-->
-                            @if($user->enrollments)
-                                @php
-                                    $cycles = $user->enrollments->map(function($enrollment) {
-                                        return $enrollment->module->cycle; // Obtén el ciclo desde el módulo
-                                    })->unique('id'); // Asegúrate de que los ciclos sean únicos por id
-
-                                    
-                                    $modules = $user->enrollments->map(function($enrollment) {
-                                        
-                                        return $enrollment->module;  // Obtener el módulo de la inscripción
-                                    });
-                                @endphp
-
-                                <div class="container">
-                                    <h2 class="mb-3">Ciclos</h2>  
-                                    <x-accordions.cycles-for-students :cycles="$cycles" :modules="$modules"/>
-                                </div>          
-                            @else
-                                Sin matrícula
-                            @endif
+                            <h2 class="mb-3">Ciclos</h2>
+                            <x-accordions.cycles-for-students :cycles="$cycles" :modules="$modules" />
                         </div>
-                    </div>
-            @endif
+                    @else
+                        Sin matrícula
+                    @endif
+                </div>
+            </div>
+        @endif
     @endif
 </div>
 @endsection
