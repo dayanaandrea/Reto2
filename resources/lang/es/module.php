@@ -2,8 +2,7 @@
 
 return [
     // INDEX
-    'index_title_1' => 'Crear un nuevo módulo',
-    'index_title_2' => 'Accede a la creación de un módulo :',
+    'create_module' => 'Crear un nuevo módulo',
     'module' => 'Módulos',
     'code' => 'Código',
     'name' => 'Nombre',

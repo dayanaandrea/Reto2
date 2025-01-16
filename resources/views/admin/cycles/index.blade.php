@@ -4,12 +4,14 @@
     <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
     <x-alert :key="'success'" :class="'success'" />
 
-    <h2>{{__('cycle.index_title_1')}}</h2>
-    <div>
-        <p> {{__('cycle.index_title_2')}} </p>
-        <p><a href="{{ route('admin.cycles.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
-                data-bs-placement="top" title="Crear un nuevo ciclo"><i class="fa-solid fa-plus"></i></a></p>
-
+    <div class="mb-2 text-end">
+        @php
+            $route = route('admin.cycles.create');
+            $type = "show";
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $tooltip =  __('cycle.create_cycle');
+        @endphp
+        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
     <h2>{{__('cycle.cycle')}}</h2>
     <table class="table table-hover table-striped">
@@ -34,14 +36,14 @@
                     $route = route('admin.cycles.show', $cycle);
                     $type = "show";
                     $text = '<i class="fa-solid fa-eye"></i>';
-                    $tooltip = __('cycle.see_data_module');
+                    $tooltip = __('cycle.see_data_cycle');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                     @php
                     $route = route('admin.cycles.edit', $cycle);
                     $type = "edit";
                     $text = '<i class="fa-solid fa-pen"></i>';
-                    $tooltip = __('cycle.edit_data_module');
+                    $tooltip = __('cycle.edit_data_cycle');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
 
@@ -49,7 +51,7 @@
                     @php
                     $id_modal = '#modal_delete' . $cycle->id;
                     $text = '<i class="fa-solid fa-trash-can"></i>';
-                    $tooltip =  __('cycle.delete_module');
+                    $tooltip =  __('cycle.delete_cycle');
                     @endphp
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                 </td>
