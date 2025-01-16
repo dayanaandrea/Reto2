@@ -36,14 +36,14 @@
                     $route = route('admin.cycles.show', $cycle);
                     $type = "show";
                     $text = '<i class="fa-solid fa-eye"></i>';
-                    $tooltip = __('cycle.see_data_module');
+                    $tooltip = __('cycle.see_data_cycle');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                     @php
                     $route = route('admin.cycles.edit', $cycle);
                     $type = "edit";
                     $text = '<i class="fa-solid fa-pen"></i>';
-                    $tooltip = __('cycle.edit_data_module');
+                    $tooltip = __('cycle.edit_data_cycle');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
 
@@ -51,7 +51,7 @@
                     @php
                     $id_modal = '#modal_delete' . $cycle->id;
                     $text = '<i class="fa-solid fa-trash-can"></i>';
-                    $tooltip =  __('cycle.delete_module');
+                    $tooltip =  __('cycle.delete_cycle');
                     @endphp
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                 </td>
