@@ -86,8 +86,6 @@
                     <div class="container">
                         <h2>Home de estudiante</h2>
                         <p>Bienvenido {{ $user->name }} {{ $user->lastname }}</p>
-
-                        <p>Hola</p>
                         <div class="container">
         <!--Mostrar ciclos-->
                             @if($user->enrollments)
@@ -95,27 +93,24 @@
                                     $cycles = $user->enrollments->map(function($enrollment) {
                                         return $enrollment->module->cycle; // Obtén el ciclo desde el módulo
                                     })->unique('id'); // Asegúrate de que los ciclos sean únicos por id
+
+                                    
+                                    $modules = $user->enrollments->map(function($enrollment) {
+                                        
+                                        return $enrollment->module;  // Obtener el módulo de la inscripción
+                                    });
                                 @endphp
 
                                 <div class="container">
                                     <h2 class="mb-3">Ciclos</h2>  
-                                    <x-accordions.cycles-modules :cycles="$cycles" />
-                                </div>
-                                           
+                                    <x-accordions.cycles-for-students :cycles="$cycles" :modules="$modules"/>
+                                </div>          
                             @else
                                 Sin matrícula
                             @endif
-
-
                         </div>
-
-
-
                     </div>
             @endif
     @endif
-
-
-
 </div>
 @endsection

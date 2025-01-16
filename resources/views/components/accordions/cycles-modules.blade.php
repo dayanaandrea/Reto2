@@ -18,6 +18,7 @@
                             <div class="ms-2 me-auto">
                                 
                                 <div class="fw-bold">{{$module->name}} ({{$module->code}})</div>
+                                
                             </div>
                         </li>
                         @endif
