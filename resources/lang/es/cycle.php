@@ -2,8 +2,7 @@
 return [
     
     // INDEX  
-    'index_title_1' => 'Crear un nuevo ciclo',
-    'index_title_2' => 'Accede a la creación de ciclo : ',
+    'create_cycle' => 'Crear un nuevo ciclo',
     'cycle' => 'Ciclo',
     'code' => 'Código',
     'name' => 'Nombre',

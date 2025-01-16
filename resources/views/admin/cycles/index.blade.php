@@ -4,12 +4,14 @@
     <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
     <x-alert :key="'success'" :class="'success'" />
 
-    <h2>{{__('cycle.index_title_1')}}</h2>
-    <div>
-        <p> {{__('cycle.index_title_2')}} </p>
-        <p><a href="{{ route('admin.cycles.create') }}" class="btn btn-primary" data-bs-toggle="tooltip"
-                data-bs-placement="top" title="Crear un nuevo ciclo"><i class="fa-solid fa-plus"></i></a></p>
-
+    <div class="mb-2 text-end">
+        @php
+            $route = route('admin.cycles.create');
+            $type = "show";
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $tooltip =  __('cycle.create_cycle');
+        @endphp
+        <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
     <h2>{{__('cycle.cycle')}}</h2>
     <table class="table table-hover table-striped">
