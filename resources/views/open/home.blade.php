@@ -89,69 +89,19 @@
 
                         <p>Hola</p>
                         <div class="container">
-                            <h2 class="mb-3">Ciclos</h2>
-
+        <!--Mostrar ciclos-->
                             @if($user->enrollments)
-                                            @php
-                                                // Obtener los ciclos únicos, porque sino se printean de forma repetida
-                                                //$uniqueCycles = $user->enrollments->pluck('module.cycle.name')->unique();
-                                                $cycles = $user->enrollments->pluck('module.cycle')->unique('id');
+                                @php
+                                    $cycles = $user->enrollments->map(function($enrollment) {
+                                        return $enrollment->module->cycle; // Obtén el ciclo desde el módulo
+                                    })->unique('id'); // Asegúrate de que los ciclos sean únicos por id
+                                @endphp
 
-                                            @endphp
                                 <div class="container">
-                                                <h2 class="mb-3">Ciclos</h2>
-                                                @php
-                                                dd($cycle[1]->name);
-                                                @endphp
-                                                <x-accordions.cycles-modules :cycles="$cycles" />
-                                            </div>
-                                            <div class="accordion" id="accordionExample">
-                                                @foreach ($cycles as $cycle)
-                                                    {{ $cycle->name }}
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header">
-                                                            <button class="accordion-button fs-5" type="button" data-bs-toggle="collapse"
-                                                                data-bs-target="#collapse{{$cycle->id}}" aria-expanded="true"
-                                                                aria-controls="collapse{{$cycle->id}}">
-                                                                {{$cycle->name}} ({{$cycle->code}})
-                                                            </button>
-                                                        </h2>
-                                                        <div id="collapse{{$cycle->id}}" class="accordion-collapse collapse show">
-                                                            <div class="accordion-body">
-                                                                <div class="container mb-4">
-                                                                    <h5>Primer Curso</h5>
-
-                                                                    <ol class="list-group list-group-numbered">
-                                                                        @foreach ($cycle->modules as $module)
-                                                                            @if($module->course == 1)
-                                                                                <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                                                    <div class="ms-2 me-auto">
-                                                                                        <div class="fw-bold">{{$module->name}} ({{$module->code}})</div>
-                                                                                    </div>
-                                                                                </li>
-                                                                            @endif
-                                                                        @endforeach
-                                                                    </ol>
-                                                                </div>
-                                                                <div class="container">
-                                                                    <h5>Segundo Curso</h5>
-                                                                    <ol class="list-group list-group-numbered">
-                                                                        @foreach ($cycle->modules as $module)
-                                                                            @if($module->course == 2)
-                                                                                <li class="list-group-item d-flex justify-content-between align-items-start">
-                                                                                    <div class="ms-2 me-auto">
-                                                                                        <div class="fw-bold">{{$module->name}} ({{$module->code}})</div>
-                                                                                    </div>
-                                                                                </li>
-                                                                            @endif
-                                                                        @endforeach
-                                                                    </ol>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
+                                    <h2 class="mb-3">Ciclos</h2>  
+                                    <x-accordions.cycles-modules :cycles="$cycles" />
+                                </div>
+                                           
                             @else
                                 Sin matrícula
                             @endif
