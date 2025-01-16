@@ -14,6 +14,7 @@ class CyclesModules extends Component
      */
     public function __construct(
         public Collection $cycles
+        
     )
     {
         //
