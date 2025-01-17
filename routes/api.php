@@ -11,9 +11,11 @@ Route::prefix('v1.0')->group(function () {
     Route::post('/login', [V1AuthController::class, 'login']);
     Route::post('/logout', [V1AuthController::class, 'logout'])->middleware('auth:sanctum');
 
+
+    Route::apiResource('users', V1UserController::class);
     Route::middleware(['auth:sanctum', 'App\Http\Middleware\CheckAdminRoleAPI'])->group(function () {
         Route::apiResource('roles', V1RoleController::class);
-        Route::apiResource('users', V1UserController::class);
+        
     });
 });
 
