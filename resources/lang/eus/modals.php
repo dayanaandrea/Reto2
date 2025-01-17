@@ -6,6 +6,5 @@ return [
     'delete_msg' => 'Ziur zaude :item <strong>:email</strong> ezabatzea nahi duzula? Ekintza hau ezin da desegondu.',
     'confirm' => 'Berretsi',
     'cancel' => 'Ezeztatu',
-
-
+    'detele_title' => 'Ezabatu',
 ];

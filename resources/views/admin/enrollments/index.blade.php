@@ -11,7 +11,7 @@
         @php
             $route = route('admin.enrollments.create');
             $type = "show";
-            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __("module.add") . '</span>';
             $tooltip = __('enrollment.tp_create');
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
@@ -75,24 +75,23 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Confirmar eliminación</h5>
+                                        <h5 class="modal-title">{{__('enrollment.delete_confirmation')}}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
 
                                     <!-- Cuerpo del Modal -->
                                     <div class="modal-body">
-                                        ¿Estás seguro de que deseas eliminar esta matrícula <b>{{ $enrollment->name }}</b>? Esta
-                                        acción no se puede deshacer.
+                                    {{__('enrollment.ask_for_delete_confirmation_1')}} <b>{{ $enrollment->name }}</b>{{__('enrollment.ask_for_delete_confirmation_2')}}
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('enrollment.cancel')}}</button>
                                         <!-- Formulario de eliminación -->
                                         <form action="{{ route('admin.enrollments.destroy', $enrollment->id) }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger" type="submit"> Eliminar </button>
+                                            <button class="btn btn-danger" type="submit"> {{__('enrollment.delete')}} </button>
                                         </form>
                                     </div>
                                 </div>

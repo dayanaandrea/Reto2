@@ -10,12 +10,15 @@
             <div class="accordion-body">
                 <div class="container mb-4">
                     <h5>Primer Curso</h5>
+                    
                     <ol class="list-group list-group-numbered">
                         @foreach ($cycle->modules as $module)
                         @if($module->course==1)
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
+                                
                                 <div class="fw-bold">{{$module->name}} ({{$module->code}})</div>
+                                
                             </div>
                         </li>
                         @endif

@@ -21,6 +21,7 @@ return [
     'confirm_2' => '? Ekintza hau ezin da desegondu.',
     'cancel' => 'Ezeztatu',
     'delete' => 'Ezabatu',
+    'add'=> 'Gehitu',
 
     // SHOW  {{ $module->name }}
     'show_title' => 'Moduluko xehetasunak',
