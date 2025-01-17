@@ -21,8 +21,9 @@
                 <th scope="col"></th>
                 <th scope="col">{{__('meeting.teacher')}}</th>
                 <th scope="col">{{__('meeting.student')}}</th>
-                <th scope="col">{{__('meeting.date')}}</th>
+                <th scope="col">{{__('meeting.day')}}</th>
                 <th scope="col">{{__('meeting.time')}} </th>
+                <th scope="col">{{__('meeting.week')}} </th>
                 <th scope="col">{{__('meeting.status')}}</th>
                 <th scope="col">{{__('meeting.actions')}}</th>
             </tr>
@@ -31,10 +32,18 @@
             @foreach ($meetings as $meeting)
             <tr>
                 <th scope="col">{{ $loop->iteration }}</th>
-                <td>{{$meeting->teacher->name}}</td>
-                <td>{{$meeting->student->name}}</td>
-                <td>{{$meeting->date}}</td>
+                <td>{{$meeting->user->name}}</td>
+                <td>
+                    @if ($meeting->participants->isEmpty())
+                    {{__('meeting.withoutParticipants')}}
+                    @else
+                        @foreach ($meeting->participants as $participant)
+                            {{ $participant->name }}@if (!$loop->last), @endif
+                        @endforeach
+                    @endif</td>
+                <td>{{$meeting->day}}</td>
                 <td>{{$meeting->time}}</td>
+                <td>{{$meeting->week}}</td>
                 <td>{{$meeting->status}}</td>
                
                 <td>
