@@ -19,8 +19,8 @@
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>
-                <th scope="col">{{__('meeting.teacher')}}</th>
-                <th scope="col">{{__('meeting.student')}}</th>
+                <th scope="col">{{__('meeting.convener')}}</th>
+                <th scope="col">{{__('meeting.participant')}}</th>
                 <th scope="col">{{__('meeting.day')}}</th>
                 <th scope="col">{{__('meeting.time')}} </th>
                 <th scope="col">{{__('meeting.week')}} </th>
