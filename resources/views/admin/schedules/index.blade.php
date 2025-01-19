@@ -9,7 +9,7 @@
         @php
             $route = route('admin.schedules.create');
             $type = "show";
-            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __('schedule.añadir') . '</span>';
             $tooltip =  __('schedule.create_schedule');
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />

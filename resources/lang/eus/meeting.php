@@ -6,7 +6,7 @@ return [
     'index_title_2' => 'Bileraren sorrera atzitu:',
     'meeting' => 'Bilerak',
     'name' => 'Izena',
-    'date' => 'Data',
+    'week' => 'Aste',
     'day' => 'Eguna',
     'time' => 'Ordua',
     'status' => 'Egoera',
@@ -23,12 +23,19 @@ return [
     'confirm_2' => '? Ekintza hau ezin da desegin.',
     'cancel' => 'Ezeztatu',
     'delete' => 'Ezabatu',
+    'create' => 'Sortu',
+    'update' => 'Eguneratu',
+    'añadir' => 'Gehitu',
+    'participant' => 'Parte hartzaileak',
+    'convener' => 'Biltzailea',
+    'withoutParticipants' => 'Parte-hartzailerik gabe',
+
 
     // SHOW  {{ $meeting->name }}
     'show_title' => 'Bileraren xehetasunak',
 
     // CREATE-EDIT
-    'select_teacher' => ' -- Aukeratu irakasle bat -- ',
+    'select_convener' => ' -- Aukeratu biltzailea -- ',
     'select_student' => ' -- Aukeratu ikasle bat -- ',
 ];
 

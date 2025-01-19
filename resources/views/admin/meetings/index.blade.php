@@ -9,7 +9,7 @@
         @php
             $route = route('admin.meetings.create');
             $type = "show";
-            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __('meeting.añadir') . '</span>';
             $tooltip =  __('meetings.create_meeting');
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
@@ -19,8 +19,8 @@
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>
-                <th scope="col">{{__('meeting.teacher')}}</th>
-                <th scope="col">{{__('meeting.student')}}</th>
+                <th scope="col">{{__('meeting.convener')}}</th>
+                <th scope="col">{{__('meeting.participant')}}</th>
                 <th scope="col">{{__('meeting.day')}}</th>
                 <th scope="col">{{__('meeting.time')}} </th>
                 <th scope="col">{{__('meeting.week')}} </th>

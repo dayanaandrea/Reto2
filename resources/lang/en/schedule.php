@@ -20,6 +20,9 @@ return [
     'confirm_2' => '? This action cannot be undone.',
     'cancel' => 'Cancel',
     'delete' => 'Delete',
+    'create' => 'Create',
+    'update' => 'Update',
+    'añadir' => 'Add',
 
     // SHOW  {{ $schedule->name }}
     'show_title' => 'Schedule details',
