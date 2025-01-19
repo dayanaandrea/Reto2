@@ -7,7 +7,7 @@
     <!-- Tarjeta para mostrar detalles de los horarios -->
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">{{ $schedule->day }}</h4>
+            <h4 class="card-title">{{$schedule->module->name}}</h4>
         </div>
         <div class="card-body">
             <div class="row">
@@ -22,10 +22,10 @@
 
                <p class="col-sm-3 fw-bold">{{__('schedule.teacher')}}</p>
                  @if ($schedule->module->user)
-                    <td><a href="{{route('admin.schedules.show', $schedule->module->user)}}"
-                    >{{$schedule->module->user->name}} {{$schedule->module->user->lastname}}</a></td>
+                    <p class="col-sm-9"><a href="{{route('admin.schedules.show', $schedule->module->user)}}"
+                    >{{$schedule->module->user->name}} {{$schedule->module->user->lastname}}</a></p>
                 @else
-                     <td>{{__('schedule.not_assigned')}}</td>
+                     <p class="col-sm-9">{{__('schedule.not_assigned')}}</p>
                 @endif
                  <div>
                         <!-- Los botones de las operaciones CRUD solo aparecen para los god y admin -->

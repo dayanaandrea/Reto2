@@ -6,7 +6,7 @@ return [
     'index_title_2' => 'Acceder a la creación de reuniones:',
     'meeting' => 'Reuniones',
     'name' => 'Nombre',
-    'date' => 'Fecha',
+    'week' => 'Semana',
     'day' => 'Día',
     'time' => 'Hora',
     'status' => 'Estado',
@@ -23,12 +23,18 @@ return [
     'confirm_2' => '? Esta acción no se puede deshacer.',
     'cancel' => 'Cancelar',
     'delete' => 'Eliminar',
+    'create' => 'Crear',
+    'update' => 'Actualizar',
+    'añadir' => 'Añadir',
+    'participant' => 'Participantes',
+    'convener' => 'Convocante',
+    'withoutParticipants' => 'Sin participantes',
 
     // SHOW  {{ $meeting->name }}
     'show_title' => 'Detalles de la reunión',
 
     // CREATE-EDIT
-    'select_teacher' => ' -- Selecciona un profesor -- ',
+    'select_teacher' => ' -- Selecciona el convocante -- ',
     'select_student' => ' -- Selecciona un estudiante -- ',
 ];
 

@@ -21,6 +21,9 @@ return [
     'confirm_2' => '? Ekintza hau ezin da desegin.',
     'cancel' => 'Ezeztatu',
     'delete' => 'Ezabatu',
+    'create' => 'Sortu',
+    'update' => 'Eguneratu',
+    'añadir' => 'Gehitu',
 
     // SHOW  {{ $schedule->name }}
     'show_title' => 'Ordutegiko xehetasunak',

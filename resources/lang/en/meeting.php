@@ -6,7 +6,7 @@ return [
     'index_title_2' => 'Access meeting creation:',
     'meeting' => 'Meetings',
     'name' => 'Name',
-    'date' => 'Date',
+    'week' => 'Week',
     'day' => 'Day',
     'time' => 'Hour',
     'status' => 'Status',
@@ -23,12 +23,20 @@ return [
     'confirm_2' => '? This action cannot be undone.',
     'cancel' => 'Cancel',
     'delete' => 'Delete',
+    'create' => 'Create',
+    'update' => 'Update',
+    'añadir' => 'Add',
+    'participant' => 'Participants',
+    'convener' => 'Convener',
+    'withoutParticipants' => 'Without participants',
+    
 
     // SHOW  {{ $meeting->name }}
     'show_title' => 'Meeting details',
 
     // CREATE-EDIT
-    'select_teacher' => ' -- Select a teacher -- ',
+    'select_convener' => ' -- Select a convener -- ',
     'select_student' => ' -- Select a student -- ',
+
 ];
 
