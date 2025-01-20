@@ -52,7 +52,7 @@
         <div class="row">
 
             <div class="col-md-4">
-                <a href="{{ route('admin.meetings.index', ['status' => 'accepted']) }}" class="text-decoration-none">
+                <a href="{{ route('admin.meetings.index', ['status' => 'aceptada']) }}" class="text-decoration-none">
                     <div class="card text-white bg-dark mb-4 text-center p-2">
                         <h5 class="card-title fs-1">{{ $reunionesAccepted }}</h5>
                         <div class="card-body">
@@ -63,7 +63,7 @@
             </div>
 
             <div class="col-md-4">
-                <a href="{{ route('admin.meetings.index', ['status' => 'pending']) }}" class="text-decoration-none">
+                <a href="{{ route('admin.meetings.index', ['status'=>'pendiente']) }}" class="text-decoration-none">
                     <div class="card text-white bg-dark mb-4 text-center p-2">
                         <h5 class="card-title fs-1">{{ $reunionesPendientes }}</h5>
                         <div class="card-body">
