@@ -20,12 +20,8 @@ Route::prefix('v1.0')->group(function () {
 });
 
 // Rutas para la versión 2.0
-Route::prefix('v2.0')->group(function () {
-
-    // Endpoint especial para mostrar la versión
+Route::prefix('v2.0')->middleware(\App\Http\Middleware\AddVersionToResponse::class)->group(function () {
     Route::get('/', [VersionController::class, 'showVersion']);
-
-    // Rutas restantes reutilizan los controladores de v1.0
     Route::post('/login', [V1AuthController::class, 'login']);
     Route::post('/logout', [V1AuthController::class, 'logout'])->middleware('auth:sanctum');
 
@@ -34,4 +30,5 @@ Route::prefix('v2.0')->group(function () {
         Route::apiResource('users', V1UserController::class);
     });
 });
+
 
