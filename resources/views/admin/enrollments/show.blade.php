@@ -70,7 +70,7 @@
 <!-- Modal para eliminar un horario -->
 @php
 $id = 'modal_delete' . $enrollment->id;
-$mensaje = "¿Estás seguro de que deseas eliminar el horario <strong>$enrollment->name</strong>? Esta acción no se puede deshacer.";
+$mensaje = __('enrollment.ask_for_delete_confirmation_1') . ' <b>' . $enrollment->name . '</b>' . __('enrollment.ask_for_delete_confirmation_2');
 $ruta = route('admin.enrollments.destroy', $enrollment);
 @endphp
 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />

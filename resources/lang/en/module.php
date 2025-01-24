@@ -21,6 +21,7 @@ return [
     'confirm_2' => '? This action cannot be undone.',
     'cancel' => 'Cancel',
     'delete' => 'Delete',
+    'add'=> 'Add',
 
     // SHOW  {{ $module->name }}
     'show_title' => 'Module details',

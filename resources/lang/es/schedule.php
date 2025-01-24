@@ -22,6 +22,9 @@ return [
     'confirm_2'=> '? Esta acción no se puede deshacer.',
     'cancel'=> 'Cancelar',
     'delete'=> 'Eliminar',
+    'create' => 'Crear',
+    'update' => 'Actualizar',
+    'añadir' => 'Añadir',
 
     // SHOW  
     'show_title' => 'Detalles del modulo',

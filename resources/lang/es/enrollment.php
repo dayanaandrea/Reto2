@@ -13,7 +13,7 @@ return [
     
     // SHOW
     'title_show_1' => 'Crear nueva matrícula',
-    'title_show_2' => 'Detalles de la matrícula',
+    'title_show_2' => 'Detalles de la matrícula ',
     'student' => 'Estudiante',
     'module' => 'Módulo',
     'cycle' => 'Ciclo',

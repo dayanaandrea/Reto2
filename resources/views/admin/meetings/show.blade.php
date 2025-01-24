@@ -7,24 +7,33 @@
     <!-- Tarjeta para mostrar detalles de los modulos -->
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">{{ $meeting->date }}</h4>
+            <h4 class="card-title">{{$meeting->user->name}} {{$meeting->user->lastname}}</h4>
         </div>
         <div class="card-body">
             <div class="row">
-                <p class="col-sm-3 fw-bold">{{__('meeting.date')}}</p>
-                <p class="col-sm-9">{{ $meeting->date }}</p>
+                <p class="col-sm-3 fw-bold">{{__('meeting.day')}}:</p>
+                <p class="col-sm-9">{{ $meeting->day }}</p>
                 
-                <p class="col-sm-3 fw-bold">{{__('meeting.time')}}</p>
+                <p class="col-sm-3 fw-bold">{{__('meeting.time')}}:</p>
                 <p class="col-sm-9">{{ $meeting-> time }}</p>
 
-                <p class="col-sm-3 fw-bold">{{__('meeting.status')}}</p>
+                <p class="col-sm-3 fw-bold">{{__('meeting.week')}}:</p>
+                <p class="col-sm-9">{{ $meeting-> week }}</p>
+
+                <p class="col-sm-3 fw-bold">{{__('meeting.status')}}:</p>
                 <p class="col-sm-9">{{ $meeting-> status }} </p>
                 
-                <p class="col-sm-3 fw-bold">{{__('meeting.teacher')}}</p>
-                <p class="col-sm-9">{{$meeting->teacher->name}} {{$meeting->teacher->lastname}}</p>
+                <p class="col-sm-3 fw-bold">{{__('meeting.convener')}}:</p>
+                <p class="col-sm-9">{{$meeting->user->name}} {{$meeting->user->lastname}}</p>
           
                 <p class="col-sm-3 fw-bold">{{__('meeting.student')}}:</p>
-                <p class="col-sm-9">{{ $meeting->student->name }} {{$meeting->student->lastname}}</p>
+                <p class="col-sm-9">@if ($meeting->participants->isEmpty())
+                    {{__('meeting.withoutParticipants')}}
+                    @else
+                        @foreach ($meeting->participants as $participant)
+                            {{ $participant->name }} {{ $participant->lastname }}@if (!$loop->last), @endif
+                        @endforeach
+                    @endif</td></p>
 
                 <div>
                         <!-- Los botones de las operaciones CRUD solo aparecen para los god y admin -->

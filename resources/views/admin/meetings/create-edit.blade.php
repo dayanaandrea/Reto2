@@ -8,10 +8,11 @@
 
     } else {
         $button = __('meeting.create');
-        $teacher_id = "";
+        $teacher = "";
         $student_id = "";
         $date = "";
         $time = "";
+        $meeting = null;
     }
 @endphp
 
@@ -42,50 +43,53 @@
 
                         <!-- Campo para Profesor -->
                         <div class="row mb-3">
-                        <label for="teacher_id" class="col-md-4 col-form-label text-md-end">{{__('meeting.teacher')}}</label>
+                        <label for="teacher_id" class="col-md-4 col-form-label text-md-end">{{__('meeting.convener')}}</label>
                             <div class="col-md-6">
                                 <select name="teacher_id" id="teacher_id" class="form-select">
-                                    <option value="" selected>{{__('meeting.select_teacher') }} </option>
+                                    <option value="" selected>{{__('meeting.select_convener') }} </option>
                                     @foreach ($teachers as $teacher)
                                     <!-- Esto verifica si la variable $meeting está definida y contiene un valor.
                                     Si estamos creando un nuevo módulo, no existe $meeting por lo que sería false 
                                     y te enseñaria la primera opción --->
                                     <option value="{{ $teacher->id }}"
-                                        {{ $teacher->id == old('teacher_id', isset($meeting) ? $meeting->teacher_id : '') ? 'selected' : '' }}>
-                                        {{ ucfirst($teacher->name) }} {{ ucfirst($teacher->lastname) }}
+                                    {{ $teacher->id == old('teacher_id', $meeting->user_id ?? '') ? 'selected' : '' }}>
+                                    {{ ucfirst($teacher->name) }} {{ ucfirst($teacher->lastname) }}
                                     </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-
+                    
                         <!-- Campo para Estudiante -->
                         <div class="row mb-3">
-                            <label for="student_id" class="col-md-4 col-form-label text-md-end">{{__('meeting.student')}}</label>
-                            <div class="col-md-6">
-                                <select name="student_id" id="student_id" class="form-select">
-                                    <option value="" selected> {{__('meeting.select_student') }}  </option>
+                            <label for="student_id" class="col-md-4 col-form-label text-md-end">{{__('meeting.participant')}}</label>
+                            <div class="form-group col-md-6">
+                                <select id="participants" name="participants[]" class="form-control" multiple>
+                                @if (!is_null($meeting))
                                     @foreach ($students as $student)
-                                    <!-- Esto verifica si la variable $meeting está definida y contiene un valor.
-                                    Si estamos creando un nuevo módulo, no existe $meeting por lo que sería false 
-                                    y te enseñaria la primera opción --->
-                                    <option value="{{ $student->id }}"
-                                        {{ $student->id == old('student_id', isset($meeting) ? $meeting->student_id : '') ? 'selected' : '' }}>
+                                        <option value="{{ $student->id }}"
+                                        {{ $meeting->participants?->contains('id', $student->id) ? 'selected' : '' }}>
                                         {{ ucfirst($student->name) }} {{ ucfirst($student->lastname) }}
-                                    </option>
+                                        </option>
                                     @endforeach
+                                @else
+                                    @foreach ($students as $student)
+                                        <option value="{{ $student->id }}">{{ ucfirst($student->name) }} {{ ucfirst($student->lastname) }}</option>
+                                    @endforeach
+                                @endif
                                 </select>
                             </div>
                         </div>
+                           
 
                         <!-- Campo para Fecha -->
                         <div class="row mb-3">
-                            <label for="date" class="col-md-4 col-form-label text-md-end">{{__('meeting.date') }} </label>
+                            <label for="day" class="col-md-4 col-form-label text-md-end">{{__('meeting.day') }} </label>
 
                             <div class="col-md-6">
-                            <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date', $meeting->date ?? '') }}" required>
+                            <input id="day" type="number" min="1" max="31" class="form-control @error('day') is-invalid @enderror" name="day" value="{{ old('day', $meeting->day ?? '') }}" required>
 
-                                @error('date')
+                                @error('time')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -98,9 +102,24 @@
                             <label for="time" class="col-md-4 col-form-label text-md-end">{{__('meeting.time') }} </label>
 
                             <div class="col-md-6">
-                            <input id="time" type="number" min="1" max="6" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ old('time', $time) }}" required autocomplete="time" autofocus>
+                            <input id="time" type="number" min="1" max="6" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ old('time', $meeting->time ?? '') }}" required>
 
                                 @error('time')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <!-- Campo para semana -->
+                        <div class="row mb-3">
+                            <label for="week" class="col-md-4 col-form-label text-md-end">{{__('meeting.week') }} </label>
+
+                            <div class="col-md-6">
+                            <input id="week" type="number" min="1" max="52" class="form-control @error('week') is-invalid @enderror" name="week" value="{{ old('week', $meeting->week ?? '') }}" required>
+
+                                @error('week')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -114,11 +133,11 @@
 
                             <div class="col-md-6">
                                 <select name="status" id="status" class="form-select">
-                                    @foreach ($status as $status)
-                                    <option value="{{ $status }}" {{ old('status', $model->status ?? 'pending') == $status ? 'selected' : '' }}>
-                                    {{ ucfirst($status) }}
-                                    </option>
-                                @endforeach
+                                    @foreach ($status as $option)
+                                        <option value="{{ $option }}" {{ old('status', $meeting->status ?? 'pendiente') === $option ? 'selected' : '' }}>
+                                            {{ ucfirst($option) }}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
