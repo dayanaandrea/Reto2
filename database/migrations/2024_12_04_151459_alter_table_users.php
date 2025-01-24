@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone2')->nullable();
             $table->binary('photo')->nullable();
             $table->boolean('intensive')->default(false);
+            $table->boolean('registered')->default(false);
 
             // Nulable para que cuando se borre un rol se ponga el campo a nulo
             $table->unsignedBigInteger('role_id')->nullable();

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -20,16 +21,17 @@ class UserSeeder extends Seeder
                 'id' => 1,
                 'name' => 'God',
                 'lastname' => 'God',
-                'email' => 'god@admin.com',
+                'email' => 'god@elorrieta-errekamari.com',
                 'email_verified_at' => now(),
-                'password' => bcrypt('1234'),
+                'password' => Hash::make('1234'),
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),
                 'pin' => '11111111A',
                 'address' => 'Camino de los Dioses, 10, 2B',
                 'phone1' => '666666666',
-                'role_id' => 4
+                'role_id' => 4,
+                'registered' => true
             ]
         ]);
 
