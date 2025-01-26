@@ -7,15 +7,14 @@ use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Illuminate\Database\Eloquent\Collection;
 
-class CyclesModules extends Component
+class CyclesForStudents extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public Collection $cycles
-        
-    )
+        public Collection $cycles,
+        public Collection $modules)
     {
         //
     }
@@ -25,6 +24,6 @@ class CyclesModules extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.accordions.cycles-modules');
+        return view('components.accordions.cycles-for-students');
     }
 }

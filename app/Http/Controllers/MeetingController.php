@@ -13,7 +13,7 @@ class MeetingController extends Controller
      */
     public function index()
     {
-        $meetings = Meeting::orderBy('date', 'asc')->paginate(10);
+        $meetings = Meeting::with(['user', 'participants'])->orderBy('day', 'asc')->paginate(10);
         return view('admin.meetings.index',['meetings' => $meetings]);
     }
 
@@ -23,13 +23,10 @@ class MeetingController extends Controller
     public function create()
     {
         $teachers = \App\Models\User::where('role_id',1)->orderBy('id')->get();
-        $students = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $students = \App\Models\User::orderBy('id')->get();
         $status = \App\Models\Meeting::getStatusOptions();
 
-        $meetings = Meeting::orderBy('date')->get();
-
         return view('admin.meetings.create-edit', [
-           'meetings' => $meetings,
            'teachers' => $teachers,
            'students' => $students,
            'status' => $status,
@@ -41,17 +38,21 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-          // Crear la reunión
-          $meeting = new Meeting();
-          $meeting->date = $request->date;
-          $meeting->time = $request->time;
-          $meeting->status = $request->status;
-          $meeting->teacher_id = $request->teacher_id;
-          $meeting->student_id = $request->student_id;
+        //$this->validateMeeting($request);
+
+        $meeting = Meeting::create([
+            'day' => $request['day'],
+            'time' => $request['time'],
+            'week' => $request['week'],
+            'status' => $request['status'],
+            'user_id' => $request['teacher_id'],
+        ]);
+        $meeting->participants()->sync($request['participants']);
+
   
           // Guardar el nuevo usuario
-          $meeting->save();
-          return redirect()->route('admin.meetings.index')->with('success', 'La reunión con la fecha <b>' . $meeting->date . '</b> ha sido creada correctamente.');
+        $meeting->save();
+        return redirect()->route('admin.meetings.index')->with('success', 'La reunión del día <b>' . $meeting->day . '</b> ha sido creada correctamente.');
     }
 
     /**
@@ -59,6 +60,7 @@ class MeetingController extends Controller
      */
     public function show(Meeting $meeting)
     {
+        $meetings = Meeting::with(['user', 'participants'])->orderBy('day', 'asc')->paginate(10);
         return view('admin.meetings.show',['meeting'=>$meeting]);
     }
 
@@ -85,19 +87,23 @@ class MeetingController extends Controller
     public function update(Request $request, Meeting $meeting)
     {
         // Validar los datos
-        $this->validateMeeting($request);
-
-        //$schedule->schedule = strtolower($request->schedule);
+        //$this->validateMeeting($request);
         //dd($request);
-        $meeting->date = $request->date;
-        $meeting->time = $request->time;
-        $meeting->status = $request->status;
-        $meeting->teacher_id = $request->teacher_id;
-        $meeting->student_id = $request->student_id;
-        // Guardar el nuevo horario
+        $meeting->day = $request->input('day');
+        $meeting->time = $request->input('time');
+        $meeting->week = $request->input('week');
+        $meeting->status = $request->input('status');
+        $meeting->user_id = $request->input('teacher_id');
+
+        // Sincronizar los participantes
+        if ($request->has('participants')) {
+            $meeting->participants()->sync($request->input('participants'));
+        }
+
+        // Guardar los cambios
         $meeting->save();
 
-        return redirect()->route('admin.meetings.index', $meeting)->with('success', 'La reunión con la fecha <b>' . $meeting->date . '</b> ha sido actualizada correctamente.');
+        return redirect()->route('admin.meetings.index', $meeting)->with('success', 'La reunión del día <b>' . $meeting->day . '</b> ha sido actualizada correctamente.');
     }
 
     /**
@@ -113,21 +119,29 @@ class MeetingController extends Controller
      /**
      * Validates module's data.
      */
-    private function validateMeeting(Request $request)
-    {
-        $request->validate([
-           
-            'date' => 'required',
-            'time' => 'required',
-            'status' => 'required',
-            'teacher_id' => 'required',
-            'student_id' => 'required',
-        ], [
-            'date.required' => 'La fecha es obligatoria.',
-            'time.required' => 'El campo hora es obligatorio.',
-            'status.required' => 'El campo del estado de la reunión es obligatorio.',
-            'teacher_id.required' => 'El campo del profesor es obligatorio.',
-            'student_id.required' => 'El campo del estudiante es obligatorio.',
-        ]);
-    }
+    protected function validateMeeting(Request $request)
+{
+    return $request->validate([
+        'day' => 'required',
+        'time' => 'required',
+        'week' => 'required',
+        'status' => 'required',
+        'user_id' => 'required', 
+        'participants' => 'required|array', // Debe ser un array
+    ], [
+        'day.required' => 'El campo día es obligatorio.',
+        
+        'time.required' => 'El campo hora es obligatorio.',
+
+        'week.required' => 'El campo semana es obligatorio.',
+
+        'status.required' => 'El campo estado es obligatorio.',
+
+        'user_id.required' => 'El campo profesor es obligatorio.',
+
+        'participants.required' => 'Debe seleccionar al menos un participante.',
+        'participants.array' => 'El campo participantes debe ser un array.',
+    ]);
+}
+
 }
