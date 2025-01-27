@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->unsignedBigInteger('meeting_id');
             $table->unsignedBigInteger('user_id');
-            $table->enum('status', ['aceptada', 'rechazada', 'pendiente', 'aceptada_F', 'rechazada_F'])->default('pendiente');
+            $table->enum('status', ['aceptada', 'rechazada', 'pendiente'])->default('pendiente');
             $table->unique(array('meeting_id', 'user_id'));
+            $table->timestamps();
+
+            $table->foreign('meeting_id')-> references('id')->on('meetings')-> onUpdate('cascade')-> onDelete('cascade');
+            $table->foreign('user_id')-> references('id')->on('users')-> onUpdate('cascade')-> onDelete('cascade');
         });
     }
 
