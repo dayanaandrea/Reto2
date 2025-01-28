@@ -21,6 +21,10 @@ return new class extends Migration
             $table->unsignedBigInteger ('user_id');
             $table->foreign('user_id')-> references('id')-> on('users')-> onUpdate('cascade')-> onDelete('cascade');
             $table->unique(array('user_id', 'id'));
+            // Para el otro reto
+            $table->string('title', 50)->nullable()->default('Reunión');
+            $table->tinyInteger('room')->nullable()->default(0);
+            $table->string('subject', 100)->nullable()->default('Solicitud de reunión');
             $table->timestamps();
         });
     }
