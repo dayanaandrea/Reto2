@@ -25,4 +25,9 @@ class Module extends Model
     public function enrollments(){
         return $this->hasMany(Enrollment::class);
     }
+    
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
 }
