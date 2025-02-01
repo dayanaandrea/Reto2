@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\Meeting;
 use App\Models\Cycle;
 use App\Models\Module;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -47,7 +48,7 @@ class HomeController extends Controller
         }
     }
 
-    public function homeAdmin()
+    public function homeAdmin(Request $request)
     {
         $user = Auth::user();
 
@@ -68,10 +69,17 @@ class HomeController extends Controller
                 } else {
                     $totalPersonal = 0;
                 }
-
-                $reunionesAccepted = Meeting::where('status', 'accepted')->count();
-                $reunionesPendientes = Meeting::where('status', 'pending')->count();
-                $reunionesTotales = Meeting::get()->count();
+           
+            $status = $request->query('status', null);  
+            if ($status) {
+                $reuniones = Meeting::where('status', $status)->get();
+            } else {
+                $reuniones = Meeting::all();
+            }
+                
+                $reunionesAccepted = Meeting::where('status', 'aceptada')->count();
+                $reunionesPendientes = Meeting::where('status', 'pendiente')->count();
+                $reunionesTotales = Meeting::count();
                 $totalCiclos = Cycle::count();
                 $usuariosSinRol = User::whereNull('role_id')->count();
                 $totalModulos = Module::count();
@@ -84,7 +92,8 @@ class HomeController extends Controller
                     'reunionesTotales',
                     'totalCiclos',
                     'usuariosSinRol',
-                    'totalModulos'
+                    'totalModulos',
+                    'reuniones'
                 ));
             }
         }
