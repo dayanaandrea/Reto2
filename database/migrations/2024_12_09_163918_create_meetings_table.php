@@ -17,7 +17,7 @@ return new class extends Migration
             $table->tinyInteger('time');
             $table->tinyInteger('week');
             //Establecer los valores por defecto que va a tener el enum
-            $table->enum('status', ['aceptada', 'rechazada', 'pendiente'])->default('pendiente');
+            $table->enum('status', ['aceptada', 'rechazada', 'pendiente', 'confirmada', 'cancelada'])->default('pendiente');
             $table->unsignedBigInteger ('user_id');
             $table->foreign('user_id')-> references('id')-> on('users')-> onUpdate('cascade')-> onDelete('cascade');
             $table->unique(array('user_id', 'id'));
