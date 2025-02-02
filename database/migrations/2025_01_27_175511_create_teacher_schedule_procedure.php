@@ -31,7 +31,7 @@ return new class extends Migration
             m.status as status, m.id as meeting_id 
             from meetings m 
                 inner join participants p on m.id = p.meeting_id 
-            where p.user_id = teacher_id and m.week = selected_week
+            where p.user_id = teacher_id and m.week = selected_week and m.day between 1 and 5
             order by day asc, hour asc;
         END
         ');
