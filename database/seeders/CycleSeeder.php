@@ -19,8 +19,8 @@ class CycleSeeder extends Seeder
         ['code' => 'ASIR', 'name' => 'Técnico superior en administración de sistemas informáticos en red', 'created_at'=>now(),'updated_at'=>now()],
         ['code' => 'DFM', 'name' => 'Técnico superior en diseño de fabricación mecánica', 'created_at'=>now(),'updated_at'=>now()],
         ['code' => 'POC', 'name' => 'Técnico superior en proyectos de obra civil', 'created_at'=>now(),'updated_at'=>now()],
-        ['code' => 'CI', 'name' => 'Técnico superior en comercio internacional', 'created_at'=>now(),'updated_at'=>now()]
-
+        ['code' => 'CI', 'name' => 'Técnico superior en comercio internacional', 'created_at'=>now(),'updated_at'=>now()],
+        ['code' => 'PROF', 'name' => 'Gestión de tutorías y guardias del profesorado', 'created_at'=>now(),'updated_at'=>now()],
     ]);
 }
 }

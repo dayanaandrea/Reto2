@@ -18,12 +18,18 @@ return new class extends Migration
             IN selected_week INT
         )
         BEGIN
-            select m.code as event, s.day as day, s.hour as hour, "module" as type, null as status, null as meeting_id
+            select 
+            case
+				when m.code like "%TUT_%" then "TUT"
+                when m.code like "%GUA_%" then "GUA" 
+                else m.code
+            end as event, 
+            s.day as day, s.hour as hour, "module" as type, null as status, null as meeting_id
             from modules m
                 inner join schedules s on s.module_id = m.id
             where m.user_id = teacher_id
         UNION
-            select "Reunión" as event, m.day as day, m.time as hour, 
+            select "REU" as event, m.day as day, m.time as hour, 
             case
                 when m.user_id = p.user_id then "creator"
                 else "guest"
