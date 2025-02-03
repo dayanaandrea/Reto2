@@ -20,6 +20,6 @@ class Meeting extends Model
 
     public static function getStatusOptions()
     {
-        return ['aceptada', 'rechazada', 'pendiente'];
+        return ['aceptada', 'rechazada', 'pendiente', 'confirmada', 'cancelada', 'forzada'];
     }
 }

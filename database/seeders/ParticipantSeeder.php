@@ -14,6 +14,9 @@ class ParticipantSeeder extends Seeder
     public function run()
     {
         DB::table('participants')->insert([
+            ['meeting_id' => 1, 'user_id'=> 17, 'status'=>'pendiente', 'created_at'=>now(),'updated_at'=>now()],
+            ['meeting_id' => 2, 'user_id'=> 17, 'status'=>'pendiente', 'created_at'=>now(),'updated_at'=>now()],
+            ['meeting_id' => 3, 'user_id'=> 17, 'status'=>'pendiente', 'created_at'=>now(),'updated_at'=>now()],
             ['meeting_id' => 4, 'user_id'=> 15, 'status'=>'pendiente', 'created_at'=>now(),'updated_at'=>now()],
             ['meeting_id' => 4, 'user_id'=> 20, 'status'=>'aceptada', 'created_at'=>now(),'updated_at'=>now()],
         ]);
