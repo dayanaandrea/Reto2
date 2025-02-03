@@ -11,6 +11,7 @@
                 @yield('content')
             </main>
         </div>
+        @include('layouts.theme-changer')
     </div>
 </body>
 
