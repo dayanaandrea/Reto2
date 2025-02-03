@@ -9,6 +9,7 @@ use App\Models\Meeting;
 use App\Models\Cycle;
 use App\Models\Module;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -52,9 +53,11 @@ class HomeController extends Controller
     {
         $user = Auth::user();
 
+
         if ($user->role) {
             $role = $user->role;
             if ($role->role == 'god' || $role->role == 'administrador') {
+
 
                 $alumnoRole = Role::where('role', 'estudiante')->first();
                 if ($alumnoRole) {
@@ -63,26 +66,29 @@ class HomeController extends Controller
                     $totalAlumnos = 0;
                 }
 
+
                 $personalRole = Role::where('role', 'profesor')->first();
                 if ($personalRole) {
                     $totalPersonal = User::where('role_id', $personalRole->id)->count();
                 } else {
                     $totalPersonal = 0;
                 }
-           
-            $status = $request->query('status', null);  
-            if ($status) {
-                $reuniones = Meeting::where('status', $status)->get();
-            } else {
-                $reuniones = Meeting::all();
-            }
-                
-                $reunionesAccepted = Meeting::where('status', 'aceptada')->count();
-                $reunionesPendientes = Meeting::where('status', 'pendiente')->count();
-                $reunionesTotales = Meeting::count();
+
+
+                $today = Carbon::today();
+
+
+                // Contar reuniones aceptadas y pendientes desde hoy
+                $reunionesAccepted = Meeting::where('status', 'aceptada')->where('day', '>=', $today)->count();
+                $reunionesPendientes = Meeting::where('status', 'pendiente')->where('day', '>=', $today)->count();
+                $reunionesTotales = Meeting::where('day', '>=', $today)->count();
+               
+
+
                 $totalCiclos = Cycle::count();
                 $usuariosSinRol = User::whereNull('role_id')->count();
                 $totalModulos = Module::count();
+
 
                 return view('admin.home',  compact(
                     'totalAlumnos',
@@ -92,14 +98,15 @@ class HomeController extends Controller
                     'reunionesTotales',
                     'totalCiclos',
                     'usuariosSinRol',
-                    'totalModulos',
-                    'reuniones'
+                    'totalModulos'
                 ));
             }
         }
 
+
         abort(404);
     }
+
 
     public function teachers()
     {
