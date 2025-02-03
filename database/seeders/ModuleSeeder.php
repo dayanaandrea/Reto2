@@ -93,7 +93,14 @@ class ModuleSeeder extends Seeder
             ['user_id' => 29, 'code' => 'MI', 'name' => 'Marketing internacional	', 'hours' => 140 , 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
             ['user_id' => 30, 'code' => 'NI', 'name' => 'Negociación internacional	', 'hours' => 100 , 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
             ['user_id' => 30, 'code' => 'FI', 'name' => 'Financiación internacional	', 'hours' => 100 , 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
-            ['user_id' => 30, 'code' => 'MPI', 'name' => 'Medios de pago internacionales	', 'hours' => 100, 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()]
+            ['user_id' => 30, 'code' => 'MPI', 'name' => 'Medios de pago internacionales	', 'hours' => 100, 'course' => 2, 'cycle_id' => 6, 'created_at' => now(), 'updated_at' => now()],
+
+            // Meter guardias y tutorias al user 16
+            ['user_id' => 16, 'code' => 'TUT_16', 'name' => 'Tutoría', 'hours' => 0, 'course' => 0, 'cycle_id' => 7, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 16, 'code' => 'GUA_16', 'name' => 'Guardia', 'hours' => 0, 'course' => 0, 'cycle_id' => 7, 'created_at' => now(), 'updated_at' => now()],
+            // Meter guardias y tutorias al user 17
+            ['user_id' => 17, 'code' => 'TUT_17', 'name' => 'Tutoría', 'hours' => 0, 'course' => 0, 'cycle_id' => 7, 'created_at' => now(), 'updated_at' => now()],
+            ['user_id' => 17, 'code' => 'GUA_17', 'name' => 'Guardia', 'hours' => 0, 'course' => 0, 'cycle_id' => 7, 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }
