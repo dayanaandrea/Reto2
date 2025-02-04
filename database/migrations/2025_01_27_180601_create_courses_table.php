@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('contact', 100);
             $table->string('description', 200);
             $table->string('schedule', 50);
-            $table->float('latitude', 10, 6);
-            $table->float('longitude', 10, 6);
+            $table->float('latitude', 10);
+            $table->float('longitude', 10);
             $table->timestamps();
         });
     }
