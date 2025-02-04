@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use Illuminate\Support\Facades\DB;
+
 return new class extends Migration
 {
     /**
@@ -17,7 +19,7 @@ return new class extends Migration
                 IN student_id INT
             )
             BEGIN 
-                select m.name as module, s.day, s.hour 
+                select m.code as module, s.day, s.hour 
                 from users u 
                 inner join enrollments e on u.id =e.user_id
                 inner join modules m on e.module_id = m.id 
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::unprepared('DROP PROCEDURE StudentSchedule;');
+        DB::unprepared('DROP PROCEDURE IF EXISTS StudentSchedule;');
     }
 };
