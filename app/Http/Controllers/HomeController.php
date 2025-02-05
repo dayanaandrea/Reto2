@@ -79,10 +79,12 @@ class HomeController extends Controller
 
 
                 // Contar reuniones aceptadas y pendientes desde hoy
-                $reunionesAccepted = Meeting::where('status', 'aceptada')->where('day', '>=', $today)->count();
-                $reunionesPendientes = Meeting::where('status', 'pendiente')->where('day', '>=', $today)->count();
-                $reunionesTotales = Meeting::where('day', '>=', $today)->count();
-               
+                $currentDay = getCurrentDay();
+                $currentWeek = getCurrentWeek();
+                $reunionesAccepted = Meeting::where('day', '=', $currentDay)->where('week', '=', $currentWeek)->where('status', 'aceptada')->count();
+                $reunionesPendientes = Meeting::where('day', '=', $currentDay)->where('week', '=', $currentWeek)->where('status', 'pendiente')->count();
+                $reunionesTotales = Meeting::where('day', '=', $currentDay)->where('week', '=', $currentWeek)->count();
+
 
 
                 $totalCiclos = Cycle::count();

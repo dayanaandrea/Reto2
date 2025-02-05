@@ -15,16 +15,16 @@ class MeetingController extends Controller
     public function index(Request $request)
     {
         $status = $request->query('status', null);
-        // Definir la fecha de hoy
-        $today = Carbon::today();
-        $meetingsQuery = Meeting::where('day', '>=', $today);
+        $meetingsQuery = Meeting::query();
 
         if ($status) {
-            $meetingsQuery->where('status', $status);
+            $currentDay = getCurrentDay();
+            $currentWeek = getCurrentWeek();
+            $meetingsQuery->where('day', '=', $currentDay)->where('week', '=', $currentWeek)->where('status', '=', $status);
         }
 
         $pagination = getPagination($request);
-        $meetings = Meeting::with(['user', 'participants'])->orderBy('day', 'asc')->paginate($pagination);
+        $meetings = $meetingsQuery->with(['user', 'participants'])->orderBy('day', 'asc')->paginate($pagination);
         return view('admin.meetings.index', ['meetings' => $meetings]);
     }
 

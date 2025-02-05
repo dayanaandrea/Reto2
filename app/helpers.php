@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
 
 /**
  * Retorna un string que contiene el valor del atributo src de una etiqueta img de HTML.
@@ -41,7 +42,6 @@ function obtenerEstiloRol($role)
     } else {
         return 'bg-light';
     }
-
 }
 
 function getPagination(Request $request): int
@@ -143,4 +143,20 @@ function validateUserUpdateAPI(Request $request, User $user)
         'phone2' => 'nullable|string|max:15',
         'role_id' => 'nullable|exists:roles,id',
     ]);
+}
+
+function getCurrentWeek()
+{
+    $fecha_inicio = strtotime("2024-09-02");
+    $fecha_actual = time();
+    $diferencia = $fecha_actual - $fecha_inicio;
+    $semanas = floor($diferencia / (60 * 60 * 24 * 7));
+
+    return (int)$semanas + 1;
+}
+
+function getCurrentDay()
+{
+    $day = date('N');
+    return (int)$day;
 }
