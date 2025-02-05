@@ -1,9 +1,12 @@
 @extends('layouts.app-admin')
 @section('content')
 <div class="container">
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
+
     <h2 class="mb-4">{{__('module.show_title')}}</h2>
 
-    <!-- Tarjeta para mostrar detalles de los modulos -->
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">{{ $module->name }}</h4>

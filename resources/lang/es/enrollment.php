@@ -10,7 +10,13 @@ return [
     'enrollments' => 'Matrículas',
     'actions' => 'Acciones',
     'enrollment' => 'Matrícula',
-    
+
+    'add' => 'Añadir',
+    'tp_create' => 'Crear matrícula',
+    'see_data_enrollment' => 'Ver datos del matrícula',
+    'edit_data_enrollment' => 'Editar datos del matrícula',
+    'delete_data_enrollment' => 'Eliminar matrícula',
+
     // SHOW
     'title_show_1' => 'Crear nueva matrícula',
     'title_show_2' => 'Detalles de la matrícula ',

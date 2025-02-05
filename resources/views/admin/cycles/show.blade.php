@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container">
-
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
     <h2 class="mb-4">{{__('cycle.show_title_1')}}</h2>
 
     <!-- Tarjeta para mostrar detalles de los modulos -->

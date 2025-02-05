@@ -15,7 +15,7 @@ class CycleController extends Controller
         $pagination = getPagination($request);
         $cycles = Cycle::orderBy('name', 'desc')->paginate($pagination);
 
-        return view('admin.cycles.index',['cycles' => $cycles]);
+        return view('admin.cycles.index', ['cycles' => $cycles]);
     }
 
     /**
@@ -23,7 +23,7 @@ class CycleController extends Controller
      */
     public function create()
     {
-        return view('admin.cycles.create-edit', ['type'=>'POST']);
+        return view('admin.cycles.create-edit', ['type' => 'POST']);
     }
 
     /**
@@ -39,12 +39,12 @@ class CycleController extends Controller
         $cycles->code = strtoupper($request->code);
         $cycles->name = $request->name;
 
-        // Guardar el nuevo ciclo
-        $cycles->save();
-
-        return redirect()->route('admin.cycles.index')->with('success',  __('cycle.cycle') . '<b>' . $cycles->name . '</b>'.   __('cycle.controller_create'));
-
-    
+        try {
+            $cycles->save();
+            return redirect()->route('admin.cycles.index')->with('success',  __('cycle.cycle') . '<b>' . $cycles->name . '</b>' .   __('cycle.controller_create'));
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al crear el ciclo.');
+        }
     }
 
     /**
@@ -52,7 +52,7 @@ class CycleController extends Controller
      */
     public function show(Cycle $cycle)
     {
-        return view('admin.cycles.show',['cycle'=>$cycle]);
+        return view('admin.cycles.show', ['cycle' => $cycle]);
     }
 
     /**
@@ -61,7 +61,7 @@ class CycleController extends Controller
     public function edit(Cycle $cycle)
     {
         // Aqui se le pueden mandar los datos de los modulos para el combo 
-        return view('admin.cycles.create-edit', ['cycle'=>$cycle, 'type'=>'PUT']);
+        return view('admin.cycles.create-edit', ['cycle' => $cycle, 'type' => 'PUT']);
     }
 
     /**
@@ -69,25 +69,32 @@ class CycleController extends Controller
      */
     public function update(Request $request, Cycle $cycle)
     {
-       // Validar los datos
-       $this->validateCycle($request);
+        // Validar los datos
+        $this->validateCycle($request);
 
-       $cycle->code = strtoupper($request->code);
-       $cycle->name = $request->name;
+        $cycle->code = strtoupper($request->code);
+        $cycle->name = $request->name;
 
-       // Guardar el nuevo ciclo
-       $cycle->save();
+        try {
+            $cycle->save();
+            return redirect()->route('admin.cycles.index', $cycle)->with('success',   __('cycle.cycle') . '<b>' . $cycle->cycle . '</b>' .   __('cycle.controller_edit'));
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al modificar el ciclo.');
+        }
 
-       return redirect()->route('admin.cycles.index', $cycle)->with('success',   __('cycle.cycle') . '<b>' . $cycle->cycle . '</b>'.   __('cycle.controller_edit'));
-   }
+        try {
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al modificar el ciclo.');
+        }
+    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Cycle $cycle)
     {
-        $cycle->delete(); 
-        return redirect()->route('admin.cycles.index')->with('success',   __('cycle.cycle') . '<b>' . $cycle->name . '</b>'.   __('cycle.controller_delete'));
+        $cycle->delete();
+        return redirect()->route('admin.cycles.index')->with('success',   __('cycle.cycle') . '<b>' . $cycle->name . '</b>' .   __('cycle.controller_delete'));
     }
     /**
      * Validates cycle's data.
@@ -106,4 +113,3 @@ class CycleController extends Controller
         ]);
     }
 }
-

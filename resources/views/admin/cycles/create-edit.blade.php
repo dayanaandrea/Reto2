@@ -15,6 +15,9 @@ $title = __('cycle.create_text');
 
 @section('content')
 <div class="container">
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -55,7 +58,7 @@ $title = __('cycle.create_text');
                                 <label for="name" class="col-md-4 col-form-label text-md-end">{{__('cycle.name')}}</label>
 
                                 <div class="col-md-6">
-                                <input id="name" type="text"
+                                    <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
                                         value="{{ old('name', $name) }}" required autocomplete="name" autofocus>
 
