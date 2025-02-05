@@ -36,7 +36,7 @@ return [
     'select_teacher' => ' -- Select a teacher -- ',
 
     // CONTROLLER 
-    
+
     'code_required' => 'The code field is required.',
     'code_min' => 'The code must be at least 2 characters.',
     'code_max' => 'The code cannot be more than 6 characters.',
@@ -48,6 +48,12 @@ return [
     'course_in' => 'The course can only be 1 or 2.',
     'course_required' => 'The course field is required.',
     'cycle_id_required' => 'The cycle field is required.',
+
+    'controller_create' => ' created successfully.',
+    'controller_edit' => ' edited successfully.',
+    'controller_delete' => ' deleted successfully.',
+    'controller_error_create' => ' Error creating the module.',
+    'controller_error_edit' => ' Error editing the module.',
 
 
 ];

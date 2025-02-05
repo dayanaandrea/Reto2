@@ -45,7 +45,7 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-       /* //dd('Antes de la validación');
+        /* //dd('Antes de la validación');
         //dd($request->all());*/
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
@@ -56,26 +56,24 @@ class EnrollmentController extends Controller
         //dd($validatedData);
 
 
-
-
         //dd($enrollment->user_id,$enrollment->module_id,$enrollment->cycle_id,$enrollment->date,$enrollment->course);  // Esto debería mostrarte el ID del usuario asignado
 
         //dd para comprobar la multiple selección de módulos
         //dd($enrollment->module_id,$enrollment->user_id,$enrollment->date);
 
+        try {
+            foreach ($validatedData['module_id'] as $module_id) {
+                $enrollment = new Enrollment();
+                $enrollment->user_id = $validatedData['user_id'];
+                $enrollment->module_id = $module_id;
+                $enrollment->date = $validatedData['date'];
 
-        foreach ($validatedData['module_id'] as $module_id) {
-            $enrollment = new Enrollment();
-            $enrollment->user_id = $validatedData['user_id'];
-            $enrollment->module_id = $module_id;
-            $enrollment->date = $validatedData['date'];
-
-            $enrollment->save();
+                $enrollment->save();
+            }
+            return redirect()->route('admin.enrollments.index')->with('success', $enrollment->user->lastname . ', ' . $enrollment->user->name . ' se ha matriculado correctamente.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al crear la matrícula.');
         }
-
-        // Guardar la nueva matrícula
-
-        return redirect()->route('admin.enrollments.index')->with('success', $enrollment->user->lastname . ', ' . $enrollment->user->name . ' se ha matriculado correctamente.');
     }
 
     /**
@@ -118,19 +116,20 @@ class EnrollmentController extends Controller
             'module_id' => 'required',
             'date' => 'required',
         ]);
-        
+
         //dd($validatedData);
 
-         // Si 'module_id' es un array, obtenemos el primer valor
+        // Si 'module_id' es un array, obtenemos el primer valor
+
         if (is_array($validatedData['module_id'])) {
             $validatedData['module_id'] = $validatedData['module_id'][0];
         }
-
-        $enrollment->update($validatedData);
-    
-    
-        return redirect()->route('admin.enrollments.show',$enrollment)->with('success', 'Matricula  <b>' . $enrollment->enrollment . '</b> creado correctamente.');   
-         
+        try {
+            $enrollment->update($validatedData);
+            return redirect()->route('admin.enrollments.show', $enrollment)->with('success', 'Matrícula  <b>' . $enrollment->enrollment . '</b> creado correctamente.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al modificar la matrícula.');
+        }
     }
 
     /**

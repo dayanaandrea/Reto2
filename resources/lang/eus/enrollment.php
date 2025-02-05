@@ -1,34 +1,35 @@
 <?php
-
-// Ejemplo
-// {{__('enrollment.title_show_2')}}
-
 return [
     // INDEX
-    'title_index_1' => 'Matrikula berria sortu',
-    'title_index_2' => 'Matrikula bat sortzera joan',
+    'title_index_1' => 'Sortu matrikula berria',
+    'title_index_2' => 'Sartu matrikula bat sortzera',
     'enrollments' => 'Matrikulak',
     'actions' => 'Ekintzak',
     'enrollment' => 'Matrikula',
-    
+
+    'add' => 'Gehitu',
+    'tp_create' => 'Sortu matrikula',
+    'see_data_enrollment' => 'Ikusi matrikulako datuak',
+    'edit_data_enrollment' => 'Editatu matrikulako datuak',
+    'delete_data_enrollment' => 'Ezabatu matrikula',
+
     // SHOW
-    'title_show_1' => 'Matrikula berria sortu',
-    'title_show_2' => 'Matrikularen xehetasunak',
+    'title_show_1' => 'Sortu matrikula berria',
+    'title_show_2' => 'Matrikulako xehetasunak',
     'student' => 'Ikaslea',
     'module' => 'Modulua',
     'cycle' => 'Zikloa',
     'date' => 'Data',
-    'course' => 'Ikastaroa',
-    'delete_confirmation' => 'Ezabatzea baieztatu',
+    'course' => 'Kursoa',
+    'delete_confirmation' => 'Ezabatzearen baieztapena',
     'ask_for_delete_confirmation_1' => 'Ziur zaude matrikula hau ezabatu nahi duzula',
-    'ask_for_delete_confirmation_2' => '? Ekintza hau ezin da desegin.',
-    'cancel' => 'Utzi',
+    'ask_for_delete_confirmation_2' => '? Ekintza hau ezin da desegondu.',
+    'cancel' => 'Ezeztatu',
     'delete' => 'Ezabatu',
 
     // CREATE-EDIT
     'update' => 'Eguneratu',
-    'update_enrollment' => 'Matrikularen eguneraketa',
+    'update_enrollment' => 'Matrikulako eguneraketa',
     'create' => 'Sortu',
-    'create_enrollment' => 'Matrikula sortu',
+    'create_enrollment' => 'Sortu matrikula',
 ];
-

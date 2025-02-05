@@ -53,11 +53,16 @@ class ModuleController extends Controller
         $module->course = $request->course;
         $module->cycle_id = $request->cycle_id;
         $module->user_id = $request->user_id;
-        // Guardar el nuevo modulo
-        $module->save();
-
-        return redirect()->route('admin.modules.index')->with('success', 'Modulo  ' . $module->name . ' creado correctamente.');
-    }
+        
+        
+        try {
+            $module->save();
+            return redirect()->route('admin.modules.index')->with('success',  __('module.module') .'<b>' . $module->name . '</b>'. __('module.controller_create'));    
+        } catch (\Exception $e) {
+            return back()->with('error',   __('module.controller_error_create'));
+        }
+    
+       }
 
     /**
      * Display the specified resource.
@@ -95,11 +100,13 @@ class ModuleController extends Controller
         $module->cycle_id = $request->cycle_id;
         $module->user_id = $request->user_id;
 
-        // Guardar el nuevo modulo
-        $module->save();
-
-        return redirect()->route('admin.modules.index', $module)->with('success', 'Modulo <b>' . $module->name . '</b> actualizado correctamente.');
-    }
+        try {
+            $module->save();
+            return redirect()->route('admin.modules.index', $module)->with('success',    __('module.module') .'<b>' . $module->name . '</b>'. __('module.controller_edit'));
+        } catch (\Exception $e) {
+            return back()->with('error',   __('module.controller_error_edit'));
+        }
+       }
 
     /**
      * Remove the specified resource from storage.
@@ -107,7 +114,7 @@ class ModuleController extends Controller
     public function destroy(Module $module)
     {
         $module->delete();
-        return redirect()->route('admin.modules.index')->with('success', 'Modulo  <b>' . $module->name . '</b> eliminado correctamente.');
+        return redirect()->route('admin.modules.index')->with('success',    __('module.module') .'<b>' . $module->name . '</b> '. __('module.controller_delete'));
     }
     /**
      * Validates module's data.
