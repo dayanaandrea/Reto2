@@ -1,25 +1,29 @@
 <?php
 return [
 
-    // INDEX  {{__('cycle.index_title_1')}}
-    'index_title_1' => 'Ziklo berri bat sortu',
-    'index_title_2' => 'Zikloa sortzera sartzea: ',
+    // INDEX  
+    'create_cycle' => 'Ziklo berri bat sortu',
     'cycle' => 'Zikloa',
     'code' => 'Kodea',
     'name' => 'Izena',
     'actions' => 'Ekintzak',
-    'see_data_module' => 'Ikusi zikloaren datuak',
-    'edit_data_module' => 'Editatu zikloaren datuak',
-    'delete_module' => 'Ezabatu zikloa',
-    'confirm_deletes' => 'Ezabaltzea berretsi',
-    'confirm_1' => 'Ziur zaude zikloa ezabatzea nahi duzula ',
-    'confirm_2' => '? Ekintza hau ezin da desegondu.',
+    'see_data_cycle' => 'Zikloaren datuak ikusi',
+    'edit_data_cycle' => 'Zikloaren datuak editatu',
+    'delete_cycle' => 'Zikloa ezabatu',
+    'confirm_deletes' => 'Ezabatzea baieztatu',
+    'confirm_1' => 'Ziur zaude zikloa ezabatu nahi duzula ',
+    'confirm_2' => '? Ekintza hau ezin da baliogabetu.',
     'cancel' => 'Ezeztatu',
     'delete' => 'Ezabatu',
+    'update' => 'Eguneratu',
+    'update_text' => 'Zikloaren eguneraketa',
+    'create' => 'Sortu',
+    'create_text' => 'Zikloaren sortzea',
+    'add' => 'Gehitu',
 
     // SHOW
 
-    'show_title_1' => 'Zikloaren xehetasunak ',
+    'show_title_1' => 'Zikloaren xehetasunak',
     'module' => 'Moduluak',
 
 ];
