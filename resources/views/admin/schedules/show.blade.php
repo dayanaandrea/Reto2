@@ -25,7 +25,7 @@
 
                 <p class="col-sm-3 fw-bold">{{__('schedule.teacher')}}</p>
                 @if ($schedule->module->user)
-                <p class="col-sm-9"><a href="{{route('admin.schedules.show', $schedule->module->user)}}">{{$schedule->module->user->name}} {{$schedule->module->user->lastname}}</a></p>
+                <p class="col-sm-9"><a href="{{route('admin.users.show', $schedule->module->user)}}">{{$schedule->module->user->name}} {{$schedule->module->user->lastname}}</a></p>
                 @else
                 <p class="col-sm-9">{{__('schedule.not_assigned')}}</p>
                 @endif
