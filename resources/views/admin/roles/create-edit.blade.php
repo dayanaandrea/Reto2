@@ -1,21 +1,23 @@
 @php
-    if (isset($role)) {
-        $name = $role->role;
-        $description = $role->description;
-        $button = "Actualizar";
-        $title = "Actualización del Rol";
-    } else {
-        $name = "";
-        $description = "";
-        $button = "Crear";
-        $title = "Creación de roles";
-    }
+if (isset($role)) {
+$name = $role->role;
+$description = $role->description;
+$button = "Actualizar";
+$title = "Actualización del Rol";
+} else {
+$name = "";
+$description = "";
+$button = "Crear";
+$title = "Creación de roles";
+}
 @endphp
 
 @extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -23,16 +25,16 @@
 
                 <div class="card-body">
                     @if($type == 'PUT')
-                        <form class="mt-2" name="create_platform" action="{{ route('admin.roles.update', $role) }}"
-                            method="POST" enctype="multipart/form-data">
+                    <form class="mt-2" name="create_platform" action="{{ route('admin.roles.update', $role) }}"
+                        method="POST" enctype="multipart/form-data">
 
-                            @method('PUT')
-                    @else
+                        @method('PUT')
+                        @else
                         <form class="mt-2" name="create_platform" action="{{ route('admin.roles.store') }}"
                             method="POST" enctype="multipart/form-data">
 
                             @method('POST')
-                    @endif
+                            @endif
                             @csrf
 
                             <h4>{{__('role.details')}}</h4>
@@ -45,9 +47,9 @@
                                         value="{{ old('role', $name) }}" required autocomplete="role" autofocus>
 
                                     @error('role')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -62,9 +64,9 @@
                                         autofocus>{{ old('description', $description) }}</textarea>
 
                                     @error('description')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>

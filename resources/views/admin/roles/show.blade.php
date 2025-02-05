@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
     <h2 class="mb-4">{{__('role.details')}}</h2>
 
     <!-- Tarjeta para mostrar detalles de los roles -->
@@ -13,27 +14,27 @@
         <div class="card-body">
             <div class="row">
                 @php
-                    // Definir la clase dependiendo del rol del usuario
-                    $clase = obtenerEstiloRol($role->role);
-                    $badge = '<span class="badge ' . $clase . ' text-capitalize">' . $role->role . '</span>';
-                    $description = $role->description;
+                // Definir la clase dependiendo del rol del usuario
+                $clase = obtenerEstiloRol($role->role);
+                $badge = '<span class="badge ' . $clase . ' text-capitalize">' . $role->role . '</span>';
+                $description = $role->description;
                 @endphp
                 <x-detail :label="__('role.role')" :value="$badge" />
                 <x-detail :label="__('role.description')" :value="$description" />
                 <x-detail :label="__('role.user')" :value="$userCount" />
                 <div>
                     @php
-                        $route = route('admin.roles.edit', $role);
-                        $type = "edit";
-                        $text = '<i class="fa-solid fa-pen"></i>';
-                        $tooltip =  __('role.edit_data_role');
+                    $route = route('admin.roles.edit', $role);
+                    $type = "edit";
+                    $text = '<i class="fa-solid fa-pen"></i>';
+                    $tooltip = __('role.edit_data_role');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                     <!-- Para generar un modal diferente siempre, se debe incluir el id -->
                     @php
-                        $id_modal = '#modal_delete' . $role->id;
-                        $text = '<i class="fa-solid fa-trash-can"></i>';
-                        $tooltip = __('role.delete_role');
+                    $id_modal = '#modal_delete' . $role->id;
+                    $text = '<i class="fa-solid fa-trash-can"></i>';
+                    $tooltip = __('role.delete_role');
                     @endphp
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                 </div>
@@ -43,9 +44,9 @@
 </div>
 <!-- Modal para eliminar un rol -->
 @php
-    $id = 'modal_delete' . $role->id;
-    $mensaje = "¿Estás seguro de que deseas eliminar el rol <strong class='text-capitalize'>$role->role</strong>? Esta acción no se puede deshacer.";
-    $ruta = route('admin.roles.destroy', $role);
- @endphp
+$id = 'modal_delete' . $role->id;
+$mensaje = "¿Estás seguro de que deseas eliminar el rol <strong class='text-capitalize'>$role->role</strong>? Esta acción no se puede deshacer.";
+$ruta = route('admin.roles.destroy', $role);
+@endphp
 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
 @endsection
