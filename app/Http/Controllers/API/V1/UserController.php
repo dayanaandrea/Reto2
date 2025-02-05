@@ -27,7 +27,7 @@ class UserController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/users",
+     *     path="/api/v1.0/users",
      *     summary="Show users",
      *     description="Returns a list of all users with pagination data.",
      *     @OA\Parameter(
@@ -96,7 +96,7 @@ class UserController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/users",
+     *     path="/api/v1.0/users",
      *     summary="Create a new user",
      *     description="Creates a new user in the system.",
      *     @OA\RequestBody(
@@ -155,7 +155,7 @@ class UserController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/users/{id}",
+     *     path="/api/v1.0/users/{id}",
      *     summary="Show a specific user",
      *     description="Fetches the details of a single user.",
      *     @OA\Parameter(
@@ -189,7 +189,7 @@ class UserController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/users/{id}",
+     *     path="/api/v1.0/users/{id}",
      *     summary="Update an existing user",
      *     description="Updates an existing user in the system.",
      *     @OA\Parameter(
@@ -278,7 +278,7 @@ class UserController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/users/{id}",
+     *     path="/api/v1.0/users/{id}",
      *     summary="Delete a specific user",
      *     description="Deletes a user from the system.",
      *     @OA\Parameter(

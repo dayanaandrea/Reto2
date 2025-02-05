@@ -20,7 +20,7 @@ class RoleController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/roles",
+     *     path="/api/v1.0/roles",
      *     summary="Show roles",
      *     description="Returns a list of all roles with pagination data.",
      *     @OA\Parameter(
@@ -84,7 +84,7 @@ class RoleController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/roles",
+     *     path="/api/v1.0/roles",
      *     summary="Create a new role",
      *     description="Creates a new role in the system.",
      *     @OA\RequestBody(
@@ -129,7 +129,7 @@ class RoleController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/roles/{id}",
+     *     path="/api/v1.0/roles/{id}",
      *     summary="Show a specific role",
      *     description="Fetches the details of a single role.",
      *     @OA\Parameter(
@@ -162,7 +162,7 @@ class RoleController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/roles/{id}",
+     *     path="/api/v1.0/roles/{id}",
      *     summary="Update an existing role",
      *     description="Updates an existing role in the system.",
      *     @OA\Parameter(
@@ -214,7 +214,7 @@ class RoleController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/roles/{id}",
+     *     path="/api/v1.0/roles/{id}",
      *     summary="Delete a specific role",
      *     description="Deletes a role from the system.",
      *     @OA\Parameter(
