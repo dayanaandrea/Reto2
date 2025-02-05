@@ -10,9 +10,10 @@ class EnrollmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $enrollments = Enrollment::orderBy('id', 'desc')->paginate(10);
+        $pagination = getPagination($request);
+        $enrollments = Enrollment::orderBy('id', 'desc')->paginate($pagination);
         return view('admin.enrollments.index', ['enrollments' => $enrollments]);
     }
 

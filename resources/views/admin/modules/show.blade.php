@@ -51,14 +51,14 @@
                     @endif
                 </div>
             </div>
+            @php
+            $id = 'modal_delete' . $module->id;
+            $mensaje = "¿Estás seguro de que deseas eliminar el modulo <strong class='text-capitalize'>$module->name</strong>? Esta acción no se puede deshacer.";
+            $ruta = route('admin.modules.destroy', $module);
+            @endphp
+            <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
         </div>
+
     </div>
 </div>
-<!-- Modal para eliminar un rol -->
-@php
-    $id = 'modal_delete' . $module->id;
-    $mensaje = "¿Estás seguro de que deseas eliminar el modulo <strong class='text-capitalize'>$module->name</strong>? Esta acción no se puede deshacer.";
-    $ruta = route('admin.modules.destroy', $module);
- @endphp
-<x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
 @endsection

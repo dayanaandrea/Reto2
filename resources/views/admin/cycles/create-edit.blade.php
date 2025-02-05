@@ -2,13 +2,13 @@
 if (isset($cycle)) {
 $code = $cycle->code;
 $name = $cycle->name;
-$button = "Actualizar";
-$title = "Actualización del Ciclo";
+$button = __('cycle.update');
+$title = __('cycle.update_text');
 } else {
 $code = "";
 $name = "";
-$button = "Crear";
-$title = "Creación de Ciclo";
+$button = __('cycle.create');
+$title = __('cycle.create_text');
 }
 @endphp
 @extends('layouts.app-admin')

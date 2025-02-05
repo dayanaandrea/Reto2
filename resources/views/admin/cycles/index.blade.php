@@ -6,10 +6,10 @@
 
     <div class="mb-2 text-end">
         @php
-            $route = route('admin.cycles.create');
-            $type = "show";
-            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
-            $tooltip =  __('cycle.create_cycle');
+        $route = route('admin.cycles.create');
+        $type = "show";
+        $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __('cycle.add') . '</span>';
+        $tooltip = __('cycle.create_cycle');
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
@@ -51,38 +51,18 @@
                     @php
                     $id_modal = '#modal_delete' . $cycle->id;
                     $text = '<i class="fa-solid fa-trash-can"></i>';
-                    $tooltip =  __('cycle.delete_cycle');
+                    $tooltip = __('cycle.delete_cycle');
                     @endphp
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                 </td>
             </tr>
             <!-- Modal para eliminar un ciclo -->
-            <div class="modal fade" id="modal_delete{{$cycle->id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            <h5 class="modal-title">{{__('cycle.confirm_deletes')}}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <!-- Cuerpo del Modal -->
-                        <div class="modal-body">
-                        {{__('module.confirm_1')}}<b>{{ $cycle->name }}</b>? {{__('cycle.confirm_2')}}
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('module.cancel')}}</button>
-                            <!-- Formulario de eliminación -->
-                            <form action="{{ route('admin.cycles.destroy', $cycle->id) }}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit"> {{__('cycle.delete')}} </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @php
+            $id = 'modal_delete' . $cycle->id;
+            $mensaje =__('cycle.confirm_1') ."<strong class='text-capitalize'>$cycle->name</strong>". __('cycle.confirm_2') ;
+            $ruta = route('admin.cycles.destroy', $cycle);
+            @endphp
+            <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
             @endforeach
         </tbody>
     </table>
