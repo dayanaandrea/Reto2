@@ -13,11 +13,12 @@ class ModuleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $pagination = getPagination($request);
         $modules = Module::orderBy('cycle_id', 'desc')
             ->orderBy('course', 'asc')
-            ->paginate(10);
+            ->paginate($pagination);
         return view('admin.modules.index', ['modules' => $modules]);
     }
 

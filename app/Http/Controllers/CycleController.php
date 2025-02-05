@@ -10,9 +10,11 @@ class CycleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cycles = Cycle::orderBy('name', 'desc')->paginate(10);
+        $pagination = getPagination($request);
+        $cycles = Cycle::orderBy('name', 'desc')->paginate($pagination);
+
         return view('admin.cycles.index',['cycles' => $cycles]);
     }
 
