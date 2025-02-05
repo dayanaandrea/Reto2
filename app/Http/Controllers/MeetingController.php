@@ -22,7 +22,9 @@ class MeetingController extends Controller
         if ($status) {
             $meetingsQuery->where('status', $status);
         }
-        $meetings = Meeting::with(['user', 'participants'])->orderBy('day', 'asc')->paginate(10);
+
+        $pagination = getPagination($request);
+        $meetings = Meeting::with(['user', 'participants'])->orderBy('day', 'asc')->paginate($pagination);
         return view('admin.meetings.index', ['meetings' => $meetings]);
     }
 

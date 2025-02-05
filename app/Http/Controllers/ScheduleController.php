@@ -10,10 +10,11 @@ class ScheduleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $pagination = getPagination($request);
         // Paginar, para no mostrar todos de golpe
-        $schedules = Schedule::orderBy('hour', 'asc')->paginate(10);
+        $schedules = Schedule::orderBy('hour', 'asc')->paginate($pagination);
         return view('admin.schedules.index',['schedules' => $schedules]);
     }
 
