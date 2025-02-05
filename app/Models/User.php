@@ -38,6 +38,7 @@ class User extends Authenticatable
         'photo',
         'role_id',
         'intensive',
+        'registered',
     ];
 
     /**
