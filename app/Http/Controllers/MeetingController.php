@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meeting;
-use App\Models\User; 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -33,15 +33,16 @@ class MeetingController extends Controller
      */
     public function create()
     {
-        $teachers = \App\Models\User::where('role_id',1)->orderBy('id')->get();
-        $students = \App\Models\User::orderBy('id')->get();
+        $teachers = \App\Models\User::where('role_id', 1)->orderBy('id')->get();
+        $students = \App\Models\User::where('role_id', 2)->orderBy('id')->get();
         $status = \App\Models\Meeting::getStatusOptions();
 
         return view('admin.meetings.create-edit', [
-           'teachers' => $teachers,
-           'students' => $students,
-           'status' => $status,
-           'type'=>'POST']);    
+            'teachers' => $teachers,
+            'students' => $students,
+            'status' => $status,
+            'type' => 'POST'
+        ]);
     }
 
     /**
@@ -49,7 +50,7 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-        //$this->validateMeeting($request);
+        $this->validateMeeting($request);
 
         $meeting = Meeting::create([
             'day' => $request['day'],
@@ -60,10 +61,13 @@ class MeetingController extends Controller
         ]);
         $meeting->participants()->sync($request['participants']);
 
-  
-          // Guardar el nuevo usuario
-        $meeting->save();
-        return redirect()->route('admin.meetings.index')->with('success', 'La reunión del día <b>' . $meeting->day . '</b> ha sido creada correctamente.');
+        try {
+            // Guardar el nuevo usuario
+            $meeting->save();
+            return redirect()->route('admin.meetings.index')->with('success', 'La reunión del día <b>' . $meeting->day . '</b> ha sido creada correctamente.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al crear la reunión.');
+        }
     }
 
     /**
@@ -71,8 +75,7 @@ class MeetingController extends Controller
      */
     public function show(Meeting $meeting)
     {
-        $meetings = Meeting::with(['user', 'participants'])->orderBy('day', 'asc')->paginate(10);
-        return view('admin.meetings.show',['meeting'=>$meeting]);
+        return view('admin.meetings.show', ['meeting' => $meeting]);
     }
 
     /**
@@ -80,16 +83,17 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
-        $teachers = \App\Models\User::where('role_id',1)->orderBy('id')->get();
-        $students = \App\Models\User::where('role_id',2)->orderBy('id')->get();
+        $teachers = \App\Models\User::where('role_id', 1)->orderBy('id')->get();
+        $students = \App\Models\User::where('role_id', 2)->orderBy('id')->get();
         $status = \App\Models\Meeting::getStatusOptions();
 
         return view('admin.meetings.create-edit', [
-           'meeting' => $meeting,
-           'teachers' => $teachers,
-           'students' => $students,
-           'status' => $status,
-           'type'=>'PUT']); 
+            'meeting' => $meeting,
+            'teachers' => $teachers,
+            'students' => $students,
+            'status' => $status,
+            'type' => 'PUT'
+        ]);
     }
 
     /**
@@ -98,7 +102,7 @@ class MeetingController extends Controller
     public function update(Request $request, Meeting $meeting)
     {
         // Validar los datos
-        //$this->validateMeeting($request);
+        $this->validateMeeting($request);
         //dd($request);
         $meeting->day = $request->input('day');
         $meeting->time = $request->input('time');
@@ -111,10 +115,13 @@ class MeetingController extends Controller
             $meeting->participants()->sync($request->input('participants'));
         }
 
-        // Guardar los cambios
-        $meeting->save();
-
-        return redirect()->route('admin.meetings.index', $meeting)->with('success', 'La reunión del día <b>' . $meeting->day . '</b> ha sido actualizada correctamente.');
+        try {
+            // Guardar los cambios
+            $meeting->save();
+            return redirect()->route('admin.meetings.index', $meeting)->with('success', 'La reunión del día <b>' . $meeting->day . '</b> ha sido actualizada correctamente.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al actualizar la reunión.');
+        }
     }
 
     /**
@@ -124,35 +131,25 @@ class MeetingController extends Controller
     {
         $meeting->delete();
         return redirect()->route('admin.meetings.index')->with('success', 'Reunión eliminada correctamente.');
-       
     }
-    
-     /**
+
+    /**
      * Validates module's data.
      */
     protected function validateMeeting(Request $request)
-{
-    return $request->validate([
-        'day' => 'required',
-        'time' => 'required',
-        'week' => 'required',
-        'status' => 'required',
-        'user_id' => 'required', 
-        'participants' => 'required|array', // Debe ser un array
-    ], [
-        'day.required' => 'El campo día es obligatorio.',
-        
-        'time.required' => 'El campo hora es obligatorio.',
-
-        'week.required' => 'El campo semana es obligatorio.',
-
-        'status.required' => 'El campo estado es obligatorio.',
-
-        'user_id.required' => 'El campo profesor es obligatorio.',
-
-        'participants.required' => 'Debe seleccionar al menos un participante.',
-        'participants.array' => 'El campo participantes debe ser un array.',
-    ]);
-}
-
+    {
+        return $request->validate([
+            'day' => 'required|numeric|min:1|max:5',
+            'time' => 'required|numeric|min:1|max:6',
+            'week' => 'required|numeric|min:1|max:39',
+            'status' => 'required',
+            'teacher_id' => 'required|exists:users,id',
+        ], [
+            'day.required' => 'El campo día es obligatorio.',
+            'time.required' => 'El campo hora es obligatorio.',
+            'week.required' => 'El campo semana es obligatorio.',
+            'status.required' => 'El campo estado es obligatorio.',
+            'teacher_id.required' => 'El campo profesor es obligatorio.',
+        ]);
+    }
 }
