@@ -5,16 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Meeting;
 use App\Models\User; 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class MeetingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $status = $request->query('status', null);
+        // Definir la fecha de hoy
+        $today = Carbon::today();
+        $meetingsQuery = Meeting::where('day', '>=', $today);
+
+        if ($status) {
+            $meetingsQuery->where('status', $status);
+        }
         $meetings = Meeting::with(['user', 'participants'])->orderBy('day', 'asc')->paginate(10);
-        return view('admin.meetings.index',['meetings' => $meetings]);
+        return view('admin.meetings.index', ['meetings' => $meetings]);
     }
 
     /**
