@@ -1,9 +1,12 @@
 @extends('layouts.app-admin')
 @section('content')
 <div class="container">
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
+
     <h2 class="mb-4">{{__('module.show_title')}}</h2>
 
-    <!-- Tarjeta para mostrar detalles de los modulos -->
     <div class="card">
         <div class="card-header">
             <h4 class="card-title">{{ $module->name }}</h4>
@@ -51,14 +54,14 @@
                     @endif
                 </div>
             </div>
+            @php
+            $id = 'modal_delete' . $module->id;
+            $mensaje = "¿Estás seguro de que deseas eliminar el modulo <strong class='text-capitalize'>$module->name</strong>? Esta acción no se puede deshacer.";
+            $ruta = route('admin.modules.destroy', $module);
+            @endphp
+            <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
         </div>
+
     </div>
 </div>
-<!-- Modal para eliminar un rol -->
-@php
-    $id = 'modal_delete' . $module->id;
-    $mensaje = "¿Estás seguro de que deseas eliminar el modulo <strong class='text-capitalize'>$module->name</strong>? Esta acción no se puede deshacer.";
-    $ruta = route('admin.modules.destroy', $module);
- @endphp
-<x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
 @endsection

@@ -5,16 +5,16 @@ $name = $module->name;
 $hours = $module->hours;
 $course = $module->course;
 $cycle_id = $module->cycle_id;
-$button = "Actualizar";
-$title = "Actualización del Modulo";
+$button = __('module.update');
+$title = __('module.update_text');
 } else {
 $code = "";
 $name = "";
 $hours = "";
 $course = "";
 $cycle_id = "";
-$button = "Crear";
-$title = "Creación de Modulo";
+$button = __('module.create');
+$title = __('module.create_text');
 }
 @endphp
 
@@ -22,6 +22,10 @@ $title = "Creación de Modulo";
 
 @section('content')
 <div class="container">
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
+    
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -48,7 +52,7 @@ $title = "Creación de Modulo";
                                 <div class="col-md-6">
                                     <input id="code" type="text"
                                         class="form-control @error('code') is-invalid @enderror" name="code"
-                                        value="{{ old('code', $code) }}"  autocomplete="code" autofocus>
+                                        value="{{ old('code', $code) }}" autocomplete="code" autofocus>
 
                                     @error('code')
                                     <span class="invalid-feedback" role="alert">
@@ -64,7 +68,7 @@ $title = "Creación de Modulo";
                                 <div class="col-md-6">
                                     <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
-                                        value="{{ old('name', $name) }}"  autocomplete="name" autofocus>
+                                        value="{{ old('name', $name) }}" autocomplete="name" autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -77,7 +81,7 @@ $title = "Creación de Modulo";
                             <div class="row mb-3">
                                 <label for="hours" class="col-md-4 col-form-label text-md-end">{{__('module.hours')}}</label>
                                 <div class="col-md-6">
-                                    <input id="hours" type="number" class="form-control @error('hours') is-invalid @enderror" name="hours" value="{{ old('hours', $hours) }}"  autocomplete="hours">
+                                    <input id="hours" type="number" class="form-control @error('hours') is-invalid @enderror" name="hours" value="{{ old('hours', $hours) }}" autocomplete="hours">
 
                                     @error('hours')
                                     <span class="invalid-feedback" role="alert">
@@ -90,7 +94,7 @@ $title = "Creación de Modulo";
                             <div class="row mb-3">
                                 <label for="course" class="col-md-4 col-form-label text-md-end">{{__('module.course')}}</label>
                                 <div class="col-md-6">
-                                    <input id="course" type="number" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course', $course) }}"  autocomplete="course">
+                                    <input id="course" type="number" class="form-control @error('course') is-invalid @enderror" name="course" value="{{ old('course', $course) }}" autocomplete="course">
                                     @error('course')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -109,15 +113,15 @@ $title = "Creación de Modulo";
                                         </option>
                                         @endforeach
                                     </select>
-                                    
+
                                 </div>
-                            </div>  
+                            </div>
 
                             <div class="row mb-3">
                                 <label for="user_id" class="col-md-4 col-form-label text-md-end">{{__('module.teacher')}}</label>
                                 <div class="col-md-6">
                                     <select name="user_id" id="user_id" class="form-select">
-                                        <option value="" selected> -- Selecciona un profesor -- </option>
+                                        <option value="" selected>{{__('module.select_teacher')}}</option>
                                         @foreach ($users as $user)
                                         <!-- Esto verifica si la variable $module está definida y contiene un valor.
                                         Si estamos creando un nuevo módulo, no existe $module por lo que sería false 

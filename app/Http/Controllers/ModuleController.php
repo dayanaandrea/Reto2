@@ -13,11 +13,12 @@ class ModuleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $modules = Module::orderBy('cycle_id', 'desc')   
-        ->orderBy('course', 'asc')     
-        ->paginate(10);               
+        $pagination = getPagination($request);
+        $modules = Module::orderBy('cycle_id', 'desc')
+            ->orderBy('course', 'asc')
+            ->paginate($pagination);
         return view('admin.modules.index', ['modules' => $modules]);
     }
 
@@ -52,14 +53,16 @@ class ModuleController extends Controller
         $module->course = $request->course;
         $module->cycle_id = $request->cycle_id;
         $module->user_id = $request->user_id;
-        // Guardar el nuevo modulo
-
-        dd($request);
-
-        $module->save();
-
-        return redirect()->route('admin.modules.index')->with('success', 'Modulo  ' . $module->name . ' creado correctamente.');
-    }
+        
+        
+        try {
+            $module->save();
+            return redirect()->route('admin.modules.index')->with('success',  __('module.module') .'<b>' . $module->name . '</b>'. __('module.controller_create'));    
+        } catch (\Exception $e) {
+            return back()->with('error',   __('module.controller_error_create'));
+        }
+    
+       }
 
     /**
      * Display the specified resource.
@@ -75,9 +78,9 @@ class ModuleController extends Controller
     public function edit(Module $module)
     {
         $cycles = Cycle::orderBy('code')->get();
-         // Esto es para poder cargar los datos de el usuario que tenga el rol 'profesor'
-         $profesorRole = Role::where('role', 'profesor')->first();
-         $users = User::where('role_id', $profesorRole->id)->orderBy('name')->get();
+        // Esto es para poder cargar los datos de el usuario que tenga el rol 'profesor'
+        $profesorRole = Role::where('role', 'profesor')->first();
+        $users = User::where('role_id', $profesorRole->id)->orderBy('name')->get();
 
         return view('admin.modules.create-edit', ['module' => $module, 'type' => 'PUT', 'cycles' => $cycles, 'users' => $users]);
     }
@@ -97,11 +100,13 @@ class ModuleController extends Controller
         $module->cycle_id = $request->cycle_id;
         $module->user_id = $request->user_id;
 
-        // Guardar el nuevo modulo
-        $module->save();
-
-        return redirect()->route('admin.modules.index', $module)->with('success', 'Modulo <b>' . $module->name . '</b> actualizado correctamente.');
-    }
+        try {
+            $module->save();
+            return redirect()->route('admin.modules.index', $module)->with('success',    __('module.module') .'<b>' . $module->name . '</b>'. __('module.controller_edit'));
+        } catch (\Exception $e) {
+            return back()->with('error',   __('module.controller_error_edit'));
+        }
+       }
 
     /**
      * Remove the specified resource from storage.
@@ -109,7 +114,7 @@ class ModuleController extends Controller
     public function destroy(Module $module)
     {
         $module->delete();
-        return redirect()->route('admin.modules.index')->with('success', 'Modulo  <b>' . $module->name . '</b> eliminado correctamente.');
+        return redirect()->route('admin.modules.index')->with('success',    __('module.module') .'<b>' . $module->name . '</b> '. __('module.controller_delete'));
     }
     /**
      * Validates module's data.
@@ -117,24 +122,24 @@ class ModuleController extends Controller
     private function validateModule(Request $request)
     {
         $request->validate([
-           
-            'code' => 'required|min:3|max:5',
-            'name' => 'required|string|min:10|max:255',
+
+            'code' => 'required|min:2|max:6',
+            'name' => 'required|string|min:5|max:255',
             'hours' => 'required|integer',
-            'course' => 'required|in:1,2', 
+            'course' => 'required|in:0,1,2',
             'cycle_id' => 'required',
         ], [
-            'code.required' => 'El campo de código es obligatorio.',
-            'code.min' => 'El código debe tener al menos 3 caracteres.',
-            'code.max' => 'El código no puede tener más de 5 caracteres.',
-            'name.required' => 'El campo de nombre es obligatorio.',
-            'name.min' => 'El nombre debe tener al menos 10 caracteres.',
-            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
-            'hours.required' => 'El campo de horas es obligatorio.',
-            'hours.numeric' => 'Ingrese un número válido para las horas.',
-            'course.in' => 'El curso solo puede ser 1 o 2.',
-            'course.required' => 'El campo de curso es obligatorio.',
-            'cycle_id.required' => 'El campo de ciclo es obligatorio.',
+            'code.required' => __('module.code_required'),
+            'code.min' => __('module.code_min'),
+            'code.max' => __('module.code_max'),
+            'name.required' => __('module.name_required'),
+            'name.min' => __('module.name_min'),
+            'name.max' => __('module.name_max'),
+            'hours.required' => __('module.hours_required'),
+            'hours.numeric' => __('module.hours_numeric'),
+            'course.in' => __('module.course_in'),
+            'course.required' => __('module.course_required'),
+            'cycle_id.required' => __('module.cycle_id_required'),
         ]);
     }
 }

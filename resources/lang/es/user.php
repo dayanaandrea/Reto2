@@ -26,4 +26,7 @@ return [
     'pin' => 'DNI/NIE',
     'schedule'=> 'Horario',
     'no_schedule'=> 'No tiene horarios asignados.',
+    'title_edit'=> 'Editar un usuario',
+    'btn_create'=> 'Crear',
+    'btn_update'=> 'Actualizar',
 ];

@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container">
-    
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
     <h2 class="mb-4">{{__('cycle.show_title_1')}}</h2>
 
     <!-- Tarjeta para mostrar detalles de los modulos -->
@@ -38,25 +40,22 @@
                         @php
                         $id_modal = '#modal_delete' . $cycle->id;
                         $text = '<i class="fa-solid fa-trash-can"></i>';
-                        $tooltip =  __('cycle.delete_cycle');
+                        $tooltip = __('cycle.delete_cycle');
                         @endphp
 
                         <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                         @endif
                     </div>
                 </div>
+                <!-- Modal para eliminar un ciclo -->
+                @php
+                $id = 'modal_delete' . $cycle->id;
+                $mensaje = __('cycle.confirm_1') . ' <strong>' . $cycle->name . '</strong>? ' . __('cycle.confirm_2');
+                $ruta = route('admin.cycles.destroy', $cycle);
+                @endphp
+                <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
+                @endsection
             </div>
         </div>
-
     </div>
-
 </div>
-
-<!-- Modal para eliminar un usuario -->
-@php
-$id = 'modal_delete' . $cycle->id;
-$mensaje = __('cycle.confirm_1') . ' <strong>' . $cycle->name . '</strong>? ' . __('cycle.confirm_2');
-$ruta = route('admin.cycles.destroy', $cycle);
-@endphp
-<x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
-@endsection

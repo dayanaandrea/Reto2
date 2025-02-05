@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Carbon\Carbon;
 
 /**
  * Retorna un string que contiene el valor del atributo src de una etiqueta img de HTML.
@@ -41,7 +42,6 @@ function obtenerEstiloRol($role)
     } else {
         return 'bg-light';
     }
-
 }
 
 function getPagination(Request $request): int
@@ -99,7 +99,7 @@ function validateUser(Request $request, $user = null)
         'address' => 'required|string|max:255',
         'phone1' => 'required|string|max:15',
         'phone2' => 'nullable|string|max:15',
-        'role_id' => 'required|exists:roles,id',
+        'role_id' => 'nullable|exists:roles,id',
     ], [
         // Mensajes de error personalizados
         'name.required' => 'El nombre es obligatorio.',
@@ -118,7 +118,6 @@ function validateUser(Request $request, $user = null)
         'phone1.required' => 'El número de teléfono principal es obligatorio.',
         'phone1.max' => 'El número de teléfono principal no puede tener más de 15 caracteres.',
         'phone2.max' => 'El número de teléfono secundario no puede tener más de 15 caracteres.',
-        'role_id.required' => 'El rol es obligatorio.',
         'role_id.exists' => 'El rol seleccionado no existe.',
     ]);
 }
@@ -144,4 +143,20 @@ function validateUserUpdateAPI(Request $request, User $user)
         'phone2' => 'nullable|string|max:15',
         'role_id' => 'nullable|exists:roles,id',
     ]);
+}
+
+function getCurrentWeek()
+{
+    $fecha_inicio = strtotime("2024-09-02");
+    $fecha_actual = time();
+    $diferencia = $fecha_actual - $fecha_inicio;
+    $semanas = floor($diferencia / (60 * 60 * 24 * 7));
+
+    return (int)$semanas + 1;
+}
+
+function getCurrentDay()
+{
+    $day = date('N');
+    return (int)$day;
 }

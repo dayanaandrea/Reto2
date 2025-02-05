@@ -2,19 +2,22 @@
 if (isset($cycle)) {
 $code = $cycle->code;
 $name = $cycle->name;
-$button = "Actualizar";
-$title = "Actualización del Ciclo";
+$button = __('cycle.update');
+$title = __('cycle.update_text');
 } else {
 $code = "";
 $name = "";
-$button = "Crear";
-$title = "Creación de Ciclo";
+$button = __('cycle.create');
+$title = __('cycle.create_text');
 }
 @endphp
 @extends('layouts.app-admin')
 
 @section('content')
 <div class="container">
+    <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -55,7 +58,7 @@ $title = "Creación de Ciclo";
                                 <label for="name" class="col-md-4 col-form-label text-md-end">{{__('cycle.name')}}</label>
 
                                 <div class="col-md-6">
-                                <input id="name" type="text"
+                                    <input id="name" type="text"
                                         class="form-control @error('name') is-invalid @enderror" name="name"
                                         value="{{ old('name', $name) }}" required autocomplete="name" autofocus>
 

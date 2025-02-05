@@ -31,5 +31,6 @@ return [
 
     // CREATE-EDIT
     'select_teacher' => ' -- Selecciona un profesor -- ',
+    'select_module' => ' -- Selecciona un módulo -- ',
 ];
 
