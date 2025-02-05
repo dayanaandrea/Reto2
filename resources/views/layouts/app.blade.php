@@ -14,7 +14,7 @@
         <div class="container mt-auto">
             @include('layouts.footer')
         </div>
-
+        @include('layouts.theme-changer')
     </div>
 </body>
 
