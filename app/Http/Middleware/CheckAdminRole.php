@@ -16,8 +16,10 @@ class CheckAdminRole
      */
     public function handle(Request $request, Closure $next): Response
     {
+
         $user = Auth::user();
 
+        // Verificar el rol del usuario
         if (!$user->role || ($user->role->role != 'administrador' && $user->role->role != 'god')) {
             abort(404);
         }

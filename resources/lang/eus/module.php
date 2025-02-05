@@ -49,4 +49,11 @@ return [
     'course_required' => 'Kursoko eremua derrigorrezkoa da.',
     'cycle_id_required' => 'Zikloaren eremua derrigorrezkoa da.',
 
+
+    'controller_create' => ' ondo sortu da.',
+    'controller_edit' => ' ondo aldatua izan da.',
+    'controller_delete' => ' ondo ezabatua izan da.',
+    'controller_error_create' => ' Moduluaren sorrera errorea izan da.',
+    'controller_error_edit' => ' Moduluaren aldaketa errorea izan da.',
+
 ];

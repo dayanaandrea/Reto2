@@ -3,7 +3,7 @@
 return [
     // INDEX
     'create_module' => 'Crear un nuevo módulo',
-    'module' => 'Módulos',
+    'module' => 'Módulo ',
     'code' => 'Código',
     'name' => 'Nombre',
     'hours' => 'Horas',
@@ -34,7 +34,7 @@ return [
     'select_teacher' => ' -- Selecciona un profesor -- ',
 
     // CONTROLLER 
-    
+
     'code_required' => 'El campo de código es obligatorio.',
     'code_min' => 'El código debe tener al menos 2 caracteres.',
     'code_max' => 'El código no puede tener más de 6 caracteres.',
@@ -46,4 +46,11 @@ return [
     'course_in' => 'El curso solo puede ser 1 o 2.',
     'course_required' => 'El campo de curso es obligatorio.',
     'cycle_id_required' => 'El campo de ciclo es obligatorio.',
+
+    'controller_create' => ' creado correctamente.',
+    'controller_edit' => '  modificado correctamente.',
+    'controller_delete' => '  eliminado correctamente.',
+    'controller_error_create' => '  Error al modificar el modulo.',
+    'controller_error_edit' => '  Error al modificar el modulo.',
+  
 ];

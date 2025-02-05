@@ -38,13 +38,13 @@
                     $routeEdit = route('admin.enrollments.edit', $enrollment);
                     $typeEdit = "edit";
                     $textEdit = '<i class="fa-solid fa-pen"></i>';
-                    $tooltipEdit = 'Editar datos de la matrícula';
+                    $tooltipEdit =__('enrollment.edit_data_enrollments');
 
                     // Ruta para la eliminación
                     $routeDelete = route('admin.enrollments.destroy', $enrollment->id);
                     $id_modal = 'modal_delete' . $enrollment->id;
                     $textDelete = '<i class="fa-solid fa-trash-can"></i>';
-                    $tooltipDelete = 'Eliminar matrícula';
+                    $tooltipDelete = __('enrollment.delete_data_enrollments');
                     $mensajeDelete = __('enrollment.ask_for_delete_confirmation_1') . ' <b>' . $enrollment->name . '</b>' . __('enrollment.ask_for_delete_confirmation_2');
                     @endphp
 

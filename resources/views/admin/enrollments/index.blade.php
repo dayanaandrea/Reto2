@@ -13,7 +13,7 @@
         @php
         $route = route('admin.enrollments.create');
         $type = "show";
-        $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __("module.add") . '</span>';
+        $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __('enrollment.add') . '</span>';
         $tooltip = __('enrollment.tp_create');
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
@@ -43,20 +43,19 @@
                 <td>{{$enrollment->module->cycle->code}}</td>
                 <td>{{$enrollment->module->course}}</td>
                 <td>{{ date('d-m-Y', strtotime($enrollment->created_at)) }}</td>
-
                 <td>
                     @php
                     $route = route('admin.enrollments.show', $enrollment);
                     $type = "show";
                     $text = '<i class="fa-solid fa-eye"></i>';
-                    $tooltip = 'Ver datos de la matrícula';
+                    $tooltip = __('enrollment.see_data_enrollment');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                     @php
                     $route = route('admin.enrollments.edit', $enrollment);
                     $type = "edit";
                     $text = '<i class="fa-solid fa-pen"></i>';
-                    $tooltip = 'Editar datos de la matrícula';
+                    $tooltip = __('enrollment.edit_data_enrollment');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
 
@@ -64,41 +63,19 @@
                     @php
                     $id_modal = '#modal_delete' . $enrollment->id;
                     $text = '<i class="fa-solid fa-trash-can"></i>';
-                    $tooltip = 'Eliminar matrícula';
+                    $tooltip = __('enrollment.delete_data_enrollment');
                     @endphp
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                 </td>
             </tr>
 
-            <!-- Modal para eliminar una matricula -->
-            <div class="modal fade" id="modal_delete{{ $enrollment->id }}" tabindex="-1"
-                aria-labelledby="deleteModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-                            <h5 class="modal-title">{{__('enrollment.delete_confirmation')}}</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <!-- Cuerpo del Modal -->
-                        <div class="modal-body">
-                            {{__('enrollment.ask_for_delete_confirmation_1')}} <b>{{ $enrollment->name }}</b>{{__('enrollment.ask_for_delete_confirmation_2')}}
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('enrollment.cancel')}}</button>
-                            <!-- Formulario de eliminación -->
-                            <form action="{{ route('admin.enrollments.destroy', $enrollment->id) }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger" type="submit"> {{__('enrollment.delete')}} </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+             <!-- Modal para eliminar un ciclo -->
+             @php
+            $id = 'modal_delete' . $enrollment->id;
+            $mensaje =__('enrollment.ask_for_delete_confirmation_1') . __('enrollment.ask_for_delete_confirmation_2') ;
+            $ruta = route('admin.enrollments.destroy', $enrollment);
+            @endphp
+            <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />
             @endforeach
         </tbody>
     </table>

@@ -57,9 +57,9 @@ class ModuleController extends Controller
         
         try {
             $module->save();
-            return redirect()->route('admin.modules.index')->with('success', 'Módulo  ' . $module->name . ' creado correctamente.');    
+            return redirect()->route('admin.modules.index')->with('success',  __('module.module') .'<b>' . $module->name . '</b>'. __('module.controller_create'));    
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al crear el modulo.');
+            return back()->with('error',   __('module.controller_error_create'));
         }
     
        }
@@ -102,9 +102,9 @@ class ModuleController extends Controller
 
         try {
             $module->save();
-            return redirect()->route('admin.modules.index', $module)->with('success', 'Modulo <b>' . $module->name . '</b> actualizado correctamente.');
+            return redirect()->route('admin.modules.index', $module)->with('success',    __('module.module') .'<b>' . $module->name . '</b>'. __('module.controller_edit'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al modificar el modulo.');
+            return back()->with('error',   __('module.controller_error_edit'));
         }
        }
 
@@ -114,7 +114,7 @@ class ModuleController extends Controller
     public function destroy(Module $module)
     {
         $module->delete();
-        return redirect()->route('admin.modules.index')->with('success', 'Modulo  <b>' . $module->name . '</b> eliminado correctamente.');
+        return redirect()->route('admin.modules.index')->with('success',    __('module.module') .'<b>' . $module->name . '</b> '. __('module.controller_delete'));
     }
     /**
      * Validates module's data.
