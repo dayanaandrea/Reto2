@@ -33,7 +33,7 @@
             @foreach ($meetings as $meeting)
             <tr>
                 <th scope="col">{{ $loop->iteration }}</th>
-                <td>{{$meeting->user->name}} {{$meeting->user->lastname}}</td>
+                <td><a href="{{route('admin.users.show', $meeting->user)}}">{{$meeting->user->name}} {{$meeting->user->lastname}}</a></td>
                 <td>
                     @if ($meeting->participants->isEmpty())
                     {{__('meeting.withoutParticipants')}}

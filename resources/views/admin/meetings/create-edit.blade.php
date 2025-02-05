@@ -51,11 +51,8 @@ $meeting = null;
                                     <select name="teacher_id" id="teacher_id" class="form-select">
                                         <option value="" selected>{{__('meeting.select_convener') }} </option>
                                         @foreach ($teachers as $teacher)
-                                        <!-- Esto verifica si la variable $meeting está definida y contiene un valor.
-                                    Si estamos creando un nuevo módulo, no existe $meeting por lo que sería false 
-                                    y te enseñaria la primera opción --->
                                         <option value="{{ $teacher->id }}"
-                                            {{ $teacher->id == old('teacher_id', $meeting->user_id ?? '') ? 'selected' : '' }}>
+                                            {{ $teacher->id == $meeting->user_id ? 'selected' : '' }}>
                                             {{ ucfirst($teacher->name) }} {{ ucfirst($teacher->lastname) }}
                                         </option>
                                         @endforeach
@@ -68,18 +65,12 @@ $meeting = null;
                                 <label for="student_id" class="col-md-4 col-form-label text-md-end">{{__('meeting.participant')}}</label>
                                 <div class="form-group col-md-6">
                                     <select id="participants" name="participants[]" class="form-control" multiple>
-                                        @if (!is_null($meeting))
                                         @foreach ($students as $student)
                                         <option value="{{ $student->id }}"
-                                            {{ $meeting->participants?->contains('id', $student->id) ? 'selected' : '' }}>
+                                            {{ in_array($student->id, $meeting->participants->pluck('id')->toArray()) ? 'selected' : '' }}>
                                             {{ ucfirst($student->name) }} {{ ucfirst($student->lastname) }}
                                         </option>
                                         @endforeach
-                                        @else
-                                        @foreach ($students as $student)
-                                        <option value="{{ $student->id }}">{{ ucfirst($student->name) }} {{ ucfirst($student->lastname) }}</option>
-                                        @endforeach
-                                        @endif
                                     </select>
                                 </div>
                             </div>

@@ -42,29 +42,12 @@ $title = "Creación de horarios";
 
                             <h4>{{ __('schedule.schedule') }}</h4>
 
-                            <!-- Campo para el profesor 
-                        <div class="row mb-3">
-                            <label for="user_id" class="col-md-4 col-form-label text-md-end">{{__('schedule.teacher')}}</label>
-                            <div class="col-md-6">
-                            <select name="user_id" id="user" class="form-select">
-                            <option value="" selected> -- Selecciona un profesor -- </option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" 
-                                        {{ $user->id == old('user_id', $schedule->user_id ?? '') ? 'selected' : '' }}>
-                                        {{ ucfirst($user->lastname . ', ' . $user->name) }}
-                                    </option>
-                                @endforeach
-                            </select>
-
-                            </div>
-                        </div>-->
-
                             <!-- Campo para Módulo -->
                             <div class="row mb-3">
                                 <label for="module_id" class="col-md-4 col-form-label text-md-end">{{__('schedule.module')}}</label>
                                 <div class="col-md-7">
                                     <select name="module_id" id="module_id" class="form-select">
-                                        <option value="" selected>{{__('schedule.select_teacher')}}</option>
+                                        <option value="" selected>{{__('schedule.select_module')}}</option>
                                         @foreach ($modules as $module)
                                         <option value="{{ $module->id }}"
                                             {{ $module->id == old('module_id', isset($schedule) ? $schedule->module_id : '') ? 'selected' : '' }}>
