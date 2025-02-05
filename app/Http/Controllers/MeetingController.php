@@ -83,6 +83,7 @@ class MeetingController extends Controller
      */
     public function edit(Meeting $meeting)
     {
+        $meeting->load('participants');
         $teachers = \App\Models\User::where('role_id', 1)->orderBy('id')->get();
         $students = \App\Models\User::where('role_id', 2)->orderBy('id')->get();
         $status = \App\Models\Meeting::getStatusOptions();
