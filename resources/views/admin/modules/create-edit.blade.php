@@ -5,16 +5,16 @@ $name = $module->name;
 $hours = $module->hours;
 $course = $module->course;
 $cycle_id = $module->cycle_id;
-$button = "Actualizar";
-$title = "Actualización del Modulo";
+$button = __('module.update');
+$title = __('module.update_text');
 } else {
 $code = "";
 $name = "";
 $hours = "";
 $course = "";
 $cycle_id = "";
-$button = "Crear";
-$title = "Creación de Modulo";
+$button =  __('module.create');
+$title =  __('module.create_text');
 }
 @endphp
 
@@ -117,7 +117,7 @@ $title = "Creación de Modulo";
                                 <label for="user_id" class="col-md-4 col-form-label text-md-end">{{__('module.teacher')}}</label>
                                 <div class="col-md-6">
                                     <select name="user_id" id="user_id" class="form-select">
-                                        <option value="" selected> -- Selecciona un profesor -- </option>
+                                        <option value="" selected>{{__('module.select_teacher')}}</option>
                                         @foreach ($users as $user)
                                         <!-- Esto verifica si la variable $module está definida y contiene un valor.
                                         Si estamos creando un nuevo módulo, no existe $module por lo que sería false 

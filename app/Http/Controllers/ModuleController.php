@@ -15,9 +15,9 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = Module::orderBy('cycle_id', 'desc')   
-        ->orderBy('course', 'asc')     
-        ->paginate(10);               
+        $modules = Module::orderBy('cycle_id', 'desc')
+            ->orderBy('course', 'asc')
+            ->paginate(10);
         return view('admin.modules.index', ['modules' => $modules]);
     }
 
@@ -72,9 +72,9 @@ class ModuleController extends Controller
     public function edit(Module $module)
     {
         $cycles = Cycle::orderBy('code')->get();
-         // Esto es para poder cargar los datos de el usuario que tenga el rol 'profesor'
-         $profesorRole = Role::where('role', 'profesor')->first();
-         $users = User::where('role_id', $profesorRole->id)->orderBy('name')->get();
+        // Esto es para poder cargar los datos de el usuario que tenga el rol 'profesor'
+        $profesorRole = Role::where('role', 'profesor')->first();
+        $users = User::where('role_id', $profesorRole->id)->orderBy('name')->get();
 
         return view('admin.modules.create-edit', ['module' => $module, 'type' => 'PUT', 'cycles' => $cycles, 'users' => $users]);
     }
@@ -114,24 +114,24 @@ class ModuleController extends Controller
     private function validateModule(Request $request)
     {
         $request->validate([
-           
-            'code' => 'required|min:3|max:5',
-            'name' => 'required|string|min:10|max:255',
+
+            'code' => 'required|min:2|max:6',
+            'name' => 'required|string|min:5|max:255',
             'hours' => 'required|integer',
-            'course' => 'required|in:1,2', 
+            'course' => 'required|in:0,1,2',
             'cycle_id' => 'required',
         ], [
-            'code.required' => 'El campo de código es obligatorio.',
-            'code.min' => 'El código debe tener al menos 3 caracteres.',
-            'code.max' => 'El código no puede tener más de 5 caracteres.',
-            'name.required' => 'El campo de nombre es obligatorio.',
-            'name.min' => 'El nombre debe tener al menos 10 caracteres.',
-            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
-            'hours.required' => 'El campo de horas es obligatorio.',
-            'hours.numeric' => 'Ingrese un número válido para las horas.',
-            'course.in' => 'El curso solo puede ser 1 o 2.',
-            'course.required' => 'El campo de curso es obligatorio.',
-            'cycle_id.required' => 'El campo de ciclo es obligatorio.',
+            'code.required' => __('module.code_required'),
+            'code.min' => __('module.code_min'),
+            'code.max' => __('module.code_max'),
+            'name.required' => __('module.name_required'),
+            'name.min' => __('module.name_min'),
+            'name.max' => __('module.name_max'),
+            'hours.required' => __('module.hours_required'),
+            'hours.numeric' => __('module.hours_numeric'),
+            'course.in' => __('module.course_in'),
+            'course.required' => __('module.course_required'),
+            'cycle_id.required' => __('module.cycle_id_required'),
         ]);
     }
 }
