@@ -15,30 +15,29 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $rolFiltro = $request->get('role', ''); 
+        $rolFiltro = $request->get('role', '');
 
         $user = User::orderBy('id', 'desc');
 
         if ($rolFiltro) {
             if ($rolFiltro === 'estudiante') {
                 $user->whereHas('role', function ($query) {
-                    $query->where('role', 'estudiante'); 
+                    $query->where('role', 'estudiante');
                 });
             } elseif ($rolFiltro === 'profesor') {
                 $user->whereHas('role', function ($query) {
-                    $query->where('role', 'profesor'); 
+                    $query->where('role', 'profesor');
                 });
-            } elseif ($rolFiltro === 'sin_rol') { 
+            } elseif ($rolFiltro === 'sin_rol') {
                 $user->whereDoesntHave('role');
             }
-        
         }
 
         $users = $user->paginate(10, ['*'], 'active');
 
         $del_users = User::onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(10, ['*'], 'inactive');
 
-        return view('admin.users.index', compact('users', 'del_users' ));
+        return view('admin.users.index', compact('users', 'del_users'));
     }
 
     /**
@@ -50,7 +49,7 @@ class UserController extends Controller
         $roles = Role::orderBy('id')->get();
 
         // Pasar los datos a la vista usando with()
-        return view('admin.users.create', ['roles' => $roles]);
+        return view('admin.users.create-edit', ['roles' => $roles, 'type' => 'POST']);
     }
 
     /**
@@ -58,9 +57,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->role_id == 0) {
+            // Para que la validación no falle por que 0 no es válido
+            $request->merge(['role_id' => null]);
+        }
         // Validar los datos del usuario
         validateUser($request);
-
         // Crear el usuario
         $user = new User();
         $user->name = $request->name;
@@ -71,13 +73,21 @@ class UserController extends Controller
         $user->phone1 = $request->phone1;
         $user->phone2 = $request->has('phone2') ? $request->phone2 : null;
         $user->intensive = $request->has('intensive') ? 1 : 0;
-        $user->role_id = $request->role_id;
+        $user->role_id = $request->has('role_id') ? $request->role_id : null;
         $user->password = Hash::make('1234');
 
-        // Guardar el nuevo usuario
-        $user->save();
-
-        return redirect()->route('admin.users.index')->with('success', 'Usuario <b>' . $user->email . '</b> creado correctamente.');
+        // Comprobar que solo el usuario god pùede añadir otros usuarios god
+        if ($user->role->role == 'god' && Auth::user()->role->role != 'god') {
+            return back()->with('error', 'No tienes permisos necesarios para crear un usuario con el rol seleccionado.');
+        } else {
+            try {
+                // Guardar el nuevo usuario
+                $user->save();
+                return redirect()->route('admin.users.index')->with('success', 'Usuario <b>' . $user->email . '</b> creado correctamente.');
+            } catch (\Exception $e) {
+                return back()->with('error', 'Error al crear el usuario.');
+            }
+        }
     }
 
     /**
@@ -85,11 +95,6 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        // Esto es para controlar lo que se puede ver en el perfil. Si es estudiante solo puede ver su perfil.
-        if ((Auth::user()->role && (Auth::user()->role->role == 'estudiante')) && (Auth::check() && $user->id != Auth::user()->id)) {
-            abort(404);
-        }
-
         return view('admin.users.show', ['user' => $user]);
     }
 
@@ -102,7 +107,7 @@ class UserController extends Controller
         $roles = Role::orderBy('id')->get();
 
         // Pasar los datos a la vista usando with()
-        return view('admin.users.edit', ['roles' => $roles, 'user' => $user]);
+        return view('admin.users.create-edit', ['roles' => $roles, 'user' => $user, 'type' => 'PUT']);
     }
 
     /**
@@ -110,25 +115,34 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        // Validar los datos del usuario
-        validateUser($request, $user);
+        // Evitar que se añada el rol god si el usuario no es god
+        // Evitar que se edite un usuario god si no es god con id 1
+        if (($request->role_id == 4 && Auth::user()->role->role != 'god') || ($user->role && $user->role->role == 'god' && Auth::user()->role->id != 1)) {
+            return back()->with('error', 'No tienes los permisos necesarios.');
+        } else {
+            if ($request->role_id == 0) {
+                // Para que la validación no falle por que 0 no es válido
+                $request->merge(['role_id' => null]);
+            }
+            // Validar los datos del usuario
+            validateUser($request, $user);
+            $user->name = $request->name;
+            $user->lastname = $request->lastname;
+            $user->email = $request->email;
+            $user->pin = $request->pin;
+            $user->address = $request->address;
+            $user->phone1 = $request->phone1;
+            $user->phone2 = $request->has('phone2') ? $request->phone2 : $user->phone2;
+            $user->intensive = $request->has('intensive') ? 1 : 0;
+            $user->role_id = $request->has('role_id') ? $request->role_id : null;
 
-        $user->name = $request->name;
-        $user->lastname = $request->lastname;
-        $user->email = $request->email;
-        $user->pin = $request->pin;
-        $user->address = $request->address;
-        $user->phone1 = $request->phone1;
-        $user->phone2 = $request->has('phone2') ? $request->phone2 : $user->phone2;
-        $user->intensive = $request->has('intensive') ? 1 : $user->intensive;
-        $user->role_id = $request->role_id;
-
-        try {
-            // Guardar el nuevo usuario
-            $user->save();
-            return redirect()->route('admin.users.show', $user)->with('success', 'Usuario <b>' . $user->email . '</b> actualizado correctamente.');
-        } catch (\Exception $e) {
-            return redirect()->route('admin.users.show', $user)->with('error', 'Error al actualizar el usuario <b>' . $user->email . '</b>.');
+            try {
+                // Guardar el nuevo usuario
+                $user->save();
+                return redirect()->route('admin.users.show', $user)->with('success', 'Usuario <b>' . $user->email . '</b> actualizado correctamente.');
+            } catch (\Exception $e) {
+                return back()->with('error', 'Error al actualizar el usuario <b>' . $user->email . '</b>.');
+            }
         }
     }
 
@@ -183,7 +197,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if (!($user->role) || ($user->role->role == 'god' && Auth::user()->role->role != 'god')) {
+        // Los usuarios god no pueden ser eliminados por nadie
+        if ($user->role->role == 'god') {
             return redirect()->route('admin.users.index')->with('permission', 'No tiene permisos para eliminar el usuario <b>' . $user->email . '</b>.');
         } else {
             $user->delete();

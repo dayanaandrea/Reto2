@@ -35,6 +35,7 @@
                         } else {
                         $clase = obtenerEstiloRol(null);
                         $badge = '<span class="badge text-dark ' . $clase . ' text-capitalize">Sin Rol</span>';
+                        $route = '#';
                         }
                         @endphp
                         <x-detail :label="__('user.role')" :value="$badge" :route="$route" />

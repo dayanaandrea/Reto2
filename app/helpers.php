@@ -99,7 +99,7 @@ function validateUser(Request $request, $user = null)
         'address' => 'required|string|max:255',
         'phone1' => 'required|string|max:15',
         'phone2' => 'nullable|string|max:15',
-        'role_id' => 'required|exists:roles,id',
+        'role_id' => 'nullable|exists:roles,id',
     ], [
         // Mensajes de error personalizados
         'name.required' => 'El nombre es obligatorio.',
@@ -118,7 +118,6 @@ function validateUser(Request $request, $user = null)
         'phone1.required' => 'El número de teléfono principal es obligatorio.',
         'phone1.max' => 'El número de teléfono principal no puede tener más de 15 caracteres.',
         'phone2.max' => 'El número de teléfono secundario no puede tener más de 15 caracteres.',
-        'role_id.required' => 'El rol es obligatorio.',
         'role_id.exists' => 'El rol seleccionado no existe.',
     ]);
 }
