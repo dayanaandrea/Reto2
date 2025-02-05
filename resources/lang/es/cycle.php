@@ -3,7 +3,7 @@ return [
 
     // INDEX  
     'create_cycle' => 'Crear un nuevo ciclo',
-    'cycle' => 'Ciclo',
+    'cycle' => 'Ciclo ',
     'code' => 'Código',
     'name' => 'Nombre',
     'actions' => 'Acciones ',
@@ -25,5 +25,17 @@ return [
 
     'show_title_1' => 'Detalles del ciclo ',
     'module' => 'Módulos',
+
+    //CONTROLLER
+    'controller_create' => 'creado correctamente.',
+    'controller_edit' => ' modificado correctamente.',
+    'controller_delete' => ' eliminado correctamente.',
+
+    'validation_code_min' => ' El código debe tener al menos 3 caracteres.',
+    'validation_code_max' => ' El código no puede tener más de 5 caracteres.',
+
+    'validation_name_min' => ' El nombre debe tener al menos 10 caracteres.',
+    'validation_name_max' => ' El nombre no puede tener más de 255 caracteres.',
+
 
 ];

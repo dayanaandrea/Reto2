@@ -26,4 +26,15 @@ return [
     'show_title_1' => 'Cycle details',
     'module' => 'Modules',
 
+    // CONTROLLER
+    'controller_create' => 'created successfully.',
+    'controller_edit' => ' successfully modified.',
+    'controller_delete' => ' successfully deleted.',
+
+    'validation_code_min' => ' The code must be at least 3 characters.',
+    'validation_code_max' => ' The code cannot be more than 5 characters.',
+
+    'validation_name_min' => ' The name must be at least 10 characters.',
+    'validation_name_max' => ' The name cannot be more than 255 characters.',
+
 ];

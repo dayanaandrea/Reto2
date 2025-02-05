@@ -26,4 +26,15 @@ return [
     'show_title_1' => 'Zikloaren xehetasunak',
     'module' => 'Moduluak',
 
+    // CONTROLLER
+    'controller_create' => 'arrakastaz sortuta.',
+    'controller_edit' => ' arrakastaz aldatu.',
+    'controller_delete' => ' arrakastaz ezabatuta.',
+
+    'validation_code_min' => ' Kodeak gutxienez 3 karaktere izan behar ditu.',
+    'validation_code_max' => ' Kodeak ez du gainditu behar 5 karaktere.',
+
+    'validation_name_min' => ' Izena gutxienez 10 karaktere izan behar ditu.',
+    'validation_name_max' => ' Izena ez du gainditu behar 255 karaktere.',
+
 ];

@@ -40,7 +40,8 @@ class CycleController extends Controller
         // Guardar el nuevo ciclo
         $cycles->save();
 
-        return redirect()->route('admin.cycles.index')->with('success', 'Ciclo   <b>' . $cycles->name . '</b> creado correctamente.');
+        return redirect()->route('admin.cycles.index')->with('success',  __('cycle.cycle') . '<b>' . $cycles->name . '</b>'.   __('cycle.controller_create'));
+
     
     }
 
@@ -75,7 +76,7 @@ class CycleController extends Controller
        // Guardar el nuevo ciclo
        $cycle->save();
 
-       return redirect()->route('admin.cycles.index', $cycle)->with('success', 'Ciclo <b>' . $cycle->cycle . '</b> actualizado correctamente.');
+       return redirect()->route('admin.cycles.index', $cycle)->with('success',   __('cycle.cycle') . '<b>' . $cycle->cycle . '</b>'.   __('cycle.controller_edit'));
    }
 
     /**
@@ -84,7 +85,7 @@ class CycleController extends Controller
     public function destroy(Cycle $cycle)
     {
         $cycle->delete(); 
-        return redirect()->route('admin.cycles.index')->with('success', 'Ciclo  <b>' . $cycle->name . '</b> eliminado correctamente.');
+        return redirect()->route('admin.cycles.index')->with('success',   __('cycle.cycle') . '<b>' . $cycle->name . '</b>'.   __('cycle.controller_delete'));
     }
     /**
      * Validates cycle's data.
@@ -96,10 +97,10 @@ class CycleController extends Controller
             'name' => 'required|string|min:10|max:255',
         ], [
             // Mensajes de error personalizados según lo que falle
-            'code.min' => 'El código debe tener al menos 3 caracteres.',
-            'code.max' => 'El código no puede tener más de 5 caracteres.',
-            'name.min' => 'El nombre debe tener al menos 10 caracteres.',
-            'name.max' => 'El nombre no puede tener más de 255 caracteres.',
+            'code.min' => __('cycle.validation_code_min'),
+            'code.max' => __('cycle.validation_code_max'),
+            'name.min' => __('cycle.validation_name_min'),
+            'name.max' => __('cycle.validation_name_max'),
         ]);
     }
 }
