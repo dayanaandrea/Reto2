@@ -5,6 +5,7 @@
     <!-- Para mostrar alertas en vez de redirigir a una página tras realizar una acción -->
     <x-alert :key="'success'" :class="'success'" />
     <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
     <div class="mb-2 text-end">
         @php
             $route = route('admin.meetings.create');
@@ -32,7 +33,7 @@
             @foreach ($meetings as $meeting)
             <tr>
                 <th scope="col">{{ $loop->iteration }}</th>
-                <td>{{$meeting->user->name}}</td>
+                <td>{{$meeting->user->name}} {{$meeting->user->lastname}}</td>
                 <td>
                     @if ($meeting->participants->isEmpty())
                     {{__('meeting.withoutParticipants')}}
