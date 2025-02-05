@@ -53,11 +53,16 @@ class ModuleController extends Controller
         $module->course = $request->course;
         $module->cycle_id = $request->cycle_id;
         $module->user_id = $request->user_id;
-        // Guardar el nuevo modulo
-        $module->save();
-
-        return redirect()->route('admin.modules.index')->with('success', 'Modulo  ' . $module->name . ' creado correctamente.');
-    }
+        
+        
+        try {
+            $module->save();
+            return redirect()->route('admin.modules.index')->with('success', 'Módulo  ' . $module->name . ' creado correctamente.');    
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al crear el modulo.');
+        }
+    
+       }
 
     /**
      * Display the specified resource.
@@ -95,11 +100,13 @@ class ModuleController extends Controller
         $module->cycle_id = $request->cycle_id;
         $module->user_id = $request->user_id;
 
-        // Guardar el nuevo modulo
-        $module->save();
-
-        return redirect()->route('admin.modules.index', $module)->with('success', 'Modulo <b>' . $module->name . '</b> actualizado correctamente.');
-    }
+        try {
+            $module->save();
+            return redirect()->route('admin.modules.index', $module)->with('success', 'Modulo <b>' . $module->name . '</b> actualizado correctamente.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al modificar el modulo.');
+        }
+       }
 
     /**
      * Remove the specified resource from storage.

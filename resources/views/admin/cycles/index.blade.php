@@ -3,6 +3,8 @@
 <div class="container">
     <!-- Esto se usa para llamar a un componente que renderiza una alerta -->
     <x-alert :key="'success'" :class="'success'" />
+    <x-alert :key="'permission'" :class="'danger'" />
+    <x-alert :key="'error'" :class="'danger'" />
 
     <div class="mb-2 text-end">
         @php
