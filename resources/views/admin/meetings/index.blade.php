@@ -8,14 +8,15 @@
     <x-alert :key="'error'" :class="'danger'" />
     <div class="mb-2 text-end">
         @php
-            $route = route('admin.meetings.create');
-            $type = "show";
-            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __('meeting.añadir') . '</span>';
-            $tooltip =  __('meetings.create_meeting');
+        $route = route('admin.meetings.create');
+        $type = "show";
+        $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __('meeting.añadir') . '</span>';
+        $tooltip = __('meetings.create_meeting');
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
     <h2>{{__('meeting.meeting')}}</h2>
+    @if($meetings->count() > 0)
     <table class="table table-hover table-striped">
         <thead>
             <tr class="text-uppercase table-dark">
@@ -38,28 +39,29 @@
                     @if ($meeting->participants->isEmpty())
                     {{__('meeting.withoutParticipants')}}
                     @else
-                        @foreach ($meeting->participants as $participant)
-                            {{ $participant->name }}@if (!$loop->last), @endif
-                        @endforeach
-                    @endif</td>
+                    @foreach ($meeting->participants as $participant)
+                    {{ $participant->name }}@if (!$loop->last), @endif
+                    @endforeach
+                    @endif
+                </td>
                 <td>{{$meeting->day}}</td>
                 <td>{{$meeting->time}}</td>
                 <td>{{$meeting->week}}</td>
                 <td>{{$meeting->status}}</td>
-               
+
                 <td>
                     @php
                     $route = route('admin.meetings.show', $meeting);
                     $type = "show";
                     $text = '<i class="fa-solid fa-eye"></i>';
-                    $tooltip =  __('meeting.see_data_meeting');
+                    $tooltip = __('meeting.see_data_meeting');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                     @php
                     $route = route('admin.meetings.edit', $meeting);
                     $type = "edit";
                     $text = '<i class="fa-solid fa-pen"></i>';
-                    $tooltip =  __('meeting.edit_data_meeting');
+                    $tooltip = __('meeting.edit_data_meeting');
                     @endphp
                     <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
 
@@ -85,7 +87,7 @@
 
                         <!-- Cuerpo del Modal -->
                         <div class="modal-body">
-                        {{__('meeting.confirm_1')}} <b>{{ $meeting->time }}</b>? {{__('meeting.confirm_2')}}
+                            {{__('meeting.confirm_1')}} <b>{{ $meeting->time }}</b>? {{__('meeting.confirm_2')}}
                         </div>
 
                         <div class="modal-footer">
@@ -94,7 +96,7 @@
                             <form action="{{ route('admin.meetings.destroy', $meeting->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger" type="submit">  {{__('meeting.delete')}} </button>
+                                <button class="btn btn-danger" type="submit"> {{__('meeting.delete')}} </button>
                             </form>
                         </div>
                     </div>
@@ -108,5 +110,8 @@
     <div>
         {!! $meetings->links('vendor.pagination.bootstrap-5') !!}
     </div>
+    @else
+    <p>No hay reuniones.</p>
+    @endif
 </div>
 @endsection
