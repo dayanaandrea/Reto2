@@ -36,7 +36,7 @@ return [
     'show_title' => 'Bileraren xehetasunak',
 
     // CREATE-EDIT
-    'select_teacher' => ' -- Deitzailea hautatu -- ',
+    'select_convener' => ' -- Deitzailea hautatu -- ',
     'select_student' => ' -- Ikaslea hautatu -- ',
 
     // CONTROLLER

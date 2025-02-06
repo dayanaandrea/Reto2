@@ -36,7 +36,7 @@ return [
     'show_title' => 'Detalles de la reunión',
 
     // CREATE-EDIT
-    'select_teacher' => ' -- Selecciona el convocante -- ',
+    'select_convener' => ' -- Selecciona el convocante -- ',
     'select_student' => ' -- Selecciona un estudiante -- ',
 
     //CONTROLLER 
