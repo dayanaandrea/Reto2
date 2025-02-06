@@ -29,6 +29,7 @@ return [
     'participant' => 'Participants',
     'convener' => 'Convener',
     'withoutParticipants' => 'No participants',
+    'no_meetings' => 'No meetings.',
 
     // SHOW
     'show_title' => 'Meeting details',

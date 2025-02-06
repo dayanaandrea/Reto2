@@ -15,7 +15,6 @@ Route::prefix('v1.0')->group(function () {
     Route::middleware(['auth:sanctum', 'App\Http\Middleware\CheckAdminRoleAPI'])->group(function () {
         Route::apiResource('roles', V1RoleController::class);
         Route::apiResource('users', V1UserController::class);
-        
     });
 });
 
@@ -30,5 +29,3 @@ Route::prefix('v2.0')->middleware(\App\Http\Middleware\AddVersionToResponse::cla
         Route::apiResource('users', V1UserController::class);
     });
 });
-
-

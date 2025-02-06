@@ -1,8 +1,8 @@
 <?php
 return [
-    
+
     // INDEX  {{__('role.create')}}  __('role.create_role')
-   
+
     'create_role' => 'Rol berri bat sortu',
     'roles' => 'Rolak',
     'role' => 'Rol',
@@ -23,12 +23,12 @@ return [
     'create_text' => 'Rolaren sorrera',
 
     // SHOW
-    
+
     'details' => 'Rolaren xehetasunak',
     'module' => 'Moduluak',
 
     // CONTROLLER
-    
+
     'controller_rol' => 'Rol',
     'controller_create' => ' behar bezala sortu da.',
     'controller_update' => ' behar bezala eguneratu da.',

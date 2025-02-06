@@ -22,6 +22,7 @@ return [
     'confirm_1' => 'Seguru zaude erabiltzailea ezabatu nahi duzula ',
     'confirm_2' => '? Ekintza hau ezin da baliogabetu.',
     'add' => 'Gehitu',
+    'no_users' => 'Ez dago erabiltzaileak.',
 
     // SHOW
     'title_show' => 'Erabiltzailearen xehetasunak',

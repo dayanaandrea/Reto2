@@ -47,7 +47,7 @@
 
                         <!-- Campo de Confirmación de Nueva Contraseña -->
                         <div class="row mb-3">
-                            <label for="new_password_confirmation" class="col-md-4 col-form-label text-md-end"> 
+                            <label for="new_password_confirmation" class="col-md-4 col-form-label text-md-end">
                                 {{ __('user.confirm_new_pass') }}
                             </label>
                             <div class="col-md-6">

@@ -83,7 +83,7 @@ class UserController extends Controller
             try {
                 // Guardar el nuevo usuario
                 $user->save();
-                return redirect()->route('admin.users.index')->with('success', __('user.controller_user')  .'<b>' . $user->email . '</b>'. __('user.controller_create'));
+                return redirect()->route('admin.users.index')->with('success', __('user.controller_user')  . '<b>' . $user->email . '</b>' . __('user.controller_create'));
             } catch (\Exception $e) {
                 return back()->with('error', __('user.controller_error_create'));
             }
@@ -139,9 +139,9 @@ class UserController extends Controller
             try {
                 // Guardar el nuevo usuario
                 $user->save();
-                return redirect()->route('admin.users.show', $user)->with('success', __('user.controller_user')  .'<b>'  . $user->email . '</b> '. __('user.controller_edit'));
+                return redirect()->route('admin.users.show', $user)->with('success', __('user.controller_user')  . '<b>'  . $user->email . '</b> ' . __('user.controller_edit'));
             } catch (\Exception $e) {
-                return back()->with('error',  __('user.controller_error_edit') .' <b>' . $user->email . '</b>.');
+                return back()->with('error',  __('user.controller_error_edit') . ' <b>' . $user->email . '</b>.');
             }
         }
     }
@@ -156,7 +156,7 @@ class UserController extends Controller
         // Guardar el nuevo usuario
         $user->save();
 
-        return redirect()->route('admin.users.index', $user)->with('success', __('user.controller_pass').' <b>' . $user->email . '</b> '. __('user.controller_pass_2'));
+        return redirect()->route('admin.users.index', $user)->with('success', __('user.controller_pass') . ' <b>' . $user->email . '</b> ' . __('user.controller_pass_2'));
     }
 
     /**
@@ -199,10 +199,10 @@ class UserController extends Controller
     {
         // Los usuarios god no pueden ser eliminados por nadie
         if ($user->role->role == 'god') {
-            return redirect()->route('admin.users.index')->with('permission',  __('user.controller_delete').' <b>' . $user->email . '</b>.');
+            return redirect()->route('admin.users.index')->with('permission',  __('user.controller_delete') . ' <b>' . $user->email . '</b>.');
         } else {
             $user->delete();
-            return redirect()->route('admin.users.index')->with('success', __('user.controller_user')  .'<b>' . $user->email . '</b>'. __('user.controller_delete_2') );
+            return redirect()->route('admin.users.index')->with('success', __('user.controller_user')  . '<b>' . $user->email . '</b>' . __('user.controller_delete_2'));
         }
     }
 

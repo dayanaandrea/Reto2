@@ -30,6 +30,7 @@ return [
     'participant' => 'Parte-hartzaileak',
     'convener' => 'Deitzailea',
     'withoutParticipants' => 'Parte-hartzailerik gabe',
+    'no_meetings' => 'Ez dago bilerarik.',
 
     // SHOW  {{ $meeting->name }}
     'show_title' => 'Bileraren xehetasunak',

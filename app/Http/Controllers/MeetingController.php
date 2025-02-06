@@ -64,7 +64,7 @@ class MeetingController extends Controller
         try {
             // Guardar el nuevo usuario
             $meeting->save();
-            return redirect()->route('admin.meetings.index')->with('success',  __('meeting.controller_meeting_text') . '<b>' . $meeting->day . '</b>'.  __('meeting.controller_create'));
+            return redirect()->route('admin.meetings.index')->with('success',  __('meeting.controller_meeting_text') . '<b>' . $meeting->day . '</b>' .  __('meeting.controller_create'));
         } catch (\Exception $e) {
             return back()->with('error', __('meeting.controller_error'));
         }
@@ -119,7 +119,7 @@ class MeetingController extends Controller
         try {
             // Guardar los cambios
             $meeting->save();
-            return redirect()->route('admin.meetings.index', $meeting)->with('success',   __('meeting.controller_meeting_text') .'<b>' . $meeting->day . '</b> '.  __('meeting.controller_edit'));
+            return redirect()->route('admin.meetings.index', $meeting)->with('success',   __('meeting.controller_meeting_text') . '<b>' . $meeting->day . '</b> ' .  __('meeting.controller_edit'));
         } catch (\Exception $e) {
             return back()->with('error',  __('meeting.controller_error_edit'));
         }

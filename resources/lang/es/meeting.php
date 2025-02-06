@@ -14,7 +14,7 @@ return [
     'teacher' => 'Profesor',
     'student' => 'Estudiante',
     'actions' => 'Acciones',
-    'not_assigned' => 'No asignado',    
+    'not_assigned' => 'No asignado',
     'create_meeting' => 'Crear reunión',
     'see_data_meeting' => 'Ver datos de la reunión',
     'edit_data_meeting' => 'Editar datos de la reunión',
@@ -30,6 +30,7 @@ return [
     'participant' => 'Participantes',
     'convener' => 'Convocante',
     'withoutParticipants' => 'Sin participantes',
+    'no_meetings' => 'No hay reuniones.',
 
     // SHOW  {{ $meeting->name }}
     'show_title' => 'Detalles de la reunión',

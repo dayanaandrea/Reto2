@@ -46,5 +46,3 @@ return [
     'controller_enrol' => ' modificado correctamente.',
 
 ];
-
-

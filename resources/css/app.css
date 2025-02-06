@@ -209,7 +209,7 @@ a.btn-warning:hover {
     background-repeat: no-repeat;
 }
 
-#totales .bg-dark{
+#totales .bg-dark {
     background-color: var(--pantone-darkest) !important;
 }
 
@@ -218,6 +218,7 @@ a.btn-warning:hover {
     transform: scale(1.05);
     transition: 0.3s ease-in-out;
 }
+
 a:not(.btn):not(.nav-link) {
     color: var(--pantone-medium);
 

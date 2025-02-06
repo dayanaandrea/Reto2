@@ -50,9 +50,9 @@
                         @endif
                         @php
                         if($user->intensive==0){
-                            $value = 'No';
+                        $value = 'No';
                         } else {
-                            $value = 'Sí';
+                        $value = 'Sí';
                         }
                         @endphp
                         <x-detail :label="'Dual intensiva'" :value="$value" />
