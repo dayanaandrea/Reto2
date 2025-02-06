@@ -2,14 +2,14 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API",
-        "version": "1.0"
+        "version": "v1.0"
     },
     "paths": {
-        "/api/roles": {
+        "/api/v1.0/roles": {
             "get": {
                 "summary": "Show roles",
                 "description": "Returns a list of all roles with pagination data.",
-                "operationId": "6cd48af64dafcf1c85923dba47e841a4",
+                "operationId": "add43a2369a12503d32ce0ab6f078b29",
                 "parameters": [
                     {
                         "name": "page",
@@ -81,25 +81,13 @@
             "post": {
                 "summary": "Create a new role",
                 "description": "Creates a new role in the system.",
-                "operationId": "4eb1ce389f63b4dbfcc5b002014636e1",
+                "operationId": "7a42de25c319df0d0006f151f3b4def4",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "role",
-                                    "description"
-                                ],
-                                "properties": {
-                                    "role": {
-                                        "type": "string"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/Role"
                             }
                         }
                     }
@@ -126,11 +114,11 @@
                 ]
             }
         },
-        "/api/roles/{id}": {
+        "/api/v1.0/roles/{id}": {
             "get": {
                 "summary": "Show a specific role",
                 "description": "Fetches the details of a single role.",
-                "operationId": "d932a477623c1c931444dcc799f1eb0a",
+                "operationId": "14b6097328b4aa180f564be349a583a6",
                 "parameters": [
                     {
                         "name": "id",
@@ -169,7 +157,7 @@
             "put": {
                 "summary": "Update an existing role",
                 "description": "Updates an existing role in the system.",
-                "operationId": "e0fa8b9f9f9cfb6c7e51a7609dd35dcd",
+                "operationId": "9e0144fcebe39d42a74630e6ec5978ae",
                 "parameters": [
                     {
                         "name": "id",
@@ -186,15 +174,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "properties": {
-                                    "role": {
-                                        "type": "string"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/Role"
                             }
                         }
                     }
@@ -226,7 +206,7 @@
             "delete": {
                 "summary": "Delete a specific role",
                 "description": "Deletes a role from the system.",
-                "operationId": "a0c87b804be9d37055fc6f936cbacb1b",
+                "operationId": "4bdce29db3838c6d0a749b5c4499106d",
                 "parameters": [
                     {
                         "name": "id",
@@ -268,11 +248,11 @@
                 ]
             }
         },
-        "/api/users": {
+        "/api/v1.0/users": {
             "get": {
                 "summary": "Show users",
                 "description": "Returns a list of all users with pagination data.",
-                "operationId": "d7a57f4d7de18fb0f92501172472c9b6",
+                "operationId": "7c7b20ab9af829d3cd288a736cbd3c74",
                 "parameters": [
                     {
                         "name": "page",
@@ -344,48 +324,13 @@
             "post": {
                 "summary": "Create a new user",
                 "description": "Creates a new user in the system.",
-                "operationId": "9fea6f2adcb69614c521a7733358382d",
+                "operationId": "511b674a3187447f33e70727b0c188af",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name",
-                                    "lastname",
-                                    "email",
-                                    "pin",
-                                    "address",
-                                    "phone1",
-                                    "role_id"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "lastname": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "pin": {
-                                        "type": "string"
-                                    },
-                                    "address": {
-                                        "type": "string"
-                                    },
-                                    "phone1": {
-                                        "type": "string"
-                                    },
-                                    "phone2": {
-                                        "type": "string"
-                                    },
-                                    "role_id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/User"
                             }
                         }
                     }
@@ -412,11 +357,11 @@
                 ]
             }
         },
-        "/api/users/{id}": {
+        "/api/v1.0/users/{id}": {
             "get": {
                 "summary": "Show a specific user",
                 "description": "Fetches the details of a single user.",
-                "operationId": "40a5104e23b52137e78c3d3ac48b88a8",
+                "operationId": "45c317c8891228a7ba056f478fd8631d",
                 "parameters": [
                     {
                         "name": "id",
@@ -455,7 +400,7 @@
             "put": {
                 "summary": "Update an existing user",
                 "description": "Updates an existing user in the system.",
-                "operationId": "b166772cec9714067040e77cf14beeba",
+                "operationId": "e3aae65fd87c76587b0f405f717ba2c0",
                 "parameters": [
                     {
                         "name": "id",
@@ -472,33 +417,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "lastname": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "pin": {
-                                        "type": "string"
-                                    },
-                                    "address": {
-                                        "type": "string"
-                                    },
-                                    "phone1": {
-                                        "type": "string"
-                                    },
-                                    "phone2": {
-                                        "type": "string"
-                                    },
-                                    "role_id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/User"
                             }
                         }
                     }
@@ -530,7 +449,7 @@
             "delete": {
                 "summary": "Delete a specific user",
                 "description": "Deletes a user from the system.",
-                "operationId": "ce06860a51ab016ef66e753544fe4563",
+                "operationId": "998e903c42e5e6211efc09e1fc606aff",
                 "parameters": [
                     {
                         "name": "id",
@@ -576,16 +495,24 @@
     "components": {
         "schemas": {
             "Role": {
+                "description": "A schema representing a user role in the system. It includes the role name and a brief description of the role's responsibilities and privileges.",
                 "required": [
                     "role",
                     "description"
                 ],
                 "properties": {
+                    "id": {
+                        "description": "The role's ID",
+                        "type": "integer",
+                        "example": 100
+                    },
                     "role": {
+                        "description": "The name of the role, which defines the user’s permissions and access levels in the system.",
                         "type": "string",
                         "example": "admin"
                     },
                     "description": {
+                        "description": "A brief description of what the role entails, including responsibilities and privileges associated with the role.",
                         "type": "string",
                         "example": "Administrator role"
                     }
@@ -593,6 +520,7 @@
                 "type": "object"
             },
             "User": {
+                "description": "A schema representing a user in the system. It includes personal details, contact information, and role assignment.",
                 "required": [
                     "name",
                     "lastname",
@@ -603,29 +531,50 @@
                     "role_id"
                 ],
                 "properties": {
+                    "id": {
+                        "description": "The user's ID",
+                        "type": "integer",
+                        "example": 100
+                    },
                     "name": {
-                        "type": "string"
+                        "description": "The user's first name",
+                        "type": "string",
+                        "example": "Leire"
                     },
                     "lastname": {
-                        "type": "string"
+                        "description": "The user's last name",
+                        "type": "string",
+                        "example": "Lasa"
                     },
                     "email": {
-                        "type": "string"
+                        "description": "The user's email address",
+                        "type": "string",
+                        "example": "leire.lasa@elorrieta.com"
                     },
                     "pin": {
-                        "type": "string"
+                        "description": "The user's Personal Identification Number",
+                        "type": "string",
+                        "example": "11111111H"
                     },
                     "address": {
-                        "type": "string"
+                        "description": "The user's address",
+                        "type": "string",
+                        "example": "Main Street, 20, 3B"
                     },
                     "phone1": {
-                        "type": "string"
+                        "description": "The user's primary phone number",
+                        "type": "string",
+                        "example": "666666666"
                     },
                     "phone2": {
-                        "type": "string"
+                        "description": "The user's secondary phone number",
+                        "type": "string",
+                        "example": "666666666"
                     },
                     "role_id": {
-                        "type": "integer"
+                        "description": "The user's role ID",
+                        "type": "integer",
+                        "example": 1
                     }
                 },
                 "type": "object"

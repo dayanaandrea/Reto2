@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Carbon\Carbon;
 
 /**
  * Retorna un string que contiene el valor del atributo src de una etiqueta img de HTML.
@@ -15,7 +13,7 @@ use Carbon\Carbon;
 function obtenerFoto($user)
 {
     // Comprobar si el usuario tiene una foto
-    if ($user->photo != null) {
+    if ($user && $user->photo != null) {
         // Si tiene foto, la codificamos en base64
         $image = base64_encode($user->photo);
         return "data:image/jpeg;base64,{$image}";
@@ -61,7 +59,7 @@ function getPagination(Request $request): int
 function validateRole(Request $request)
 {
     $request->validate([
-        'role' => 'required|min:10|max:50',
+        'role' => 'required|min:5|max:50',
         'description' => 'required|min:10|max:255'
     ], [
         // Mensajes de error personalizados según lo que falle
@@ -75,7 +73,7 @@ function validateRole(Request $request)
 function validateRoleUpdateAPI(Request $request)
 {
     $request->validate([
-        'role' => 'nullable|min:10|max:50',
+        'role' => 'nullable|min:5|max:50',
         'description' => 'nullable|min:10|max:255'
     ]);
 }

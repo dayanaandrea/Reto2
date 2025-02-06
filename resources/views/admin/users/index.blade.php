@@ -19,7 +19,7 @@
     @if ($users->count() > 0)
         <h2>{{ __('user.title_index_2') }}</h2>
         <div>
-            <table class="table table-hover table-striped lista">
+            <table class="table table-hover table-striped lista table-responsive">
                 <thead>
                     <tr class="text-uppercase table-dark">
                         <th scope="col"></th>

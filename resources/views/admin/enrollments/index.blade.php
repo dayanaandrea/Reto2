@@ -20,7 +20,7 @@
     </div>
 
     <h2>{{__('enrollment.enrollments')}}</h2>
-    <table class="table table-hover table-striped">
+    <table class="table table-hover table-striped table-responsive">
         <thead>
             <tr class="text-uppercase table-dark ">
                 <th scope="col"></th>
