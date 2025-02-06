@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
  *     type="object",
  *     description="A schema representing a user in the system. It includes personal details, contact information, and role assignment.",
  *     required={"name", "lastname", "email", "pin", "address", "phone1", "role_id"},
+ *                 @OA\Property(property="id", type="integer", description="The user's ID", example=100),
  *                 @OA\Property(property="name", type="string", description="The user's first name", example="Leire"),
  *                 @OA\Property(property="lastname", type="string", description="The user's last name", example="Lasa"),
  *                 @OA\Property(property="email", type="string", description="The user's email address", example="leire.lasa@elorrieta.com"),

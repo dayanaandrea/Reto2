@@ -501,6 +501,11 @@
                     "description"
                 ],
                 "properties": {
+                    "id": {
+                        "description": "The role's ID",
+                        "type": "integer",
+                        "example": 100
+                    },
                     "role": {
                         "description": "The name of the role, which defines the user’s permissions and access levels in the system.",
                         "type": "string",
@@ -526,6 +531,11 @@
                     "role_id"
                 ],
                 "properties": {
+                    "id": {
+                        "description": "The user's ID",
+                        "type": "integer",
+                        "example": 100
+                    },
                     "name": {
                         "description": "The user's first name",
                         "type": "string",

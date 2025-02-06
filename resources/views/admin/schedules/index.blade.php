@@ -17,7 +17,7 @@
     <h2>{{ __('schedule.schedule') }}</h2>
     <table class="table table-hover table-striped">
         <thead>
-            <tr class="text-uppercase table-dark">
+            <tr class="text-uppercase table-dark table-responsive">
                 <th scope="col"></th>
                 <th scope="col">{{__('schedule.module')}}</th>
                 <th scope="col">{{__('schedule.teacher')}}</th>

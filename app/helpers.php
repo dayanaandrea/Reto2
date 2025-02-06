@@ -61,7 +61,7 @@ function getPagination(Request $request): int
 function validateRole(Request $request)
 {
     $request->validate([
-        'role' => 'required|min:10|max:50',
+        'role' => 'required|min:5|max:50',
         'description' => 'required|min:10|max:255'
     ], [
         // Mensajes de error personalizados según lo que falle
@@ -75,7 +75,7 @@ function validateRole(Request $request)
 function validateRoleUpdateAPI(Request $request)
 {
     $request->validate([
-        'role' => 'nullable|min:10|max:50',
+        'role' => 'nullable|min:5|max:50',
         'description' => 'nullable|min:10|max:255'
     ]);
 }

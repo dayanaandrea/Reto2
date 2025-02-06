@@ -13,6 +13,7 @@ use Illuminate\Http\Response;
  *     type="object",
  *     required={"role", "description"},
  *     description="A schema representing a user role in the system. It includes the role name and a brief description of the role's responsibilities and privileges.",
+ *     @OA\Property(property="id", type="integer", description="The role's ID", example=100),
  *     @OA\Property(property="role", type="string", description="The name of the role, which defines the user’s permissions and access levels in the system.", example="admin"),
  *     @OA\Property(property="description", type="string", description="A brief description of what the role entails, including responsibilities and privileges associated with the role.", example="Administrator role")
  * )

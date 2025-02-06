@@ -3,7 +3,7 @@
 @if (Auth::user()->role && Auth::user()->role->role == 'profesor')
 <div class="container">
     <h2 class="mb-3">Profesores</h2>
-    <table class="table table-striped">
+    <table class="table table-striped table-responsive">
         <thead>
             <tr class="table-dark text-uppercase">
                 <th scope="col"></th>
