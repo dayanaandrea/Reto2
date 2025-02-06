@@ -1,15 +1,11 @@
 @php
 if (isset($meeting)) {
 $button = __('meeting.update');
-$teacher_id = $meeting->teacher_id;
-$student_id = $meeting->student_id;
 $date = $meeting->date;
 $time = $meeting->time;
 
 } else {
 $button = __('meeting.create');
-$teacher = "";
-$student_id = "";
 $date = "";
 $time = "";
 $meeting = null;
@@ -52,7 +48,7 @@ $meeting = null;
                                         <option value="" selected>{{__('meeting.select_convener') }} </option>
                                         @foreach ($teachers as $teacher)
                                         <option value="{{ $teacher->id }}"
-                                            {{ $teacher->id == $meeting->user_id ? 'selected' : '' }}>
+                                            {{ (isset($meeting) && $teacher->id == $meeting->user->id) ? 'selected' : '' }}>
                                             {{ ucfirst($teacher->name) }} {{ ucfirst($teacher->lastname) }}
                                         </option>
                                         @endforeach
@@ -67,7 +63,7 @@ $meeting = null;
                                     <select id="participants" name="participants[]" class="form-control" multiple>
                                         @foreach ($students as $student)
                                         <option value="{{ $student->id }}"
-                                            {{ in_array($student->id, $meeting->participants->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                            {{(isset($meeting) && in_array($student->id, $meeting->participants->pluck('id')->toArray())) ? 'selected' : '' }}>
                                             {{ ucfirst($student->name) }} {{ ucfirst($student->lastname) }}
                                         </option>
                                         @endforeach
