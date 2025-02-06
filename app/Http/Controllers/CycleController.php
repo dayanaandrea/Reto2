@@ -81,7 +81,6 @@ class CycleController extends Controller
         } catch (\Exception $e) {
             return back()->with('error',  __('cycle.controller_error_edit'));
         }
-
     }
 
     /**

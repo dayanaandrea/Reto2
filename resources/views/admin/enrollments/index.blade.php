@@ -69,8 +69,8 @@
                 </td>
             </tr>
 
-             <!-- Modal para eliminar un ciclo -->
-             @php
+            <!-- Modal para eliminar un ciclo -->
+            @php
             $id = 'modal_delete' . $enrollment->id;
             $mensaje =__('enrollment.ask_for_delete_confirmation_1') . __('enrollment.ask_for_delete_confirmation_2') ;
             $ruta = route('admin.enrollments.destroy', $enrollment);

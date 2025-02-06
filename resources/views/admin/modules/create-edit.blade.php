@@ -25,7 +25,7 @@ $title = __('module.create_text');
     <x-alert :key="'success'" :class="'success'" />
     <x-alert :key="'permission'" :class="'danger'" />
     <x-alert :key="'error'" :class="'danger'" />
-    
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

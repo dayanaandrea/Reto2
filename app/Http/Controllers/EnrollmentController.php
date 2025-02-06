@@ -126,7 +126,7 @@ class EnrollmentController extends Controller
         }
         try {
             $enrollment->update($validatedData);
-            return redirect()->route('admin.enrollments.show', $enrollment)->with('success', __('enrollment.enrrolment') .' <b>' . $enrollment->enrollment . '</b> ' . __('enrollment.controller_edit'));
+            return redirect()->route('admin.enrollments.show', $enrollment)->with('success', __('enrollment.enrrolment') . ' <b>' . $enrollment->enrollment . '</b> ' . __('enrollment.controller_edit'));
         } catch (\Exception $e) {
             return back()->with('error',  __('module.controller_error_edit'));
         }

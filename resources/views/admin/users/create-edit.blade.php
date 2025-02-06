@@ -1,30 +1,30 @@
 @php
 if (isset($user)){
-    $name = $user->name;
-    $email = $user->email;
-    $lastname = $user->lastname;
-    $pin = $user->pin;
-    $address = $user->address;
-    $phone1 = $user->phone1;
-    $phone2 = $user->phone2;
-    $intensive = $user->intensive;
-    $role_id = $user->role_id;
+$name = $user->name;
+$email = $user->email;
+$lastname = $user->lastname;
+$pin = $user->pin;
+$address = $user->address;
+$phone1 = $user->phone1;
+$phone2 = $user->phone2;
+$intensive = $user->intensive;
+$role_id = $user->role_id;
 
-    $button = __('auth.btn_create');
-    $title = __('auth.title_edit');
+$button = __('auth.btn_create');
+$title = __('auth.title_edit');
 } else {
-    $name = "";
-    $email = "";
-    $lastname = "";
-    $pin = "";
-    $address = "";
-    $phone1 = "";
-    $phone2 = "";
-    $intensive = "";
-    $role_id = 0;
+$name = "";
+$email = "";
+$lastname = "";
+$pin = "";
+$address = "";
+$phone1 = "";
+$phone2 = "";
+$intensive = "";
+$role_id = 0;
 
-    $button = __('auth.btn_create');
-    $title = __('auth.title_index_1');
+$button = __('auth.btn_create');
+$title = __('auth.title_index_1');
 }
 @endphp
 

@@ -53,16 +53,15 @@ class ModuleController extends Controller
         $module->course = $request->course;
         $module->cycle_id = $request->cycle_id;
         $module->user_id = $request->user_id;
-        
-        
+
+
         try {
             $module->save();
-            return redirect()->route('admin.modules.index')->with('success',  __('module.module') .'<b>' . $module->name . '</b>'. __('module.controller_create'));    
+            return redirect()->route('admin.modules.index')->with('success',  __('module.module') . '<b>' . $module->name . '</b>' . __('module.controller_create'));
         } catch (\Exception $e) {
             return back()->with('error',   __('module.controller_error_create'));
         }
-    
-       }
+    }
 
     /**
      * Display the specified resource.
@@ -102,11 +101,11 @@ class ModuleController extends Controller
 
         try {
             $module->save();
-            return redirect()->route('admin.modules.index', $module)->with('success',    __('module.module') .'<b>' . $module->name . '</b>'. __('module.controller_edit'));
+            return redirect()->route('admin.modules.index', $module)->with('success',    __('module.module') . '<b>' . $module->name . '</b>' . __('module.controller_edit'));
         } catch (\Exception $e) {
             return back()->with('error',   __('module.controller_error_edit'));
         }
-       }
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -114,7 +113,7 @@ class ModuleController extends Controller
     public function destroy(Module $module)
     {
         $module->delete();
-        return redirect()->route('admin.modules.index')->with('success',    __('module.module') .'<b>' . $module->name . '</b> '. __('module.controller_delete'));
+        return redirect()->route('admin.modules.index')->with('success',    __('module.module') . '<b>' . $module->name . '</b> ' . __('module.controller_delete'));
     }
     /**
      * Validates module's data.

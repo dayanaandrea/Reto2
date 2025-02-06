@@ -52,5 +52,5 @@ return [
     'controller_delete' => '  eliminado correctamente.',
     'controller_error_create' => '  Error al crear el modulo.',
     'controller_error_edit' => '  Error al modificar el modulo.',
-  
+
 ];

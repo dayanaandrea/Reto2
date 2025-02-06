@@ -1,8 +1,8 @@
 <?php
 return [
-    
+
     // INDEX  {{__('role.create')}}  __('role.create_role')
-   
+
     'create_role' => 'Create a new role',
     'roles' => 'Roles',
     'role' => 'Role',
@@ -23,12 +23,12 @@ return [
     'create_text' => 'Role Creation',
 
     // SHOW
-    
+
     'details' => 'Role details',
     'module' => 'Modules',
 
     // CONTROLLER
-    
+
     'controller_rol' => 'The role',
     'controller_create' => ' has been successfully created.',
     'controller_update' => ' has been successfully updated.',

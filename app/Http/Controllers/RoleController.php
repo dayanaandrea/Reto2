@@ -103,7 +103,7 @@ class RoleController extends Controller
             return back()->with('permission',  __('role.controller_rol') . '<b>'  . $role->role . '</b>' . __('role.controller_delete_2'));
         } else {
             $role->delete();
-            return redirect()->route('admin.roles.index')->with('success',  __('role.controller_rol') . '<b>'  . $role->role . '</b>' . __('role.controller_delete') );
+            return redirect()->route('admin.roles.index')->with('success',  __('role.controller_rol') . '<b>'  . $role->role . '</b>' . __('role.controller_delete'));
         }
     }
 }
