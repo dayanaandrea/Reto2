@@ -3,7 +3,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite --port 3006"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
