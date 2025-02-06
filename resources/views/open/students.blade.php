@@ -8,7 +8,7 @@
     @if ($students->count() > 0)
     <h2>Estudiantes</h2>
     <div>
-        <table class="table table-hover table-striped lista">
+        <table class="table table-hover table-striped lista table-responsive">
             <thead>
                 <tr class="text-uppercase table-dark">
                     <th scope="col"></th>

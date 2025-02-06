@@ -12,15 +12,17 @@ use Illuminate\Http\Response;
  *     schema="Role",
  *     type="object",
  *     required={"role", "description"},
- *     @OA\Property(property="role", type="string", example="admin"),
- *     @OA\Property(property="description", type="string", example="Administrator role")
+ *     description="A schema representing a user role in the system. It includes the role name and a brief description of the role's responsibilities and privileges.",
+ *     @OA\Property(property="id", type="integer", description="The role's ID", example=100),
+ *     @OA\Property(property="role", type="string", description="The name of the role, which defines the user’s permissions and access levels in the system.", example="admin"),
+ *     @OA\Property(property="description", type="string", description="A brief description of what the role entails, including responsibilities and privileges associated with the role.", example="Administrator role")
  * )
  */
 class RoleController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/roles",
+     *     path="/api/v1.0/roles",
      *     summary="Show roles",
      *     description="Returns a list of all roles with pagination data.",
      *     @OA\Parameter(
@@ -84,19 +86,14 @@ class RoleController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/api/roles",
+     *     path="/api/v1.0/roles",
      *     summary="Create a new role",
      *     description="Creates a new role in the system.",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\MediaType(
      *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 required={"role", "description"},
-     *                 @OA\Property(property="role", type="string"),
-     *                 @OA\Property(property="description", type="string")
-     *             )
+     *             @OA\Schema(ref="#/components/schemas/Role")
      *         )
      *     ),
      *     @OA\Response(
@@ -129,7 +126,7 @@ class RoleController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/roles/{id}",
+     *     path="/api/v1.0/roles/{id}",
      *     summary="Show a specific role",
      *     description="Fetches the details of a single role.",
      *     @OA\Parameter(
@@ -162,7 +159,7 @@ class RoleController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/roles/{id}",
+     *     path="/api/v1.0/roles/{id}",
      *     summary="Update an existing role",
      *     description="Updates an existing role in the system.",
      *     @OA\Parameter(
@@ -176,11 +173,7 @@ class RoleController extends Controller
      *         required=true,
      *         @OA\MediaType(
      *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 @OA\Property(property="role", type="string"),
-     *                 @OA\Property(property="description", type="string")
-     *             )
+     *             @OA\Schema(ref="#/components/schemas/Role")
      *         )
      *     ),
      *     @OA\Response(
@@ -214,7 +207,7 @@ class RoleController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/api/roles/{id}",
+     *     path="/api/v1.0/roles/{id}",
      *     summary="Delete a specific role",
      *     description="Deletes a role from the system.",
      *     @OA\Parameter(

@@ -16,7 +16,7 @@
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
     <h2>{{__('cycle.cycle')}}</h2>
-    <table class="table table-hover table-striped">
+    <table class="table table-hover table-striped table-responsive">
         <thead>
             <tr class="text-uppercase table-dark ">
                 <th scope="col"></th>

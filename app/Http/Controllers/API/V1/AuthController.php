@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 
 /**
- * @OA\Info(title="API", version="1.0"),
+ * @OA\Info(title="API", version="v1.0"),
  * @OA\SecurityScheme(
  *     in="header",
  *     scheme="bearer",

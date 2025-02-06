@@ -17,7 +17,7 @@
     </div>
     <h2>{{__('meeting.meeting')}}</h2>
     @if($meetings->count() > 0)
-    <table class="table table-hover table-striped">
+    <table class="table table-hover table-striped table-responsive">
         <thead>
             <tr class="text-uppercase table-dark">
                 <th scope="col"></th>
