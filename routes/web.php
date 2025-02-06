@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
 
   // Rutas del administrador
   Route::prefix('admin')->name('admin.')
-  ->middleware([CheckAdminRole::class, VerificarIP::class])
+  ->middleware([CheckAdminRole::class, 'verificar.ip'])
   ->group(function () {
     // Ruta principal del panel de administración
     Route::get('/home', [HomeController::class, 'homeAdmin'])->name('home');
