@@ -15,17 +15,18 @@ class VerificarIP
      */
     public function handle(Request $request, Closure $next): Response
     {
+        /*
         $ip = $request->ip();
 
         if (substr($ip, 0, 4) !== '10.5.') {
             return redirect()->route('login');
         }
-
-        /*
+*/
+        
         if ($ip !== '192.168.1.135') {
             return redirect()->route('login');
         }
-        */
+        
         
         return $next($request);
     }
