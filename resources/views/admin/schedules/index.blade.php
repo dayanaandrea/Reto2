@@ -10,7 +10,7 @@
         $route = route('admin.schedules.create');
         $type = "show";
         $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __('schedule.añadir') . '</span>';
-        $tooltip = __('schedule.create_schedule');
+        $tooltip = __('schedule.index_title_1');
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
@@ -59,7 +59,7 @@
                     @php
                     $id_modal = '#modal_delete' . $schedule->id;
                     $text = '<i class="fa-solid fa-trash-can"></i>';
-                    $tooltip = __('schedule.delete_data_schedule');
+                    $tooltip = __('schedule.delete_schedule');
                     @endphp
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                 </td>

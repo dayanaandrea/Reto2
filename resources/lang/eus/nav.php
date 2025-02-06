@@ -11,7 +11,7 @@ return [
     'cycle' => 'Zikloak',
     'module' => 'Moduluak',
     'enrollments' => 'Matrikulak',
-    'schedules' => 'Bilkurak',
+    'schedules' => 'Ordutegiak',
     'meetings' => 'Bilkurak',
     'profile' => 'Profila',
     'languaje' => 'Hizkuntza',

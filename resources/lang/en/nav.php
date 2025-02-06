@@ -11,7 +11,7 @@ return [
     'cycle' => 'Cycles',
     'module' => 'Modules',
     'enrollments' => 'Enrollments',
-    'schedules' => 'Meetings',
+    'schedules' => 'Schedules',
     'meetings' => 'Meetings',
     'profile' => 'Profile',
     'languaje' => 'Language',
