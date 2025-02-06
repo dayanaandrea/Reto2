@@ -9,7 +9,7 @@
         @php
             $route = route('admin.roles.create');
             $type = "show";
-            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">Añadir</span>';
+            $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __('role.add') . '</span>';
             $tooltip =  __('role.create_role');
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
@@ -67,7 +67,7 @@
                                 <!-- Modal para eliminar un rol -->
                                 @php
                                     $id = 'modal_delete' . $role->id;
-                                    $mensaje = "¿Estás seguro de que deseas eliminar el rol <strong class='text-capitalize'>$role->role</strong>? Esta acción no se puede deshacer.";
+                                    $mensaje =__('role.confirm_1') . "<strong class='text-capitalize'>$role->role</strong>" . __('role.confirm_2') ;
                                     $ruta = route('admin.roles.destroy', $role);
                                  @endphp
                                 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />

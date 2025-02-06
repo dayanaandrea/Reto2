@@ -213,6 +213,12 @@ a.btn-warning:hover {
     background-color: var(--pantone-darkest) !important;
 }
 
+
+.hover-effect:hover {
+    transform: scale(1.05);
+    transition: 0.3s ease-in-out;
+}
 a:not(.btn):not(.nav-link) {
     color: var(--pantone-medium);
+
 }

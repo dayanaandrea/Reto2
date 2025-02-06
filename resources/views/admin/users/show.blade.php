@@ -108,7 +108,7 @@
                             $route = route('admin.users.change-pass', $user);
                             $type = "show";
                             $text = '<i class="fa-solid fa-lock"></i>';
-                            $tooltip = 'Cambiar contraseña';
+                            $tooltip = __('user.tp_change_pass');
                             @endphp
                             <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
                             @endif
@@ -122,7 +122,7 @@
 <!-- Modal para eliminar un usuario -->
 @php
 $id = 'modal_delete' . $user->id;
-$mensaje = "¿Estás seguro de que deseas eliminar el usuario <strong>$user->email</strong>? Esta acción no se puede deshacer.";
+$mensaje = __('user.confirm_1') . "<strong>$user->email</strong>" . __('user.confirm_2');
 $ruta = route('admin.users.destroy', $user);
 @endphp
 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />

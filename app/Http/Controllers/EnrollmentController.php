@@ -70,9 +70,9 @@ class EnrollmentController extends Controller
 
                 $enrollment->save();
             }
-            return redirect()->route('admin.enrollments.index')->with('success', $enrollment->user->lastname . ', ' . $enrollment->user->name . ' se ha matriculado correctamente.');
+            return redirect()->route('admin.enrollments.index')->with('success', $enrollment->user->lastname . ', ' . $enrollment->user->name . __('module.controller_create'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al crear la matrícula.');
+            return back()->with('error',   __('module.controller_error_create'));
         }
     }
 
@@ -126,9 +126,9 @@ class EnrollmentController extends Controller
         }
         try {
             $enrollment->update($validatedData);
-            return redirect()->route('admin.enrollments.show', $enrollment)->with('success', 'Matrícula  <b>' . $enrollment->enrollment . '</b> creado correctamente.');
+            return redirect()->route('admin.enrollments.show', $enrollment)->with('success', __('enrollment.enrrolment') .' <b>' . $enrollment->enrollment . '</b> ' . __('enrollment.controller_edit'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al modificar la matrícula.');
+            return back()->with('error',  __('module.controller_error_edit'));
         }
     }
 
@@ -138,7 +138,7 @@ class EnrollmentController extends Controller
     public function destroy(Enrollment $enrollment)
     {
         $enrollment->delete();
-        return redirect()->route('admin.enrollments.index')->with('success', 'Matricula eliminada correctamente.');
+        return redirect()->route('admin.enrollments.index')->with('success', __('enrollment.controller_delete'));
         /*
         $id = $enrollment->id; 
         $enrollment->delete(); 

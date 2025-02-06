@@ -8,15 +8,15 @@ return [
     'name' => 'Name',
     'week' => 'Week',
     'day' => 'Day',
-    'time' => 'Hour',
+    'time' => 'Time',
     'status' => 'Status',
     'module' => 'Module',
     'teacher' => 'Teacher',
     'student' => 'Student',
     'actions' => 'Actions',
     'not_assigned' => 'Not assigned',
-    'see_data_meeting' => 'View meeting data',
-    'edit_data_meeting' => 'Edit meeting data',
+    'see_data_meeting' => 'View meeting details',
+    'edit_data_meeting' => 'Edit meeting details',
     'delete_meeting' => 'Delete meeting',
     'confirm_deletes' => 'Confirm deletion',
     'confirm_1' => 'Are you sure you want to delete the meeting ',
@@ -28,15 +28,25 @@ return [
     'añadir' => 'Add',
     'participant' => 'Participants',
     'convener' => 'Convener',
-    'withoutParticipants' => 'Without participants',
-    
+    'withoutParticipants' => 'No participants',
 
-    // SHOW  {{ $meeting->name }}
+    // SHOW
     'show_title' => 'Meeting details',
 
     // CREATE-EDIT
-    'select_convener' => ' -- Select a convener -- ',
+    'select_teacher' => ' -- Select the convener -- ',
     'select_student' => ' -- Select a student -- ',
 
-];
+    // CONTROLLER
+    'controller_meeting_text' => 'The meeting on',
+    'controller_create' => ' has been successfully created.',
+    'controller_update' => ' has been successfully updated.',
+    'controller_delete' => ' Meeting successfully deleted.',
+    'controller_error' => ' Error creating the meeting.',
 
+    'day_required' => 'The day field is required.',
+    'time_required' => 'The time field is required.',
+    'week_required' => 'The week field is required.',
+    'status_required' => 'The status field is required.',
+    'teacher_id_required' => 'The teacher field is required.',
+];

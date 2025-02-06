@@ -8,7 +8,9 @@ return [
     'name' => 'Name',
     'day' => 'Day',
     'hour' => 'Hour',
-    'module' => 'Module',
+    'module' => 'Modules',
+    'course' => 'Course',
+    'cycle' => 'Cycle',
     'teacher' => 'Teacher',
     'actions' => 'Actions',
     'not_assigned' => 'Not assigned',
@@ -21,13 +23,27 @@ return [
     'cancel' => 'Cancel',
     'delete' => 'Delete',
     'create' => 'Create',
+    'create_text' => 'Schedule creation',
     'update' => 'Update',
-    'añadir' => 'Add',
+    'update_text' => 'Schedule update',
+    'add' => 'Add',
 
-    // SHOW  {{ $schedule->name }}
-    'show_title' => 'Schedule details',
+    // SHOW  
+    'show_title' => 'Module details',
 
     // CREATE-EDIT
     'select_teacher' => ' -- Select a teacher -- ',
+    'select_module' => ' -- Select a module -- ',
 
+    // CONTROLLER 
+    'schedules' => 'Schedule',
+    'controller_create' => ' created successfully.',
+    'controller_error_create' => 'Error creating the schedule.',
+    'controller_edit' => 'updated successfully.',
+    'controller_error_edit' => 'Error updating the schedule.',
+    'controller_delete' => 'Schedule deleted successfully.',
+
+    'module_id_required' => 'The module field is required.',
+    'day_required' => 'The day field is required.',
+    'hour_required' => 'The hour field is required.',
 ];

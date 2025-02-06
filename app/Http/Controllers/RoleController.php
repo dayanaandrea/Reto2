@@ -43,9 +43,9 @@ class RoleController extends Controller
         try {
             // Guardar el nuevo rol
             $role->save();
-            return redirect()->route('admin.roles.index')->with('success', 'Rol <b>' . $role->role . '</b> creado correctamente.');
+            return redirect()->route('admin.roles.index')->with('success',   __('role.controller_rol') . '<b>' . $role->role . '</b>' . __('role.controller_create'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al crear el rol.');
+            return back()->with('error',  __('role.controller_error_create'));
         }
     }
 
@@ -77,7 +77,7 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         if ($role->role == 'god' || $role->role == 'administrador' || $role->role == 'estudiante' || $role->role == 'profesor') {
-            return back()->with('permission', 'El rol <b>' . $role->role . '</b> no puede ser editado.');
+            return back()->with('permission', __('role.controller_rol') . '<b>'  . $role->role . '</b>' . __('role.controller_update_2'));
         }
         // Validar los datos
         validateRole($request);
@@ -88,9 +88,9 @@ class RoleController extends Controller
         try {
             // Guardar el nuevo rol
             $role->save();
-            return redirect()->route('admin.roles.show', $role)->with('success', 'Rol <b>' . $role->role . '</b> actualizado correctamente.');
+            return redirect()->route('admin.roles.show', $role)->with('success',  __('role.controller_rol') . '<b>'  . $role->role . '</b>' . __('role.controller_update'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al actualizar el rol <b>' . $role->role . '</b>.');
+            return back()->with('error',  __('role.controller_error_update') . '<b>'  . $role->role . '</b>.');
         }
     }
 
@@ -100,10 +100,10 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         if ($role->role == 'god' || $role->role == 'administrador' || $role->role == 'estudiante' || $role->role == 'profesor') {
-            return back()->with('permission', 'El rol <b>' . $role->role . '</b> no puede ser eliminado.');
+            return back()->with('permission',  __('role.controller_rol') . '<b>'  . $role->role . '</b>' . __('role.controller_delete_2'));
         } else {
             $role->delete();
-            return redirect()->route('admin.roles.index')->with('success', 'Rol <b>' . $role->role . '</b> eliminado correctamente.');
+            return redirect()->route('admin.roles.index')->with('success',  __('role.controller_rol') . '<b>'  . $role->role . '</b>' . __('role.controller_delete') );
         }
     }
 }

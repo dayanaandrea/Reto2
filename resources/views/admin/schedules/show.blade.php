@@ -58,7 +58,7 @@
 <!-- Modal para eliminar un horario -->
 @php
 $id = 'modal_delete' . $schedule->id;
-$mensaje = "¿Estás seguro de que deseas eliminar el horario <strong>$schedule->name</strong>? Esta acción no se puede deshacer.";
+$mensaje = __('schedule.confirm_1') . "<strong>$schedule->name</strong>" . __('schedule.confirm_2') ;
 $ruta = route('admin.schedules.destroy', $schedule);
 @endphp
 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />

@@ -64,9 +64,9 @@ class MeetingController extends Controller
         try {
             // Guardar el nuevo usuario
             $meeting->save();
-            return redirect()->route('admin.meetings.index')->with('success', 'La reunión del día <b>' . $meeting->day . '</b> ha sido creada correctamente.');
+            return redirect()->route('admin.meetings.index')->with('success',  __('meeting.controller_meeting_text') . '<b>' . $meeting->day . '</b>'.  __('meeting.controller_create'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al crear la reunión.');
+            return back()->with('error', __('meeting.controller_error'));
         }
     }
 
@@ -119,9 +119,9 @@ class MeetingController extends Controller
         try {
             // Guardar los cambios
             $meeting->save();
-            return redirect()->route('admin.meetings.index', $meeting)->with('success', 'La reunión del día <b>' . $meeting->day . '</b> ha sido actualizada correctamente.');
+            return redirect()->route('admin.meetings.index', $meeting)->with('success',   __('meeting.controller_meeting_text') .'<b>' . $meeting->day . '</b> '.  __('meeting.controller_edit'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al actualizar la reunión.');
+            return back()->with('error',  __('meeting.controller_error_edit'));
         }
     }
 
@@ -131,7 +131,7 @@ class MeetingController extends Controller
     public function destroy(Meeting $meeting)
     {
         $meeting->delete();
-        return redirect()->route('admin.meetings.index')->with('success', 'Reunión eliminada correctamente.');
+        return redirect()->route('admin.meetings.index')->with('success',  __('meeting.controller_delete'));
     }
 
     /**
@@ -146,11 +146,11 @@ class MeetingController extends Controller
             'status' => 'required',
             'teacher_id' => 'required|exists:users,id',
         ], [
-            'day.required' => 'El campo día es obligatorio.',
-            'time.required' => 'El campo hora es obligatorio.',
-            'week.required' => 'El campo semana es obligatorio.',
-            'status.required' => 'El campo estado es obligatorio.',
-            'teacher_id.required' => 'El campo profesor es obligatorio.',
+            'day.required' =>   __('meeting.day_required'),
+            'time.required' => __('meeting.time_required'),
+            'week.required' => __('meeting.week_required'),
+            'status.required' => __('meeting.status_required'),
+            'teacher_id.required' => __('meeting.teacher_id_required'),
         ]);
     }
 }

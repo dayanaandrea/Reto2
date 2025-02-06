@@ -36,6 +36,15 @@ return [
     'update_enrollment' => 'Actualización de la matrícula',
     'create' => 'Crear',
     'create_enrollment' => 'Crear matrícula',
+
+    //CONTROLLER 
+    'controller_create' => ' se ha matriculado correctamente.',
+    'controller_edit' => ' modificado correctamente.',
+    'controller_delete' => ' Matricula eliminada correctamente. ',
+    'controller_error_create' => '  Error al crear la matrícula.',
+    'controller_error_edit' => '  Error al modificar la matrícula.',
+    'controller_enrol' => ' modificado correctamente.',
+
 ];
 
 

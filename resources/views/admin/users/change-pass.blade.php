@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Cambio de Contraseña</div>
+                <div class="card-header">{{ __('user.change_pass') }}</div>
 
                 <div class="card-body">
                     <form action="{{ route('admin.users.store-pass', $user) }}" method="POST">
@@ -14,8 +14,9 @@
 
                         <!-- Campo de Contraseña Actual -->
                         <div class="row mb-3">
-                            <label for="current_password" class="col-md-4 col-form-label text-md-end">Contraseña
-                                Actual</label>
+                            <label for="current_password" class="col-md-4 col-form-label text-md-end">
+                                {{ __('user.current_pass') }}
+                            </label>
                             <div class="col-md-6">
                                 <input type="password"
                                     class="form-control @error('current_password') is-invalid @enderror"
@@ -23,30 +24,32 @@
                                     value="{{ old('current_password', '') }}">
 
                                 @error('current_password')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
 
                         <!-- Campo de Nueva Contraseña -->
                         <div class="row mb-3">
-                            <label for="new_password" class="col-md-4 col-form-label text-md-end">Nueva
-                                Contraseña</label>
+                            <label for="new_password" class="col-md-4 col-form-label text-md-end">
+                                {{ __('user.new_pass') }}
+                            </label>
                             <div class="col-md-6">
                                 <input type="password" class="form-control @error('new_password') is-invalid @enderror"
                                     id="new_password" name="new_password" required
                                     value="{{ old('new_password', '') }}">
 
                                 @error('new_password')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
 
                         <!-- Campo de Confirmación de Nueva Contraseña -->
                         <div class="row mb-3">
-                            <label for="new_password_confirmation" class="col-md-4 col-form-label text-md-end">Confirmar
-                                Nueva Contraseña</label>
+                            <label for="new_password_confirmation" class="col-md-4 col-form-label text-md-end"> 
+                                {{ __('user.confirm_new_pass') }}
+                            </label>
                             <div class="col-md-6">
                                 <input type="password"
                                     class="form-control @error('new_password_confirmation') is-invalid @enderror"
@@ -54,16 +57,16 @@
                                     value="{{ old('new_password_confirmation', '') }}">
 
                                 @error('new_password_confirmation')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">Actualizar contraseña</button>
+                                <button type="submit" class="btn btn-primary">{{ __('user.update_pass') }}</button>
                             </div>
                         </div>
-                        </form>
+                    </form>
                 </div>
             </div>
             @endsection

@@ -2,9 +2,8 @@
 
 return [
     // INDEX
-    'index_title_1' => 'Create a new module',
-    'index_title_2' => 'Access module creation:',
-    'module' => 'Modules',
+    'create_module' => 'Create a new module',
+    'module' => 'Module ',
     'code' => 'Code',
     'name' => 'Name',
     'hours' => 'Hours',
@@ -13,23 +12,21 @@ return [
     'teacher' => 'Teacher',
     'actions' => 'Actions',
     'not_assigned' => 'Not assigned',
-    'see_data_module' => 'View module data',
-    'edit_data_module' => 'Edit module data',
+    'see_data_module' => 'View module details',
+    'edit_data_module' => 'Edit module details',
     'delete_module' => 'Delete module',
     'confirm_deletes' => 'Confirm deletion',
     'confirm_1' => 'Are you sure you want to delete the module ',
     'confirm_2' => '? This action cannot be undone.',
     'cancel' => 'Cancel',
     'delete' => 'Delete',
-    'add' => 'Add',
     'update' => 'Update',
-    'update_text' => 'Cycle Update',
+    'update_text' => 'Cycle update',
     'create' => 'Create',
-    'create_text' => 'Cycle Creation',
+    'create_text' => 'Cycle creation',
     'add' => 'Add',
 
-
-    // SHOW  {{ $module->name }}
+    // SHOW  
     'show_title' => 'Module details',
 
     // CREATE-EDIT
@@ -50,10 +47,8 @@ return [
     'cycle_id_required' => 'The cycle field is required.',
 
     'controller_create' => ' created successfully.',
-    'controller_edit' => ' edited successfully.',
+    'controller_edit' => ' modified successfully.',
     'controller_delete' => ' deleted successfully.',
     'controller_error_create' => ' Error creating the module.',
     'controller_error_edit' => ' Error editing the module.',
-
-
 ];

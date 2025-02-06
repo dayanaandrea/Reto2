@@ -45,7 +45,7 @@
 <!-- Modal para eliminar un rol -->
 @php
 $id = 'modal_delete' . $role->id;
-$mensaje = "¿Estás seguro de que deseas eliminar el rol <strong class='text-capitalize'>$role->role</strong>? Esta acción no se puede deshacer.";
+$mensaje =__('role.confirm_1') . "<strong class='text-capitalize'>$role->role</strong>" . __('role.confirm_2');
 $ruta = route('admin.roles.destroy', $role);
 @endphp
 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />

@@ -43,7 +43,7 @@ class CycleController extends Controller
             $cycles->save();
             return redirect()->route('admin.cycles.index')->with('success',  __('cycle.cycle') . '<b>' . $cycles->name . '</b>' .   __('cycle.controller_create'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al crear el ciclo.');
+            return back()->with('error',  __('cycle.controller_error_create'));
         }
     }
 
@@ -79,13 +79,9 @@ class CycleController extends Controller
             $cycle->save();
             return redirect()->route('admin.cycles.index', $cycle)->with('success',   __('cycle.cycle') . '<b>' . $cycle->cycle . '</b>' .   __('cycle.controller_edit'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al modificar el ciclo.');
+            return back()->with('error',  __('cycle.controller_error_edit'));
         }
 
-        try {
-        } catch (\Exception $e) {
-            return back()->with('error', 'Error al modificar el ciclo.');
-        }
     }
 
     /**

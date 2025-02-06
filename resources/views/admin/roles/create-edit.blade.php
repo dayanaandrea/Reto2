@@ -2,13 +2,13 @@
 if (isset($role)) {
 $name = $role->role;
 $description = $role->description;
-$button = "Actualizar";
-$title = "Actualización del Rol";
+$button = __('role.update');
+$title = __('role.update_text');
 } else {
 $name = "";
 $description = "";
-$button = "Crear";
-$title = "Creación de roles";
+$button = __('role.create');
+$title = __('role.create_text');
 }
 @endphp
 

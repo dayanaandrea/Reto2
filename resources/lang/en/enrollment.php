@@ -1,8 +1,9 @@
 <?php
+
 return [
     // INDEX
     'title_index_1' => 'Create new enrollment',
-    'title_index_2' => 'Access the creation of an enrollment',
+    'title_index_2' => 'Access enrollment creation',
     'enrollments' => 'Enrollments',
     'actions' => 'Actions',
     'enrollment' => 'Enrollment',
@@ -29,7 +30,15 @@ return [
 
     // CREATE-EDIT
     'update' => 'Update',
-    'update_enrollment' => 'Update enrollment',
+    'update_enrollment' => 'Enrollment update',
     'create' => 'Create',
     'create_enrollment' => 'Create enrollment',
+
+    // CONTROLLER
+    'controller_create' => ' has been successfully enrolled.',
+    'controller_edit' => ' successfully modified.',
+    'controller_delete' => ' Enrollment successfully deleted.',
+    'controller_error_create' => ' Error creating the enrollment.',
+    'controller_error_edit' => ' Error modifying the enrollment.',
+    'controller_enrol' => ' successfully modified.',
 ];
