@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API",
-        "version": "1.0"
+        "version": "v1.0"
     },
     "paths": {
         "/api/v1.0/roles": {
@@ -87,19 +87,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "role",
-                                    "description"
-                                ],
-                                "properties": {
-                                    "role": {
-                                        "type": "string"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/Role"
                             }
                         }
                     }
@@ -186,15 +174,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "properties": {
-                                    "role": {
-                                        "type": "string"
-                                    },
-                                    "description": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/Role"
                             }
                         }
                     }
@@ -350,42 +330,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name",
-                                    "lastname",
-                                    "email",
-                                    "pin",
-                                    "address",
-                                    "phone1",
-                                    "role_id"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "lastname": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "pin": {
-                                        "type": "string"
-                                    },
-                                    "address": {
-                                        "type": "string"
-                                    },
-                                    "phone1": {
-                                        "type": "string"
-                                    },
-                                    "phone2": {
-                                        "type": "string"
-                                    },
-                                    "role_id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/User"
                             }
                         }
                     }
@@ -472,33 +417,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "lastname": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "pin": {
-                                        "type": "string"
-                                    },
-                                    "address": {
-                                        "type": "string"
-                                    },
-                                    "phone1": {
-                                        "type": "string"
-                                    },
-                                    "phone2": {
-                                        "type": "string"
-                                    },
-                                    "role_id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/User"
                             }
                         }
                     }
@@ -576,16 +495,19 @@
     "components": {
         "schemas": {
             "Role": {
+                "description": "A schema representing a user role in the system. It includes the role name and a brief description of the role's responsibilities and privileges.",
                 "required": [
                     "role",
                     "description"
                 ],
                 "properties": {
                     "role": {
+                        "description": "The name of the role, which defines the user’s permissions and access levels in the system.",
                         "type": "string",
                         "example": "admin"
                     },
                     "description": {
+                        "description": "A brief description of what the role entails, including responsibilities and privileges associated with the role.",
                         "type": "string",
                         "example": "Administrator role"
                     }
@@ -593,6 +515,7 @@
                 "type": "object"
             },
             "User": {
+                "description": "A schema representing a user in the system. It includes personal details, contact information, and role assignment.",
                 "required": [
                     "name",
                     "lastname",
@@ -604,28 +527,44 @@
                 ],
                 "properties": {
                     "name": {
-                        "type": "string"
+                        "description": "The user's first name",
+                        "type": "string",
+                        "example": "Leire"
                     },
                     "lastname": {
-                        "type": "string"
+                        "description": "The user's last name",
+                        "type": "string",
+                        "example": "Lasa"
                     },
                     "email": {
-                        "type": "string"
+                        "description": "The user's email address",
+                        "type": "string",
+                        "example": "leire.lasa@elorrieta.com"
                     },
                     "pin": {
-                        "type": "string"
+                        "description": "The user's Personal Identification Number",
+                        "type": "string",
+                        "example": "11111111H"
                     },
                     "address": {
-                        "type": "string"
+                        "description": "The user's address",
+                        "type": "string",
+                        "example": "Main Street, 20, 3B"
                     },
                     "phone1": {
-                        "type": "string"
+                        "description": "The user's primary phone number",
+                        "type": "string",
+                        "example": "666666666"
                     },
                     "phone2": {
-                        "type": "string"
+                        "description": "The user's secondary phone number",
+                        "type": "string",
+                        "example": "666666666"
                     },
                     "role_id": {
-                        "type": "integer"
+                        "description": "The user's role ID",
+                        "type": "integer",
+                        "example": 1
                     }
                 },
                 "type": "object"

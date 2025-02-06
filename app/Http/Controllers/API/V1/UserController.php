@@ -12,15 +12,16 @@ use Illuminate\Support\Facades\Hash;
  * @OA\Schema(
  *     schema="User",
  *     type="object",
+ *     description="A schema representing a user in the system. It includes personal details, contact information, and role assignment.",
  *     required={"name", "lastname", "email", "pin", "address", "phone1", "role_id"},
- *                 @OA\Property(property="name", type="string"),
- *                 @OA\Property(property="lastname", type="string"),
- *                 @OA\Property(property="email", type="string"),
- *                 @OA\Property(property="pin", type="string"),
- *                 @OA\Property(property="address", type="string"),
- *                 @OA\Property(property="phone1", type="string"),
- *                 @OA\Property(property="phone2", type="string"),
- *                 @OA\Property(property="role_id", type="integer")
+ *                 @OA\Property(property="name", type="string", description="The user's first name", example="Leire"),
+ *                 @OA\Property(property="lastname", type="string", description="The user's last name", example="Lasa"),
+ *                 @OA\Property(property="email", type="string", description="The user's email address", example="leire.lasa@elorrieta.com"),
+ *                 @OA\Property(property="pin", type="string", description="The user's Personal Identification Number", example="11111111H"),
+ *                 @OA\Property(property="address", type="string", description="The user's address", example="Main Street, 20, 3B"),
+ *                 @OA\Property(property="phone1", type="string", description="The user's primary phone number", example="666666666"),
+ *                 @OA\Property(property="phone2", type="string", description="The user's secondary phone number", example="666666666"),
+ *                 @OA\Property(property="role_id", type="integer", description="The user's role ID", example=1)
  * )
  */
 class UserController extends Controller
@@ -103,18 +104,7 @@ class UserController extends Controller
      *         required=true,
      *         @OA\MediaType(
      *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 required={"name", "lastname", "email", "pin", "address", "phone1", "role_id"},
-     *                 @OA\Property(property="name", type="string"),
-     *                 @OA\Property(property="lastname", type="string"),
-     *                 @OA\Property(property="email", type="string"),
-     *                 @OA\Property(property="pin", type="string"),
-     *                 @OA\Property(property="address", type="string"),
-     *                 @OA\Property(property="phone1", type="string"),
-     *                 @OA\Property(property="phone2", type="string"),
-     *                 @OA\Property(property="role_id", type="integer")
-     *             )
+     *             @OA\Schema(ref="#/components/schemas/User")
      *         )
      *     ),
      *     @OA\Response(
@@ -142,7 +132,7 @@ class UserController extends Controller
         $user->pin = $request->pin;
         $user->address = $request->address;
         $user->phone1 = $request->phone1;
-        $user->phone2 = $request->has('phone2') ? $request->phone2 : $user->phone2;
+        $user->phone2 = $request->has('phone2') ? $request->phone2 : null;
         $user->role_id = $request->role_id;
         $user->password = Hash::make('1234');
 
@@ -203,17 +193,7 @@ class UserController extends Controller
      *         required=true,
      *         @OA\MediaType(
      *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 @OA\Property(property="name", type="string"),
-     *                 @OA\Property(property="lastname", type="string"),
-     *                 @OA\Property(property="email", type="string"),
-     *                 @OA\Property(property="pin", type="string"),
-     *                 @OA\Property(property="address", type="string"),
-     *                 @OA\Property(property="phone1", type="string"),
-     *                 @OA\Property(property="phone2", type="string"),
-     *                 @OA\Property(property="role_id", type="integer")
-     *             )
+     *             @OA\Schema(ref="#/components/schemas/User")
      *         )
      *     ),
      *     @OA\Response(

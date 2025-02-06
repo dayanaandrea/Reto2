@@ -12,8 +12,9 @@ use Illuminate\Http\Response;
  *     schema="Role",
  *     type="object",
  *     required={"role", "description"},
- *     @OA\Property(property="role", type="string", example="admin"),
- *     @OA\Property(property="description", type="string", example="Administrator role")
+ *     description="A schema representing a user role in the system. It includes the role name and a brief description of the role's responsibilities and privileges.",
+ *     @OA\Property(property="role", type="string", description="The name of the role, which defines the user’s permissions and access levels in the system.", example="admin"),
+ *     @OA\Property(property="description", type="string", description="A brief description of what the role entails, including responsibilities and privileges associated with the role.", example="Administrator role")
  * )
  */
 class RoleController extends Controller
@@ -91,12 +92,7 @@ class RoleController extends Controller
      *         required=true,
      *         @OA\MediaType(
      *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 required={"role", "description"},
-     *                 @OA\Property(property="role", type="string"),
-     *                 @OA\Property(property="description", type="string")
-     *             )
+     *             @OA\Schema(ref="#/components/schemas/Role")
      *         )
      *     ),
      *     @OA\Response(
@@ -176,11 +172,7 @@ class RoleController extends Controller
      *         required=true,
      *         @OA\MediaType(
      *             mediaType="application/json",
-     *             @OA\Schema(
-     *                 type="object",
-     *                 @OA\Property(property="role", type="string"),
-     *                 @OA\Property(property="description", type="string")
-     *             )
+     *             @OA\Schema(ref="#/components/schemas/Role")
      *         )
      *     ),
      *     @OA\Response(
