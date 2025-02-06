@@ -11,4 +11,7 @@ return [
     'allMeetings_admin' => 'Reuniones totales',
     'modules_admin' => 'Módulos',
     'cycles_admin' => 'Ciclos',
+    
+
+    
 ];
