@@ -35,7 +35,7 @@ return [
     'show_title' => 'Meeting details',
 
     // CREATE-EDIT
-    'select_teacher' => ' -- Select the convener -- ',
+    'select_convener' => ' -- Select the convener -- ',
     'select_student' => ' -- Select a student -- ',
 
     // CONTROLLER
