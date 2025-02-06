@@ -141,6 +141,10 @@ a.btn-warning:hover {
     background-color: var(--pantone-medium);
 }
 
+#sideMenuPhone {
+    background-color: var(--pantone-dark);
+}
+
 #sideMenu {
     background-color: var(--pantone-dark);
     overflow: hidden;

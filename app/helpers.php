@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Carbon\Carbon;
 
 /**
  * Retorna un string que contiene el valor del atributo src de una etiqueta img de HTML.
@@ -15,7 +13,7 @@ use Carbon\Carbon;
 function obtenerFoto($user)
 {
     // Comprobar si el usuario tiene una foto
-    if ($user->photo != null) {
+    if ($user && $user->photo != null) {
         // Si tiene foto, la codificamos en base64
         $image = base64_encode($user->photo);
         return "data:image/jpeg;base64,{$image}";
