@@ -11,7 +11,7 @@
         $route = route('admin.meetings.create');
         $type = "show";
         $text = '<i class="fa-solid fa-plus"></i><span class="ms-2 fw-bold">' . __('meeting.añadir') . '</span>';
-        $tooltip = __('meetings.create_meeting');
+        $tooltip = __('meeting.create_meeting');
         @endphp
         <x-buttons.generic :route="$route" :type="$type" :text="$text" :tooltip="$tooltip" />
     </div>
@@ -69,7 +69,7 @@
                     @php
                     $id_modal = '#modal_delete' . $meeting->id;
                     $text = '<i class="fa-solid fa-trash-can"></i>';
-                    $tooltip = __('meeting.delete_data_meeting');
+                    $tooltip = __('meeting.delete_meeting');
                     @endphp
                     <x-buttons.open-modal :id="$id_modal" :text="$text" :type="'danger'" :tooltip="$tooltip" />
                 </td>

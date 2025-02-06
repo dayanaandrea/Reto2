@@ -4,13 +4,13 @@ $module = $schedule->module_id;
 $day = $schedule->day;
 $hour = $schedule->hour;
 $button = __('schedule.update');
-$title = "Actualización de horarios";
+$title = __('schedule.update_text');
 } else {
 $module = "";
 $day = "";
 $hour = "";
-$button = __('schedule.create');;
-$title = "Creación de horarios";
+$button = __('schedule.create');
+$title = __('schedule.create_text');
 }
 @endphp
 

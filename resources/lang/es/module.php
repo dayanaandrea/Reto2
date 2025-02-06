@@ -50,7 +50,7 @@ return [
     'controller_create' => ' creado correctamente.',
     'controller_edit' => '  modificado correctamente.',
     'controller_delete' => '  eliminado correctamente.',
-    'controller_error_create' => '  Error al modificar el modulo.',
+    'controller_error_create' => '  Error al crear el modulo.',
     'controller_error_edit' => '  Error al modificar el modulo.',
   
 ];

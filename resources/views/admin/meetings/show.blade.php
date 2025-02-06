@@ -67,7 +67,7 @@
 <!-- Modal para eliminar una reunión-->
 @php
 $id = 'modal_delete' . $meeting->id;
-$mensaje = "¿Estás seguro de que deseas eliminar la reunión <strong>$meeting->name</strong>? Esta acción no se puede deshacer.";
+$mensaje = __('meeting.confirm_1') . "<strong>$meeting->name</strong>" . __('meeting.confirm_2');
 $ruta = route('admin.meetings.destroy', $meeting);
 @endphp
 <x-modals.delete :id="$id" :mensaje="$mensaje" :ruta="$ruta" />

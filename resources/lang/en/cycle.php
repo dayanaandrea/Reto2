@@ -1,12 +1,11 @@
 <?php
 return [
-
-    // INDEX 
+    // INDEX  
     'create_cycle' => 'Create a new cycle',
-    'cycle' => 'Cycle',
+    'cycle' => 'Cycle ',
     'code' => 'Code',
     'name' => 'Name',
-    'actions' => 'Actions',
+    'actions' => 'Actions ',
     'see_data_cycle' => 'View cycle data',
     'edit_data_cycle' => 'Edit cycle data',
     'delete_cycle' => 'Delete cycle',
@@ -16,25 +15,24 @@ return [
     'cancel' => 'Cancel',
     'delete' => 'Delete',
     'update' => 'Update',
-    'update_text' => 'Cycle Update',
+    'update_text' => 'Cycle update',
     'create' => 'Create',
-    'create_text' => 'Cycle Creation',
+    'create_text' => 'Cycle creation',
     'add' => 'Add',
 
-    // SHOW
-
-    'show_title_1' => 'Cycle details',
+    // SHOW  
+    'show_title_1' => 'Cycle details ',
     'module' => 'Modules',
 
-    // CONTROLLER
-    'controller_create' => 'created successfully.',
-    'controller_edit' => ' successfully modified.',
-    'controller_delete' => ' successfully deleted.',
+    // CONTROLLER  
+    'controller_create' => 'successfully created.',
+    'controller_edit' => 'successfully modified.',
+    'controller_delete' => 'successfully deleted.',
+    'controller_error_edit' => 'Error modifying the cycle.',
+    'controller_error_create' => 'Error creating the cycle.',
 
-    'validation_code_min' => ' The code must be at least 3 characters.',
-    'validation_code_max' => ' The code cannot be more than 5 characters.',
-
-    'validation_name_min' => ' The name must be at least 10 characters.',
-    'validation_name_max' => ' The name cannot be more than 255 characters.',
-
+    'validation_code_min' => 'The code must be at least 3 characters long.',
+    'validation_code_max' => 'The code cannot be longer than 5 characters.',
+    'validation_name_min' => 'The name must be at least 10 characters long.',
+    'validation_name_max' => 'The name cannot be longer than 255 characters.',
 ];

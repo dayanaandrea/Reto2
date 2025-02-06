@@ -83,9 +83,9 @@ class UserController extends Controller
             try {
                 // Guardar el nuevo usuario
                 $user->save();
-                return redirect()->route('admin.users.index')->with('success', 'Usuario <b>' . $user->email . '</b> creado correctamente.');
+                return redirect()->route('admin.users.index')->with('success', __('user.controller_user')  .'<b>' . $user->email . '</b>'. __('user.controller_create'));
             } catch (\Exception $e) {
-                return back()->with('error', 'Error al crear el usuario.');
+                return back()->with('error', __('user.controller_error_create'));
             }
         }
     }
@@ -139,9 +139,9 @@ class UserController extends Controller
             try {
                 // Guardar el nuevo usuario
                 $user->save();
-                return redirect()->route('admin.users.show', $user)->with('success', 'Usuario <b>' . $user->email . '</b> actualizado correctamente.');
+                return redirect()->route('admin.users.show', $user)->with('success', __('user.controller_user')  .'<b>'  . $user->email . '</b> '. __('user.controller_edit'));
             } catch (\Exception $e) {
-                return back()->with('error', 'Error al actualizar el usuario <b>' . $user->email . '</b>.');
+                return back()->with('error',  __('user.controller_error_edit') .' <b>' . $user->email . '</b>.');
             }
         }
     }
@@ -156,7 +156,7 @@ class UserController extends Controller
         // Guardar el nuevo usuario
         $user->save();
 
-        return redirect()->route('admin.users.index', $user)->with('success', 'Contraseña del usuario <b>' . $user->email . '</b> restablecida correctamente.');
+        return redirect()->route('admin.users.index', $user)->with('success', __('user.controller_pass').' <b>' . $user->email . '</b> '. __('user.controller_pass_2'));
     }
 
     /**
@@ -174,14 +174,14 @@ class UserController extends Controller
     {
         // Verificar si el usuario logueado es el mismo que el usuario cuya contraseña se quiere cambiar
         if (Auth::user()->id !== $user->id) {
-            return back()->with('permission', 'No tienes permiso para cambiar la contraseña de este usuario.');
+            return back()->with('permission',  __('user.controller_pass_change'));
         }
 
         $this->validatePass($request);
 
         // Verificar si la contraseña actual es correcta
         if (!Hash::check($request->current_password, $user->password)) {
-            return back()->withErrors(['current_password' => 'La contraseña actual es incorrecta.'])->withInput();
+            return back()->withErrors(['current_password' =>  __('user.controller_incorrect_pass')])->withInput();
         }
 
         $user->password = Hash::make($request->new_password);
@@ -189,7 +189,7 @@ class UserController extends Controller
         // Guardar el nuevo usuario
         $user->save();
 
-        return redirect()->route('admin.users.show', $user)->with('success', 'Contraseña actualizada correctamente.');
+        return redirect()->route('admin.users.show', $user)->with('success',  __('user.controller_update_pass'));
     }
 
     /**
@@ -199,10 +199,10 @@ class UserController extends Controller
     {
         // Los usuarios god no pueden ser eliminados por nadie
         if ($user->role->role == 'god') {
-            return redirect()->route('admin.users.index')->with('permission', 'No tiene permisos para eliminar el usuario <b>' . $user->email . '</b>.');
+            return redirect()->route('admin.users.index')->with('permission',  __('user.controller_delete').' <b>' . $user->email . '</b>.');
         } else {
             $user->delete();
-            return redirect()->route('admin.users.index')->with('success', 'Usuario <b>' . $user->email . '</b> eliminado correctamente.');
+            return redirect()->route('admin.users.index')->with('success', __('user.controller_user')  .'<b>' . $user->email . '</b>'. __('user.controller_delete_2') );
         }
     }
 
@@ -223,12 +223,12 @@ class UserController extends Controller
             'new_password_confirmation' => 'required',
         ], [
             // Mensajes de error personalizados según lo que falle
-            'new_password.regex' => 'La contraseña debe contener al menos una letra, un número y un carácter especial.',
-            'new_password.confirmed' => 'Las contraseñas no coinciden.',
-            'new_password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-            'new_password.max' => 'La contraseña no puede tener más de 255 caracteres.',
-            'new_password_confirmation.min' => 'La contraseña debe tener al menos 8 caracteres.',
-            'new_password_confirmation.max' => 'La contraseña no puede tener más de 255 caracteres.',
+            'new_password.regex' =>  __('user.new_password_regex'),
+            'new_password.confirmed' => __('user.new_password_confirmed'),
+            'new_password.min' => __('user.new_password_min'),
+            'new_password.max' => __('user.new_password_max'),
+            'new_password_confirmation.min' => __('user.new_password_confirmation_min'),
+            'new_password_confirmation.max' => __('user.new_password_confirmation_max'),
         ]);
     }
 }

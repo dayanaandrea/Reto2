@@ -52,9 +52,9 @@ class ScheduleController extends Controller
 
         try {
             $schedule->save();
-            return redirect()->route('admin.schedules.index')->with('success', 'Horario  ' . $schedule->day . ' creado correctamente.');
+            return redirect()->route('admin.schedules.index')->with('success',   __('schedule.schedules') . '<b>' . $schedule->day . '</b>' .  __('schedule.controller_create'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al crear el horario.');
+            return back()->with('error', __('schedule.controller_error_create'));
         }
     }
 
@@ -98,9 +98,9 @@ class ScheduleController extends Controller
 
         try {
             $schedule->save();
-            return redirect()->route('admin.schedules.index', $schedule)->with('success', 'Horario <b>' . $schedule->day . '</b> actualizado correctamente.');
+            return redirect()->route('admin.schedules.index', $schedule)->with('success',  __('schedule.schedules') . '</b>' .  __('schedule.controller_update'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Error al actualizar el horario.');
+            return back()->with('error', __('schedule.controller_error_create'));
         }
     }
 
@@ -111,7 +111,7 @@ class ScheduleController extends Controller
     {
 
         $schedule->delete();
-        return redirect()->route('admin.schedules.index')->with('success', 'Horario eliminado correctamente.');
+        return redirect()->route('admin.schedules.index')->with('success', __('schedule.controller_delete'));
     }
 
     /**
@@ -125,9 +125,9 @@ class ScheduleController extends Controller
             'day' => 'required|numeric|min:1|max:5',
             'hour' => 'required|numeric|min:1|max:6',
         ], [
-            'module_id.required' => 'El campo de módulo es obligatorio.',
-            'day.required' => 'El campo día es obligatorio.',
-            'hour.required' => 'El campo de horas es obligatorio.',
+            'module_id.required' => __('schedule.module_id_required'),
+            'day.required' => __('schedule.day_required'),
+            'hour.required' => __('schedule.hour_required'),
         ]);
     }
 }

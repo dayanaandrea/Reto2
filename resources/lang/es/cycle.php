@@ -30,12 +30,13 @@ return [
     'controller_create' => 'creado correctamente.',
     'controller_edit' => ' modificado correctamente.',
     'controller_delete' => ' eliminado correctamente.',
+    'controller_error_edit' => 'Error al modificar el ciclo.',
+    'controller_error_create' => ' Error al crear el ciclo.',
 
     'validation_code_min' => ' El código debe tener al menos 3 caracteres.',
     'validation_code_max' => ' El código no puede tener más de 5 caracteres.',
 
     'validation_name_min' => ' El nombre debe tener al menos 10 caracteres.',
     'validation_name_max' => ' El nombre no puede tener más de 255 caracteres.',
-
 
 ];
