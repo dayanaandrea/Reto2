@@ -22,6 +22,8 @@ return [
     'confirm_1' => '¿Estás seguro de que deseas eliminar el usuario ',
     'confirm_2' => '? Esta acción no se puede deshacer.',
     'add' => 'Añadir',
+    'no_users' => 'No hay usuarios.',
+
 
     // SHOW
     'title_show' => 'Detalles del Usuario',

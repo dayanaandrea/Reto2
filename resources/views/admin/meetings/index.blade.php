@@ -111,7 +111,7 @@
         {!! $meetings->links('vendor.pagination.bootstrap-5') !!}
     </div>
     @else
-    <p>No hay reuniones.</p>
+    <p>{{ __('meeting.no_meetings') }}</p>
     @endif
 </div>
 @endsection

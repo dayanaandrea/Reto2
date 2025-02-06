@@ -30,6 +30,7 @@ return [
     'participant' => 'Participantes',
     'convener' => 'Convocante',
     'withoutParticipants' => 'Sin participantes',
+    'no_meetings' => 'No hay reuniones.',
 
     // SHOW  {{ $meeting->name }}
     'show_title' => 'Detalles de la reunión',

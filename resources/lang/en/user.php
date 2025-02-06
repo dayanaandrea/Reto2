@@ -22,6 +22,7 @@ return [
     'confirm_1' => 'Are you sure you want to delete the user ',
     'confirm_2' => '? This action cannot be undone.',
     'add' => 'Add',
+    'no_users' => 'No users.',
 
     // SHOW
     'title_show' => 'User Details',
