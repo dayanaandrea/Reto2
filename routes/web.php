@@ -41,7 +41,9 @@ Route::middleware('auth')->group(function () {
   Route::put('store-image', [ProfileController::class, 'storeImage'])->name('store-image');
 
   // Rutas del administrador
-  Route::prefix('admin')->name('admin.')->middleware(CheckAdminRole::class)->group(function () {
+  Route::prefix('admin')->name('admin.')
+  ->middleware([CheckAdminRole::class, VerificarIP::class])
+  ->group(function () {
     // Ruta principal del panel de administración
     Route::get('/home', [HomeController::class, 'homeAdmin'])->name('home');
 
